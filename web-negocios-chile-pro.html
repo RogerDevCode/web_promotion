@@ -1,0 +1,1571 @@
+<!doctype html>
+<html lang="es-CL" x-data="{ mobileMenu: false, showVideo: false }" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Páginas Web Profesionales para tu Negocio en Chile | Más Clientes, Más Confianza</title>
+  <meta name="description" content="Diseño páginas web profesionales para negocios, PYMEs y emprendedores en Chile. Sin complicaciones, con resultado real. Cotiza gratis por WhatsApp." />
+  <meta name="theme-color" content="#282A36" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Páginas Web Profesionales para tu Negocio en Chile" />
+  <meta property="og:description" content="Tu negocio merece verse profesional en internet. Páginas web claras, modernas y listas para recibir clientes." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            // Dracula base
+            drac: {
+              bg: '#282A36',
+              darker: '#1E1F29',
+              current: '#44475A',
+              fg: '#F8F8F2',
+              comment: '#6272A4',
+              cyan: '#8BE9FD',
+              green: '#50FA7B',
+              orange: '#FFB86C',
+              pink: '#FF79C6',
+              purple: '#BD93F9',
+              red: '#FF5555',
+              yellow: '#F1FA8C',
+            },
+            // Chilean flag
+            chile: {
+              red: '#D52B1E',
+              redDark: '#B02218',
+              blue: '#0039A6',
+              blueDark: '#002D85',
+              blueLight: '#1A5FCE',
+              white: '#FFFFFF',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            glow: '0 0 60px rgba(0,57,166,0.15)',
+            'glow-red': '0 0 60px rgba(213,43,30,0.12)',
+            card: '0 8px 32px rgba(0,0,0,0.3)',
+            'card-hover': '0 16px 48px rgba(0,57,166,0.2)',
+            glass: '0 8px 32px rgba(0,0,0,0.12)',
+            mega: '0 24px 80px rgba(0,0,0,0.4)',
+          },
+          keyframes: {
+            'fade-up': {
+              '0%': { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            'fade-in': {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' }
+            },
+            'float': {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-8px)' }
+            },
+            'float-slow': {
+              '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+              '50%': { transform: 'translateY(-12px) rotate(1deg)' }
+            },
+            'pulse-soft': {
+              '0%, 100%': { opacity: '1' },
+              '50%': { opacity: '0.7' }
+            },
+            'shimmer': {
+              '0%': { backgroundPosition: '-200% center' },
+              '100%': { backgroundPosition: '200% center' }
+            },
+            'scale-in': {
+              '0%': { opacity: '0', transform: 'scale(0.95)' },
+              '100%': { opacity: '1', transform: 'scale(1)' }
+            },
+            'gradient-move': {
+              '0%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+              '100%': { backgroundPosition: '0% 50%' }
+            },
+            'count-up': {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            }
+          },
+          animation: {
+            'fade-up': 'fade-up 0.7s cubic-bezier(0.16,1,0.3,1) both',
+            'fade-in': 'fade-in 0.5s ease both',
+            'float': 'float 6s ease-in-out infinite',
+            'float-slow': 'float-slow 8s ease-in-out infinite',
+            'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+            'shimmer': 'shimmer 3s ease-in-out infinite',
+            'scale-in': 'scale-in 0.5s cubic-bezier(0.16,1,0.3,1) both',
+            'gradient-move': 'gradient-move 6s ease infinite',
+            'count-up': 'count-up 0.6s cubic-bezier(0.16,1,0.3,1) both',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root { color-scheme: dark; }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #1E1F29;
+      color: #F8F8F2;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #1E1F29; }
+    ::-webkit-scrollbar-thumb { background: #44475A; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #6272A4; }
+
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-32px);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-left.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(32px);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-right.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-scale.is-visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Glassmorphism */
+    .glass {
+      background: rgba(40, 42, 54, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(248,248,242,0.08);
+    }
+    .glass-light {
+      background: rgba(248,248,242,0.05);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(248,248,242,0.06);
+    }
+
+    /* Gradient text */
+    .text-gradient-chile {
+      background: linear-gradient(135deg, #0039A6 0%, #1A5FCE 40%, #D52B1E 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .text-gradient-gold {
+      background: linear-gradient(135deg, #FFB86C, #F1FA8C, #FFB86C);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    /* Mesh background */
+    .mesh-bg {
+      background-image:
+        radial-gradient(ellipse at 20% 0%, rgba(0,57,166,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 0%, rgba(213,43,30,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, rgba(189,147,249,0.08) 0%, transparent 50%);
+    }
+
+    /* Noise texture */
+    .noise::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    /* Glow ring */
+    .glow-ring {
+      position: relative;
+    }
+    .glow-ring::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, #0039A6, #D52B1E, #BD93F9, #0039A6);
+      background-size: 300% 300%;
+      animation: gradient-move 4s ease infinite;
+      z-index: -1;
+      opacity: 0.6;
+      filter: blur(8px);
+    }
+
+    /* Button hover glow */
+    .btn-glow {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .btn-glow::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .btn-glow:hover::after {
+      opacity: 1;
+    }
+
+    /* Counter animation */
+    .counter-value {
+      display: inline-block;
+    }
+
+    /* Dot grid pattern */
+    .dot-pattern {
+      background-image: radial-gradient(rgba(248,248,242,0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* Custom selection */
+    ::selection {
+      background: rgba(0,57,166,0.4);
+      color: #F8F8F2;
+    }
+
+    /* Smooth link underline */
+    .link-underline {
+      position: relative;
+    }
+    .link-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #0039A6, #D52B1E);
+      transition: width 0.3s ease;
+    }
+    .link-underline:hover::after {
+      width: 100%;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal, .reveal-left, .reveal-right, .reveal-scale {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* Typing cursor */
+    .typing-cursor::after {
+      content: '|';
+      animation: pulse-soft 1s ease-in-out infinite;
+      color: #0039A6;
+    }
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen">
+  <!-- Skip to content -->
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-chile-blue focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">Saltar al contenido</a>
+
+  <!-- ============================================ -->
+  <!-- NAVBAR -->
+  <!-- ============================================ -->
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar"
+    x-data="{ scrolled: false }"
+    x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 20 })"
+    :class="scrolled ? 'glass shadow-card py-2' : 'bg-transparent py-4'">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <!-- Logo -->
+      <a href="#inicio" class="flex items-center gap-3 group" aria-label="Inicio">
+        <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-chile-blue to-chile-blueLight text-white shadow-glow transition-transform duration-300 group-hover:scale-110">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </span>
+        <div>
+          <p class="text-sm font-extrabold tracking-tight text-drac-fg font-display">TuWebPro<span class="text-chile-red">.cl</span></p>
+          <p class="text-[10px] font-medium text-drac-comment tracking-wider uppercase">Diseño Web Profesional</p>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden items-center gap-1 md:flex" aria-label="Navegación principal">
+        <a href="#beneficios" class="link-underline rounded-xl px-4 py-2 text-sm font-semibold text-drac-comment transition-colors hover:text-drac-fg">Beneficios</a>
+        <a href="#servicios" class="link-underline rounded-xl px-4 py-2 text-sm font-semibold text-drac-comment transition-colors hover:text-drac-fg">Servicios</a>
+        <a href="#proceso" class="link-underline rounded-xl px-4 py-2 text-sm font-semibold text-drac-comment transition-colors hover:text-drac-fg">Proceso</a>
+        <a href="#precios" class="link-underline rounded-xl px-4 py-2 text-sm font-semibold text-drac-comment transition-colors hover:text-drac-fg">Inversión</a>
+        <a href="#faq" class="link-underline rounded-xl px-4 py-2 text-sm font-semibold text-drac-comment transition-colors hover:text-drac-fg">Preguntas</a>
+        <a href="#contacto" class="ml-3 btn-glow inline-flex items-center rounded-full bg-gradient-to-r from-chile-red to-chile-redDark px-5 py-2.5 text-sm font-bold text-white shadow-glow-red transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+          <svg class="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.613.613l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-2.278 0-4.381-.762-6.065-2.046l-.424-.328-2.643.886.886-2.643-.328-.424A9.72 9.72 0 012.25 12 9.75 9.75 0 0112 2.25 9.75 9.75 0 0121.75 12 9.75 9.75 0 0112 21.75z"/></svg>
+          Cotizar Gratis
+        </a>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <button @click="mobileMenu = !mobileMenu" class="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-drac-current/50 text-drac-fg md:hidden transition-colors hover:bg-drac-current/30" :aria-expanded="mobileMenu.toString()" aria-label="Menú">
+        <svg x-show="!mobileMenu" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg x-show="mobileMenu" x-cloak viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div x-show="mobileMenu" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0 -translate-y-2" class="glass border-t border-drac-current/30 md:hidden" x-cloak>
+      <nav class="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4 sm:px-6">
+        <a @click="mobileMenu=false" href="#beneficios" class="rounded-xl px-4 py-3 text-sm font-semibold text-drac-comment hover:bg-drac-current/30 hover:text-drac-fg transition-colors">Beneficios</a>
+        <a @click="mobileMenu=false" href="#servicios" class="rounded-xl px-4 py-3 text-sm font-semibold text-drac-comment hover:bg-drac-current/30 hover:text-drac-fg transition-colors">Servicios</a>
+        <a @click="mobileMenu=false" href="#proceso" class="rounded-xl px-4 py-3 text-sm font-semibold text-drac-comment hover:bg-drac-current/30 hover:text-drac-fg transition-colors">Proceso</a>
+        <a @click="mobileMenu=false" href="#precios" class="rounded-xl px-4 py-3 text-sm font-semibold text-drac-comment hover:bg-drac-current/30 hover:text-drac-fg transition-colors">Inversión</a>
+        <a @click="mobileMenu=false" href="#faq" class="rounded-xl px-4 py-3 text-sm font-semibold text-drac-comment hover:bg-drac-current/30 hover:text-drac-fg transition-colors">Preguntas</a>
+        <a @click="mobileMenu=false" href="#contacto" class="mt-2 rounded-xl bg-gradient-to-r from-chile-red to-chile-redDark px-4 py-3 text-center text-sm font-bold text-white">
+          💬 Cotizar Gratis por WhatsApp
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ============================================ -->
+    <!-- HERO -->
+    <!-- ============================================ -->
+    <section id="inicio" class="relative min-h-screen flex items-center overflow-hidden mesh-bg noise">
+      <!-- Decorative elements -->
+      <div class="absolute top-20 left-10 h-72 w-72 rounded-full bg-chile-blue/10 blur-[100px] animate-pulse-soft"></div>
+      <div class="absolute bottom-20 right-10 h-64 w-64 rounded-full bg-chile-red/8 blur-[80px] animate-pulse-soft" style="animation-delay: 1.5s"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-drac-purple/5 blur-[120px]"></div>
+
+      <div class="relative mx-auto max-w-7xl px-4 py-32 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+          <!-- Left content -->
+          <div class="reveal">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 rounded-full border border-chile-blue/20 bg-chile-blue/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-chile-blueLight mb-8">
+              <span class="h-2 w-2 rounded-full bg-drac-green animate-pulse-soft"></span>
+              Diseño Web para Negocios en Chile
+            </div>
+
+            <h1 class="font-display text-4xl font-black leading-[1.05] sm:text-5xl lg:text-6xl xl:text-[3.5rem]">
+              Tu negocio merece
+              <span class="text-gradient-chile">verse profesional</span>
+              en internet
+            </h1>
+
+            <p class="mt-6 max-w-xl text-lg leading-relaxed text-drac-comment">
+              ¿Tus clientes te buscan en Google y no te encuentran? ¿Dependes solo de Instagram o Facebook para que te contacten? Una página web profesional <strong class="text-drac-fg">genera confianza</strong>, explica tu servicio las 24 horas y te trae más clientes. Sin complicaciones técnicas, sin costos ocultos.
+            </p>
+
+            <!-- CTA buttons -->
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="#contacto" class="btn-glow inline-flex items-center justify-center rounded-full bg-gradient-to-r from-chile-blue to-chile-blueLight px-8 py-4 text-sm font-bold text-white shadow-glow transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <svg class="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.613.613l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-2.278 0-4.381-.762-6.065-2.046l-.424-.328-2.643.886.886-2.643-.328-.424A9.72 9.72 0 012.25 12 9.75 9.75 0 0112 2.25 9.75 9.75 0 0121.75 12 9.75 9.75 0 0112 21.75z"/></svg>
+                Quiero mi Página Web
+              </a>
+              <a href="#precios" class="inline-flex items-center justify-center rounded-full border border-drac-current bg-drac-current/30 px-8 py-4 text-sm font-bold text-drac-fg transition-all duration-300 hover:-translate-y-1 hover:border-chile-blue/40 hover:bg-drac-current/50">
+                Ver Inversión →
+              </a>
+            </div>
+
+            <!-- Trust signals -->
+            <div class="mt-8 flex flex-wrap items-center gap-6 text-sm text-drac-comment">
+              <div class="flex items-center gap-2">
+                <svg class="h-4 w-4 text-drac-green" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Respuesta en menos de 24 hrs
+              </div>
+              <div class="flex items-center gap-2">
+                <svg class="h-4 w-4 text-drac-green" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Sin costo de mantención
+              </div>
+              <div class="flex items-center gap-2">
+                <svg class="h-4 w-4 text-drac-green" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Hosting gratuito incluido
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Browser mockup -->
+          <div class="reveal-right" style="transition-delay: .15s">
+            <div class="relative animate-float-slow">
+              <!-- Glow behind -->
+              <div class="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-chile-blue/20 via-transparent to-chile-red/15 blur-2xl"></div>
+
+              <!-- Browser frame -->
+              <div class="relative glass rounded-[2rem] shadow-mega overflow-hidden">
+                <!-- Browser chrome -->
+                <div class="flex items-center justify-between border-b border-drac-current/50 px-5 py-3.5">
+                  <div class="flex items-center gap-2">
+                    <span class="h-3 w-3 rounded-full bg-chile-red/80"></span>
+                    <span class="h-3 w-3 rounded-full bg-drac-orange/80"></span>
+                    <span class="h-3 w-3 rounded-full bg-drac-green/80"></span>
+                  </div>
+                  <div class="flex-1 mx-4">
+                    <div class="flex items-center justify-center rounded-lg bg-drac-darker/60 px-3 py-1.5 text-xs text-drac-comment">
+                      <svg class="mr-1.5 h-3 w-3 text-drac-green" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg>
+                      tunegocio.cl
+                    </div>
+                  </div>
+                  <span class="rounded-full bg-chile-blue/15 px-3 py-1 text-[10px] font-bold text-chile-blueLight uppercase tracking-wider">Vista previa</span>
+                </div>
+
+                <!-- Mock website content -->
+                <div class="p-5 space-y-4">
+                  <!-- Mini hero -->
+                  <div class="rounded-2xl bg-gradient-to-br from-chile-blue via-chile-blueLight to-chile-blueDark p-6 text-white">
+                    <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">Tu marca aquí</p>
+                    <h2 class="mt-2 font-display text-xl font-bold leading-tight">Soluciones profesionales para tu hogar</h2>
+                    <p class="mt-2 text-xs text-white/70 leading-relaxed">Más de 10 años de experiencia al servicio de tu tranquilidad.</p>
+                    <div class="mt-4 flex gap-2">
+                      <span class="rounded-full bg-white/20 px-3 py-1.5 text-[10px] font-bold">Cotizar Ahora</span>
+                      <span class="rounded-full border border-white/30 px-3 py-1.5 text-[10px] font-bold">Ver Servicios</span>
+                    </div>
+                  </div>
+
+                  <!-- Mini cards -->
+                  <div class="grid grid-cols-3 gap-2">
+                    <div class="rounded-xl bg-drac-current/40 p-3 text-center">
+                      <div class="mx-auto h-8 w-8 rounded-lg bg-chile-blue/20 flex items-center justify-center text-chile-blueLight text-sm">⚡</div>
+                      <p class="mt-2 text-[9px] font-bold text-drac-fg">Rápido</p>
+                    </div>
+                    <div class="rounded-xl bg-drac-current/40 p-3 text-center">
+                      <div class="mx-auto h-8 w-8 rounded-lg bg-drac-green/20 flex items-center justify-center text-drac-green text-sm">✓</div>
+                      <p class="mt-2 text-[9px] font-bold text-drac-fg">Confiable</p>
+                    </div>
+                    <div class="rounded-xl bg-drac-current/40 p-3 text-center">
+                      <div class="mx-auto h-8 w-8 rounded-lg bg-chile-red/20 flex items-center justify-center text-chile-red text-sm">★</div>
+                      <p class="mt-2 text-[9px] font-bold text-drac-fg">Premium</p>
+                    </div>
+                  </div>
+
+                  <!-- Mini testimonial -->
+                  <div class="rounded-xl border border-drac-current/30 bg-drac-current/20 p-4">
+                    <div class="flex items-center gap-3">
+                      <div class="h-8 w-8 rounded-full bg-gradient-to-br from-chile-blue to-drac-purple flex items-center justify-center text-white text-xs font-bold">MC</div>
+                      <div>
+                        <p class="text-[10px] font-bold text-drac-fg">María C. — Peluquería</p>
+                        <div class="flex gap-0.5 mt-0.5">
+                          <span class="text-drac-orange text-[8px]">★★★★★</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-2 text-[9px] text-drac-comment leading-relaxed italic">"Desde que tengo mi página me llegan clientes nuevos cada semana"</p>
+                  </div>
+
+                  <!-- WhatsApp bar -->
+                  <div class="rounded-xl bg-[#25D366]/15 border border-[#25D366]/20 p-3 flex items-center justify-between">
+                    <span class="text-[10px] font-bold text-[#25D366]">💬 Contactar por WhatsApp</span>
+                    <span class="h-2 w-2 rounded-full bg-[#25D366] animate-pulse-soft"></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating badge -->
+              <div class="absolute -right-3 -bottom-3 glass rounded-2xl px-4 py-3 shadow-card animate-float" style="animation-delay: 1s">
+                <div class="flex items-center gap-2">
+                  <span class="flex h-8 w-8 items-center justify-center rounded-full bg-drac-green/20 text-drac-green">
+                    <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  </span>
+                  <div>
+                    <p class="text-[10px] font-bold text-drac-fg">Adaptada a Celular</p>
+                    <p class="text-[9px] text-drac-comment">Se ve perfecto en todo</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating badge left -->
+              <div class="absolute -left-3 top-1/3 glass rounded-2xl px-4 py-3 shadow-card animate-float hidden sm:block" style="animation-delay: 2s">
+                <div class="flex items-center gap-2">
+                  <span class="flex h-8 w-8 items-center justify-center rounded-full bg-chile-blue/20 text-chile-blueLight">
+                    <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+                  </span>
+                  <div>
+                    <p class="text-[10px] font-bold text-drac-fg">Carga Ultra Rápida</p>
+                    <p class="text-[9px] text-drac-comment">Menos de 1 segundo</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SOCIAL PROOF STATS -->
+    <!-- ============================================ -->
+    <section class="relative border-y border-drac-current/30 bg-drac-darker/50" x-data="{
+      shown: false,
+      count1: 0, count2: 0, count3: 0, count4: 0,
+      animateCounters() {
+        if (this.shown) return;
+        this.shown = true;
+        const duration = 2000;
+        const steps = 60;
+        const interval = duration / steps;
+        let step = 0;
+        const timer = setInterval(() => {
+          step++;
+          const progress = step / steps;
+          const ease = 1 - Math.pow(1 - progress, 3);
+          this.count1 = Math.round(50 * ease);
+          this.count2 = Math.round(98 * ease);
+          this.count3 = Math.round(24 * ease);
+          this.count4 = Math.round(0 * ease);
+          if (step >= steps) clearInterval(timer);
+        }, interval);
+      }
+    }" x-intersect.once="animateCounters()">
+      <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 gap-6 lg:grid-cols-4">
+          <div class="text-center">
+            <p class="font-display text-4xl font-black text-chile-blueLight" x-text="count1 + '+'">50+</p>
+            <p class="mt-2 text-sm font-medium text-drac-comment">Proyectos entregados</p>
+          </div>
+          <div class="text-center">
+            <p class="font-display text-4xl font-black text-drac-green" x-text="count2 + '%'">98%</p>
+            <p class="mt-2 text-sm font-medium text-drac-comment">Clientes satisfechos</p>
+          </div>
+          <div class="text-center">
+            <p class="font-display text-4xl font-black text-drac-orange" x-text="count3 + ' hrs'">24 hrs</p>
+            <p class="mt-2 text-sm font-medium text-drac-comment">Tiempo de respuesta</p>
+          </div>
+          <div class="text-center">
+            <p class="font-display text-4xl font-black text-chile-red">$0</p>
+            <p class="mt-2 text-sm font-medium text-drac-comment">Costo de mantención mensual</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PAIN POINTS / PROBLEM -->
+    <!-- ============================================ -->
+    <section id="beneficios" class="relative overflow-hidden dot-pattern">
+      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div class="reveal text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-flex items-center rounded-full bg-chile-red/10 border border-chile-red/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-chile-red mb-6">
+            ¿Te suena familiar?
+          </span>
+          <h2 class="font-display text-3xl font-black sm:text-4xl lg:text-5xl">
+            Sin página web, estás dejando
+            <span class="text-chile-red">plata sobre la mesa</span>
+          </h2>
+          <p class="mt-6 text-lg text-drac-comment leading-relaxed">
+            Estos son los problemas más comunes que enfrentan los negocios que todavía no tienen presencia profesional en internet.
+          </p>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Pain 1 -->
+          <div class="reveal group rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-7 transition-all duration-300 hover:border-chile-red/30 hover:shadow-card-hover hover:-translate-y-1" style="transition-delay: 0s">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-chile-red/10 text-chile-red transition-transform duration-300 group-hover:scale-110">
+              <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-bold text-drac-fg">No apareces en Google</h3>
+            <p class="mt-3 text-sm leading-relaxed text-drac-comment">Tus potenciales clientes buscan lo que tú ofreces, pero encuentran a tu competencia porque ellos sí tienen página web.</p>
+          </div>
+
+          <!-- Pain 2 -->
+          <div class="reveal group rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-7 transition-all duration-300 hover:border-chile-red/30 hover:shadow-card-hover hover:-translate-y-1" style="transition-delay: 0.06s">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-drac-orange/10 text-drac-orange transition-transform duration-300 group-hover:scale-110">
+              <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-bold text-drac-fg">Dependes solo de las redes</h3>
+            <p class="mt-3 text-sm leading-relaxed text-drac-comment">Instagram y Facebook cambian sus algoritmos cuando quieren. Un día te ven miles, al siguiente nadie. Tu página web es tuya, siempre.</p>
+          </div>
+
+          <!-- Pain 3 -->
+          <div class="reveal group rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-7 transition-all duration-300 hover:border-chile-red/30 hover:shadow-card-hover hover:-translate-y-1" style="transition-delay: 0.12s">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-drac-purple/10 text-drac-purple transition-transform duration-300 group-hover:scale-110">
+              <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-bold text-drac-fg">Te ven poco profesional</h3>
+            <p class="mt-3 text-sm leading-relaxed text-drac-comment">Un cliente busca tu negocio y no encuentra nada serio. Sin página web, pierdes credibilidad frente a la competencia que sí tiene una.</p>
+          </div>
+
+          <!-- Pain 4 -->
+          <div class="reveal group rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-7 transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover hover:-translate-y-1" style="transition-delay: 0.18s">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-chile-blue/10 text-chile-blueLight transition-transform duration-300 group-hover:scale-110">
+              <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-bold text-drac-fg">Pierdes clientes fuera de horario</h3>
+            <p class="mt-3 text-sm leading-relaxed text-drac-comment">Tu página web trabaja las 24 horas, los 7 días. Mientras duermes, un cliente puede ver tus servicios y contactarte por WhatsApp.</p>
+          </div>
+
+          <!-- Pain 5 -->
+          <div class="reveal group rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-7 transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover hover:-translate-y-1" style="transition-delay: 0.24s">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-drac-cyan/10 text-drac-cyan transition-transform duration-300 group-hover:scale-110">
+              <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-bold text-drac-fg">No explicas bien lo que haces</h3>
+            <p class="mt-3 text-sm leading-relaxed text-drac-comment">Un post de Instagram no alcanza. Tu página web presenta tu servicio de forma ordenada, con toda la info que el cliente necesita para decidirse.</p>
+          </div>
+
+          <!-- Pain 6 - CTA card -->
+          <div class="reveal rounded-2xl bg-gradient-to-br from-chile-blue to-chile-blueDark p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-glow" style="transition-delay: 0.3s">
+            <div>
+              <h3 class="text-lg font-bold text-white">¿Listo para solucionarlo?</h3>
+              <p class="mt-3 text-sm leading-relaxed text-white/70">Una página web profesional resuelve todos estos problemas de una vez. Y cuesta menos de lo que piensas.</p>
+            </div>
+            <a href="#precios" class="mt-6 inline-flex items-center justify-center rounded-full bg-white/15 border border-white/20 px-5 py-3 text-sm font-bold text-white transition-all duration-300 hover:bg-white/25">
+              Ver inversión →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SERVICES -->
+    <!-- ============================================ -->
+    <section id="servicios" class="relative border-y border-drac-current/30 bg-drac-darker/50 overflow-hidden">
+      <div class="absolute top-0 right-0 h-96 w-96 rounded-full bg-chile-blue/5 blur-[120px]"></div>
+
+      <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div class="reveal text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-flex items-center rounded-full bg-chile-blue/10 border border-chile-blue/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-chile-blueLight mb-6">
+            Qué incluye tu página web
+          </span>
+          <h2 class="font-display text-3xl font-black sm:text-4xl lg:text-5xl">
+            Todo lo que necesitas para
+            <span class="text-gradient-chile">verte profesional</span>
+          </h2>
+          <p class="mt-6 text-lg text-drac-comment leading-relaxed">
+            No te vendo funciones que no vas a usar. Te entrego lo que realmente necesita tu negocio para generar confianza y recibir más clientes.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Service 1 -->
+          <div class="reveal group relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/80 p-8 transition-all duration-500 hover:border-chile-blue/30 hover:shadow-card-hover hover:-translate-y-1">
+            <div class="absolute inset-0 rounded-[1.75rem] bg-gradient-to-b from-chile-blue/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+            <div class="relative">
+              <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-chile-blue/20 to-chile-blueLight/10 text-chile-blueLight ring-1 ring-chile-blue/10">
+                <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
+              </div>
+              <h3 class="mt-6 text-xl font-bold text-drac-fg">Diseño Profesional a Medida</h3>
+              <p class="mt-3 text-sm leading-relaxed text-drac-comment">No uso plantillas genéricas. Cada página se diseña específicamente para tu negocio, con tus colores, tu estilo y tu mensaje.</p>
+              <ul class="mt-5 space-y-2.5">
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Colores y estilo de tu marca
+                </li>
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Tipografías modernas y legibles
+                </li>
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Animaciones sutiles y elegantes
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="reveal group relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/80 p-8 transition-all duration-500 hover:border-drac-green/30 hover:shadow-card-hover hover:-translate-y-1" style="transition-delay: .08s">
+            <div class="absolute inset-0 rounded-[1.75rem] bg-gradient-to-b from-drac-green/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+            <div class="relative">
+              <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-drac-green/20 to-drac-green/5 text-drac-green ring-1 ring-drac-green/10">
+                <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/></svg>
+              </div>
+              <h3 class="mt-6 text-xl font-bold text-drac-fg">Perfecta en Celular y PC</h3>
+              <p class="mt-3 text-sm leading-relaxed text-drac-comment">Más del 80% de tus clientes te van a ver desde el celular. Tu página se adapta perfectamente a cualquier pantalla.</p>
+              <ul class="mt-5 space-y-2.5">
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Diseño responsive (se adapta sola)
+                </li>
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Carga ultra rápida (menos de 1 seg)
+                </li>
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Probada en todos los navegadores
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="reveal group relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/80 p-8 transition-all duration-500 hover:border-drac-orange/30 hover:shadow-card-hover hover:-translate-y-1" style="transition-delay: .16s">
+            <div class="absolute inset-0 rounded-[1.75rem] bg-gradient-to-b from-drac-orange/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+            <div class="relative">
+              <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-drac-orange/20 to-drac-orange/5 text-drac-orange ring-1 ring-drac-orange/10">
+                <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.613.613l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-2.278 0-4.381-.762-6.065-2.046l-.424-.328-2.643.886.886-2.643-.328-.424A9.72 9.72 0 012.25 12 9.75 9.75 0 0112 2.25 9.75 9.75 0 0121.75 12 9.75 9.75 0 0112 21.75z"/></svg>
+              </div>
+              <h3 class="mt-6 text-xl font-bold text-drac-fg">Botón de WhatsApp Integrado</h3>
+              <p class="mt-3 text-sm leading-relaxed text-drac-comment">Tus clientes te escriben al tiro con un solo toque. Sin formularios complicados, directo a tu WhatsApp de negocio.</p>
+              <ul class="mt-5 space-y-2.5">
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Botón fijo siempre visible
+                </li>
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Mensaje predefinido automático
+                </li>
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Funciona en celular y computador
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="reveal group relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/80 p-8 transition-all duration-500 hover:border-drac-purple/30 hover:shadow-card-hover hover:-translate-y-1" style="transition-delay: .24s">
+            <div class="absolute inset-0 rounded-[1.75rem] bg-gradient-to-b from-drac-purple/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+            <div class="relative">
+              <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-drac-purple/20 to-drac-purple/5 text-drac-purple ring-1 ring-drac-purple/10">
+                <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z"/></svg>
+              </div>
+              <h3 class="mt-6 text-xl font-bold text-drac-fg">Hosting Gratuito Incluido</h3>
+              <p class="mt-3 text-sm leading-relaxed text-drac-comment">Tu página queda publicada en servidores profesionales sin costo mensual. Rápida, segura y con certificado de seguridad (HTTPS).</p>
+              <ul class="mt-5 space-y-2.5">
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  $0 pesos mensuales de hosting
+                </li>
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Candadito verde (HTTPS seguro)
+                </li>
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Opción de dominio propio (.cl)
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="reveal group relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/80 p-8 transition-all duration-500 hover:border-drac-cyan/30 hover:shadow-card-hover hover:-translate-y-1" style="transition-delay: .32s">
+            <div class="absolute inset-0 rounded-[1.75rem] bg-gradient-to-b from-drac-cyan/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+            <div class="relative">
+              <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-drac-cyan/20 to-drac-cyan/5 text-drac-cyan ring-1 ring-drac-cyan/10">
+                <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605"/></svg>
+              </div>
+              <h3 class="mt-6 text-xl font-bold text-drac-fg">Optimizada para Google</h3>
+              <p class="mt-3 text-sm leading-relaxed text-drac-comment">Tu página se construye con las mejores prácticas para que Google la encuentre y la muestre cuando busquen lo que tú ofreces.</p>
+              <ul class="mt-5 space-y-2.5">
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Código limpio para buscadores
+                </li>
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Velocidad de carga optimizada
+                </li>
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Estructura SEO profesional
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="reveal group relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/80 p-8 transition-all duration-500 hover:border-chile-red/30 hover:shadow-card-hover hover:-translate-y-1" style="transition-delay: .40s">
+            <div class="absolute inset-0 rounded-[1.75rem] bg-gradient-to-b from-chile-red/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+            <div class="relative">
+              <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-chile-red/20 to-chile-red/5 text-chile-red ring-1 ring-chile-red/10">
+                <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+              </div>
+              <h3 class="mt-6 text-xl font-bold text-drac-fg">Lista para Crecer</h3>
+              <p class="mt-3 text-sm leading-relaxed text-drac-comment">Empiezas con lo esencial y después puedes agregar secciones, funciones o integrar tu página con otras herramientas cuando lo necesites.</p>
+              <ul class="mt-5 space-y-2.5">
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Arquitectura escalable
+                </li>
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Puedes agregar secciones después
+                </li>
+                <li class="flex items-center gap-2 text-sm text-drac-comment">
+                  <svg class="h-4 w-4 text-drac-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Integración con redes sociales
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PROCESS -->
+    <!-- ============================================ -->
+    <section id="proceso" class="relative overflow-hidden">
+      <div class="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-drac-purple/5 blur-[120px]"></div>
+
+      <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div class="reveal text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-flex items-center rounded-full bg-drac-green/10 border border-drac-green/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-drac-green mb-6">
+            Proceso simple y transparente
+          </span>
+          <h2 class="font-display text-3xl font-black sm:text-4xl lg:text-5xl">
+            De la conversación a tu página
+            <span class="text-drac-green">en 4 pasos</span>
+          </h2>
+          <p class="mt-6 text-lg text-drac-comment leading-relaxed">
+            Sin vueltas, sin procesos complicados. Yo me encargo de todo lo técnico, tú solo me cuentas sobre tu negocio.
+          </p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="relative">
+          <!-- Vertical line -->
+          <div class="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-chile-blue via-drac-purple to-chile-red hidden lg:block"></div>
+
+          <div class="space-y-8 lg:space-y-12">
+            <!-- Step 1 -->
+            <div class="reveal lg:ml-20 group">
+              <div class="relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/60 p-8 transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover">
+                <!-- Step number (desktop) -->
+                <div class="absolute -left-[4.75rem] top-8 hidden lg:flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-chile-blue to-chile-blueLight text-white text-sm font-black shadow-glow ring-4 ring-drac-darker">1</div>
+                <!-- Step number (mobile) -->
+                <span class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-chile-blue to-chile-blueLight text-white text-sm font-black mb-4">1</span>
+                <div class="flex flex-col lg:flex-row lg:items-start lg:gap-8">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-3">
+                      <h3 class="text-xl font-bold text-drac-fg">Conversamos sobre tu negocio</h3>
+                      <span class="rounded-full bg-chile-blue/10 px-3 py-1 text-[10px] font-bold text-chile-blueLight uppercase tracking-wider">15 min</span>
+                    </div>
+                    <p class="text-sm leading-relaxed text-drac-comment">Me cuentas qué haces, a quién le vendes y qué quieres lograr con tu página. Es una conversación relajada por WhatsApp o videollamada. Sin compromisos.</p>
+                  </div>
+                  <div class="mt-4 lg:mt-0 lg:flex-shrink-0">
+                    <div class="rounded-xl bg-drac-current/30 border border-drac-current/30 px-4 py-3 text-xs">
+                      <p class="font-bold text-drac-fg mb-1">Lo que recibes:</p>
+                      <p class="text-drac-comment">✓ Enfoque claro para tu página</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="reveal lg:ml-20 group" style="transition-delay: .08s">
+              <div class="relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/60 p-8 transition-all duration-300 hover:border-chile-red/30 hover:shadow-card-hover">
+                <div class="absolute -left-[4.75rem] top-8 hidden lg:flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-chile-red to-chile-redDark text-white text-sm font-black shadow-glow-red ring-4 ring-drac-darker">2</div>
+                <span class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-chile-red to-chile-redDark text-white text-sm font-black mb-4">2</span>
+                <div class="flex flex-col lg:flex-row lg:items-start lg:gap-8">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-3">
+                      <h3 class="text-xl font-bold text-drac-fg">Armo el contenido y estructura</h3>
+                      <span class="rounded-full bg-chile-red/10 px-3 py-1 text-[10px] font-bold text-chile-red uppercase tracking-wider">2–3 días</span>
+                    </div>
+                    <p class="text-sm leading-relaxed text-drac-comment">Organizo las secciones de tu página, escribo los textos que mejor comunican lo que haces y defino la estructura que va a convencer a tus clientes.</p>
+                  </div>
+                  <div class="mt-4 lg:mt-0 lg:flex-shrink-0">
+                    <div class="rounded-xl bg-drac-current/30 border border-drac-current/30 px-4 py-3 text-xs">
+                      <p class="font-bold text-drac-fg mb-1">Lo que recibes:</p>
+                      <p class="text-drac-comment">✓ Esquema y textos listos</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="reveal lg:ml-20 group" style="transition-delay: .16s">
+              <div class="relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/60 p-8 transition-all duration-300 hover:border-drac-purple/30 hover:shadow-card-hover">
+                <div class="absolute -left-[4.75rem] top-8 hidden lg:flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-drac-purple to-[#9B72D8] text-white text-sm font-black ring-4 ring-drac-darker" style="box-shadow: 0 0 30px rgba(189,147,249,0.2)">3</div>
+                <span class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-drac-purple to-[#9B72D8] text-white text-sm font-black mb-4">3</span>
+                <div class="flex flex-col lg:flex-row lg:items-start lg:gap-8">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-3">
+                      <h3 class="text-xl font-bold text-drac-fg">Diseño y ajustes contigo</h3>
+                      <span class="rounded-full bg-drac-purple/10 px-3 py-1 text-[10px] font-bold text-drac-purple uppercase tracking-wider">3–5 días</span>
+                    </div>
+                    <p class="text-sm leading-relaxed text-drac-comment">Construyo tu página con diseño profesional. Te muestro un borrador para que lo revises y hacemos los ajustes que necesites hasta que quede como tú quieres.</p>
+                  </div>
+                  <div class="mt-4 lg:mt-0 lg:flex-shrink-0">
+                    <div class="rounded-xl bg-drac-current/30 border border-drac-current/30 px-4 py-3 text-xs">
+                      <p class="font-bold text-drac-fg mb-1">Lo que recibes:</p>
+                      <p class="text-drac-comment">✓ Borrador interactivo + ajustes</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="reveal lg:ml-20 group" style="transition-delay: .24s">
+              <div class="relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/60 p-8 transition-all duration-300 hover:border-drac-green/30 hover:shadow-card-hover">
+                <div class="absolute -left-[4.75rem] top-8 hidden lg:flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-drac-green to-[#3DD668] text-drac-darker text-sm font-black ring-4 ring-drac-darker" style="box-shadow: 0 0 30px rgba(80,250,123,0.2)">4</div>
+                <span class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-drac-green to-[#3DD668] text-drac-darker text-sm font-black mb-4">4</span>
+                <div class="flex flex-col lg:flex-row lg:items-start lg:gap-8">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-3">
+                      <h3 class="text-xl font-bold text-drac-fg">¡Tu página queda online!</h3>
+                      <span class="rounded-full bg-drac-green/10 px-3 py-1 text-[10px] font-bold text-drac-green uppercase tracking-wider">1 día</span>
+                    </div>
+                    <p class="text-sm leading-relaxed text-drac-comment">Publico tu página en internet, configuro todo lo técnico y te la entrego funcionando. Listo, ya puedes compartir tu link con todos tus clientes.</p>
+                  </div>
+                  <div class="mt-4 lg:mt-0 lg:flex-shrink-0">
+                    <div class="rounded-xl bg-drac-green/10 border border-drac-green/20 px-4 py-3 text-xs">
+                      <p class="font-bold text-drac-green mb-1">Lo que recibes:</p>
+                      <p class="text-drac-comment">✓ Tu página 100% online</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- IDEAL CLIENT -->
+    <!-- ============================================ -->
+    <section class="border-y border-drac-current/30 bg-drac-darker/50">
+      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div class="reveal text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-flex items-center rounded-full bg-drac-purple/10 border border-drac-purple/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-drac-purple mb-6">
+            ¿Es para ti?
+          </span>
+          <h2 class="font-display text-3xl font-black sm:text-4xl lg:text-5xl">
+            Ideal para negocios como
+            <span class="text-drac-purple">el tuyo</span>
+          </h2>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="reveal group rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-6 text-center transition-all duration-300 hover:border-drac-purple/30 hover:-translate-y-1 hover:shadow-card">
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-chile-blue/10 text-3xl mb-4 transition-transform duration-300 group-hover:scale-110">👨‍💼</div>
+            <h3 class="font-bold text-drac-fg">Profesionales</h3>
+            <p class="mt-2 text-xs text-drac-comment leading-relaxed">Contadores, abogados, arquitectos, consultores, coaches y más.</p>
+          </div>
+
+          <div class="reveal group rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-6 text-center transition-all duration-300 hover:border-drac-purple/30 hover:-translate-y-1 hover:shadow-card" style="transition-delay: .06s">
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-drac-green/10 text-3xl mb-4 transition-transform duration-300 group-hover:scale-110">🏪</div>
+            <h3 class="font-bold text-drac-fg">Negocios Locales</h3>
+            <p class="mt-2 text-xs text-drac-comment leading-relaxed">Peluquerías, cafeterías, talleres, tiendas, restaurantes y más.</p>
+          </div>
+
+          <div class="reveal group rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-6 text-center transition-all duration-300 hover:border-drac-purple/30 hover:-translate-y-1 hover:shadow-card" style="transition-delay: .12s">
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-chile-red/10 text-3xl mb-4 transition-transform duration-300 group-hover:scale-110">🔧</div>
+            <h3 class="font-bold text-drac-fg">Servicios</h3>
+            <p class="mt-2 text-xs text-drac-comment leading-relaxed">Electricistas, gasfíteres, técnicos, mantención, limpieza y más.</p>
+          </div>
+
+          <div class="reveal group rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-6 text-center transition-all duration-300 hover:border-drac-purple/30 hover:-translate-y-1 hover:shadow-card" style="transition-delay: .18s">
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-drac-orange/10 text-3xl mb-4 transition-transform duration-300 group-hover:scale-110">🚀</div>
+            <h3 class="font-bold text-drac-fg">Emprendedores</h3>
+            <p class="mt-2 text-xs text-drac-comment leading-relaxed">Proyectos nuevos que necesitan verse profesionales desde el día uno.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PRICING -->
+    <!-- ============================================ -->
+    <section id="precios" class="relative overflow-hidden">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-chile-blue/5 blur-[150px]"></div>
+
+      <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div class="reveal text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-flex items-center rounded-full bg-drac-orange/10 border border-drac-orange/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-drac-orange mb-6">
+            Inversión transparente
+          </span>
+          <h2 class="font-display text-3xl font-black sm:text-4xl lg:text-5xl">
+            Precio claro,
+            <span class="text-drac-orange">sin sorpresas</span>
+          </h2>
+          <p class="mt-6 text-lg text-drac-comment leading-relaxed">
+            Sin letras chicas, sin cobros escondidos, sin costos mensuales obligatorios. Lo que ves es lo que pagas.
+          </p>
+        </div>
+
+        <div class="grid gap-8 lg:grid-cols-3 items-start">
+
+          <!-- Plan Esencial -->
+          <div class="reveal rounded-[2rem] border border-drac-current/40 bg-drac-bg/80 overflow-hidden transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover hover:-translate-y-1">
+            <div class="p-8">
+              <p class="text-sm font-bold uppercase tracking-[0.2em] text-chile-blueLight">Esencial</p>
+              <p class="mt-4 font-display text-4xl font-black text-drac-fg">$149.990<span class="text-base font-medium text-drac-comment"> CLP</span></p>
+              <p class="mt-2 text-sm text-drac-comment">Pago único • Sin cobro mensual</p>
+              <div class="mt-6 h-px bg-drac-current/30"></div>
+              <ul class="mt-6 space-y-3">
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Página web de una sección
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Diseño profesional adaptado a celular
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Botón de WhatsApp integrado
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Hosting gratuito incluido
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  1 ronda de ajustes
+                </li>
+              </ul>
+            </div>
+            <div class="p-6 pt-0">
+              <a href="#contacto" class="btn-glow flex w-full items-center justify-center rounded-2xl border border-chile-blue/30 bg-chile-blue/10 px-5 py-3.5 text-sm font-bold text-chile-blueLight transition-all duration-300 hover:bg-chile-blue/20">Cotizar Plan Esencial</a>
+            </div>
+          </div>
+
+          <!-- Plan Profesional (Featured) -->
+          <div class="reveal rounded-[2rem] border-2 border-chile-blue/50 bg-drac-bg/80 overflow-hidden shadow-glow transition-all duration-300 hover:-translate-y-2 relative" style="transition-delay: .08s">
+            <!-- Popular badge -->
+            <div class="bg-gradient-to-r from-chile-blue to-chile-blueLight py-2 px-4 text-center">
+              <p class="text-xs font-bold text-white uppercase tracking-[0.2em]">⭐ Más popular</p>
+            </div>
+            <div class="p-8">
+              <p class="text-sm font-bold uppercase tracking-[0.2em] text-chile-blueLight">Profesional</p>
+              <p class="mt-4 font-display text-4xl font-black text-drac-fg">$249.990<span class="text-base font-medium text-drac-comment"> CLP</span></p>
+              <p class="mt-2 text-sm text-drac-comment">Pago único • Sin cobro mensual</p>
+              <div class="mt-6 h-px bg-drac-current/30"></div>
+              <ul class="mt-6 space-y-3">
+                <li class="flex items-start gap-3 text-sm text-drac-fg font-medium">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Todo lo del plan Esencial
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Hasta 5 secciones completas
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Microanimaciones profesionales
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Optimización para Google
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Formulario de contacto
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Integración con redes sociales
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  3 rondas de ajustes
+                </li>
+              </ul>
+            </div>
+            <div class="p-6 pt-0">
+              <a href="#contacto" class="btn-glow flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-chile-blue to-chile-blueLight px-5 py-3.5 text-sm font-bold text-white shadow-glow transition-all duration-300 hover:shadow-xl">
+                <svg class="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.613.613l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+                Cotizar Plan Profesional
+              </a>
+            </div>
+          </div>
+
+          <!-- Plan Premium -->
+          <div class="reveal rounded-[2rem] border border-drac-current/40 bg-drac-bg/80 overflow-hidden transition-all duration-300 hover:border-drac-purple/30 hover:shadow-card-hover hover:-translate-y-1" style="transition-delay: .16s">
+            <div class="p-8">
+              <p class="text-sm font-bold uppercase tracking-[0.2em] text-drac-purple">Premium</p>
+              <p class="mt-4 font-display text-4xl font-black text-drac-fg">$449.990<span class="text-base font-medium text-drac-comment"> CLP</span></p>
+              <p class="mt-2 text-sm text-drac-comment">Pago único • Sin cobro mensual</p>
+              <div class="mt-6 h-px bg-drac-current/30"></div>
+              <ul class="mt-6 space-y-3">
+                <li class="flex items-start gap-3 text-sm text-drac-fg font-medium">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Todo lo del plan Profesional
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Secciones ilimitadas
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Dominio .cl por 1 año incluido
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Animaciones avanzadas
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Galería de trabajos / portafolio
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Ajustes ilimitados por 30 días
+                </li>
+                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Soporte prioritario por 3 meses
+                </li>
+              </ul>
+            </div>
+            <div class="p-6 pt-0">
+              <a href="#contacto" class="btn-glow flex w-full items-center justify-center rounded-2xl border border-drac-purple/30 bg-drac-purple/10 px-5 py-3.5 text-sm font-bold text-drac-purple transition-all duration-300 hover:bg-drac-purple/20">Cotizar Plan Premium</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Investment justification -->
+        <div class="reveal mt-16 rounded-[2rem] border border-drac-current/30 bg-gradient-to-br from-drac-bg/80 to-drac-darker/80 p-8 lg:p-10">
+          <h3 class="font-display text-2xl font-bold text-drac-fg text-center mb-8">¿Por qué es una buena inversión?</h3>
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="text-center">
+              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-drac-green/10 text-drac-green mb-3">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <p class="text-sm font-bold text-drac-fg">Pago único</p>
+              <p class="mt-1 text-xs text-drac-comment">No pagas mensualidad, la página es tuya para siempre.</p>
+            </div>
+            <div class="text-center">
+              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-chile-blue/10 text-chile-blueLight mb-3">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5"/></svg>
+              </div>
+              <p class="text-sm font-bold text-drac-fg">Trabaja 24/7</p>
+              <p class="mt-1 text-xs text-drac-comment">Tu página no descansa. Recibe clientes a toda hora.</p>
+            </div>
+            <div class="text-center">
+              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-drac-orange/10 text-drac-orange mb-3">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+              </div>
+              <p class="text-sm font-bold text-drac-fg">Retorno rápido</p>
+              <p class="mt-1 text-xs text-drac-comment">Con 1 solo cliente nuevo, ya recuperaste la inversión.</p>
+            </div>
+            <div class="text-center">
+              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-chile-red/10 text-chile-red mb-3">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+              </div>
+              <p class="text-sm font-bold text-drac-fg">Credibilidad</p>
+              <p class="mt-1 text-xs text-drac-comment">Te ves profesional y serio, eso se traduce en más ventas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TESTIMONIALS -->
+    <!-- ============================================ -->
+    <section class="border-y border-drac-current/30 bg-drac-darker/50">
+      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div class="reveal text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-flex items-center rounded-full bg-drac-yellow/10 border border-drac-yellow/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-drac-yellow mb-6">
+            Lo que dicen nuestros clientes
+          </span>
+          <h2 class="font-display text-3xl font-black sm:text-4xl lg:text-5xl">
+            Negocios que ya
+            <span class="text-drac-yellow">dieron el paso</span>
+          </h2>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          <div class="reveal rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-7 transition-all duration-300 hover:border-drac-yellow/20 hover:shadow-card hover:-translate-y-1">
+            <div class="flex gap-1 mb-4">
+              <span class="text-drac-orange">★</span><span class="text-drac-orange">★</span><span class="text-drac-orange">★</span><span class="text-drac-orange">★</span><span class="text-drac-orange">★</span>
+            </div>
+            <p class="text-sm leading-relaxed text-drac-comment italic">"Tenía puro Instagram y no me tomaban en serio. Desde que tengo mi página, los clientes llegan con más confianza y me contactan directo por WhatsApp. La mejor inversión que he hecho para mi negocio."</p>
+            <div class="mt-6 flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-gradient-to-br from-chile-blue to-drac-purple flex items-center justify-center text-white text-sm font-bold">MC</div>
+              <div>
+                <p class="text-sm font-bold text-drac-fg">María C.</p>
+                <p class="text-xs text-drac-comment">Peluquería — Santiago</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-7 transition-all duration-300 hover:border-drac-yellow/20 hover:shadow-card hover:-translate-y-1" style="transition-delay: .08s">
+            <div class="flex gap-1 mb-4">
+              <span class="text-drac-orange">★</span><span class="text-drac-orange">★</span><span class="text-drac-orange">★</span><span class="text-drac-orange">★</span><span class="text-drac-orange">★</span>
+            </div>
+            <p class="text-sm leading-relaxed text-drac-comment italic">"Yo no cacho nada de tecnología y tenía miedo de que fuera complicado. Pero él se encargó de todo. Me explicó cada paso sin tecnicismos. Ahora tengo una página bacán que puedo mostrar con orgullo."</p>
+            <div class="mt-6 flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-gradient-to-br from-drac-green to-drac-cyan flex items-center justify-center text-drac-darker text-sm font-bold">RP</div>
+              <div>
+                <p class="text-sm font-bold text-drac-fg">Roberto P.</p>
+                <p class="text-xs text-drac-comment">Electricista — Viña del Mar</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-7 transition-all duration-300 hover:border-drac-yellow/20 hover:shadow-card hover:-translate-y-1" style="transition-delay: .16s">
+            <div class="flex gap-1 mb-4">
+              <span class="text-drac-orange">★</span><span class="text-drac-orange">★</span><span class="text-drac-orange">★</span><span class="text-drac-orange">★</span><span class="text-drac-orange">★</span>
+            </div>
+            <p class="text-sm leading-relaxed text-drac-comment italic">"Al principio pensé que era caro, pero con el primer cliente que llegó por la página ya la pagué. Ahora me contactan personas que ni sabían que existía mi negocio. Vale cada peso."</p>
+            <div class="mt-6 flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-gradient-to-br from-chile-red to-drac-orange flex items-center justify-center text-white text-sm font-bold">LV</div>
+              <div>
+                <p class="text-sm font-bold text-drac-fg">Laura V.</p>
+                <p class="text-xs text-drac-comment">Pastelería — Concepción</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FAQ -->
+    <!-- ============================================ -->
+    <section id="faq" class="relative overflow-hidden">
+      <div class="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div class="reveal text-center mb-16">
+          <span class="inline-flex items-center rounded-full bg-drac-cyan/10 border border-drac-cyan/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-drac-cyan mb-6">
+            Preguntas frecuentes
+          </span>
+          <h2 class="font-display text-3xl font-black sm:text-4xl">
+            Las dudas que todos tienen
+            <span class="text-drac-cyan">(resueltas)</span>
+          </h2>
+        </div>
+
+        <div class="space-y-3" x-data="{ openFaq: null }">
+          <!-- FAQ 1 -->
+          <div class="reveal rounded-2xl border border-drac-current/40 bg-drac-bg/60 overflow-hidden transition-colors hover:border-drac-cyan/20">
+            <button @click="openFaq = openFaq === 1 ? null : 1" class="flex w-full items-center justify-between p-6 text-left">
+              <span class="text-sm font-bold text-drac-fg pr-4">¿Es muy caro tener una página web?</span>
+              <svg :class="openFaq === 1 ? 'rotate-180' : ''" class="h-5 w-5 text-drac-comment flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div x-show="openFaq === 1" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-cloak class="px-6 pb-6">
+              <p class="text-sm leading-relaxed text-drac-comment">Para nada. Piénsalo así: una publicidad en Instagram puede costarte $50.000 o más al mes y dura unos días. Tu página web la pagas una sola vez y trabaja para ti las 24 horas, los 365 días del año. Además, el hosting es gratuito, así que no tienes costo mensual. Con un solo cliente nuevo que te llegue por la página, ya la pagaste.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="reveal rounded-2xl border border-drac-current/40 bg-drac-bg/60 overflow-hidden transition-colors hover:border-drac-cyan/20" style="transition-delay: .04s">
+            <button @click="openFaq = openFaq === 2 ? null : 2" class="flex w-full items-center justify-between p-6 text-left">
+              <span class="text-sm font-bold text-drac-fg pr-4">Yo no sé nada de tecnología, ¿puedo tener una página igual?</span>
+              <svg :class="openFaq === 2 ? 'rotate-180' : ''" class="h-5 w-5 text-drac-comment flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div x-show="openFaq === 2" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-cloak class="px-6 pb-6">
+              <p class="text-sm leading-relaxed text-drac-comment">¡Por supuesto! Yo me encargo de absolutamente todo lo técnico. Tú solo me cuentas sobre tu negocio y yo hago el resto. No necesitas saber nada de computación, programación ni nada por el estilo. Te explico todo en palabras simples, sin tecnicismos.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="reveal rounded-2xl border border-drac-current/40 bg-drac-bg/60 overflow-hidden transition-colors hover:border-drac-cyan/20" style="transition-delay: .08s">
+            <button @click="openFaq = openFaq === 3 ? null : 3" class="flex w-full items-center justify-between p-6 text-left">
+              <span class="text-sm font-bold text-drac-fg pr-4">Pero si ya tengo Instagram, ¿para qué necesito página web?</span>
+              <svg :class="openFaq === 3 ? 'rotate-180' : ''" class="h-5 w-5 text-drac-comment flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div x-show="openFaq === 3" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-cloak class="px-6 pb-6">
+              <p class="text-sm leading-relaxed text-drac-comment">Instagram es una vitrina, pero no es tuya. El algoritmo decide quién te ve y cuándo. Si Facebook o Instagram cambian las reglas (y lo hacen seguido), puedes perder alcance de un día para otro. Tu página web es tu espacio propio: apareces en Google, explicas tu servicio completo, y tus clientes te contactan directo sin depender de ninguna red social.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="reveal rounded-2xl border border-drac-current/40 bg-drac-bg/60 overflow-hidden transition-colors hover:border-drac-cyan/20" style="transition-delay: .12s">
+            <button @click="openFaq = openFaq === 4 ? null : 4" class="flex w-full items-center justify-between p-6 text-left">
+              <span class="text-sm font-bold text-drac-fg pr-4">¿Cuánto tiempo toma tener mi página lista?</span>
+              <svg :class="openFaq === 4 ? 'rotate-180' : ''" class="h-5 w-5 text-drac-comment flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div x-show="openFaq === 4" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-cloak class="px-6 pb-6">
+              <p class="text-sm leading-relaxed text-drac-comment">Depende del plan, pero en general tu página puede estar lista y publicada en 5 a 10 días hábiles desde que empezamos. El proceso es bien rápido porque trabajo de forma enfocada y organizada.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="reveal rounded-2xl border border-drac-current/40 bg-drac-bg/60 overflow-hidden transition-colors hover:border-drac-cyan/20" style="transition-delay: .16s">
+            <button @click="openFaq = openFaq === 5 ? null : 5" class="flex w-full items-center justify-between p-6 text-left">
+              <span class="text-sm font-bold text-drac-fg pr-4">¿Tengo que pagar algo mensual?</span>
+              <svg :class="openFaq === 5 ? 'rotate-180' : ''" class="h-5 w-5 text-drac-comment flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div x-show="openFaq === 5" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-cloak class="px-6 pb-6">
+              <p class="text-sm leading-relaxed text-drac-comment">No. El hosting (donde vive tu página en internet) es completamente gratuito. Lo único opcional es si quieres un dominio propio (como tunegocio.cl), que cuesta alrededor de $10.000 al año. Pero incluso sin dominio propio, tu página queda publicada y funcionando perfecto.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 6 -->
+          <div class="reveal rounded-2xl border border-drac-current/40 bg-drac-bg/60 overflow-hidden transition-colors hover:border-drac-cyan/20" style="transition-delay: .20s">
+            <button @click="openFaq = openFaq === 6 ? null : 6" class="flex w-full items-center justify-between p-6 text-left">
+              <span class="text-sm font-bold text-drac-fg pr-4">¿Puedo agregar cosas después?</span>
+              <svg :class="openFaq === 6 ? 'rotate-180' : ''" class="h-5 w-5 text-drac-comment flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div x-show="openFaq === 6" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-cloak class="px-6 pb-6">
+              <p class="text-sm leading-relaxed text-drac-comment">Sí, totalmente. Tu página se construye con una base sólida que permite agregar secciones, funcionalidades o integrar herramientas nuevas en el futuro. Empiezas con lo que necesitas hoy y creces cuando tu negocio lo pida.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CTA + CONTACT -->
+    <!-- ============================================ -->
+    <section id="contacto" class="relative overflow-hidden mesh-bg noise">
+      <div class="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-chile-blue/10 blur-[120px]"></div>
+      <div class="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-chile-red/8 blur-[100px]"></div>
+
+      <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <!-- Left -->
+          <div class="reveal">
+            <span class="inline-flex items-center rounded-full bg-drac-green/10 border border-drac-green/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-drac-green mb-6">
+              <span class="mr-2 h-2 w-2 rounded-full bg-drac-green animate-pulse-soft"></span>
+              Disponible ahora
+            </span>
+            <h2 class="font-display text-3xl font-black sm:text-4xl lg:text-5xl">
+              ¿Listo para que tu negocio
+              <span class="text-gradient-chile">se vea profesional</span>?
+            </h2>
+            <p class="mt-6 text-lg text-drac-comment leading-relaxed">
+              La primera conversación no tiene ningún costo ni compromiso. Me cuentas sobre tu negocio y te doy una propuesta clara. Si te convence, avanzamos. Así de simple.
+            </p>
+
+            <div class="mt-8 space-y-4">
+              <div class="flex items-center gap-4 rounded-2xl border border-drac-current/30 bg-drac-bg/40 p-4 transition-all duration-300 hover:border-drac-green/20">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-drac-green/10 text-drac-green flex-shrink-0">
+                  <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-bold text-drac-fg">Cotización sin costo</p>
+                  <p class="text-xs text-drac-comment">Te respondo en menos de 24 horas con una propuesta detallada.</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 rounded-2xl border border-drac-current/30 bg-drac-bg/40 p-4 transition-all duration-300 hover:border-drac-green/20">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-drac-green/10 text-drac-green flex-shrink-0">
+                  <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-bold text-drac-fg">Sin compromiso</p>
+                  <p class="text-xs text-drac-comment">Si no te convence, no hay problema. Sin presión.</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 rounded-2xl border border-drac-current/30 bg-drac-bg/40 p-4 transition-all duration-300 hover:border-drac-green/20">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-drac-green/10 text-drac-green flex-shrink-0">
+                  <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-bold text-drac-fg">Pago seguro</p>
+                  <p class="text-xs text-drac-comment">50% al inicio, 50% cuando tu página esté lista y aprobada por ti.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Contact form -->
+          <div class="reveal-right" style="transition-delay: .1s">
+            <div class="relative">
+              <div class="absolute -inset-3 rounded-[2.5rem] bg-gradient-to-br from-chile-blue/20 via-transparent to-chile-red/15 blur-xl"></div>
+              <div class="relative glass rounded-[2rem] p-8 shadow-mega">
+                <h3 class="text-xl font-bold text-drac-fg mb-6">Cuéntame sobre tu negocio</h3>
+                <form class="space-y-4" x-data="{ sent: false }" @submit.prevent="sent = true">
+                  <div x-show="!sent">
+                    <div>
+                      <label for="form-nombre" class="mb-2 block text-sm font-bold text-drac-fg">Tu nombre</label>
+                      <input id="form-nombre" type="text" placeholder="Ej: Juan Pérez" required class="w-full rounded-xl border border-drac-current/50 bg-drac-darker/60 px-4 py-3 text-sm text-drac-fg placeholder-drac-comment/50 outline-none transition focus:border-chile-blue focus:ring-2 focus:ring-chile-blue/20" />
+                    </div>
+                    <div class="mt-4">
+                      <label for="form-negocio" class="mb-2 block text-sm font-bold text-drac-fg">¿Qué negocio o servicio tienes?</label>
+                      <input id="form-negocio" type="text" placeholder="Ej: Peluquería, Electricista, Consultoría, etc." required class="w-full rounded-xl border border-drac-current/50 bg-drac-darker/60 px-4 py-3 text-sm text-drac-fg placeholder-drac-comment/50 outline-none transition focus:border-chile-blue focus:ring-2 focus:ring-chile-blue/20" />
+                    </div>
+                    <div class="mt-4">
+                      <label for="form-telefono" class="mb-2 block text-sm font-bold text-drac-fg">Tu WhatsApp (con +56)</label>
+                      <input id="form-telefono" type="tel" placeholder="Ej: +56 9 1234 5678" class="w-full rounded-xl border border-drac-current/50 bg-drac-darker/60 px-4 py-3 text-sm text-drac-fg placeholder-drac-comment/50 outline-none transition focus:border-chile-blue focus:ring-2 focus:ring-chile-blue/20" />
+                    </div>
+                    <div class="mt-4">
+                      <label for="form-mensaje" class="mb-2 block text-sm font-bold text-drac-fg">¿Qué te gustaría mostrar en tu página?</label>
+                      <textarea id="form-mensaje" rows="3" placeholder="Cuéntame brevemente qué necesitas..." class="w-full rounded-xl border border-drac-current/50 bg-drac-darker/60 px-4 py-3 text-sm text-drac-fg placeholder-drac-comment/50 outline-none transition focus:border-chile-blue focus:ring-2 focus:ring-chile-blue/20 resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="mt-6 btn-glow flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] px-5 py-4 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
+                      <svg class="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.613.613l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+                      Enviar y Cotizar por WhatsApp
+                    </button>
+                    <p class="mt-3 text-center text-xs text-drac-comment">Al enviar, se abrirá una conversación de WhatsApp con tu mensaje listo.</p>
+                  </div>
+
+                  <!-- Success state -->
+                  <div x-show="sent" x-transition class="text-center py-8" x-cloak>
+                    <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-drac-green/20 text-drac-green mb-4">
+                      <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-drac-fg">¡Mensaje enviado!</h4>
+                    <p class="mt-2 text-sm text-drac-comment">Te contactaré en menos de 24 horas para conversar sobre tu proyecto.</p>
+                    <a href="https://wa.me/56900000000?text=Hola%2C%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio" target="_blank" rel="noopener" class="mt-6 inline-flex items-center justify-center rounded-xl bg-[#25D366] px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5">
+                      Ir a WhatsApp directo →
+                    </a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Direct WhatsApp CTA -->
+        <div class="reveal mt-16 text-center">
+          <p class="text-sm text-drac-comment mb-4">¿Prefieres ir directo al grano?</p>
+          <a href="https://wa.me/56900000000?text=Hola%2C%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio" target="_blank" rel="noopener" class="btn-glow inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] px-10 py-5 text-base font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <svg class="mr-3 h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.613.613l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+            Hablar por WhatsApp Ahora
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================ -->
+  <!-- FOOTER -->
+  <!-- ============================================ -->
+  <footer class="border-t border-drac-current/30 bg-drac-darker">
+    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div class="grid gap-8 md:grid-cols-3">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-chile-blue to-chile-blueLight text-white">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </span>
+            <div>
+              <p class="text-sm font-bold text-drac-fg">TuWebPro<span class="text-chile-red">.cl</span></p>
+              <p class="text-[10px] text-drac-comment">Diseño Web Profesional</p>
+            </div>
+          </div>
+          <p class="text-xs text-drac-comment leading-relaxed">Páginas web profesionales para negocios, PYMEs y emprendedores en Chile. Sin complicaciones, con resultado real.</p>
+        </div>
+
+        <div>
+          <p class="text-sm font-bold text-drac-fg mb-4">Navegación</p>
+          <nav class="space-y-2">
+            <a href="#beneficios" class="block text-xs text-drac-comment transition-colors hover:text-drac-fg">Beneficios</a>
+            <a href="#servicios" class="block text-xs text-drac-comment transition-colors hover:text-drac-fg">Servicios</a>
+            <a href="#proceso" class="block text-xs text-drac-comment transition-colors hover:text-drac-fg">Proceso</a>
+            <a href="#precios" class="block text-xs text-drac-comment transition-colors hover:text-drac-fg">Inversión</a>
+            <a href="#faq" class="block text-xs text-drac-comment transition-colors hover:text-drac-fg">Preguntas Frecuentes</a>
+          </nav>
+        </div>
+
+        <div>
+          <p class="text-sm font-bold text-drac-fg mb-4">Contacto</p>
+          <div class="space-y-2">
+            <a href="https://wa.me/56900000000" target="_blank" rel="noopener" class="flex items-center gap-2 text-xs text-drac-comment transition-colors hover:text-drac-green">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.613.613l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+              +56 9 0000 0000
+            </a>
+            <p class="text-xs text-drac-comment">Santiago, Chile 🇨🇱</p>
+          </div>
+
+          <div class="mt-6 rounded-xl border border-drac-current/30 bg-drac-bg/40 p-3">
+            <p class="text-[10px] text-drac-comment leading-relaxed">
+              <span class="text-drac-green font-bold">●</span> Hosting gratuito en GitHub Pages / Vercel<br>
+              <span class="text-chile-blueLight font-bold">●</span> Certificado SSL incluido (HTTPS)<br>
+              <span class="text-drac-orange font-bold">●</span> Página 100% autocontenida
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-col items-center gap-3 border-t border-drac-current/20 pt-8 text-center sm:flex-row sm:justify-between">
+        <p class="text-xs text-drac-comment">© 2026 TuWebPro.cl — Todos los derechos reservados</p>
+        <p class="text-[10px] text-drac-comment/50">Hecho con ❤️ en Chile • HTML + Tailwind CSS + Alpine.js</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <!-- ============================================ -->
+  <a href="https://wa.me/56900000000?text=Hola%2C%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio" target="_blank" rel="noopener"
+     class="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl animate-float"
+     aria-label="Contactar por WhatsApp"
+     style="animation-delay: 3s">
+    <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.613.613l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-2.278 0-4.381-.762-6.065-2.046l-.424-.328-2.643.886.886-2.643-.328-.424A9.72 9.72 0 012.25 12 9.75 9.75 0 0112 2.25 9.75 9.75 0 0121.75 12 9.75 9.75 0 0112 21.75z"/></svg>
+  </a>
+
+  <!-- ============================================ -->
+  <!-- SCROLL REVEAL SCRIPT -->
+  <!-- ============================================ -->
+  <script>
+    // Intersection Observer for reveal animations
+    const observerOptions = { threshold: 0.08, rootMargin: '0px 0px -40px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach((el) => {
+      observer.observe(el);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
