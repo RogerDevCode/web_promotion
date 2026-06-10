@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="es-CL" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Tech | Tienda Online & Panel de Administración Demo</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Demo de E-commerce de alta conversión para Chile. Incluye carro de compras, avisos de urgencia y panel de administración interactivo para gestionar productos y pedidos.">
+    <meta name="keywords" content="ecommerce, tienda online, panel de administracion, chile, pyme, desarrollo web, carro de compras">
+    <meta property="og:title" content="Apex Tech | Tienda Online & Panel de Administración Demo" />
+    <meta property="og:description" content="Mira cómo puedes escalar tu negocio de una landing page a un e-commerce completo con panel de administración." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./hero.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Structured Data JSON-LD (Store) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Apex Tech Demo",
+      "image": "./hero.png",
+      "description": "Tienda demostrativa de gadgets tecnológicos premium.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Providencia 1234",
+        "addressLocality": "Santiago",
+        "addressRegion": "Metropolitana",
+        "addressCountry": "CL"
+      },
+      "telephone": "+56912345678",
+      "priceRange": "$$"
+    }
+    </script>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+    <!-- Fonts: Outfit (headings) & Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Custom Vanilla CSS -->
+    <style>
+        /* Design Tokens & Theme Colors (Premium Dark Mode) */
+        :root {
+            --bg-darkest: #090d16;     /* Deep space black */
+            --bg-dark: #121824;        /* Dark blue-grey card background */
+            --bg-light: #1e293b;       /* Lighter slate for nested cards */
+            --accent: #f97316;         /* Neon Orange for primary CTAs and urgency */
+            --accent-hover: #ea580c;
+            --accent-secondary: #0ea5e9; /* Tech Cyan */
+            --text-light: #f8fafc;     /* Off-white */
+            --text-muted: #94a3b8;     /* Slate grey */
+            --success: #10b981;        /* Emerald green */
+            --danger: #ef4444;         /* Red */
+            --border: rgba(255, 255, 255, 0.08);
+            --font-headings: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-glow: 0 0 20px rgba(249, 115, 22, 0.15);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-darkest);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-headings);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-smooth);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darkest);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-light);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* Containers */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        /* Header Navigation */
+        header {
+            background-color: rgba(9, 13, 22, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 4.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-light);
+            font-family: var(--font-headings);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-btn {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .nav-btn:hover {
+            color: var(--text-light);
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        .nav-btn.admin {
+            color: var(--accent-secondary);
+            border: 1px dashed rgba(14, 165, 233, 0.3);
+        }
+        .nav-btn.admin:hover {
+            background-color: rgba(14, 165, 233, 0.1);
+            color: #38bdf8;
+        }
+
+        .cart-trigger {
+            position: relative;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border);
+            color: var(--text-light);
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .cart-trigger:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        /* Storefront Closed Warning Banner */
+        .closed-banner {
+            background-color: rgba(239, 68, 68, 0.15);
+            border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            text-align: center;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            min-height: calc(85vh - 7.5rem);
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 2rem;
+                padding-bottom: 3rem;
+            }
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        @media (max-width: 900px) {
+            .hero-text {
+                align-items: center;
+            }
+        }
+
+        .hero-badge {
+            background-color: rgba(14, 165, 233, 0.1);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            color: var(--accent-secondary);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 60%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        .hero-description {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-features {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            background-color: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+
+        .hero-feature-item svg {
+            color: var(--success);
+            width: 1.1rem;
+            height: 1.1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 2rem;
+            border-radius: 12px;
+            font-family: var(--font-headings);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: none;
+            outline: none;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.25);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .hero-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 420px;
+            border-radius: 32px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            transition: var(--transition-smooth);
+        }
+        .hero-image:hover {
+            transform: scale(1.02) rotate(1deg);
+        }
+
+        /* Catalog Layout */
+        .catalog-section {
+            background-color: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            color: var(--text-light);
+            border-color: var(--accent);
+            background-color: rgba(249, 115, 22, 0.1);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: var(--bg-darkest);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(249, 115, 22, 0.25);
+            box-shadow: var(--shadow-md);
+        }
+
+        .product-img-wrapper {
+            position: relative;
+            padding-bottom: 85%;
+            background-color: #1a2332;
+            overflow: hidden;
+        }
+
+        .product-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+
+
+        .product-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .product-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .price-current {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-light);
+        }
+
+
+
+        /* Cart Drawer (Side Modal) */
+        .cart-drawer-backdrop {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .cart-drawer {
+            width: 100%;
+            max-width: 450px;
+            background-color: var(--bg-dark);
+            height: 100%;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border);
+            animation: slideLeft 0.3s ease-out;
+        }
+
+        @keyframes slideLeft {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        .drawer-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+
+        .close-btn:hover {
+            color: var(--text-light);
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        .drawer-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding-bottom: 1.25rem;
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border);
+            align-items: center;
+        }
+
+        .cart-item-img {
+            width: 4.5rem;
+            height: 4.5rem;
+            border-radius: 12px;
+            object-fit: cover;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border);
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .qty-btn {
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 6px;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border);
+            color: var(--text-light);
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background-color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .drawer-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            background-color: var(--bg-darkest);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .summary-row.total {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-light);
+            border-top: 1px dashed var(--border);
+            padding-top: 1rem;
+        }
+
+        /* Modals & Forms */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(6px);
+            z-index: 210;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .modal {
+            background-color: var(--bg-dark);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 550px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            background-color: var(--bg-darkest);
+            border: 1px solid var(--border);
+            color: var(--text-light);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: #4b5563;
+        }
+
+        /* Admin Dashboard Design */
+        .admin-modal {
+            max-width: 950px;
+            width: 95%;
+            height: 85vh;
+        }
+
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            height: calc(85vh - 4.5rem); /* Header is 4.5rem */
+        }
+
+        @media (max-width: 768px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr;
+            }
+        }
+
+        .admin-sidebar {
+            background-color: var(--bg-darkest);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        .admin-tab-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+            text-align: left;
+            transition: var(--transition-smooth);
+            width: 100%;
+        }
+
+        .admin-tab-btn:hover, .admin-tab-btn.active {
+            color: var(--text-light);
+            background-color: rgba(255,255,255,0.04);
+        }
+        .admin-tab-btn.active {
+            color: var(--accent-secondary);
+            background-color: rgba(14, 165, 233, 0.08);
+            border-left: 3px solid var(--accent-secondary);
+        }
+        @media (max-width: 768px) {
+            .admin-tab-btn.active {
+                border-left: none;
+                border-bottom: 3px solid var(--accent-secondary);
+                border-radius: 0;
+            }
+        }
+
+        .admin-content {
+            padding: 2rem;
+            overflow-y: auto;
+            background-color: var(--bg-dark);
+        }
+
+        /* Admin Tables */
+        .admin-table-wrapper {
+            background-color: var(--bg-darkest);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .admin-table th, .admin-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .admin-table th {
+            background-color: rgba(255,255,255,0.02);
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .admin-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .admin-table td img {
+            width: 3rem;
+            height: 3rem;
+            object-fit: cover;
+            border-radius: 8px;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border);
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 2.75rem;
+            height: 1.5rem;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background-color: #374151;
+            transition: .3s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 1.1rem;
+            width: 1.1rem;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--success);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(1.25rem);
+        }
+
+        /* Order badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-badge.pending {
+            background-color: rgba(249, 115, 22, 0.15);
+            color: var(--accent);
+        }
+
+        .status-badge.completed {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.4rem;
+            border-radius: 6px;
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-btn:hover {
+            color: var(--text-light);
+            background-color: rgba(255,255,255,0.06);
+        }
+
+        .action-btn.edit:hover {
+            color: var(--accent-secondary);
+        }
+
+        .action-btn.delete:hover {
+            color: var(--danger);
+        }
+
+        /* Educational Scale Up Section */
+        .scale-section {
+            background-color: #0b0f19;
+            border-top: 1px solid var(--border);
+        }
+
+        .scale-card {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #0f172a 100%);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .scale-card {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+                gap: 2rem;
+            }
+        }
+
+        .scale-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(14, 165, 233, 0.05);
+            filter: blur(80px);
+            border-radius: 50%;
+        }
+
+        .scale-bullet {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .scale-bullet-icon {
+            background-color: rgba(14, 165, 233, 0.1);
+            color: var(--accent-secondary);
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+
+        .scale-bullet-icon svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .scale-bullet-text h4 {
+            font-size: 1.05rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .scale-bullet-text p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* SVG Sizing */
+        svg.icon-inline {
+            width: 1.25rem;
+            height: 1.25rem;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            vertical-align: middle;
+        }
+        
+        /* Footer styling */
+        footer {
+            background-color: var(--bg-darkest);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        
+        .footer-logo {
+            font-family: var(--font-headings);
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        .footer-logo span { color: var(--accent); }
+        
+        .footer-title {
+            color: var(--text-light);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body x-data="storeApp()" x-init="init()">
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                ⚡ Apex<span>Tech</span>
+            </a>
+            
+            <div class="nav-actions">
+                <button @click="openAdminModal()" class="nav-btn admin">
+                    <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Panel Admin
+                </button>
+                
+                <button @click="isCartOpen = true" class="cart-trigger" aria-label="Abrir Carrito">
+                    <svg class="icon-inline" style="width: 1.5rem; height: 1.5rem;" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                    <span class="cart-badge" x-show="cart.length > 0" x-text="cartCount()">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Store Closed Banner -->
+    <div class="closed-banner" x-show="isStoreClosed()">
+        <svg class="icon-inline" style="color: var(--danger);" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        <span><strong>Horario de Atención Cerrado.</strong> La tienda está fuera de horario (Atención: <span x-text="storeHours.open"></span> a <span x-text="storeHours.close"></span>). Aún puedes hacer pedidos de demostración.</span>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="container section-padding" style="padding-top: 3rem; padding-bottom: 3rem;">
+        <div class="hero">
+            <div class="hero-text">
+                <span class="hero-badge">
+                    <svg class="icon-inline" style="stroke-width: 3;" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Envío Express Hoy mismo en Santiago
+                </span>
+                <h1 class="hero-title">Equipamiento tecnológico de nivel superior</h1>
+                <p class="hero-description">Dispositivos premium seleccionados para potenciar tu productividad y entretenimiento diario. Garantía oficial de 12 meses y despacho inmediato.</p>
+                
+                <div class="hero-actions">
+                    <a href="#catalogo" class="btn btn-primary">
+                        Comprar Ahora
+                        <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+                
+                <div class="hero-features" style="margin-top: 2.5rem;">
+                    <div class="hero-feature-item">
+                        <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        Compra 100% Segura
+                    </div>
+                    <div class="hero-feature-item">
+                        <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        Despacho a Regiones
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image-container">
+                <img src="hero.png" alt="Dispositivos Premium" class="hero-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="catalogo" class="catalog-section section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span style="color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; display: block; margin-bottom: 0.5rem;">CATÁLOGO DE PRODUCTOS</span>
+                <h2 class="section-title">Nuestras Ofertas Tecnológicas</h2>
+                <p class="section-subtitle">Aprovecha precios exclusivos por tiempo limitado en artículos premium</p>
+            </div>
+
+            <!-- Categories Tabs -->
+            <div class="category-tabs">
+                <button @click="activeCategory = 'todos'" :class="{'active': activeCategory === 'todos'}" class="tab-btn">Todos</button>
+                <button @click="activeCategory = 'audio'" :class="{'active': activeCategory === 'audio'}" class="tab-btn">Audio</button>
+                <button @click="activeCategory = 'wearables'" :class="{'active': activeCategory === 'wearables'}" class="tab-btn">Wearables</button>
+                <button @click="activeCategory = 'accesorios'" :class="{'active': activeCategory === 'accesorios'}" class="tab-btn">Accesorios</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid">
+                <template x-for="product in getFilteredProducts()" :key="product.id">
+                    <div class="product-card" x-show="product.active">
+                        
+                        <div class="product-img-wrapper">
+                            <img :src="product.image" :alt="product.name" class="product-img">
+                        </div>
+                        
+                        <div class="product-body">
+                            <h3 class="product-title" x-text="product.name"></h3>
+                            <p class="product-desc" x-text="product.description"></p>
+                            
+                            <div class="product-price-row">
+                                <span class="price-current" x-text="formatCLP(product.price)"></span>
+                            </div>
+                            
+                            <button @click="addToCart(product)" class="btn btn-primary" style="width: 100%; border-radius: 10px; padding: 0.75rem 1.5rem; font-size: 0.95rem;">
+                                <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                                Agregar al Carro
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scale Up Educational Section -->
+    <section class="scale-section section-padding">
+        <div class="container">
+            <div class="scale-card">
+                <div>
+                    <span style="color: var(--accent-secondary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">CÓMO ESCALAR TU NEGOCIO</span>
+                    <h2 style="font-size: 2.25rem; font-weight: 900; margin-bottom: 1.5rem; line-height: 1.2;">De una Landing Page simple a un E-commerce real</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1rem;">Esta maqueta interactiva simula el funcionamiento de una tienda con base de datos en memoria (`localStorage`). Para llevar este proyecto a un nivel real y comercializable con clientes reales, se implementan tecnologías de backend robustas:</p>
+                    
+                    <div class="scale-bullets">
+                        <div class="scale-bullet">
+                            <div class="scale-bullet-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+                            </div>
+                            <div class="scale-bullet-text">
+                                <h4>Base de Datos Persistente</h4>
+                                <p>Reemplazamos el almacenamiento local por bases de datos relacionales (como PostgreSQL o MySQL) conectadas a un panel administrativo con credenciales de seguridad seguras.</p>
+                            </div>
+                        </div>
+
+                        <div class="scale-bullet">
+                            <div class="scale-bullet-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 00-3 3z"/></svg>
+                            </div>
+                            <div class="scale-bullet-text">
+                                <h4>Pasarelas de Pago Integradas (Chile)</h4>
+                                <p>Conexión directa con Webpay Plus, Flow o Mercado Pago para que tus clientes paguen en línea con débito (Redcompra) o crédito de forma 100% automatizada.</p>
+                            </div>
+                        </div>
+
+                        <div class="scale-bullet">
+                            <div class="scale-bullet-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v-4l-4 4 4 4v-4H3V8h9v4l4-4-4-4v4h5z"/></svg>
+                            </div>
+                            <div class="scale-bullet-text">
+                                <h4>Logística Automatizada</h4>
+                                <p>Cálculo de envíos en tiempo real e integración con courriers (Starken, Chilexpress, CorreosChile o Blue Express) para generar etiquetas de envío automáticamente al pagar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background-color: var(--bg-darkest); border: 1px solid var(--border); padding: 2.25rem; border-radius: 20px; display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div style="background-color: rgba(249, 115, 22, 0.1); color: var(--accent); width: 3.5rem; height: 3.5rem; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <svg class="icon-inline" style="width: 1.75rem; height: 1.75rem;" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 style="font-size: 1.4rem;">¿Quieres dar el siguiente paso?</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin: 0;">Podemos ayudarte a transformar esta plantilla en tu tienda oficial. Diseñamos, programamos y conectamos todo el sistema de pagos y administración para que solo te preocupes de vender.</p>
+                    <a href="../index.html#contacto" class="btn btn-primary" style="margin-top: 1rem; border-radius: 10px;">Volver a Cotizar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Cart Drawer -->
+    <div class="cart-drawer-backdrop" x-show="isCartOpen" x-transition.opacity @click.self="isCartOpen = false" style="display: none;">
+        <div class="cart-drawer" x-show="isCartOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="transform translate-x-full" x-transition:enter-end="transform translate-x-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="transform translate-x-0" x-transition:leave-end="transform translate-x-full">
+            
+            <div class="drawer-header">
+                <h3>Tu Carro de Compras</h3>
+                <button @click="isCartOpen = false" class="close-btn" aria-label="Cerrar carrito">
+                    <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            
+            <div class="drawer-content">
+                <template x-if="cart.length === 0">
+                    <div style="text-align: center; padding: 3rem 0; color: var(--text-muted);">
+                        <svg class="icon-inline" style="width: 3.5rem; height: 3.5rem; margin-bottom: 1rem;" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                        <p>Tu carrito está vacío.</p>
+                    </div>
+                </template>
+                
+                <template x-for="item in cart" :key="item.id">
+                    <div class="cart-item">
+                        <img :src="item.image" :alt="item.name" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name" x-text="item.name"></div>
+                            <div class="cart-item-price" x-text="formatCLP(item.price)"></div>
+                            <div class="qty-controls">
+                                <button @click="decreaseQty(item)" class="qty-btn">-</button>
+                                <span style="font-weight: 600; font-size: 0.9rem; padding: 0 0.5rem;" x-text="item.qty"></span>
+                                <button @click="increaseQty(item)" class="qty-btn">+</button>
+                            </div>
+                        </div>
+                        <button @click="removeFromCart(item)" class="action-btn delete" style="padding: 0.5rem;" aria-label="Eliminar artículo">
+                            <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                        </button>
+                    </div>
+                </template>
+            </div>
+            
+            <div class="drawer-footer" x-show="cart.length > 0">
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span x-text="formatCLP(getCartTotal())"></span>
+                </div>
+                
+                <button @click="openCheckout()" class="btn btn-primary" style="width: 100%; margin-top: 1rem; border-radius: 12px;">
+                    Continuar al Pago
+                    <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-backdrop" x-show="isCheckoutOpen" x-transition.opacity style="display: none;">
+        <div class="modal" @click.outside="closeCheckout()">
+            <div class="modal-header">
+                <h3>Confirmar Pedido</h3>
+                <button @click="closeCheckout()" class="close-btn" aria-label="Cerrar">
+                    <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form @submit.prevent="submitOrder()">
+                    <div class="form-group">
+                        <label class="form-label" for="checkout-name">Nombre Completo</label>
+                        <input id="checkout-name" type="text" x-model="checkoutName" required class="form-control" placeholder="Ej. Juan Pérez">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="checkout-phone">Teléfono / WhatsApp</label>
+                        <input id="checkout-phone" type="tel" x-model="checkoutPhone" required class="form-control" placeholder="Ej. +56912345678">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="checkout-method">Método de Entrega</label>
+                        <select id="checkout-method" x-model="checkoutMethod" class="form-control">
+                            <!-- Presencial listed first (Crucial Rule C) -->
+                            <option value="presencial">Presencial (Retiro en tienda - Providencia)</option>
+                            <option value="despacho">Despacho a domicilio</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" x-show="checkoutMethod === 'despacho'">
+                        <label class="form-label" for="checkout-address">Dirección de Despacho</label>
+                        <input id="checkout-address" type="text" x-model="checkoutAddress" :required="checkoutMethod === 'despacho'" class="form-control" placeholder="Calle, Número, Comuna">
+                    </div>
+                    
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                        <button type="button" @click="closeCheckout()" class="btn" style="flex: 1; background-color: var(--bg-light); color: var(--text-light);">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" style="flex: 1.5;">Confirmar Pedido</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Order Modal -->
+    <div class="modal-backdrop" x-show="showSuccessModal" x-transition.opacity style="display: none;">
+        <div class="modal" style="max-width: 450px; text-align: center;">
+            <div class="modal-body" style="padding: 3rem 2rem;">
+                <div style="background-color: rgba(16, 185, 129, 0.1); color: var(--success); width: 4.5rem; height: 4.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto;">
+                    <svg class="icon-inline" style="width: 2.25rem; height: 2.25rem;" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">¡Pedido Recibido!</h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.6;">
+                    El pedido ha sido ingresado exitosamente en la cola de pedidos de administración. Puedes abrir el <b>Panel Admin</b> arriba para atenderlo y gestionarlo.
+                </p>
+                <button @click="showSuccessModal = false" class="btn btn-primary" style="width: 100%; border-radius: 12px;">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Modal -->
+    <div class="modal-backdrop" x-show="isAdminOpen" x-transition.opacity style="display: none;">
+        <div class="modal admin-modal" @click.outside="isAdminOpen = false">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.3rem;">🔧 Panel de Control Administrativo</span>
+                    <span style="background-color: rgba(14, 165, 233, 0.15); color: var(--accent-secondary); font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px; text-transform: uppercase;">Modo Demo</span>
+                </div>
+                <button @click="isAdminOpen = false" class="close-btn" aria-label="Cerrar panel">
+                    <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            
+            <div class="admin-layout">
+                <div class="admin-sidebar">
+                    <button @click="adminActiveTab = 'productos'" :class="{'active': adminActiveTab === 'productos'}" class="admin-tab-btn">
+                        <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                        Productos
+                    </button>
+                    <button @click="adminActiveTab = 'pedidos'" :class="{'active': adminActiveTab === 'pedidos'}" class="admin-tab-btn">
+                        <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                        Cola de Pedidos
+                        <span style="background-color: var(--danger); color: white; font-size: 0.7rem; font-weight: bold; padding: 0.1rem 0.35rem; border-radius: 50px; margin-left: auto;" x-show="pendingOrdersCount() > 0" x-text="pendingOrdersCount()"></span>
+                    </button>
+                    <button @click="adminActiveTab = 'horarios'" :class="{'active': adminActiveTab === 'horarios'}" class="admin-tab-btn">
+                        <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Horarios de Tienda
+                    </button>
+                </div>
+                
+                <div class="admin-content">
+                    
+                    <!-- TAB: PRODUCTOS -->
+                    <div x-show="adminActiveTab === 'productos'">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h3>Gestión de Productos</h3>
+                            <button @click="openAddProductModal()" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem; border-radius: 8px;">
+                                <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                                Agregar Producto
+                            </button>
+                        </div>
+                        
+                        <div class="admin-table-wrapper">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Imagen</th>
+                                        <th>Nombre</th>
+                                        <th>Categoría</th>
+                                        <th>Precio</th>
+                                        <th>Activo</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template x-for="product in products" :key="product.id">
+                                        <tr>
+                                            <td><img :src="product.image" :alt="product.name"></td>
+                                            <td>
+                                                <div style="font-weight: 700;" x-text="product.name"></div>
+                                                <div style="font-size: 0.75rem; color: var(--text-muted); max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" x-text="product.description"></div>
+                                            </td>
+                                            <td style="text-transform: capitalize;" x-text="product.category"></td>
+                                            <td x-text="formatCLP(product.price)"></td>
+                                            <td>
+                                                <label class="switch">
+                                                    <input type="checkbox" :checked="product.active" @change="toggleProductActive(product.id)">
+                                                    <span class="slider"></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div style="display: flex; gap: 0.25rem;">
+                                                    <button @click="openEditProductModal(product)" class="action-btn edit" title="Editar">
+                                                        <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                                    </button>
+                                                    <button @click="deleteProduct(product.id)" class="action-btn delete" title="Eliminar">
+                                                        <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- TAB: PEDIDOS -->
+                    <div x-show="adminActiveTab === 'pedidos'">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h3>Pedidos en Cola</h3>
+                            <button @click="clearOrders()" class="btn" style="background-color: var(--bg-light); color: var(--danger); padding: 0.5rem 1.25rem; font-size: 0.85rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2)">
+                                Vaciar Cola
+                            </button>
+                        </div>
+                        
+                        <template x-if="orders.length === 0">
+                            <div style="text-align: center; padding: 4rem 0; color: var(--text-muted);">
+                                <svg class="icon-inline" style="width: 3.5rem; height: 3.5rem; margin-bottom: 1rem;" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                                <p>No hay pedidos pendientes en la cola.</p>
+                            </div>
+                        </template>
+                        
+                        <div class="admin-table-wrapper" x-show="orders.length > 0">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID / Fecha</th>
+                                        <th>Cliente</th>
+                                        <th>Entrega</th>
+                                        <th>Detalle</th>
+                                        <th>Total</th>
+                                        <th>Estado</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template x-for="order in orders" :key="order.id">
+                                        <tr>
+                                            <td>
+                                                <div style="font-weight: 700;" x-text="`#${order.id.toString().slice(-4)}`"></div>
+                                                <div style="font-size: 0.75rem; color: var(--text-muted);" x-text="new Date(order.date).toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit'})"></div>
+                                            </td>
+                                            <td>
+                                                <div style="font-weight: 700;" x-text="order.name"></div>
+                                                <div style="font-size: 0.8rem; color: var(--text-muted);" x-text="order.phone"></div>
+                                            </td>
+                                            <td>
+                                                <div style="font-weight: 600; text-transform: capitalize;" x-text="order.method"></div>
+                                                <div style="font-size: 0.75rem; color: var(--text-muted); max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" x-show="order.method === 'despacho'" x-text="order.address"></div>
+                                            </td>
+                                            <td>
+                                                <div style="font-size: 0.8rem;">
+                                                    <template x-for="item in order.items" :key="item.id">
+                                                        <div x-text="`${item.qty}x ${item.name}`"></div>
+                                                    </template>
+                                                </div>
+                                            </td>
+                                            <td style="font-weight: 700; color: var(--accent);" x-text="formatCLP(order.total)"></td>
+                                            <td>
+                                                <span class="status-badge" :class="order.status === 'pendiente' ? 'pending' : 'completed'" x-text="order.status"></span>
+                                            </td>
+                                            <td>
+                                                <button @click="attendOrder(order.id)" class="btn" :disabled="order.status === 'atendido'" :style="order.status === 'atendido' ? 'background: transparent; color: var(--text-muted); cursor: default; padding: 0.4rem;' : 'background-color: var(--success); color: white; padding: 0.4rem 0.8rem; font-size: 0.8rem; border-radius: 6px;'">
+                                                    <span x-text="order.status === 'pendiente' ? 'Atender' : 'Listo'"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- TAB: HORARIOS -->
+                    <div x-show="adminActiveTab === 'horarios'">
+                        <h3>Configuración de Horario de Atención</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Ajusta los horarios en que la tienda recibe pedidos automáticamente. También puedes forzar el cierre manual.</p>
+                        
+                        <div style="background-color: var(--bg-darkest); padding: 2rem; border-radius: 16px; border: 1px solid var(--border); max-width: 500px; display: flex; flex-direction: column; gap: 1.5rem;">
+                            <div style="display: flex; gap: 1rem;">
+                                <div class="form-group" style="flex: 1;">
+                                    <label class="form-label" for="hours-open">Hora de Apertura</label>
+                                    <input id="hours-open" type="time" x-model="storeHours.open" @change="saveHours()" class="form-control">
+                                </div>
+                                <div class="form-group" style="flex: 1;">
+                                    <label class="form-label" for="hours-close">Hora de Cierre</label>
+                                    <input id="hours-close" type="time" x-model="storeHours.close" @change="saveHours()" class="form-control">
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 1.5rem;">
+                                <div>
+                                    <h4 style="font-size: 1rem; margin-bottom: 0.25rem;">Forzar Cierre de la Tienda</h4>
+                                    <p style="color: var(--text-muted); font-size: 0.8rem;">Cierra temporalmente la recepción de pedidos sin importar la hora.</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" x-model="storeHours.forcedClosed" @change="saveHours()">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div style="background-color: rgba(255,255,255,0.02); border-radius: 8px; padding: 1rem; text-align: center; border: 1px solid var(--border);">
+                                <span style="font-size: 0.9rem;">Estado Actual en Tienda: </span>
+                                <span :style="isStoreClosed() ? 'color: var(--danger); font-weight: 700;' : 'color: var(--success); font-weight: 700;'" x-text="isStoreClosed() ? '🔴 CERRADA' : '🟢 ABIERTA'"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product CRUD Add/Edit Sub-Modal -->
+    <div class="modal-backdrop" x-show="isProductModalOpen" x-transition.opacity style="display: none; z-index: 220;">
+        <div class="modal" @click.outside="closeProductModal()">
+            <div class="modal-header">
+                <h3 x-text="isEditingProduct ? 'Editar Producto' : 'Agregar Nuevo Producto'"></h3>
+                <button @click="closeProductModal()" class="close-btn" aria-label="Cerrar">
+                    <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <form @submit.prevent="saveProduct()">
+                    <div class="form-group">
+                        <label class="form-label" for="product-name">Nombre del Producto</label>
+                        <input id="product-name" type="text" x-model="currentProduct.name" required class="form-control" placeholder="Ej. Smartband Active">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="product-category">Categoría</label>
+                        <select id="product-category" x-model="currentProduct.category" class="form-control">
+                            <option value="audio">Audio</option>
+                            <option value="wearables">Wearables</option>
+                            <option value="accesorios">Accesorios</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="product-price">Precio ($ CLP)</label>
+                        <input id="product-price" type="number" x-model.number="currentProduct.price" required min="1" class="form-control" placeholder="Ej. 19990">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="product-description">Descripción</label>
+                        <textarea id="product-description" x-model="currentProduct.description" required class="form-control" rows="3" placeholder="Detalles clave del producto..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="product-image">Imagen del Producto (Carga 1 Archivo)</label>
+                        <input id="product-image" type="file" accept="image/*" @change="onProductImageFileChange($event)" class="form-control" style="font-size: 0.85rem;">
+                        <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem;">Carga una foto local. Se guardará directamente en memoria temporal.</p>
+                        
+                        <div x-show="productFormImageBase64 || currentProduct.image" style="margin-top: 1rem; text-align: center;">
+                            <span class="form-label" style="display: block; margin-bottom: 0.5rem;">Previsualización de la Imagen</span>
+                            <img :src="productFormImageBase64 || currentProduct.image" alt="Previsualización" style="max-height: 120px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border);">
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                        <button type="button" @click="closeProductModal()" class="btn" style="flex: 1; background-color: var(--bg-light); color: var(--text-light);">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" style="flex: 1.5;" x-text="isEditingProduct ? 'Guardar Cambios' : 'Crear Producto'"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">⚡ Apex<span>Tech</span></div>
+                    <p style="max-width: 250px; font-size: 0.8rem; line-height: 1.4;">Plataforma de demostración interactiva que muestra el potencial de escalabilidad a comercio electrónico.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Enlaces</h4>
+                    <ul class="footer-links">
+                        <li><a href="#catalogo">Catálogo</a></li>
+                        <li><a href="#" @click.prevent="openAdminModal()">Panel Admin</a></li>
+                        <li><a href="../index.html">Volver al Showcase</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Contacto Demo</h4>
+                    <ul class="footer-links">
+                        <li style="color: var(--text-muted);">Providencia, Santiago, Chile</li>
+                        <li style="color: var(--text-muted);">+56 9 1234 5678</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Apex Tech Demo. Todos los derechos reservados.</p>
+                <p>Desarrollado con fines demostrativos para el mercado de PYMEs en Chile.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alpine.js Application Logic -->
+    <script>
+        function storeApp() {
+            return {
+                // Products list
+                products: [],
+                activeCategory: 'todos',
+                
+                // Shopping Cart
+                cart: [],
+                isCartOpen: false,
+                
+                // Checkout Modal
+                isCheckoutOpen: false,
+                checkoutName: '',
+                checkoutPhone: '',
+                checkoutMethod: 'presencial', // 'presencial' (Retiro) must be first / default (Crucial Rule C)
+                checkoutAddress: '',
+                showSuccessModal: false,
+                
+                // Admin Panel Modals & Form
+                isAdminOpen: false,
+                adminActiveTab: 'productos',
+                isProductModalOpen: false,
+                isEditingProduct: false,
+                productFormImageBase64: '',
+                
+                // Current editing/creating product container
+                currentProduct: {
+                    id: null,
+                    name: '',
+                    description: '',
+                    price: 0,
+                    image: 'product_charger.png', // Default fallback image
+                    active: true,
+                    category: 'audio',
+                    stock: 3
+                },
+                
+                // Store settings
+                storeHours: {
+                    open: '09:00',
+                    close: '21:00',
+                    forcedClosed: false
+                },
+                orders: [],
+
+                init() {
+                    this.loadData();
+                },
+
+                // Load and initialize data with localStorage persistence
+                loadData() {
+                    // 1. Load Store Hours
+                    const savedHours = localStorage.getItem('apex_store_hours');
+                    if (savedHours) {
+                        this.storeHours = JSON.parse(savedHours);
+                    }
+
+                    // 2. Load Products
+                    const savedProducts = localStorage.getItem('apex_products');
+                    if (savedProducts) {
+                        this.products = JSON.parse(savedProducts);
+                    } else {
+                        // Insert defaults
+                        this.products = [
+                            {
+                                id: 1,
+                                name: "Auriculares Apex Pro Wireless",
+                                description: "Audífonos de alta fidelidad con cancelación activa de ruido híbrida y 40 horas de batería.",
+                                price: 129990,
+                                image: "product_headphones.png",
+                                active: true,
+                                category: "audio",
+                                stock: 3
+                            },
+                            {
+                                id: 2,
+                                name: "Smartwatch Apex Fit Active",
+                                description: "Reloj inteligente con pantalla AMOLED, GPS integrado, monitoreo cardíaco y resistencia al agua 5 ATM.",
+                                price: 89990,
+                                image: "product_watch.png",
+                                active: true,
+                                category: "wearables",
+                                stock: 4
+                            },
+                            {
+                                id: 3,
+                                name: "Cargador Magnético Aura 3-en-1",
+                                description: "Estación de carga rápida inalámbrica para tu celular, audífonos y reloj inteligente al mismo tiempo.",
+                                price: 39990,
+                                image: "product_charger.png",
+                                active: true,
+                                category: "accesorios",
+                                stock: 2
+                            }
+                        ];
+                        this.saveProductsToStorage();
+                    }
+
+                    // 3. Load Orders
+                    const savedOrders = localStorage.getItem('apex_orders');
+                    if (savedOrders) {
+                        this.orders = JSON.parse(savedOrders);
+                    }
+                    if (!this.orders || this.orders.length === 0) {
+                        // Insert sample orders
+                        this.orders = [
+                            {
+                                id: 1718023456000,
+                                date: new Date(Date.now() - 1800000).toISOString(), // 30 mins ago
+                                name: "Constanza Silva",
+                                phone: "+56 9 8812 3456",
+                                method: "presencial",
+                                address: "",
+                                items: [
+                                    {
+                                        id: 1,
+                                        name: "Auriculares Apex Pro Wireless",
+                                        price: 129990,
+                                        image: "product_headphones.png",
+                                        qty: 1
+                                    }
+                                ],
+                                total: 129990,
+                                status: "pendiente"
+                            },
+                            {
+                                id: 1718023800000,
+                                date: new Date(Date.now() - 600000).toISOString(), // 10 mins ago
+                                name: "Mauricio Tapia",
+                                phone: "+56 9 7755 4422",
+                                method: "despacho",
+                                address: "Av. Vitacura 4560, Depto 502, Vitacura",
+                                items: [
+                                    {
+                                        id: 2,
+                                        name: "Smartwatch Apex Fit Active",
+                                        price: 89990,
+                                        image: "product_watch.png",
+                                        qty: 1
+                                    },
+                                    {
+                                        id: 3,
+                                        name: "Cargador Magnético Aura 3-en-1",
+                                        price: 39990,
+                                        image: "product_charger.png",
+                                        qty: 1
+                                    }
+                                ],
+                                total: 129980,
+                                status: "pendiente"
+                            }
+                        ];
+                        localStorage.setItem('apex_orders', JSON.stringify(this.orders));
+                    }
+                },
+
+                // Filters product list depending on category tab
+                getFilteredProducts() {
+                    if (this.activeCategory === 'todos') {
+                        return this.products;
+                    }
+                    return this.products.filter(p => p.category === this.activeCategory);
+                },
+
+                // Cart methods
+                addToCart(product) {
+                    const existingItem = this.cart.find(item => item.id === product.id);
+                    if (existingItem) {
+                        existingItem.qty++;
+                    } else {
+                        this.cart.push({
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            image: product.image,
+                            qty: 1
+                        });
+                    }
+                    this.isCartOpen = true;
+                },
+
+                removeFromCart(item) {
+                    this.cart = this.cart.filter(cartItem => cartItem.id !== item.id);
+                },
+
+                increaseQty(item) {
+                    item.qty++;
+                },
+
+                decreaseQty(item) {
+                    if (item.qty > 1) {
+                        item.qty--;
+                    } else {
+                        this.removeFromCart(item);
+                    }
+                },
+
+                cartCount() {
+                    return this.cart.reduce((total, item) => total + item.qty, 0);
+                },
+
+                getCartTotal() {
+                    return this.cart.reduce((total, item) => total + (item.price * item.qty), 0);
+                },
+
+                getCartFinalTotal() {
+                    return this.getCartTotal();
+                },
+
+                // Checkout management
+                openCheckout() {
+                    this.isCartOpen = false;
+                    this.isCheckoutOpen = true;
+                },
+
+                closeCheckout() {
+                    this.isCheckoutOpen = false;
+                    this.resetCheckoutForm();
+                },
+
+                resetCheckoutForm() {
+                    this.checkoutName = '';
+                    this.checkoutPhone = '';
+                    this.checkoutMethod = 'presencial'; // 'presencial' must be first/default
+                    this.checkoutAddress = '';
+                },
+
+                submitOrder() {
+                    // Create new order
+                    const newOrder = {
+                        id: Date.now(),
+                        date: new Date().toISOString(),
+                        name: this.checkoutName,
+                        phone: this.checkoutPhone,
+                        method: this.checkoutMethod,
+                        address: this.checkoutMethod === 'despacho' ? this.checkoutAddress : '',
+                        items: JSON.parse(JSON.stringify(this.cart)),
+                        total: this.getCartFinalTotal(),
+                        status: 'pendiente'
+                    };
+
+                    this.orders.unshift(newOrder);
+                    localStorage.setItem('apex_orders', JSON.stringify(this.orders));
+
+                    // Empty cart, close modal, trigger success notification
+                    this.cart = [];
+                    this.closeCheckout();
+                    this.showSuccessModal = true;
+                },
+
+                // Store open/close check logic
+                isStoreClosed() {
+                    if (this.storeHours.forcedClosed) return true;
+                    
+                    const now = new Date();
+                    const hours = now.getHours().toString().padStart(2, '0');
+                    const minutes = now.getMinutes().toString().padStart(2, '0');
+                    const currentTimeStr = `${hours}:${minutes}`;
+                    
+                    return currentTimeStr < this.storeHours.open || currentTimeStr > this.storeHours.close;
+                },
+
+                saveHours() {
+                    localStorage.setItem('apex_store_hours', JSON.stringify(this.storeHours));
+                },
+
+                // Admin methods
+                openAdminModal() {
+                    this.isAdminOpen = true;
+                },
+
+                pendingOrdersCount() {
+                    return this.orders.filter(o => o.status === 'pendiente').length;
+                },
+
+                attendOrder(orderId) {
+                    const order = this.orders.find(o => o.id === orderId);
+                    if (order) {
+                        order.status = 'atendido';
+                        localStorage.setItem('apex_orders', JSON.stringify(this.orders));
+                    }
+                },
+
+                clearOrders() {
+                    if (confirm('¿Seguro que deseas vaciar la cola de pedidos de la demo?')) {
+                        this.orders = [];
+                        localStorage.setItem('apex_orders', JSON.stringify(this.orders));
+                    }
+                },
+
+                // Product CRUD operations
+                saveProductsToStorage() {
+                    localStorage.setItem('apex_products', JSON.stringify(this.products));
+                },
+
+                toggleProductActive(productId) {
+                    const product = this.products.find(p => p.id === productId);
+                    if (product) {
+                        product.active = !product.active;
+                        this.saveProductsToStorage();
+                    }
+                },
+
+                openAddProductModal() {
+                    this.isEditingProduct = false;
+                    this.currentProduct = {
+                        id: null,
+                        name: '',
+                        description: '',
+                        price: 0,
+                        image: 'product_charger.png', // Default fallback image
+                        active: true,
+                        category: 'audio',
+                        stock: 5
+                    };
+                    this.productFormImageBase64 = '';
+                    this.isProductModalOpen = true;
+                },
+
+                openEditProductModal(product) {
+                    this.isEditingProduct = true;
+                    this.currentProduct = JSON.parse(JSON.stringify(product));
+                    this.productFormImageBase64 = '';
+                    this.isProductModalOpen = true;
+                },
+
+                closeProductModal() {
+                    this.isProductModalOpen = false;
+                    this.productFormImageBase64 = '';
+                    // Reset fields
+                    this.currentProduct = { id: null, name: '', description: '', price: 0, image: '', active: true, category: 'audio', stock: 5 };
+                },
+
+                onProductImageFileChange(event) {
+                    const file = event.target.files[0];
+                    if (!file) return;
+                    
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.productFormImageBase64 = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                },
+
+                saveProduct() {
+                    // Set image from base64 if uploaded
+                    if (this.productFormImageBase64) {
+                        this.currentProduct.image = this.productFormImageBase64;
+                    }
+
+                    if (this.isEditingProduct) {
+                        // Update existing
+                        const index = this.products.findIndex(p => p.id === this.currentProduct.id);
+                        if (index !== -1) {
+                            this.products[index] = JSON.parse(JSON.stringify(this.currentProduct));
+                        }
+                    } else {
+                        // Create new
+                        this.currentProduct.id = Date.now();
+                        this.products.push(JSON.parse(JSON.stringify(this.currentProduct)));
+                    }
+
+                    this.saveProductsToStorage();
+                    this.closeProductModal();
+                },
+
+                deleteProduct(productId) {
+                    if (confirm('¿Seguro que deseas eliminar este producto de la demo?')) {
+                        this.products = this.products.filter(p => p.id !== productId);
+                        this.saveProductsToStorage();
+                    }
+                },
+
+
+
+                formatCLP(value) {
+                    return new Intl.NumberFormat('es-CL', {
+                        style: 'currency',
+                        currency: 'CLP',
+                        minimumFractionDigits: 0
+                    }).format(value);
+                }
+            };
+        }
+    </script>
+</body>
+</html>
