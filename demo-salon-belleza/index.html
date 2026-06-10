@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="es-CL" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Chic | Salón de Alta Peluquería & Estilo - Santiago</title>
+    
+    <!-- Meta tags SEO -->
+    <meta name="description" content="Descubre Studio Chic, salón de alta peluquería en Santiago. Especialistas en balayage, cortes de autor y tratamientos de reconstrucción capilar. Agenda online.">
+    <meta name="keywords" content="peluquería santiago, salon de belleza, balayage chile, corte de pelo, alisado de keratina, masajes capilares, agenda peluqueria">
+    <meta property="og:title" content="Studio Chic | Salón de Alta Peluquería & Estilo - Santiago" />
+    <meta property="og:description" content="Descubre Studio Chic, salón de alta peluquería en Santiago. Especialistas en balayage, cortes de autor y tratamientos capilares." />
+    <meta property="og:type" content="business.business" />
+    <meta property="og:image" content="./hero.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BeautySalon",
+      "name": "Studio Chic",
+      "image": "./hero.png",
+      "description": "Salón de alta peluquería en Santiago. Especialistas en color, cortes de autor y cuidado capilar.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Providencia 2045, Oficina 402",
+        "addressLocality": "Providencia",
+        "addressRegion": "Santiago",
+        "addressCountry": "CL"
+      },
+      "telephone": "+56999998888",
+      "priceRange": "$$$"
+    }
+    </script>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+
+    <!-- Google Fonts: Outfit (luxury headings) & Inter (clean body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Custom Vanilla CSS for Luxury Editorial Theme -->
+    <style>
+        /* Design Tokens & Theme Colors */
+        :root {
+            --bg-dark: #0A0A0A;        /* Matte black background */
+            --bg-card: #141414;        /* Dark grey for cards */
+            --bg-card-hover: #1A1A1A;
+            --accent-gold: #D4AF37;    /* Classic gold */
+            --accent-gold-rgb: 212, 175, 55;
+            --accent-champagne: #C5A880; /* Soft gold/champagne */
+            --text-light: #F4F4F3;     /* Off-white */
+            --text-muted: #8E8E8E;     /* Medium grey */
+            --border-color: rgba(197, 168, 128, 0.15); /* Soft champagne border */
+            --font-headings: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition-luxury: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Basic Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-headings);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-smooth);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-gold);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-champagne);
+        }
+
+        /* Split Screen Layout for Desktop */
+        .page-wrapper {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        /* Fixed Sidebar Cover (Hero) */
+        .sidebar-cover {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 42%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 4rem;
+            z-index: 10;
+        }
+
+        .sidebar-bg {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(10, 10, 10, 0.3), rgba(10, 10, 10, 0.8)), url('hero.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            /* Ken Burns Effect */
+            animation: kenBurns 40s infinite alternate ease-in-out;
+        }
+
+        /* Scrollable Content Area */
+        .content-main {
+            margin-left: 42%;
+            width: 58%;
+            min-height: 100vh;
+            padding: 4rem 6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8rem;
+        }
+
+        /* Responsive Layout Breaks */
+        @media (max-width: 1200px) {
+            .sidebar-cover {
+                padding: 3rem;
+            }
+            .content-main {
+                padding: 4rem 3rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .page-wrapper {
+                flex-direction: column;
+            }
+            .sidebar-cover {
+                position: relative;
+                width: 100%;
+                height: 70vh;
+                padding: 3rem 2rem;
+            }
+            .content-main {
+                margin-left: 0;
+                width: 100%;
+                padding: 4rem 2rem;
+                gap: 6rem;
+            }
+        }
+
+        /* Cover branding and titles */
+        .brand-logo {
+            font-family: var(--font-headings);
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-logo span {
+            color: var(--accent-gold);
+        }
+
+        .cover-content {
+            margin-top: auto;
+            margin-bottom: auto;
+            max-width: 480px;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+        .cover-badge::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 1.25rem;
+            height: 1px;
+            background-color: var(--accent-gold);
+        }
+
+        .cover-title {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .cover-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Navigation Links in cover */
+        .cover-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .cover-nav-link {
+            font-family: var(--font-headings);
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+        }
+        .cover-nav-link::before {
+            content: '';
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-gold);
+            transition: var(--transition-luxury);
+        }
+        .cover-nav-link:hover {
+            color: var(--text-light);
+            padding-left: 0.5rem;
+        }
+        .cover-nav-link:hover::before {
+            width: 1.5rem;
+        }
+
+        @media (max-width: 992px) {
+            .cover-nav {
+                display: none;
+            }
+        }
+
+        /* Buttons & Drawing border animation */
+        .btn-luxury {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.25rem;
+            background-color: transparent;
+            color: var(--text-light);
+            font-family: var(--font-headings);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            transition: var(--transition-luxury);
+        }
+
+        .btn-luxury::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: translateX(-100%);
+            transition: var(--transition-luxury);
+        }
+
+        .btn-luxury:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+            color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+        .btn-luxury:hover::before {
+            transform: translateX(100%);
+            transition: 1s;
+        }
+
+        .btn-luxury-solid {
+            background-color: var(--accent-gold);
+            color: var(--bg-dark);
+            border-color: var(--accent-gold);
+        }
+        .btn-luxury-solid:hover {
+            background-color: transparent;
+            color: var(--text-light);
+            border-color: var(--accent-gold);
+        }
+
+        /* Section Layout details */
+        .section-header {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .section-num {
+            font-family: var(--font-headings);
+            font-size: 4rem;
+            font-weight: 800;
+            color: rgba(197, 168, 128, 0.05);
+            position: absolute;
+            top: -2.5rem;
+            left: -0.5rem;
+            user-select: none;
+        }
+        .section-subtitle {
+            font-family: var(--font-headings);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-light);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        /* Bento Grid Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        @media (max-width: 640px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .service-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: var(--transition-luxury);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        /* Floating Aura Glow on Hover */
+        .service-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            opacity: 0;
+            box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.05), 0 0 20px rgba(212, 175, 55, 0.03);
+            transition: var(--transition-luxury);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            background-color: var(--bg-card-hover);
+        }
+        .service-card:hover::after {
+            opacity: 1;
+        }
+
+        .service-card.selected {
+            border-color: var(--accent-gold);
+            background-color: rgba(212, 175, 55, 0.03);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.1);
+        }
+
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        .service-card.selected .service-title {
+            color: var(--accent-gold);
+        }
+
+        .service-price {
+            font-family: var(--font-headings);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .service-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .service-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1rem;
+            margin-top: auto;
+        }
+        
+        .service-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        
+        .service-duration svg {
+            width: 1rem;
+            height: 1rem;
+            stroke: currentColor;
+        }
+
+        .selection-indicator {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            border: 2px solid var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+        .service-card.selected .selection-indicator {
+            border-color: var(--accent-gold);
+            background-color: var(--accent-gold);
+        }
+        
+        .selection-indicator svg {
+            width: 0.75rem;
+            height: 0.75rem;
+            stroke: var(--bg-dark);
+            stroke-width: 3.5;
+            display: none;
+        }
+        .service-card.selected .selection-indicator svg {
+            display: block;
+        }
+
+        /* Drag-to-Reveal Before/After Slider */
+        .slider-section {
+            background-color: rgba(20, 20, 20, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            padding: 3rem;
+        }
+        @media (max-width: 640px) {
+            .slider-section {
+                padding: 1.5rem;
+            }
+        }
+
+        .before-after-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            user-select: none;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+        }
+        @media (max-width: 640px) {
+            .before-after-container {
+                height: 300px;
+            }
+        }
+
+        .slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .image-before-wrapper {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .image-after-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        /* Fixed size for the image so it doesn't scale as the wrapper narrows */
+        .image-after-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .slider-bar {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background-color: var(--accent-gold);
+            z-index: 3;
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+        }
+
+        .slider-handle-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background-color: var(--bg-dark);
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 10px rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: ew-resize;
+            z-index: 4;
+            color: var(--accent-gold);
+            transition: transform 0.2s;
+        }
+        .slider-handle-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .slider-label {
+            position: absolute;
+            bottom: 1rem;
+            padding: 0.35rem 0.85rem;
+            background-color: rgba(10, 10, 10, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: var(--font-headings);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            z-index: 3;
+            pointer-events: none;
+        }
+        .label-before {
+            right: 1rem;
+        }
+        .label-after {
+            left: 1rem;
+        }
+
+        /* Stylist Team Focus Hover transition */
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        @media (max-width: 640px) {
+            .team-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .team-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            height: 420px;
+            cursor: pointer;
+            transition: var(--transition-luxury);
+        }
+
+        .team-img-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-luxury);
+        }
+
+        .team-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-luxury);
+        }
+
+        /* Focus Blur Effect & Specialty reveal */
+        .team-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 15%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            z-index: 2;
+            transition: var(--transition-luxury);
+        }
+
+        .stylist-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+            transition: var(--transition-luxury);
+        }
+
+        .stylist-specialty {
+            font-family: var(--font-headings);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .stylist-details {
+            max-height: 0;
+            overflow: hidden;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            transition: var(--transition-luxury);
+            opacity: 0;
+        }
+
+        /* Focus Animation Triggered on Hover */
+        .team-card:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.1);
+        }
+        
+        .team-card:hover .team-img {
+            transform: scale(1.05);
+            filter: blur(2px);
+        }
+
+        .team-card:hover .team-card-overlay {
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.98) 35%, rgba(10, 10, 10, 0.4) 100%);
+        }
+
+        .team-card:hover .stylist-details {
+            max-height: 80px;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        /* Sticky Styles for checkout preview bar */
+        .checkout-preview {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: calc(58% - 8rem);
+            background-color: var(--bg-card);
+            border: 1px solid var(--accent-gold);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            border-radius: 40px;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 90;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @media (max-width: 1200px) {
+            .checkout-preview {
+                width: calc(58% - 5rem);
+            }
+        }
+        @media (max-width: 992px) {
+            .checkout-preview {
+                width: calc(100% - 4rem);
+                left: 2rem;
+                right: 2rem;
+            }
+        }
+
+        .checkout-info {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .checkout-stat {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .checkout-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+        
+        .checkout-val {
+            font-family: var(--font-headings);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        /* Reservation Modal & Form Controls */
+        .modal-overlay-bg {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .modal-card {
+            background-color: var(--bg-dark);
+            border: 1px solid var(--accent-gold);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h3 {
+            font-family: var(--font-headings);
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
+        }
+        .modal-close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            width: 2.25rem;
+            height: 2.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition-smooth);
+            border: 1px solid transparent;
+        }
+        .modal-close-btn:hover {
+            color: var(--accent-gold);
+            border-color: var(--border-color);
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            max-height: 75vh;
+            overflow-y: auto;
+        }
+
+        .form-group-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+        @media (max-width: 600px) {
+            .form-group-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            font-family: var(--font-headings);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-champagne);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--text-light);
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+        .form-input:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+        
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23d4af37'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+            background-size: 1.25rem;
+            padding-right: 2.5rem;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1.25rem;
+            margin-top: 2rem;
+        }
+
+        /* Location Section (Map) */
+        .location-section {
+            border-top: 1px solid var(--border-color);
+            padding-top: 6rem;
+        }
+        .map-wrapper {
+            width: 100%;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            margin-top: 2rem;
+        }
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 4rem;
+            margin-top: 6rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .footer-logo {
+            font-family: var(--font-headings);
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background-color: #25D366;
+            color: white;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 18px rgba(37, 211, 102, 0.4);
+            z-index: 100;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
+        }
+        .whatsapp-float svg {
+            width: 2rem;
+            height: 2rem;
+            fill: currentColor;
+        }
+        .whatsapp-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background-color: #E24C4C;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Success Toast */
+        .success-toast {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background-color: #10B981;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 600;
+        }
+
+        /* Mobile top bar (header) */
+        .mobile-header {
+            display: none;
+            background-color: var(--bg-dark);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            align-items: center;
+            justify-content: space-between;
+        }
+        @media (max-width: 992px) {
+            .mobile-header {
+                display: flex;
+            }
+        }
+
+        /* Keyframes Animations */
+        @keyframes kenBurns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        @keyframes slideUp {
+            from { transform: translate3d(0, 40px, 0); opacity: 0; }
+            to { transform: translate3d(0, 0, 0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+            100% { transform: scale(0.9); opacity: 1; }
+        }
+    </style>
+</head>
+<body x-data="{
+    bookingModal: false,
+    selectedServices: [],
+    selectedDuration: 0,
+    selectedPrice: 0,
+    successToast: false,
+    sliderVal: 50,
+
+    // Form inputs
+    formName: '',
+    formEmail: '',
+    formPhone: '',
+    formDate: '',
+    formTime: '',
+    formSector: 'presencial', // Sector/modalidad: default presencial (Salón)
+    formStylist: 'any',
+    formComment: '',
+
+    init() {
+        // Init logic if needed
+    },
+
+    toggleService(id, title, price, duration) {
+        const index = this.selectedServices.findIndex(s => s.id === id);
+        if (index > -1) {
+            this.selectedServices.splice(index, 1);
+            this.selectedPrice -= price;
+            this.selectedDuration -= duration;
+        } else {
+            this.selectedServices.push({ id, title, price, duration });
+            this.selectedPrice += price;
+            this.selectedDuration += duration;
+        }
+    },
+
+    openBooking() {
+        // Asegurar modalidad/sector marcada por default a presencial
+        this.formSector = 'presencial';
+        this.bookingModal = true;
+    },
+
+    closeBooking() {
+        // Limpieza 100% del formulario al salir o cancelar (sin recuerdos)
+        this.formName = '';
+        this.formEmail = '';
+        this.formPhone = '';
+        this.formDate = '';
+        this.formTime = '';
+        this.formSector = 'presencial';
+        this.formStylist = 'any';
+        this.formComment = '';
+        this.bookingModal = false;
+    },
+
+    submitBooking() {
+        if (!this.formName || !this.formPhone || !this.formDate || !this.formTime) {
+            alert('Por favor, ingresa los datos requeridos (Nombre, Teléfono, Fecha y Hora).');
+            return;
+        }
+
+        // Simular envío de solicitud a email predefinido
+        const subject = encodeURIComponent('Nueva Reserva de Estilo - Studio Chic');
+        const servicesList = this.selectedServices.map(s => `- ${s.title} ($${s.price.toLocaleString('es-CL')})`).join('\n');
+        
+        const bodyText = `Hola Studio Chic, solicito agendar una hora de atención:\n\n` +
+            `Nombre: ${this.formName}\n` +
+            `Teléfono: ${this.formPhone}\n` +
+            `Email: ${this.formEmail || 'No provisto'}\n\n` +
+            `Servicios Solicitados:\n${servicesList || 'Ninguno seleccionado'}\n` +
+            `Total Estimado: $${this.selectedPrice.toLocaleString('es-CL')} (${this.selectedDuration} min)\n\n` +
+            `Fecha: ${this.formDate}\n` +
+            `Hora: ${this.formTime}\n` +
+            `Estilista de Preferencia: ${this.formStylist === 'stylist1' ? 'Valentina Moretti' : 'Cualquier profesional disponible'}\n` +
+            `Sector de Atención: ${this.formSector === 'presencial' ? 'Presencial (Tocador Central)' : 'Online / Diagnóstico a Distancia'}\n` +
+            `Detalles Adicionales: ${this.formComment || 'Ninguno'}`;
+        
+        window.location.href = `mailto:citas@studiochic.cl?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+
+        // Cerrar modal
+        this.bookingModal = false;
+
+        // Limpieza 100% del formulario al terminar la solicitud (sin recuerdos)
+        this.formName = '';
+        this.formEmail = '';
+        this.formPhone = '';
+        this.formDate = '';
+        this.formTime = '';
+        this.formSector = 'presencial';
+        this.formStylist = 'any';
+        this.formComment = '';
+        this.selectedServices = [];
+        this.selectedPrice = 0;
+        this.selectedDuration = 0;
+
+        // Mostrar notificación de éxito
+        this.successToast = true;
+        setTimeout(() => { this.successToast = false; }, 3500);
+    },
+
+    // Handle Before/After dragging
+    handleDrag(e) {
+        const rect = this.$refs.sliderContainer.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const offset = clientX - rect.left;
+        let percentage = (offset / rect.width) * 100;
+        if (percentage < 0) percentage = 0;
+        if (percentage > 100) percentage = 100;
+        this.sliderVal = percentage.toFixed(2);
+    }
+}">
+
+    <!-- Success Toast -->
+    <div x-show="successToast" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 scale-95 translate-y-[-20px]"
+         x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+         x-transition:leave-end="opacity-0 scale-95 translate-y-[-20px]"
+         class="success-toast" 
+         style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width: 1.5rem; height: 1.5rem;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>¡Reserva solicitada correctamente!</span>
+    </div>
+
+    <!-- Mobile Header Navigation (Sticky) -->
+    <div class="mobile-header">
+        <a href="#" class="brand-logo">
+            Studio<span>Chic</span>
+        </a>
+        <button @click="openBooking()" class="btn-luxury" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Reservar</button>
+    </div>
+
+    <div class="page-wrapper">
+        
+        <!-- FIXED SIDEBAR COVER (HERO PANE) -->
+        <aside class="sidebar-cover">
+            <div class="sidebar-bg"></div>
+            
+            <a href="#" class="brand-logo" style="position: relative; z-index: 5;">
+                Studio<span>Chic</span>
+            </a>
+
+            <div class="cover-content" style="position: relative; z-index: 5;">
+                <span class="cover-badge">Estilo & Sofisticación</span>
+                <h1 class="cover-title">Tu cabello habla de ti. Dale voz.</h1>
+                <p class="cover-desc">Alta peluquería en Santiago. Diseñamos cortes de autor, iluminaciones con técnica balayage y tratamientos orgánicos premium para lucir una melena radiante y saludable.</p>
+                <button @click="openBooking()" class="btn-luxury btn-luxury-solid">Agendar tu Cita</button>
+            </div>
+
+            <!-- Anchor links sidebar menu -->
+            <nav style="position: relative; z-index: 5;">
+                <ul class="cover-nav">
+                    <li><a href="#servicios" class="cover-nav-link">01. Servicios</a></li>
+                    <li><a href="#transformacion" class="cover-nav-link">02. Galería Antes/Después</a></li>
+                    <li><a href="#equipo" class="cover-nav-link">03. Nuestro Equipo</a></li>
+                    <li><a href="#ubicacion" class="cover-nav-link">04. Ubicación</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- SCROLLABLE MAIN CONTENT PANE -->
+        <main class="content-main">
+            
+            <!-- SECTION 1: SERVICIOS CON PRECIOS (Bento Grid) -->
+            <section id="servicios">
+                <div class="section-header">
+                    <span class="section-num">01</span>
+                    <span class="section-subtitle">Nuestra Carta</span>
+                    <h2 class="section-title">Servicios de Autor</h2>
+                </div>
+
+                <div class="services-grid">
+                    <!-- Service 1 -->
+                    <div class="service-card" 
+                         :class="{'selected': selectedServices.some(s => s.id === 1)}"
+                         @click="toggleService(1, 'Corte de Autor & Styling', 35000, 60)">
+                        <div class="service-header">
+                            <h3 class="service-title">Corte de Autor</h3>
+                            <span class="service-price">$35.000</span>
+                        </div>
+                        <p class="service-desc">Corte personalizado diseñado según tu visagismo. Incluye lavado orgánico nutritivo y peinado final de pasarela.</p>
+                        <div class="service-footer">
+                            <span class="service-duration">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                60 Min
+                            </span>
+                            <div class="selection-indicator">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-card" 
+                         :class="{'selected': selectedServices.some(s => s.id === 2)}"
+                         @click="toggleService(2, 'Balayage Iluminación Champagne', 85000, 180)">
+                        <div class="service-header">
+                            <h3 class="service-title">Balayage Champagne</h3>
+                            <span class="service-price">$85.000</span>
+                        </div>
+                        <p class="service-desc">Difuminado suave de luz natural con tonos arena o champagne. Cuidado máximo de la fibra capilar, incluye tratamiento plex protector.</p>
+                        <div class="service-footer">
+                            <span class="service-duration">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                180 Min
+                            </span>
+                            <div class="selection-indicator">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-card" 
+                         :class="{'selected': selectedServices.some(s => s.id === 3)}"
+                         @click="toggleService(3, 'Reconstrucción Capilar de Keratina', 45000, 90)">
+                        <div class="service-header">
+                            <h3 class="service-title">Reconstrucción Plex</h3>
+                            <span class="service-price">$45.000</span>
+                        </div>
+                        <p class="service-desc">Tratamiento reparador molecular intensivo para cabellos dañados o porosos. Devuelve la fuerza, brillo y suavidad de inmediato.</p>
+                        <div class="service-footer">
+                            <span class="service-duration">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                90 Min
+                            </span>
+                            <div class="selection-indicator">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="service-card" 
+                         :class="{'selected': selectedServices.some(s => s.id === 4)}"
+                         @click="toggleService(4, 'Peinado Novia / Eventos', 60000, 120)">
+                        <div class="service-header">
+                            <h3 class="service-title">Peinado de Evento</h3>
+                            <span class="service-price">$60.000</span>
+                        </div>
+                        <p class="service-desc">Estilismo para ocasiones especiales (novias, graduaciones). Recogidos elegantes, ondas desarmadas o alisados con pulido espejo.</p>
+                        <div class="service-footer">
+                            <span class="service-duration">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                120 Min
+                            </span>
+                            <div class="selection-indicator">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: INTERACTIVE DRAG-TO-REVEAL SLIDER (Galería antes/después) -->
+            <section id="transformacion" class="slider-section">
+                <div class="section-header">
+                    <span class="section-num">02</span>
+                    <span class="section-subtitle">La Magia del Cambio</span>
+                    <h2 class="section-title">El Arte de la Transformación</h2>
+                </div>
+                
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">
+                    Desliza el tirador dorado hacia los lados para revelar el cambio de frizz y opacidad a una melena de espejo perfectamente hidratada con nuestra técnica de reestructuración orgánica.
+                </p>
+
+                <!-- Custom Slider Widget -->
+                <div class="before-after-container" 
+                     x-ref="sliderContainer"
+                     @mousemove="handleDrag($event)"
+                     @touchmove="handleDrag($event)">
+                    
+                    <!-- Background: Before Image -->
+                    <div class="image-before-wrapper">
+                        <img src="before.png" alt="Pelo dañado y seco antes del tratamiento" class="slider-image">
+                    </div>
+                    
+                    <!-- Clip Pane: After Image -->
+                    <div class="image-after-wrapper" :style="'width: ' + sliderVal + '%'">
+                        <img src="after.png" alt="Pelo brillante y liso después del tratamiento" :style="'width: ' + ($refs.sliderContainer ? $refs.sliderContainer.clientWidth + 'px' : '100%') + '; max-width: none;'">
+                    </div>
+                    
+                    <!-- Divider Line -->
+                    <div class="slider-bar" :style="'left: ' + sliderVal + '%'"></div>
+                    
+                    <!-- Interactive Button Handle -->
+                    <div class="slider-handle-button" :style="'left: ' + sliderVal + '%'" @mousedown="handleDrag($event)">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width: 1.5rem; height: 1.5rem;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                        </svg>
+                    </div>
+                    
+                    <!-- Labels -->
+                    <span class="slider-label label-after">Después</span>
+                    <span class="slider-label label-before">Antes</span>
+                </div>
+            </section>
+
+            <!-- SECTION 3: EQUIPO (Focus Hover Transition) -->
+            <section id="equipo">
+                <div class="section-header">
+                    <span class="section-num">03</span>
+                    <span class="section-subtitle">Nuestras Manos</span>
+                    <h2 class="section-title">Estilistas Profesionales</h2>
+                </div>
+
+                <div class="team-container">
+                    <!-- Stylist 1 -->
+                    <div class="team-card">
+                        <div class="team-img-container">
+                            <img src="stylist.png" alt="Valentina Moretti, Directora de Estilo" class="team-img">
+                        </div>
+                        <div class="team-card-overlay">
+                            <h4 class="stylist-name">Valentina Moretti</h4>
+                            <span class="stylist-specialty">Directora Creativa & Colorista</span>
+                            <p class="stylist-details">Con más de 10 años de experiencia, Valentina es especialista certificada en balayage europeo e iluminación capilar saludable.</p>
+                        </div>
+                    </div>
+
+                    <!-- Stylist 2 (Simulado con la misma o con una tarjeta artística) -->
+                    <div class="team-card">
+                        <div class="team-img-container">
+                            <img src="hero.png" alt="Ariadna Ruiz, Estilista Senior" class="team-img">
+                        </div>
+                        <div class="team-card-overlay">
+                            <h4 class="stylist-name">Ariadna Ruiz</h4>
+                            <span class="stylist-specialty">Especialista en Cortes & Peinados</span>
+                            <p class="stylist-details">Egresada de academias en Londres, Ariadna diseña cortes asimétricos, de autor y peinados de alta costura para eventos exclusivos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: LOCATION (Google Maps) -->
+            <section id="ubicacion" class="location-section">
+                <div class="section-header">
+                    <span class="section-num">04</span>
+                    <span class="section-subtitle">Encuéntranos</span>
+                    <h2 class="section-title">El Salón de Estilo</h2>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">
+                        Estamos ubicados en un sector exclusivo de Providencia, con estacionamiento propio y servicio de cafetería de cortesía durante tu atención.
+                    </p>
+                    <p style="font-family: var(--font-headings); font-size: 1.1rem; color: var(--accent-champagne);">
+                        📍 Av. Providencia 2045, Oficina 402, Providencia, Santiago
+                    </p>
+                    
+                    <div class="map-wrapper">
+                        <!-- Google Maps Embed centered on Providencia Area, Santiago -->
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.9881180295195!2d-70.6120302!3d-33.4223253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662cf6405206ef7%3A0xe54d3ca34f89fbef!2sAv.%20Providencia%202045%2C%20Providencia%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1781042500000!5m2!1ses-419!2scl" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Footer Section -->
+                <footer>
+                    <div>
+                        <div class="footer-logo">Studio<span>Chic</span></div>
+                        <p style="max-width: 250px; font-size: 0.8rem; line-height: 1.4;">Alta peluquería, elegancia y cuidado molecular de tu cabello en un solo lugar.</p>
+                    </div>
+                    <div>
+                        <p style="margin-bottom: 0.5rem;">Lunes a Sábado: 10:00 - 20:00</p>
+                        <p>Teléfono: +56 9 8765 4321</p>
+                    </div>
+                    <div>
+                        <p>&copy; 2026 Studio Chic. Todos los derechos reservados.</p>
+                        <p style="font-size: 0.75rem; color: var(--accent-gold); margin-top: 0.25rem;">Estilismo de Vanguardia.</p>
+                    </div>
+                </footer>
+            </section>
+        </main>
+    </div>
+
+    <!-- STICKY CHECKOUT BAR (Triggered when services selected) -->
+    <div x-show="selectedServices.length > 0" class="checkout-preview" style="display: none;">
+        <div class="checkout-info">
+            <div class="checkout-stat">
+                <span class="checkout-label">Servicios</span>
+                <span class="checkout-val" x-text="selectedServices.length">0</span>
+            </div>
+            <div class="checkout-stat">
+                <span class="checkout-label">Tiempo Estimado</span>
+                <span class="checkout-val" x-text="selectedDuration + ' min'">0 min</span>
+            </div>
+            <div class="checkout-stat">
+                <span class="checkout-label">Total Cita</span>
+                <span class="checkout-val" x-text="'$' + selectedPrice.toLocaleString('es-CL')">$0</span>
+            </div>
+        </div>
+        <button @click="openBooking()" class="btn-luxury btn-luxury-solid" style="padding: 0.75rem 1.5rem; font-size: 0.8rem; border-radius: 50px;">Solicitar Hora</button>
+    </div>
+
+    <!-- Floating WhatsApp Widget -->
+    <a href="https://wa.me/56987654321?text=Hola%20Studio%20Chic%2C%20me%20gustar%C3%ADa%20hacer%20una%20consulta%20por%20horas%20disponibles." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="whatsapp-float" 
+       id="whatsapp-button"
+       aria-label="Contactar por WhatsApp">
+        <div class="whatsapp-badge"></div>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.517 2.266 2.27 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.632 1.97 14.156.946 11.53.946c-5.423 0-9.849 4.373-9.853 9.803-.001 1.737.457 3.432 1.328 4.925l-.995 3.636 3.738-.97c1.516.828 3.011 1.258 4.307 1.26z"/>
+        </svg>
+    </a>
+
+    <!-- RESERVATION MODAL (Booking Form) -->
+    <div x-show="bookingModal" 
+         class="modal-overlay-bg" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         style="display: none;">
+        
+        <div class="modal-card" 
+             x-show="bookingModal"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95 translate-y-[30px]"
+             x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+             x-transition:leave-end="opacity-0 scale-95 translate-y-[30px]"
+             @click.away="closeBooking()">
+            
+            <div class="modal-header">
+                <h3>Solicitar Hora de Estilo</h3>
+                <button @click="closeBooking()" class="modal-close-btn" aria-label="Cerrar modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 1.25rem; height: 1.25rem; stroke-width: 2.5;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <form @submit.prevent="submitBooking()">
+                    <!-- Name & Phone -->
+                    <div class="form-group-grid">
+                        <div class="form-group">
+                            <label class="form-label">Nombre Completo *</label>
+                            <input type="text" x-model="formName" required class="form-input" placeholder="Ej: Marcela Paz" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Teléfono / WhatsApp *</label>
+                            <input type="tel" x-model="formPhone" required class="form-input" placeholder="Ej: +56 9 1234 5678" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <!-- Email & Stylist -->
+                    <div class="form-group-grid">
+                        <div class="form-group">
+                            <label class="form-label">Email (Opcional)</label>
+                            <input type="email" x-model="formEmail" class="form-input" placeholder="marcela@ejemplo.cl" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Estilista de Preferencia</label>
+                            <select x-model="formStylist" class="form-input">
+                                <option value="any">Cualquier Profesional Disponible</option>
+                                <option value="stylist1">Valentina Moretti (Directora)</option>
+                                <option value="stylist2">Ariadna Ruiz (Senior)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Date & Time -->
+                    <div class="form-group-grid">
+                        <div class="form-group">
+                            <label class="form-label">Fecha Solicitada *</label>
+                            <input type="date" x-model="formDate" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Hora Solicitada *</label>
+                            <input type="time" x-model="formTime" required class="form-input">
+                        </div>
+                    </div>
+
+                    <!-- Modality / Preferred Sector (Marked "presencial" as first and default) -->
+                    <div class="form-group">
+                        <label class="form-label">Modalidad de Atención *</label>
+                        <select x-model="formSector" class="form-input">
+                            <option value="presencial">Presencial - Atención en el Salón (Providencia)</option>
+                            <option value="online">Online - Asesoría / Diagnóstico Capilar Virtual</option>
+                        </select>
+                    </div>
+
+                    <!-- Comments / Selected Services summary (Read-only reference) -->
+                    <div class="form-group" x-show="selectedServices.length > 0">
+                        <label class="form-label">Servicios Pre-Seleccionados</label>
+                        <div style="background-color: var(--bg-card); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); font-size: 0.85rem;">
+                            <template x-for="service in selectedServices" :key="service.id">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span x-text="service.title" style="color: var(--text-light);"></span>
+                                    <span x-text="'$' + service.price.toLocaleString('es-CL')" style="color: var(--accent-gold); font-weight: 600;"></span>
+                                </div>
+                            </template>
+                            <div style="border-top: 1px solid rgba(255,255,255,0.05); margin-top: 0.5rem; padding-top: 0.5rem; display: flex; justify-content: space-between; font-weight: 700;">
+                                <span>Total Estimado:</span>
+                                <span x-text="'$' + selectedPrice.toLocaleString('es-CL')" style="color: var(--accent-gold);"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Special Comments -->
+                    <div class="form-group">
+                        <label class="form-label">Comentarios / Alergias / Mensaje</label>
+                        <textarea x-model="formComment" class="form-input" placeholder="Cuéntanos sobre tu cabello, tratamientos previos, etc..." style="resize: vertical; min-height: 80px;" autocomplete="off"></textarea>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="form-actions">
+                        <button type="button" @click="closeBooking()" class="btn-luxury">Cancelar</button>
+                        <button type="submit" class="btn-luxury btn-luxury-solid">Enviar Solicitud</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -10,6 +10,24 @@
   <meta property="og:title" content="Páginas Web Profesionales para tu Negocio en Chile" />
   <meta property="og:description" content="Tu negocio merece verse profesional en internet. Páginas web claras, modernas y listas para recibir clientes." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="./demo-psicologa/preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Páginas Web Profesionales para tu Negocio en Chile" />
+  <meta name="twitter:description" content="Tu negocio merece verse profesional en internet. Páginas web claras, modernas y listas para recibir clientes." />
+  <meta name="twitter:image" content="./demo-psicologa/preview.png" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www%2eorg/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "RogerDevCode Web Promotion",
+    "url": "https://rogerdevcode.cl",
+    "description": "Diseño páginas web profesionales para negocios, PYMEs y emprendedores en Chile."
+  }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -351,6 +369,7 @@
         <a href="#beneficios" class="link-underline rounded-xl px-4 py-2 text-sm font-semibold text-drac-comment transition-colors hover:text-drac-fg">Beneficios</a>
         <a href="#servicios" class="link-underline rounded-xl px-4 py-2 text-sm font-semibold text-drac-comment transition-colors hover:text-drac-fg">Servicios</a>
         <a href="#proceso" class="link-underline rounded-xl px-4 py-2 text-sm font-semibold text-drac-comment transition-colors hover:text-drac-fg">Proceso</a>
+        <a href="#demos" class="link-underline rounded-xl px-4 py-2 text-sm font-semibold text-drac-comment transition-colors hover:text-drac-fg">Demos</a>
         <a href="#precios" class="link-underline rounded-xl px-4 py-2 text-sm font-semibold text-drac-comment transition-colors hover:text-drac-fg">Inversión</a>
         <a href="#faq" class="link-underline rounded-xl px-4 py-2 text-sm font-semibold text-drac-comment transition-colors hover:text-drac-fg">Preguntas</a>
         <a href="#contacto" class="ml-3 btn-glow inline-flex items-center rounded-full bg-gradient-to-r from-chile-red to-chile-redDark px-5 py-2.5 text-sm font-bold text-white shadow-glow-red transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
@@ -372,6 +391,7 @@
         <a @click="mobileMenu=false" href="#beneficios" class="rounded-xl px-4 py-3 text-sm font-semibold text-drac-comment hover:bg-drac-current/30 hover:text-drac-fg transition-colors">Beneficios</a>
         <a @click="mobileMenu=false" href="#servicios" class="rounded-xl px-4 py-3 text-sm font-semibold text-drac-comment hover:bg-drac-current/30 hover:text-drac-fg transition-colors">Servicios</a>
         <a @click="mobileMenu=false" href="#proceso" class="rounded-xl px-4 py-3 text-sm font-semibold text-drac-comment hover:bg-drac-current/30 hover:text-drac-fg transition-colors">Proceso</a>
+        <a @click="mobileMenu=false" href="#demos" class="rounded-xl px-4 py-3 text-sm font-semibold text-drac-comment hover:bg-drac-current/30 hover:text-drac-fg transition-colors">Demos</a>
         <a @click="mobileMenu=false" href="#precios" class="rounded-xl px-4 py-3 text-sm font-semibold text-drac-comment hover:bg-drac-current/30 hover:text-drac-fg transition-colors">Inversión</a>
         <a @click="mobileMenu=false" href="#faq" class="rounded-xl px-4 py-3 text-sm font-semibold text-drac-comment hover:bg-drac-current/30 hover:text-drac-fg transition-colors">Preguntas</a>
         <a @click="mobileMenu=false" href="#contacto" class="mt-2 rounded-xl bg-gradient-to-r from-chile-red to-chile-redDark px-4 py-3 text-center text-sm font-bold text-white">
@@ -547,47 +567,122 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- SOCIAL PROOF STATS -->
     <!-- ============================================ -->
-    <section class="relative border-y border-drac-current/30 bg-drac-darker/50" x-data="{
-      shown: false,
-      count1: 0, count2: 0, count3: 0, count4: 0,
-      animateCounters() {
-        if (this.shown) return;
-        this.shown = true;
-        const duration = 2000;
-        const steps = 60;
-        const interval = duration / steps;
-        let step = 0;
-        const timer = setInterval(() => {
-          step++;
-          const progress = step / steps;
-          const ease = 1 - Math.pow(1 - progress, 3);
-          this.count1 = Math.round(50 * ease);
-          this.count2 = Math.round(98 * ease);
-          this.count3 = Math.round(24 * ease);
-          this.count4 = Math.round(0 * ease);
-          if (step >= steps) clearInterval(timer);
-        }, interval);
-      }
-    }" x-intersect.once="animateCounters()">
-      <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-2 gap-6 lg:grid-cols-4">
-          <div class="text-center">
-            <p class="font-display text-4xl font-black text-chile-blueLight" x-text="count1 + '+'">50+</p>
-            <p class="mt-2 text-sm font-medium text-drac-comment">Proyectos entregados</p>
-          </div>
-          <div class="text-center">
-            <p class="font-display text-4xl font-black text-drac-green" x-text="count2 + '%'">98%</p>
-            <p class="mt-2 text-sm font-medium text-drac-comment">Clientes satisfechos</p>
-          </div>
-          <div class="text-center">
-            <p class="font-display text-4xl font-black text-drac-orange" x-text="count3 + ' hrs'">24 hrs</p>
-            <p class="mt-2 text-sm font-medium text-drac-comment">Tiempo de respuesta</p>
-          </div>
-          <div class="text-center">
-            <p class="font-display text-4xl font-black text-chile-red">$0</p>
-            <p class="mt-2 text-sm font-medium text-drac-comment">Costo de mantención mensual</p>
+    <!-- DEMO SHOWCASE SECTION (PORTAFOLIO DE DEMOS) -->
+    <!-- ============================================ -->
+    <section id="demos" class="relative py-20 border-y border-drac-current/30 bg-drac-darker/50 overflow-hidden">
+      <!-- Background glow -->
+      <div class="absolute -top-40 -left-40 h-[350px] w-[350px] rounded-full bg-drac-purple/5 blur-[120px] pointer-events-none"></div>
+      <div class="absolute -bottom-40 -right-40 h-[350px] w-[350px] rounded-full bg-chile-blue/5 blur-[120px] pointer-events-none"></div>
+
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="reveal text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-flex items-center rounded-full bg-drac-green/10 border border-drac-green/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-drac-green mb-6">
+            Demos Interactivas 100% Funcionales
+          </span>
+          <h2 class="font-display text-3xl font-black sm:text-4xl lg:text-5xl">
+            Explora nuestro trabajo
+            <span class="text-drac-green">en vivo</span>
+          </h2>
+          <p class="mt-6 text-lg text-drac-comment leading-relaxed">
+            No te quedes solo con palabras. Hemos diseñado y desarrollado maquetas funcionales completas adaptadas a los rubros chilenos más solicitados. Haz clic en cualquiera para navegar e interactuar.
+          </p>
+        </div>
+
+        <!-- Showcase grid -->
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Demo 1: Psicóloga -->
+          <a href="./demo-psicologa/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2">
+            <div class="relative h-48 w-full overflow-hidden">
+              <img src="./demo-psicologa/preview.png" alt="Demo Clara Altieri Psicóloga" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-drac-bg to-transparent opacity-60"></div>
+              <div class="absolute top-4 left-4 rounded-full bg-drac-purple/95 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow">Salud & Bienestar</div>
+            </div>
+            <div class="flex flex-col flex-grow p-6">
+              <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-green transition-colors">Psicóloga Clínica</h3>
+              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">Página limpia y minimalista enfocada en transmitir tranquilidad. Incluye selector de modalidad presencial/online y formulario de reserva con reset inmediato.</p>
+              <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-purple mt-auto">
+                <span>Ver demo en vivo</span>
+                <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Demo 2: Café La Ruta -->
+          <a href="./demo-cafe-valparaiso/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .06s">
+            <div class="relative h-48 w-full overflow-hidden">
+              <img src="./demo-cafe-valparaiso/hero.png" alt="Demo Café La Ruta Valparaíso" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-drac-bg to-transparent opacity-60"></div>
+              <div class="absolute top-4 left-4 rounded-full bg-drac-orange/95 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow">Gastronomía</div>
+            </div>
+            <div class="flex flex-col flex-grow p-6">
+              <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-green transition-colors">Café de Especialidad</h3>
+              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">Diseño rústico y cálido con colores de Valparaíso. Incluye Bento Grid para historia/horarios, carta digital interactiva con simulador de precios y mapa.</p>
+              <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-orange mt-auto">
+                <span>Ver demo en vivo</span>
+                <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Demo 3: Studio Chic -->
+          <a href="./demo-salon-belleza/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .12s">
+            <div class="relative h-48 w-full overflow-hidden">
+              <img src="./demo-salon-belleza/hero.png" alt="Demo Studio Chic Peluquería" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-drac-bg to-transparent opacity-60"></div>
+              <div class="absolute top-4 left-4 rounded-full bg-drac-yellow/95 px-3 py-1 text-xs font-bold uppercase tracking-wider text-drac-darker shadow">Estética & Belleza</div>
+            </div>
+            <div class="flex flex-col flex-grow p-6">
+              <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-green transition-colors">Salón de Belleza</h3>
+              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">Estilo de lujo editorial en negro y dorado. Destaca su panel dividido (split-screen) y su deslizador interactivo de cambio capilar antes/después.</p>
+              <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-yellow mt-auto">
+                <span>Ver demo en vivo</span>
+                <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Demo 4: Artesanías del Sur -->
+          <a href="./demo-artesanias/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .18s">
+            <div class="relative h-48 w-full overflow-hidden">
+              <img src="./demo-artesanias/studio.png" alt="Demo Artesanías del Sur E-commerce" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-drac-bg to-transparent opacity-60"></div>
+              <div class="absolute top-4 left-4 rounded-full bg-drac-pink/95 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow">Tienda & Retail</div>
+            </div>
+            <div class="flex flex-col flex-grow p-6">
+              <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-green transition-colors">Catálogo de Productos</h3>
+              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">E-commerce asimétrico y natural para productos locales. Cuenta con filtrado de catálogo, carro de compras interactivo y checkout directo a WhatsApp.</p>
+              <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-pink mt-auto">
+                <span>Ver demo en vivo</span>
+                <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Demo 5: ContaDigital -->
+          <a href="./demo-contabilidad/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .24s">
+            <div class="relative h-48 w-full overflow-hidden">
+              <img src="./demo-contabilidad/office.png" alt="Demo ContaDigital Contabilidad" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-drac-bg to-transparent opacity-60"></div>
+              <div class="absolute top-4 left-4 rounded-full bg-drac-cyan/95 px-3 py-1 text-xs font-bold uppercase tracking-wider text-drac-darker shadow">Servicios B2B</div>
+            </div>
+            <div class="flex flex-col flex-grow p-6">
+              <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-green transition-colors">ContaDigital Asesoría</h3>
+              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">Portal corporativo limpio y tecnológico en azul marino. Ofrece una calculadora interactiva de planes y tarifas dinámicas y workflow explicativo.</p>
+              <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-cyan mt-auto">
+                <span>Ver demo en vivo</span>
+                <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Call to Action Card -->
+          <div class="reveal group relative flex flex-col justify-center rounded-3xl border border-dashed border-drac-comment/40 bg-drac-bg/20 p-8 text-center" style="transition-delay: .3s">
+            <h3 class="text-2xl font-black text-drac-fg">¿Quieres ver tu rubro aquí?</h3>
+            <p class="mt-4 text-sm text-drac-comment leading-relaxed">Diseñamos páginas adaptadas a cualquier negocio. Hablemos sobre lo que necesitas y creamos una maqueta para ti.</p>
+            <div class="mt-8">
+              <a href="#contacto" class="btn-glow inline-flex items-center justify-center rounded-2xl bg-drac-green px-6 py-3 text-sm font-bold text-drac-darker transition-all duration-300 hover:scale-105">Cotizar mi Página</a>
+            </div>
           </div>
         </div>
       </div>

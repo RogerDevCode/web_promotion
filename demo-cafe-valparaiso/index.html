@@ -1,0 +1,2074 @@
+<!DOCTYPE html>
+<html lang="es-CL" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café La Ruta | Cafetería de Especialidad & Almuerzos - Valparaíso</title>
+    
+    <!-- Meta tags SEO -->
+    <meta name="description" content="Café La Ruta en el corazón de Valparaíso. Disfruta de café de especialidad, panadería artesanal y almuerzos tradicionales frente a los cerros porteños.">
+    <meta name="keywords" content="cafe valparaiso, cafeteria especialidad, cerro alegre, almuerzo tradicional, cafe la ruta, panaderia artesanal, chile">
+    <meta property="og:title" content="Café La Ruta | Cafetería de Especialidad & Almuerzos - Valparaíso" />
+    <meta property="og:description" content="Café La Ruta en el corazón de Valparaíso. Disfruta de café de especialidad, panadería artesanal y almuerzos tradicionales." />
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:image" content="./hero.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CafeOrCoffeeShop",
+      "name": "Café La Ruta",
+      "image": "./hero.png",
+      "description": "Cafetería de Especialidad y Almuerzos en Valparaíso.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Cerro Alegre",
+        "addressLocality": "Valparaíso",
+        "addressCountry": "CL"
+      },
+      "telephone": "+56987654321",
+      "servesCuisine": "Café de Especialidad, Almuerzos",
+      "priceRange": "$$"
+    }
+    </script>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+
+    <!-- Google Fonts: Outfit (headings) & Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Custom Vanilla CSS -->
+    <style>
+        /* Design Tokens & Theme Colors */
+        :root {
+            --primary: #c85c32;       /* Terracotta / Burnt Orange */
+            --primary-hover: #b04e28;
+            --primary-light: #f6e6de;
+            --secondary: #2c1e17;     /* Dark Espresso Brown */
+            --secondary-light: #3d2e27;
+            --accent: #d4af37;        /* Gold */
+            --bg-cream: #faf3e8;      /* Cream background */
+            --bg-cream-dark: #f2e7d5;
+            --text-dark: #2c1e17;
+            --text-muted: #6b5c54;
+            --text-light: #faf3e8;
+            --glass-bg: rgba(250, 243, 232, 0.85);
+            --glass-border: rgba(44, 30, 23, 0.08);
+            --font-headings: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 2px 8px rgba(44, 30, 23, 0.05);
+            --shadow-md: 0 8px 20px rgba(44, 30, 23, 0.08);
+            --shadow-lg: 0 16px 36px rgba(44, 30, 23, 0.12);
+        }
+
+        /* Basic Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-headings);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-smooth);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-cream-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Helper Classes for Alpine Transitions */
+        .transition { transition-property: all; }
+        .ease-out { transition-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+        .ease-in { transition-timing-function: cubic-bezier(0.4, 0, 1, 1); }
+        .duration-300 { transition-duration: 300ms; }
+        .duration-200 { transition-duration: 200ms; }
+        .opacity-0 { opacity: 0; }
+        .opacity-100 { opacity: 1; }
+        .scale-95 { transform: scale(0.95); }
+        .scale-100 { transform: scale(1); }
+
+        /* General Layout Utilities */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-padding {
+            padding: 6rem 0;
+        }
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 4rem 0;
+            }
+        }
+
+        /* Glassmorphism class */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Custom Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.75rem;
+            border-radius: 50px;
+            font-family: var(--font-headings);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: none;
+            outline: none;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--text-light);
+            box-shadow: 0 4px 14px rgba(200, 92, 50, 0.3);
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(200, 92, 50, 0.4);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+        .btn-secondary:hover {
+            background-color: var(--secondary);
+            color: var(--text-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-white {
+            background-color: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--text-light);
+        }
+        .btn-outline-white:hover {
+            background-color: var(--text-light);
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation Bar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            transition: var(--transition-smooth);
+        }
+        
+        header.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 4.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-headings);
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--secondary);
+        }
+        
+        .logo-icon {
+            color: var(--primary);
+            width: 2rem;
+            height: 2rem;
+            fill: currentColor;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--secondary-light);
+            position: relative;
+            padding: 0.25rem 0;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition-smooth);
+        }
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--secondary);
+            width: 2.5rem;
+            height: 2.5rem;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-toggle {
+                display: flex;
+            }
+            .header-cta {
+                display: none;
+            }
+        }
+
+        /* Mobile Nav Menu Panel */
+        .mobile-nav-panel {
+            position: fixed;
+            top: 4.5rem;
+            left: 0;
+            right: 0;
+            background-color: var(--bg-cream);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 99;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background-image: linear-gradient(rgba(44, 30, 23, 0.6), rgba(44, 30, 23, 0.65)), url('hero.png');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-light);
+            padding-top: 5rem;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-badge {
+            background-color: rgba(200, 92, 50, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--accent);
+            display: inline-block;
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            opacity: 0.8;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        .scroll-down:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+        
+        .scroll-down-arrow {
+            width: 1.5rem;
+            height: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        /* Bento Grid Section */
+        .section-title-wrapper {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-subtitle {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            font-weight: 800;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .bento-card {
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-smooth);
+            background-color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--glass-border);
+        }
+        .bento-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(200, 92, 50, 0.2);
+        }
+
+        .bento-img-bg {
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            min-height: 250px;
+            position: relative;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+        }
+        .bento-img-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent, rgba(44, 30, 23, 0.9));
+            z-index: 1;
+        }
+
+        .bento-img-bg .card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .bento-card-large-double {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .bento-card-double {
+            grid-column: span 2;
+        }
+
+        .card-padding {
+            padding: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-icon {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .card-icon svg {
+            width: 1.8rem;
+            height: 1.8rem;
+        }
+
+        .bento-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            color: inherit;
+        }
+        
+        .bento-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .bento-card-large-double p {
+            color: rgba(250, 243, 232, 0.9);
+            font-size: 1rem;
+        }
+
+        .bento-card-double p {
+            color: rgba(250, 243, 232, 0.9);
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(44, 30, 23, 0.1);
+            padding: 0.75rem 0;
+            font-size: 0.9rem;
+        }
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+        .hours-day {
+            font-weight: 600;
+        }
+        .hours-time {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        @media (max-width: 1024px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .bento-card-large-double {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            .bento-card-large-double,
+            .bento-card-double {
+                grid-column: span 1;
+            }
+        }
+
+        /* Digital Interactive Menu */
+        .menu-section {
+            background-color: var(--bg-cream-dark);
+        }
+
+        .menu-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-tab-btn {
+            background-color: var(--text-light);
+            border: 1px solid var(--glass-border);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-family: var(--font-headings);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            color: var(--secondary-light);
+        }
+        
+        .menu-tab-btn.active, .menu-tab-btn:hover {
+            background-color: var(--primary);
+            color: var(--text-light);
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(200, 92, 50, 0.2);
+        }
+
+        .menu-items-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .menu-items-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .menu-item-card {
+            background-color: var(--text-light);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition-smooth);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .menu-item-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(200, 92, 50, 0.25);
+        }
+
+        .menu-item-info {
+            flex-grow: 1;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .menu-item-price {
+            font-family: var(--font-headings);
+            font-size: 1.15rem;
+            color: var(--primary);
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .menu-item-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .menu-item-tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            background-color: var(--bg-cream-dark);
+            color: var(--text-muted);
+        }
+        
+        .tag-special {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* Order Preview Widget (Simulator) */
+        .order-preview-bar {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 3rem);
+            max-width: 600px;
+            background-color: var(--secondary);
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 90;
+            animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .order-preview-text {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .order-preview-price {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        @media (max-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 250px;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition-smooth);
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.08);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent, rgba(44, 30, 23, 0.7));
+            opacity: 0;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+            transition: var(--transition-smooth);
+            color: var(--text-light);
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-overlay h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Reservation Section & Form Design */
+        .reserve-section {
+            background-color: var(--bg-cream-dark);
+            position: relative;
+        }
+
+        .reserve-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        @media (max-width: 900px) {
+            .reserve-layout {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        .reserve-info h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        .reserve-info p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .reserve-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .reserve-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .reserve-feature-icon {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            width: 3rem;
+            height: 3rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .reserve-feature-icon svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .reserve-feature-text h4 {
+            font-size: 1.1rem;
+            color: var(--secondary);
+        }
+        .reserve-feature-text p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Reservation Modal & Form Styles */
+        .modal-overlay-bg {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(44, 30, 23, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-card {
+            background-color: var(--bg-cream);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 28px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .modal-header {
+            background-color: var(--secondary);
+            color: var(--text-light);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .modal-close-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition-smooth);
+            opacity: 0.8;
+        }
+        .modal-close-btn:hover {
+            opacity: 1;
+            background-color: rgba(250, 243, 232, 0.1);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Form Controls */
+        .form-group-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+        @media (max-width: 600px) {
+            .form-group-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        @media (max-width: 600px) {
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--secondary-light);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background-color: var(--text-light);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+        .form-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(200, 92, 50, 0.15);
+        }
+        
+        /* Select element styling */
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%232c1e17'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.25rem;
+            padding-right: 2.5rem;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Location and Map Section */
+        .map-section {
+            background-color: var(--bg-cream);
+        }
+
+        .map-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        @media (max-width: 900px) {
+            .map-layout {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        .map-wrapper {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--glass-border);
+            height: 400px;
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .location-info h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .location-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .location-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .location-item-icon {
+            color: var(--primary);
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+
+        .location-item-icon svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .location-item-text h4 {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 0.25rem;
+        }
+        .location-item-text p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Lightbox for Gallery */
+        .lightbox-bg {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(44, 30, 23, 0.95);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-caption {
+            color: var(--text-light);
+            font-family: var(--font-headings);
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: var(--text-light);
+            padding: 4rem 0 2rem 0;
+            border-top: 1px solid rgba(250, 243, 232, 0.1);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        .footer-logo {
+            font-family: var(--font-headings);
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-desc {
+            color: rgba(250, 243, 232, 0.7);
+            font-size: 0.95rem;
+            max-width: 320px;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--accent);
+            font-family: var(--font-headings);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(250, 243, 232, 0.8);
+            font-size: 0.95rem;
+        }
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(250, 243, 232, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: rgba(250, 243, 232, 0.5);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #25D366;
+            color: white;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 18px rgba(37, 211, 102, 0.4);
+            z-index: 100;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
+        }
+        .whatsapp-float svg {
+            width: 2rem;
+            height: 2rem;
+            fill: currentColor;
+        }
+        
+        .whatsapp-badge {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            background-color: #E24C4C;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid white;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Custom Success Alert Modal */
+        .success-toast {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background-color: #10B981;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 600;
+        }
+
+        /* Keyframes Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-8px);
+            }
+            60% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body x-data="{ 
+    bookingModal: false, 
+    mobileMenu: false, 
+    scrolled: false, 
+    activeTab: 'cafe',
+    orderTotal: 0,
+    orderCount: 0,
+    lightbox: false,
+    lightboxImg: '',
+    lightboxCaption: '',
+    successToast: false,
+    
+    // Form variables
+    formName: '',
+    formEmail: '',
+    formPhone: '',
+    formDate: '',
+    formTime: '',
+    formGuests: '2',
+    formSector: 'presencial', // Sector/modalidad: default presencial (Terraza)
+    formComment: '',
+
+    init() {
+        window.addEventListener('scroll', () => {
+            this.scrolled = window.scrollY > 50;
+        });
+    },
+
+    openLightbox(img, caption) {
+        this.lightboxImg = img;
+        this.lightboxCaption = caption;
+        this.lightbox = true;
+    },
+
+    addToOrder(price) {
+        this.orderTotal += price;
+        this.orderCount++;
+    },
+
+    resetOrder() {
+        this.orderTotal = 0;
+        this.orderCount = 0;
+    },
+
+    openBooking() {
+        // Al abrir, se asegura de que el sector/modalidad por defecto esté marcado (presencial = Terraza)
+        this.formSector = 'presencial';
+        this.bookingModal = true;
+    },
+
+    closeBooking() {
+        // Limpieza total del formulario al salir sin guardar (sin recuerdos)
+        this.formName = '';
+        this.formEmail = '';
+        this.formPhone = '';
+        this.formDate = '';
+        this.formTime = '';
+        this.formGuests = '2';
+        this.formSector = 'presencial';
+        this.formComment = '';
+        this.bookingModal = false;
+    },
+
+    submitBooking() {
+        if (!this.formName || !this.formPhone || !this.formDate || !this.formTime) {
+            alert('Por favor, completa los campos requeridos.');
+            return;
+        }
+
+        // Crear cuerpo para simular el correo predefinido
+        const subject = encodeURIComponent('Nueva Solicitud de Reserva - Café La Ruta');
+        const bodyText = `Hola Café La Ruta, me gustaría solicitar una reserva:\n\n` +
+            `Nombre: ${this.formName}\n` +
+            `Teléfono: ${this.formPhone}\n` +
+            `Email: ${this.formEmail || 'No provisto'}\n` +
+            `Fecha: ${this.formDate}\n` +
+            `Hora: ${this.formTime}\n` +
+            `N° de Personas: ${this.formGuests}\n` +
+            `Sector Preferido: ${this.formSector === 'presencial' ? 'Terraza (Presencial)' : 'Salón Interior (Online/Privado)'}\n` +
+            `Comentarios: ${this.formComment || 'Ninguno'}`;
+        
+        // Simular envío enviando a un email predefinido via mailto
+        window.location.href = `mailto:reservas@cafelaruta.cl?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+
+        // Cerrar modal
+        this.bookingModal = false;
+
+        // Limpiar completamente el formulario (sin recuerdos)
+        this.formName = '';
+        this.formEmail = '';
+        this.formPhone = '';
+        this.formDate = '';
+        this.formTime = '';
+        this.formGuests = '2';
+        this.formSector = 'presencial';
+        this.formComment = '';
+
+        // Mostrar alerta de éxito
+        this.successToast = true;
+        setTimeout(() => { this.successToast = false; }, 3500);
+    }
+}">
+
+    <!-- Success Toast Notification -->
+    <div x-show="successToast" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 scale-95 translate-y-[-20px]"
+         x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+         x-transition:leave-end="opacity-0 scale-95 translate-y-[-20px]"
+         class="success-toast" 
+         style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width: 1.5rem; height: 1.5rem;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>¡Solicitud enviada con éxito!</span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="glass" :class="{'scrolled': scrolled}">
+        <div class="container nav-container">
+            <a href="#inicio" class="logo">
+                <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M2 21h18v-2H2v2M20 8h2V5h-2v3M4 19h12v-4H4v4m0-6h12V9H4v4m0-6h12V3H4v4m14 8h2v-4h-2v4m0-6h2V9h-2v3m0 8h2v-3h-2v3z"/>
+                </svg>
+                <span>Café La Ruta</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+                <li><a href="#menu" class="nav-link">Menú</a></li>
+                <li><a href="#galeria" class="nav-link">Galería</a></li>
+                <li><a href="#reserva" class="nav-link">Reserva</a></li>
+                <li><a href="#ubicacion" class="nav-link">Ubicación</a></li>
+            </ul>
+
+            <div class="header-cta">
+                <button @click="openBooking()" class="btn btn-primary">Reservar Mesa</button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button @click="mobileMenu = !mobileMenu" class="mobile-toggle" aria-label="Toggle menu">
+                <svg x-show="!mobileMenu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 1.8rem; height: 1.8rem;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <svg x-show="mobileMenu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 1.8rem; height: 1.8rem; display: none;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Panel -->
+        <div x-show="mobileMenu" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             class="mobile-nav-panel" 
+             style="display: none;">
+            <a href="#inicio" @click="mobileMenu = false" class="nav-link">Inicio</a>
+            <a href="#nosotros" @click="mobileMenu = false" class="nav-link">Nosotros</a>
+            <a href="#menu" @click="mobileMenu = false" class="nav-link">Menú</a>
+            <a href="#galeria" @click="mobileMenu = false" class="nav-link">Galería</a>
+            <a href="#reserva" @click="mobileMenu = false" class="nav-link">Reserva</a>
+            <a href="#ubicacion" @click="mobileMenu = false" class="nav-link">Ubicación</a>
+            <button @click="mobileMenu = false; openBooking()" class="btn btn-primary" style="width: 100%;">Reservar Mesa</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">Café de Especialidad & Cocina Chilena</span>
+                <h1 class="hero-title">El sabor del puerto en cada rincón</h1>
+                <p class="hero-description">
+                    Ubicados en los pintorescos cerros de Valparaíso, te invitamos a disfrutar de café tostado localmente, panadería artesanal recién horneada y almuerzos tradicionales que rescatan la verdadera alma porteña.
+                </p>
+                <div class="hero-actions">
+                    <a href="#menu" class="btn btn-primary">
+                        <span>Ver Menú del Día</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width: 1.1rem; height: 1.1rem;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </a>
+                    <button @click="openBooking()" class="btn btn-outline-white">Reservar Mesa</button>
+                </div>
+            </div>
+        </div>
+        <a href="#nosotros" class="scroll-down">
+            <span>Explorar</span>
+            <svg class="scroll-down-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </a>
+    </section>
+
+    <!-- Bento Grid Section (Nosotros / Lo que nos hace únicos) -->
+    <section id="nosotros" class="section-padding">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <span class="section-subtitle">Bienvenidos a La Ruta</span>
+                <h2 class="section-title">El latido bohemio de Valparaíso</h2>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Large Card (Double Column, Double Row) -->
+                <div class="bento-card bento-card-large-double">
+                    <div class="bento-img-bg" style="background-image: linear-gradient(rgba(44, 30, 23, 0.4), rgba(44, 30, 23, 0.85)), url('coffee.png');">
+                        <div class="card-content">
+                            <span style="color: var(--accent); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Nuestra Pasión</span>
+                            <h3 style="color: var(--text-light); font-size: 1.8rem; margin-top: 0.5rem; margin-bottom: 1rem;">Cafetería de Especialidad</h3>
+                            <p>Tostamos granos seleccionados de cooperativas sustentables de todo el mundo. Cada taza es preparada por baristas dedicados, destacando notas frutales, dulces y un cuerpo balanceado que complementa la brisa del puerto.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 (Standard Column) -->
+                <div class="bento-card">
+                    <div class="card-padding">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
+                            </svg>
+                        </div>
+                        <h3>Comercio Justo</h3>
+                        <p>Trabajamos de la mano con agricultores locales de la V Región para ofrecer productos frescos, de temporada y de origen ético.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 (Standard Column) -->
+                <div class="bento-card">
+                    <div class="card-padding">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.79-2.79C10.09 18.64 11.03 19 12 19c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
+                            </svg>
+                        </div>
+                        <h3>Pet Friendly</h3>
+                        <p>Nuestra terraza exterior cuenta con pocillos de agua y bocadillos especiales para que disfrutes junto a tu compañero fiel.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 (Double Column Width) -->
+                <div class="bento-card bento-card-double">
+                    <div class="bento-img-bg" style="background-image: linear-gradient(rgba(44, 30, 23, 0.4), rgba(44, 30, 23, 0.85)), url('cazuela.png');">
+                        <div class="card-content">
+                            <span style="color: var(--accent); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Almuerzos Tradicionales</span>
+                            <h3 style="color: var(--text-light); font-size: 1.6rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">El Menú Casero de la Abuela</h3>
+                            <p>Todos los días servimos platos clásicos chilenos como nuestra famosa cazuela de vacuno en vasija de greda, empanadas de pino y pastel de choclo, acompañados de pan amasado calentito.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 (Standard Column) -->
+                <div class="bento-card">
+                    <div class="card-padding">
+                        <h3 style="margin-bottom: 1.25rem; font-size: 1.3rem;">Horarios</h3>
+                        <div class="hours-row">
+                            <span class="hours-day">Lun - Vie</span>
+                            <span class="hours-time">08:00 - 20:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Sábado</span>
+                            <span class="hours-time">09:00 - 21:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Domingo</span>
+                            <span class="hours-time" style="color: var(--text-muted);">Cerrado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 (Standard Column) -->
+                <div class="bento-card">
+                    <div class="bento-img-bg" style="background-image: linear-gradient(rgba(44, 30, 23, 0.5), rgba(44, 30, 23, 0.95)), url('exterior.png'); padding: 1.5rem;">
+                        <div class="card-content">
+                            <h3 style="color: var(--text-light); font-size: 1.25rem; margin-bottom: 0.5rem;">Vista Privilegiada</h3>
+                            <p style="font-size: 0.85rem; line-height: 1.4;">Disfruta tu café con una vista única al Cerro Concepción y los cerros patrimoniales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Interactive Menu Section -->
+    <section id="menu" class="section-padding menu-section">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <span class="section-subtitle">Nuestra Carta</span>
+                <h2 class="section-title">Sabores Porteños</h2>
+            </div>
+
+            <!-- Menu Navigation Tabs -->
+            <div class="menu-nav">
+                <button @click="activeTab = 'cafe'" :class="{'active': activeTab === 'cafe'}" class="menu-tab-btn">Cafetería & Bebidas</button>
+                <button @click="activeTab = 'cocina'" :class="{'active': activeTab === 'cocina'}" class="menu-tab-btn">Cocina & Almuerzos</button>
+                <button @click="activeTab = 'pasteleria'" :class="{'active': activeTab === 'pasteleria'}" class="menu-tab-btn">Pastelería Artesanal</button>
+            </div>
+
+            <!-- Café Section -->
+            <div x-show="activeTab === 'cafe'" class="menu-items-grid" x-transition:enter="transition ease-out duration-300">
+                <!-- Item 1 -->
+                <div class="menu-item-card" @click="addToOrder(2800)">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Espresso Doble</h4>
+                            <span class="menu-item-price">$2.800</span>
+                        </div>
+                        <p class="menu-item-desc">Extracción concentrada de blend arábico, notas a chocolate amargo y avellana tostada.</p>
+                        <div class="menu-item-tags">
+                            <span class="tag tag-special">Recomendado</span>
+                            <span class="tag">Vegano</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="menu-item-card" @click="addToOrder(3200)">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Capuccino Italiano</h4>
+                            <span class="menu-item-price">$3.200</span>
+                        </div>
+                        <p class="menu-item-desc">Espresso con leche emulsionada y una capa densa de crema, espolvoreado con cacao.</p>
+                        <div class="menu-item-tags">
+                            <span class="tag">Opción Leche Vegetal</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="menu-item-card" @click="addToOrder(3400)">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Flat White</h4>
+                            <span class="menu-item-price">$3.400</span>
+                        </div>
+                        <p class="menu-item-desc">Doble Ristretto con microespuma de leche sedosa. Sabor a café intenso y aterciopelado.</p>
+                        <div class="menu-item-tags">
+                            <span class="tag tag-special">Especialidad</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="menu-item-card" @click="addToOrder(3600)">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Cold Brew de la Casa</h4>
+                            <span class="menu-item-price">$3.600</span>
+                        </div>
+                        <p class="menu-item-desc">Infusión fría de café filtrado por 18 horas, refrescante con notas cítricas.</p>
+                        <div class="menu-item-tags">
+                            <span class="tag">Vegano</span>
+                            <span class="tag">Frío</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cocina Section -->
+            <div x-show="activeTab === 'cocina'" class="menu-items-grid" x-transition:enter="transition ease-out duration-300" style="display: none;">
+                <!-- Item 1 -->
+                <div class="menu-item-card" @click="addToOrder(7800)">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Cazuela de Vacuno en Greda</h4>
+                            <span class="menu-item-price">$7.800</span>
+                        </div>
+                        <p class="menu-item-desc">Caldo casero de vacuno con choclo, zapallo, papa, arroz y porotos verdes, servida hirviendo.</p>
+                        <div class="menu-item-tags">
+                            <span class="tag tag-special">Plato Estrella</span>
+                            <span class="tag">Tradicional</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="menu-item-card" @click="addToOrder(6500)">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Sándwich Mechada del Puerto</h4>
+                            <span class="menu-item-price">$6.500</span>
+                        </div>
+                        <p class="menu-item-desc">Carne mechada desmenuzada, queso mantecoso fundido, tomate, palta y mayonesa casera en pan marraqueta.</p>
+                        <div class="menu-item-tags">
+                            <span class="tag">Contundente</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="menu-item-card" @click="addToOrder(4500)">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Dúo de Empanadas de Pino</h4>
+                            <span class="menu-item-price">$4.500</span>
+                        </div>
+                        <p class="menu-item-desc">Empanadas horneadas rellenas con carne picada, cebolla caramelizada, aceituna, pasas y huevo duro.</p>
+                        <div class="menu-item-tags">
+                            <span class="tag">Recién Horneado</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="menu-item-card" @click="addToOrder(6900)">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Pastel de Choclo</h4>
+                            <span class="menu-item-price">$6.900</span>
+                        </div>
+                        <p class="menu-item-desc">Pino de carne y pollo cubierto con pasta de choclo tierno caramelizado, gratinado al horno de barro.</p>
+                        <div class="menu-item-tags">
+                            <span class="tag tag-special">Popular</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pastelería Section -->
+            <div x-show="activeTab === 'pasteleria'" class="menu-items-grid" x-transition:enter="transition ease-out duration-300" style="display: none;">
+                <!-- Item 1 -->
+                <div class="menu-item-card" @click="addToOrder(3800)">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Torta Tres Leches Porteña</h4>
+                            <span class="menu-item-price">$3.800</span>
+                        </div>
+                        <p class="menu-item-desc">Bizcocho húmedo embebido en tres tipos de leche, relleno de dulce de leche (manjar) y merengue.</p>
+                        <div class="menu-item-tags">
+                            <span class="tag tag-special">Más Vendido</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="menu-item-card" @click="addToOrder(3200)">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Kuchen de Arándanos</h4>
+                            <span class="menu-item-price">$3.200</span>
+                        </div>
+                        <p class="menu-item-desc">Masa quebrada rellena de crema pastelera casera y arándanos frescos de la zona del Maule.</p>
+                        <div class="menu-item-tags">
+                            <span class="tag">Frutal</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="menu-item-card" @click="addToOrder(1800)">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Alfajor de Maicena Gigante</h4>
+                            <span class="menu-item-price">$1.800</span>
+                        </div>
+                        <p class="menu-item-desc">Dos tapas suaves de maicena rellenas con abundante manjar artesanal y coco rallado.</p>
+                        <div class="menu-item-tags">
+                            <span class="tag">Para compartir</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="menu-item-card" @click="addToOrder(2900)">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Brownie Fudge con Nuez</h4>
+                            <span class="menu-item-price">$2.900</span>
+                        </div>
+                        <p class="menu-item-desc">Brownie húmedo de chocolate semi-amargo con trozos de nueces, servido tibio con helado de vainilla (+ $1.000).</p>
+                        <div class="menu-item-tags">
+                            <span class="tag">Dulce Intenso</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Preview Simulator Panel (Sticky) -->
+    <div x-show="orderCount > 0" class="order-preview-bar" style="display: none;">
+        <div class="order-preview-text">
+            <span>Simulador de Consumo: </span>
+            <span x-text="orderCount" class="order-preview-price">0</span>
+            <span x-text="orderCount === 1 ? ' item' : ' items'"></span>
+            <span> | Total Estimado: </span>
+            <span class="order-preview-price" x-text="'$' + orderTotal.toLocaleString('es-CL')">0</span>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+            <button @click="resetOrder()" class="btn btn-outline-white" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Limpiar</button>
+            <button @click="openBooking()" class="btn btn-primary" style="background-color: var(--primary); padding: 0.5rem 1.25rem; font-size: 0.85rem;">Reservar Mesa</button>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="section-padding">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <span class="section-subtitle">Visualiza la Experiencia</span>
+                <h2 class="section-title">El Viento y el Café</h2>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- Item 1 -->
+                <div class="gallery-item" @click="openLightbox('hero.png', 'Atmósfera rústica y cálida de Café La Ruta')">
+                    <img src="hero.png" alt="Cafetería Interior" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Nuestro Salón Cálido</h4>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="gallery-item" @click="openLightbox('coffee.png', 'Arte latte preparado por baristas profesionales')">
+                    <img src="coffee.png" alt="Barista preparando café" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Café con Amor</h4>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="gallery-item" @click="openLightbox('cazuela.png', 'Cazuela casera de vacuno en vasija tradicional de greda')">
+                    <img src="cazuela.png" alt="Almuerzo Cazuela" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Tradición en Greda</h4>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="gallery-item" @click="openLightbox('exterior.png', 'Fachada pintoresca de nuestro café en los cerros de Valparaíso')">
+                    <img src="exterior.png" alt="Fachada exterior Valparaíso" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Fachada Porteña</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reserva" class="section-padding reserve-section">
+        <div class="container">
+            <div class="reserve-layout">
+                <div class="reserve-info">
+                    <span class="section-subtitle">Asegura tu Lugar</span>
+                    <h2>Planifica tu visita al puerto</h2>
+                    <p>Las mesas en nuestra terraza con vista al cerro son limitadas. Te recomendamos reservar con anticipación, especialmente para los fines de semana.</p>
+                    
+                    <div class="reserve-features">
+                        <div class="reserve-feature">
+                            <div class="reserve-feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div class="reserve-feature-text">
+                                <h4>Reserva Instantánea</h4>
+                                <p>Solicita tu hora y sector preferido en segundos.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="reserve-feature">
+                            <div class="reserve-feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <div class="reserve-feature-text">
+                                <h4>Elige tu Sector</h4>
+                                <p>Terraza soleada con vista o salón de greda climatizado.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button @click="openBooking()" class="btn btn-primary" style="margin-top: 2.5rem;">Solicitar Reserva Ahora</button>
+                </div>
+                
+                <div style="position: relative;">
+                    <img src="exterior.png" alt="Terraza del café" style="width: 100%; border-radius: 28px; box-shadow: var(--shadow-lg); object-fit: cover; height: 350px; border: 1px solid var(--glass-border);">
+                    <div class="glass" style="position: absolute; bottom: -1.5rem; right: -1.5rem; padding: 1.5rem; border-radius: 20px; box-shadow: var(--shadow-md); max-width: 280px; display: flex; align-items: center; gap: 1rem;">
+                        <div style="background-color: #25D366; color: white; width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 1.5rem; height: 1.5rem;">
+                                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.517 2.266 2.27 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.632 1.97 14.156.946 11.53.946c-5.423 0-9.849 4.373-9.853 9.803-.001 1.737.457 3.432 1.328 4.925l-.995 3.636 3.738-.97c1.516.828 3.011 1.258 4.307 1.26z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h5 style="color: var(--secondary); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem;">¿Dudas rápidas?</h5>
+                            <p style="font-size: 0.8rem; margin: 0; color: var(--text-muted);">Escríbenos directamente al chat de asistencia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section (Map) -->
+    <section id="ubicacion" class="section-padding map-section">
+        <div class="container">
+            <div class="map-layout">
+                <div class="map-wrapper">
+                    <!-- Google Maps Embed centered on Cerro Alegre / Cerro Concepción Area, Valparaíso -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3344.8347895287754!2d-71.6293931!3d-33.044331!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689e12bfd3df4bf%3A0xc3cf2db726e680a6!2sCerro%20Alegre%2C%20Valpara%C3%ADso!5e0!3m2!1ses-419!2scl!4v1781042500000!5m2!1ses-419!2scl" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <div class="location-info">
+                    <span class="section-subtitle">¿Cómo llegar?</span>
+                    <h2>Nuestra Ubicación</h2>
+                    
+                    <div class="location-details">
+                        <div class="location-item">
+                            <div class="location-item-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <div class="location-item-text">
+                                <h4>Dirección</h4>
+                                <p>Pasaje Templeman 154, Cerro Alegre, Valparaíso, Chile</p>
+                            </div>
+                        </div>
+
+                        <div class="location-item">
+                            <div class="location-item-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                            </div>
+                            <div class="location-item-text">
+                                <h4>Teléfono de Contacto</h4>
+                                <p>+56 9 8765 4321</p>
+                            </div>
+                        </div>
+
+                        <div class="location-item">
+                            <div class="location-item-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div class="location-item-text">
+                                <h4>Correo Electrónico</h4>
+                                <p>contacto@cafelaruta.cl</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#inicio" class="footer-logo">
+                        <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="color: var(--primary);">
+                            <path d="M2 21h18v-2H2v2M20 8h2V5h-2v3M4 19h12v-4H4v4m0-6h12V9H4v4m0-6h12V3H4v4m14 8h2v-4h-2v4m0-6h2V9h-2v3m0 8h2v-3h-2v3z"/>
+                        </svg>
+                        <span>Café La Ruta</span>
+                    </a>
+                    <p class="footer-desc">Un espacio de encuentro, café artesanal de especialidad y tradición culinaria en los cerros históricos de Valparaíso.</p>
+                </div>
+
+                <div>
+                    <h4 class="footer-title">Enlaces Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#menu">Menú Carta</a></li>
+                        <li><a href="#reserva">Reservas</a></li>
+                        <li><a href="#ubicacion">Ubicación</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-title">Contacto</h4>
+                    <ul class="footer-links">
+                        <li style="color: rgba(250, 243, 232, 0.7); font-size: 0.95rem;">Pasaje Templeman 154, Cerro Alegre, Valparaíso</li>
+                        <li style="color: rgba(250, 243, 232, 0.7); font-size: 0.95rem;">+56 9 8765 4321</li>
+                        <li><a href="mailto:reservas@cafelaruta.cl">reservas@cafelaruta.cl</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Café La Ruta - Todos los derechos reservados.</p>
+                <p>Diseño web optimizado para el usuario chileno.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Widget -->
+    <a href="https://wa.me/56987654321?text=Hola%20Caf%C3%A9%20La%20Ruta%2C%20quisiera%20consultar%20por%20una%20reserva." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="whatsapp-float" 
+       id="whatsapp-button"
+       aria-label="Contactar por WhatsApp">
+        <div class="whatsapp-badge"></div>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.517 2.266 2.27 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.632 1.97 14.156.946 11.53.946c-5.423 0-9.849 4.373-9.853 9.803-.001 1.737.457 3.432 1.328 4.925l-.995 3.636 3.738-.97c1.516.828 3.011 1.258 4.307 1.26z"/>
+        </svg>
+    </a>
+
+    <!-- Booking Modal (Reservation Form) -->
+    <div x-show="bookingModal" 
+         class="modal-overlay-bg" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         style="display: none;">
+        
+        <div class="modal-card" 
+             x-show="bookingModal"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             @click.away="closeBooking()">
+            
+            <div class="modal-header">
+                <h3>Solicitar Reserva de Mesa</h3>
+                <button @click="closeBooking()" class="modal-close-btn" aria-label="Cerrar modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 1.25rem; height: 1.25rem; stroke-width: 2.5;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <form @submit.prevent="submitBooking()">
+                    <!-- Name & Phone -->
+                    <div class="form-group-grid">
+                        <div class="form-group">
+                            <label class="form-label">Nombre Completo *</label>
+                            <input type="text" x-model="formName" required class="form-input" placeholder="Ej: Juan Pérez" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Teléfono / WhatsApp *</label>
+                            <input type="tel" x-model="formPhone" required class="form-input" placeholder="Ej: +56 9 1234 5678" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <!-- Email & Guests -->
+                    <div class="form-group-grid">
+                        <div class="form-group">
+                            <label class="form-label">Email (Opcional)</label>
+                            <input type="email" x-model="formEmail" class="form-input" placeholder="correo@ejemplo.cl" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Número de Personas *</label>
+                            <select x-model="formGuests" class="form-input">
+                                <option value="1">1 Persona</option>
+                                <option value="2">2 Personas</option>
+                                <option value="3">3 Personas</option>
+                                <option value="4">4 Personas</option>
+                                <option value="5">5 Personas</option>
+                                <option value="6">6 Personas</option>
+                                <option value="8">8 Personas</option>
+                                <option value="10">10+ Personas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Date & Time -->
+                    <div class="form-group-grid">
+                        <div class="form-group">
+                            <label class="form-label">Fecha de Reserva *</label>
+                            <input type="date" x-model="formDate" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Hora *</label>
+                            <input type="time" x-model="formTime" required class="form-input">
+                        </div>
+                    </div>
+
+                    <!-- Modality / Preferred Sector -->
+                    <div class="form-group">
+                        <label class="form-label">Sector de Preferencia *</label>
+                        <!-- Modalidad/sector preferido: Presencial (Terraza) como primera opcion marcada por default, y online (interior/reservado) como siguiente -->
+                        <select x-model="formSector" class="form-input">
+                            <option value="presencial">Presencial - Terraza con vista a los cerros</option>
+                            <option value="online">Interior - Salón privado climatizado (Sujeto a disponibilidad)</option>
+                        </select>
+                    </div>
+
+                    <!-- Special Requests -->
+                    <div class="form-group">
+                        <label class="form-label">Comentarios o Peticiones Especiales</label>
+                        <textarea x-model="formComment" class="form-input" placeholder="Indícanos alergias, celebraciones o si vienes con tu mascota..." style="resize: vertical; min-height: 80px;" autocomplete="off"></textarea>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="form-actions">
+                        <button type="button" @click="closeBooking()" class="btn btn-secondary">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Lightbox Modal -->
+    <div x-show="lightbox" 
+         class="lightbox-bg" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click="lightbox = false"
+         style="display: none;">
+        
+        <div class="lightbox-content" @click.stop>
+            <button @click="lightbox = false" class="modal-close-btn" style="position: absolute; top: -2.5rem; right: 0; background: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 2rem; height: 2rem;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <img :src="lightboxImg" :alt="lightboxCaption" class="lightbox-img">
+            <p class="lightbox-caption" x-text="lightboxCaption"></p>
+        </div>
+    </div>
+
+</body>
+</html>

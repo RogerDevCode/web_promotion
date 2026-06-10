@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="es-CL" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artesanías del Sur | Catálogo & Tienda Online - Chile</title>
+    
+    <!-- Meta tags SEO -->
+    <meta name="description" content="Catálogo online de Artesanías del Sur. Descubre mantas de lana, vajilla de greda de Pomaire y tablas de madera nativa hechas a mano por artesanos chilenos.">
+    <meta name="keywords" content="artesanias de chile, greda de pomaire, lana de oveja chiloe, madera nativa lenga, artesanias del sur, productos chilenos, hechos a mano">
+    <meta property="og:title" content="Artesanías del Sur | Catálogo & Tienda Online - Chile" />
+    <meta property="og:description" content="Catálogo online de Artesanías del Sur. Descubre mantas de lana, vajilla de greda de Pomaire y tablas de madera nativa." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./studio.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Artesanías del Sur",
+      "image": "./studio.png",
+      "description": "Tienda online de productos hechos a mano por artesanos chilenos.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Puerto Varas",
+        "addressRegion": "Los Lagos",
+        "addressCountry": "CL"
+      },
+      "telephone": "+56911223344",
+      "priceRange": "$$"
+    }
+    </script>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏺</text></svg>">
+
+    <!-- Google Fonts: Outfit (brand headings) & Inter (organic body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Custom Vanilla CSS for Organic Craft Theme -->
+    <style>
+        /* Design Tokens & Theme Colors (Forest & Wood) */
+        :root {
+            --primary-forest: #1E3F20;     /* Deep forest green */
+            --primary-forest-hover: #122713;
+            --secondary-clay: #A65E44;     /* Terracotta/Clay */
+            --accent-gold: #B88B4A;        /* Ochre/Gold */
+            --bg-sand: #F8F6F2;            /* Light sand cream background */
+            --bg-sand-dark: #EADEC9;       /* Darker sand/kraft paper */
+            --text-dark: #1E2520;          /* Soft black for text */
+            --text-muted: #5E6660;         /* Muted slate */
+            --text-light: #F8F6F2;
+            --border-color: rgba(30, 63, 32, 0.1); /* Soft forest border */
+            --font-headings: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition-tactile: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-smooth: all 0.3s ease;
+            --shadow-soft: 0 10px 30px rgba(30, 63, 32, 0.05);
+            --shadow-md: 0 15px 35px rgba(30, 63, 32, 0.1);
+        }
+
+        /* Basic Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-sand);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-headings);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-smooth);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-sand);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-forest);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-clay);
+        }
+
+        /* Layout & Containers */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-padding {
+            padding: 6rem 0;
+        }
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 4rem 0;
+            }
+        }
+
+        /* Buttons styling */
+        .btn-organic {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.75rem;
+            border-radius: 12px;
+            font-family: var(--font-headings);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition-tactile);
+            border: 1px solid transparent;
+            outline: none;
+            gap: 0.5rem;
+        }
+
+        .btn-forest {
+            background-color: var(--primary-forest);
+            color: var(--text-light);
+        }
+        .btn-forest:hover {
+            background-color: var(--primary-forest-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(30, 63, 32, 0.2);
+        }
+
+        .btn-outline-forest {
+            background-color: transparent;
+            color: var(--primary-forest);
+            border: 2px solid var(--primary-forest);
+        }
+        .btn-outline-forest:hover {
+            background-color: var(--primary-forest);
+            color: var(--text-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-clay {
+            background-color: var(--secondary-clay);
+            color: var(--text-light);
+        }
+        .btn-clay:hover {
+            background-color: #925039;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(166, 94, 68, 0.2);
+        }
+
+        /* Header Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(248, 246, 242, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            transition: var(--transition-smooth);
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 4.5rem;
+        }
+
+        .logo {
+            font-family: var(--font-headings);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-forest);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-icon {
+            color: var(--secondary-clay);
+            width: 1.8rem;
+            height: 1.8rem;
+            fill: currentColor;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--primary-forest);
+        }
+        .nav-link:hover {
+            color: var(--secondary-clay);
+        }
+
+        .cart-trigger-btn {
+            background-color: var(--primary-forest);
+            color: var(--text-light);
+            border: none;
+            cursor: pointer;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: var(--transition-tactile);
+        }
+        .cart-trigger-btn:hover {
+            transform: scale(1.05);
+            background-color: var(--primary-forest-hover);
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            background-color: var(--secondary-clay);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--bg-sand);
+        }
+
+        /* Cart Shake animation trigger class */
+        .cart-shake {
+            animation: cartShakeKeyframe 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        @keyframes cartShakeKeyframe {
+            10%, 90% { transform: translate3d(-1px, 0, 0) scale(1.05); }
+            20%, 80% { transform: translate3d(2px, 0, 0) scale(1.05); }
+            30%, 50%, 70% { transform: translate3d(-3px, 0, 0) scale(1.05); }
+            40%, 60% { transform: translate3d(3px, 0, 0) scale(1.05); }
+        }
+
+        /* Hero Section - Split Style */
+        .hero {
+            background-color: var(--bg-sand-dark);
+            border-bottom: 1px solid var(--border-color);
+            padding: 5rem 0;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: var(--primary-forest);
+            margin-bottom: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-collage {
+            position: relative;
+            height: 400px;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .hero-collage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Shop Section & Grid Filters */
+        .shop-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        @media (max-width: 900px) {
+            .shop-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Sidebar filter panel */
+        .filter-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .filter-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-forest);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .filter-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            text-align: left;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition-smooth);
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            color: var(--primary-forest);
+            background-color: rgba(30, 63, 32, 0.06);
+            font-weight: 600;
+        }
+
+        .filter-btn-qty {
+            font-size: 0.8rem;
+            background-color: var(--bg-sand-dark);
+            padding: 0.1rem 0.5rem;
+            border-radius: 50px;
+            color: var(--text-muted);
+        }
+
+        /* Search Box */
+        .search-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.8rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background-color: var(--text-light);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+        .search-input:focus {
+            border-color: var(--primary-forest);
+            box-shadow: 0 0 10px rgba(30,63,32,0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+
+        /* Product Grid (Asymmetrical Masonry Look on large screens) */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: var(--text-light);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-tactile);
+            position: relative;
+        }
+        
+        /* Tactical Lift-Off effect on hover */
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(166, 94, 68, 0.25);
+        }
+
+        .product-img-wrapper {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-tactile);
+        }
+        .product-card:hover .product-img {
+            transform: scale(1.04);
+        }
+
+        /* Sello de Origen Stamp (Rotates on hover) */
+        .origin-stamp {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            z-index: 10;
+            background-color: rgba(248, 246, 242, 0.9);
+            border: 1px dashed var(--secondary-clay);
+            color: var(--secondary-clay);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.1;
+            padding: 0.2rem;
+            transition: transform 0.6s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            pointer-events: none;
+        }
+        
+        .product-card:hover .origin-stamp {
+            transform: rotate(90deg) scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-origin {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            color: var(--primary-forest);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .product-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            border-top: 1px solid rgba(30, 63, 32, 0.05);
+            padding-top: 1rem;
+        }
+
+        .product-price {
+            font-family: var(--font-headings);
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary-forest);
+        }
+
+        .add-cart-btn {
+            background-color: var(--primary-forest);
+            color: var(--text-light);
+            border: none;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-tactile);
+        }
+        .add-cart-btn:hover {
+            background-color: var(--secondary-clay);
+            transform: scale(1.05);
+        }
+        .add-cart-btn svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        /* Shopping Cart Drawer (Right Slide Over) */
+        .cart-drawer-bg {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(30, 63, 32, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            max-width: 440px;
+            background-color: var(--bg-sand);
+            border-left: 1px solid var(--border-color);
+            box-shadow: -15px 0 35px rgba(30, 63, 32, 0.15);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary-forest);
+            color: var(--text-light);
+        }
+        
+        .cart-header h3 {
+            font-size: 1.25rem;
+        }
+
+        .cart-close-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+            transition: var(--transition-smooth);
+        }
+        .cart-close-btn:hover {
+            opacity: 1;
+        }
+
+        .cart-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .cart-empty-message {
+            margin: auto;
+            text-align: center;
+            color: var(--text-muted);
+        }
+        .cart-empty-message svg {
+            width: 3rem;
+            height: 3rem;
+            margin-bottom: 1rem;
+            stroke: currentColor;
+            opacity: 0.5;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid rgba(30, 63, 32, 0.05);
+        }
+
+        .cart-item-img {
+            width: 4.5rem;
+            height: 4.5rem;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-forest);
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            font-size: 0.9rem;
+            color: var(--secondary-clay);
+            font-weight: 700;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .qty-btn {
+            background-color: var(--bg-sand-dark);
+            border: none;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: var(--primary-forest);
+            transition: var(--transition-smooth);
+        }
+        .qty-btn:hover {
+            background-color: var(--secondary-clay);
+            color: var(--text-light);
+        }
+
+        .qty-val {
+            font-size: 0.9rem;
+            font-weight: 600;
+            min-width: 1rem;
+            text-align: center;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: auto;
+            text-decoration: underline;
+        }
+        .cart-item-remove:hover {
+            color: #D32F2F;
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-sand-dark);
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--primary-forest);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Checkout Details Modal (No memory, fully cleared on close/cancel) */
+        .modal-overlay-bg {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(30, 63, 32, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .modal-card {
+            background-color: var(--bg-sand);
+            border: 1px solid var(--primary-forest);
+            width: 100%;
+            max-width: 580px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background-color: var(--primary-forest);
+            color: var(--text-light);
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h3 {
+            font-size: 1.3rem;
+        }
+
+        .modal-body {
+            padding: 2rem;
+            max-height: 75vh;
+            overflow-y: auto;
+        }
+
+        .form-group-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+        @media (max-width: 600px) {
+            .form-group-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary-forest);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem 1.1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background-color: var(--text-light);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+        .form-input:focus {
+            border-color: var(--primary-forest);
+            box-shadow: 0 0 8px rgba(30,63,32,0.15);
+        }
+
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%231e3f20'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.25rem;
+            padding-right: 2.5rem;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* History & Story Section */
+        .story-section {
+            background-color: var(--bg-sand-dark);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        @media (max-width: 900px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        .story-content h2 {
+            font-size: 2.2rem;
+            color: var(--primary-forest);
+            margin-bottom: 1.5rem;
+        }
+        .story-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .story-img-wrapper {
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            height: 380px;
+        }
+        
+        .story-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-forest);
+            color: var(--text-light);
+            padding: 4rem 0 2rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        .footer-logo {
+            font-family: var(--font-headings);
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--accent-gold);
+            font-family: var(--font-headings);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gold);
+            padding-left: 3px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(248, 246, 242, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #25D366;
+            color: white;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 18px rgba(37, 211, 102, 0.4);
+            z-index: 100;
+            transition: var(--transition-tactile);
+            cursor: pointer;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
+        }
+        .whatsapp-float svg {
+            width: 2rem;
+            height: 2rem;
+            fill: currentColor;
+        }
+        .whatsapp-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background-color: var(--secondary-clay);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+            100% { transform: scale(0.9); opacity: 1; }
+        }
+    </style>
+</head>
+<body x-data="{
+    cartDrawer: false,
+    checkoutModal: false,
+    successToast: false,
+    activeCategory: 'all',
+    searchQuery: '',
+    shakeCart: false,
+    
+    // Products Catalog Data
+    products: [
+        { id: 1, name: 'Fuente de Greda Pomaire', price: 18500, category: 'greda', image: 'greda.png', desc: 'Moldeado a mano y cocido en horno de leña. Ideal para preparaciones tradicionales chilenas.', origin: 'Melipilla' },
+        { id: 2, name: 'Manta de Lana de Oveja', price: 45000, category: 'lana', image: 'wool.png', desc: 'Tejido rústico hilado a mano en telar de Chiloé. 100% lana natural ultra abrigadora.', origin: 'Chiloé' },
+        { id: 3, name: 'Tabla de Madera Nativa (Lenga)', price: 28000, category: 'madera', image: 'wood.png', desc: 'Madera noble de lenga con corte vivo lateral, curada con cera orgánica de abeja.', origin: 'Villarrica' },
+        { id: 4, name: 'Paila Rústica de Greda', price: 12500, category: 'greda', image: 'greda.png', desc: 'Paila tradicional con asas de greda refractaria apta para fuego directo.', origin: 'Melipilla' },
+        { id: 5, name: 'Choapino Grueso de Telar', price: 22000, category: 'lana', image: 'wool.png', desc: 'Alfombra pequeña de entrada en lana virgen natural gruesa de alta resistencia.', origin: 'Chiloé' },
+        { id: 6, name: 'Mortero de Madera de Roble', price: 19500, category: 'madera', image: 'wood.png', desc: 'Tallado a mano en una sola pieza maciza de roble patagónico. Incluye mazo.', origin: 'Villarrica' }
+    ],
+    
+    cart: [],
+    
+    // Checkout form inputs
+    formName: '',
+    formPhone: '',
+    formAddress: '',
+    formSector: 'presencial', // Sector/modalidad: default presencial (Retiro en tienda)
+    formComment: '',
+
+    get filteredProducts() {
+        return this.products.filter(p => {
+            const matchCategory = this.activeCategory === 'all' || p.category === this.activeCategory;
+            const matchSearch = p.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+            return matchCategory && matchSearch;
+        });
+    },
+
+    get cartCount() {
+        return this.cart.reduce((sum, item) => sum + item.qty, 0);
+    },
+
+    get cartTotal() {
+        return this.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    },
+
+    addToCart(prod) {
+        const item = this.cart.find(i => i.id === prod.id);
+        if (item) {
+            item.qty++;
+        } else {
+            this.cart.push({ ...prod, qty: 1 });
+        }
+        
+        // Trigger shake cart animation on addition
+        this.shakeCart = true;
+        setTimeout(() => { this.shakeCart = false; }, 600);
+    },
+
+    removeFromCart(id) {
+        this.cart = this.cart.filter(item => item.id !== id);
+    },
+
+    updateQty(id, delta) {
+        const item = this.cart.find(i => i.id === id);
+        if (item) {
+            item.qty += delta;
+            if (item.qty <= 0) {
+                this.removeFromCart(id);
+            }
+        }
+    },
+
+    openCheckout() {
+        this.formSector = 'presencial';
+        this.checkoutModal = true;
+    },
+
+    closeCheckout() {
+        // Limpieza 100% del formulario al cancelar/cerrar (sin recuerdos)
+        this.formName = '';
+        this.formPhone = '';
+        this.formAddress = '';
+        this.formSector = 'presencial';
+        this.formComment = '';
+        this.checkoutModal = false;
+    },
+
+    submitCheckout() {
+        if (!this.formName || !this.formPhone || (this.formSector !== 'presencial' && !this.formAddress)) {
+            alert('Por favor, ingresa los datos de entrega requeridos.');
+            return;
+        }
+
+        // Generar texto del pedido para enviar por WhatsApp
+        const itemsList = this.cart.map(i => `- ${i.qty}x ${i.name} ($${(i.price * i.qty).toLocaleString('es-CL')})`).join('\n');
+        
+        const messageText = `Hola Artesanías del Sur, me gustaría concretar el siguiente pedido:\n\n` +
+            `Resumen del Pedido:\n${itemsList}\n\n` +
+            `Total: $${this.cartTotal.toLocaleString('es-CL')}\n\n` +
+            `Datos de Contacto:\n` +
+            `- Nombre: ${this.formName}\n` +
+            `- Teléfono: ${this.formPhone}\n` +
+            `- Entrega: ${this.formSector === 'presencial' ? 'Retiro en Tienda' : 'Envío a Domicilio'}\n` +
+            (this.formSector !== 'presencial' ? `- Dirección: ${this.formAddress}\n` : '') +
+            (this.formComment ? `- Notas: ${this.formComment}\n` : '');
+
+        // Redirect to WhatsApp checkout link (Predefined number +56987654321)
+        const waUrl = `https://wa.me/56987654321?text=${encodeURIComponent(messageText)}`;
+        window.open(waUrl, '_blank');
+
+        // Cerrar modales y cajón
+        this.checkoutModal = false;
+        this.cartDrawer = false;
+
+        // Limpieza total de formulario (sin recuerdos)
+        this.formName = '';
+        this.formPhone = '';
+        this.formAddress = '';
+        this.formSector = 'presencial';
+        this.formComment = '';
+        this.cart = [];
+
+        // Toast de éxito
+        this.successToast = true;
+        setTimeout(() => { this.successToast = false; }, 3500);
+    }
+}">
+
+    <!-- Success Toast -->
+    <div x-show="successToast" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 scale-95 translate-y-[-20px]"
+         x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+         x-transition:leave-end="opacity-0 scale-95 translate-y-[-20px]"
+         class="success-toast" 
+         style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width: 1.5rem; height: 1.5rem;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>¡Pedido enviado a WhatsApp con éxito!</span>
+    </div>
+
+    <!-- Header Navbar -->
+    <header>
+        <div class="container header-container">
+            <a href="#inicio" class="logo">
+                <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 2.2L19 12h-2v6h-2v-6H9v6H7v-6H5l7-6.8z"/>
+                </svg>
+                <span>Artesanías del Sur</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#tienda" class="nav-link">Catálogo</a></li>
+                <li><a href="#nosotros" class="nav-link">Nuestra Historia</a></li>
+            </ul>
+
+            <div>
+                <!-- Cart Trigger with shake effect on add -->
+                <button @click="cartDrawer = true" class="cart-trigger-btn" :class="{'cart-shake': shakeCart}">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 1.5rem; height: 1.5rem; stroke-width: 2.2;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <div x-show="cartCount > 0" class="cart-badge" x-text="cartCount" style="display: none;"></div>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <h1 style="line-height: 1.1;">Arte honesto hecho a mano</h1>
+                <p>Cada pieza de greda de Pomaire, manta hilada a mano y tabla de madera nativa cuenta una historia de tradición familiar y respeto por la materia prima en el sur de Chile.</p>
+                <a href="#tienda" class="btn-organic btn-forest">Explorar Catálogo</a>
+            </div>
+            
+            <div class="hero-collage">
+                <img src="studio.png" alt="Taller de artesano del sur">
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Catalog Section -->
+    <section id="tienda" class="section-padding">
+        <div class="container">
+            <h2 style="font-size: 2.2rem; color: var(--primary-forest); text-align: center; margin-bottom: 2.5rem;">Catálogo de Origen</h2>
+            
+            <div class="shop-layout">
+                
+                <!-- Sidebar Category Filters -->
+                <aside class="filter-panel">
+                    <div>
+                        <h4 class="filter-title">Categorías</h4>
+                        <ul class="filter-list">
+                            <li>
+                                <button @click="activeCategory = 'all'" class="filter-btn" :class="{'active': activeCategory === 'all'}">
+                                    <span>Todo el origen</span>
+                                    <span class="filter-btn-qty" x-text="products.length">0</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button @click="activeCategory = 'greda'" class="filter-btn" :class="{'active': activeCategory === 'greda'}">
+                                    <span>Greda de Pomaire</span>
+                                    <span class="filter-btn-qty" x-text="products.filter(p => p.category === 'greda').length">0</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button @click="activeCategory = 'lana'" class="filter-btn" :class="{'active': activeCategory === 'lana'}">
+                                    <span>Lana de Oveja</span>
+                                    <span class="filter-btn-qty" x-text="products.filter(p => p.category === 'lana').length">0</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button @click="activeCategory = 'madera'" class="filter-btn" :class="{'active': activeCategory === 'madera'}">
+                                    <span>Madera Nativa</span>
+                                    <span class="filter-btn-qty" x-text="products.filter(p => p.category === 'madera').length">0</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <!-- Catalog Grid -->
+                <main>
+                    <!-- Search Input -->
+                    <div class="search-wrapper">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input type="text" x-model="searchQuery" placeholder="Buscar artesanías por nombre..." class="search-input">
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="products-grid">
+                        <template x-for="product in filteredProducts" :key="product.id">
+                            <div class="product-card">
+                                <div class="product-img-wrapper">
+                                    <img :src="product.image" :alt="product.name" class="product-img">
+                                    <div class="origin-stamp">
+                                        <span>Origen</span>
+                                        <span x-text="product.origin" style="color: var(--accent-gold); font-size: 0.55rem; font-weight: 800;"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="product-info">
+                                    <span class="product-origin" x-text="'Artesanía en ' + product.category"></span>
+                                    <h3 class="product-name" x-text="product.name"></h3>
+                                    <p class="product-desc" x-text="product.desc"></p>
+                                    
+                                    <div class="product-footer">
+                                        <span class="product-price" x-text="'$' + product.price.toLocaleString('es-CL')"></span>
+                                        <button @click="addToCart(product)" class="add-cart-btn" aria-label="Añadir al carrito">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        
+                        <div x-show="filteredProducts.length === 0" class="cart-empty-message" style="grid-column: span 3; padding: 4rem 0;">
+                            <p>No se encontraron piezas artesanales con ese nombre.</p>
+                        </div>
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section ("Sobre nosotros") -->
+    <section id="nosotros" class="section-padding story-section">
+        <div class="container story-grid">
+            <div class="story-img-wrapper">
+                <img src="studio.png" alt="Taller e historia de artesanía">
+            </div>
+            
+            <div class="story-content">
+                <h2>El Legado de los Talleres</h2>
+                <p>Nuestra iniciativa nace para conectar directamente a las familias artesanas del sur de Chile con personas que aprecian el valor de las obras no industriales.</p>
+                <p>Trabajamos sin intermediarios abusivos. Aseguramos que más del 80% del valor de venta vaya directamente al artesano tejedor, al tallador de lenga o al alfarero de Pomaire, preservando las técnicas ancestrales de manufactura de nuestro país.</p>
+                <a href="#tienda" class="btn-organic btn-outline-forest" style="margin-top: 1.5rem;">Comprar en el Catálogo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">
+                        <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="color: var(--accent-gold);">
+                            <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 2.2L19 12h-2v6h-2v-6H9v6H7v-6H5l7-6.8z"/>
+                        </svg>
+                        <span>Artesanías del Sur</span>
+                    </div>
+                    <p style="opacity: 0.8; font-size: 0.85rem; max-width: 300px; line-height: 1.4;">Comercio justo directo de origen. Cada pieza es única, tejida y tallada a mano en la Patagonia y zona central chilena.</p>
+                </div>
+                <div>
+                    <h4 class="filter-title" style="color: var(--accent-gold); font-size: 1rem;">Líneas de Trabajo</h4>
+                    <ul class="footer-links">
+                        <li>Greda de Pomaire Horno Barro</li>
+                        <li>Lana de Oveja Chilota</li>
+                        <li>Madera Nativa Tallada</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="filter-title" style="color: var(--accent-gold); font-size: 1rem;">Contacto</h4>
+                    <ul class="footer-links">
+                        <li>Villarrica / Chiloé / Melipilla, Chile</li>
+                        <li>Soporte WhatsApp: +56 9 8765 4321</li>
+                        <li>contacto@artesaniasdelsur.cl</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Artesanías del Sur. Comercio Justo.</p>
+                <p>Hecho a mano con materiales 100% orgánicos.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp button for direct support -->
+    <a href="https://wa.me/56987654321?text=Hola%20Artesan%C3%ADas%20del%20Sur%2C%20quisiera%20consultar%20por%20sus%20productos." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="whatsapp-float" 
+       id="whatsapp-button"
+       aria-label="Soporte por WhatsApp">
+        <div class="whatsapp-badge"></div>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.517 2.266 2.27 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.632 1.97 14.156.946 11.53.946c-5.423 0-9.849 4.373-9.853 9.803-.001 1.737.457 3.432 1.328 4.925l-.995 3.636 3.738-.97c1.516.828 3.011 1.258 4.307 1.26z"/>
+        </svg>
+    </a>
+
+    <!-- SHOPPING CART DRAWER PANEL (Right overlay) -->
+    <div x-show="cartDrawer" class="cart-drawer-bg" @click="cartDrawer = false" style="display: none;"></div>
+    <div x-show="cartDrawer" 
+         x-transition:enter="transition ease-out duration-300 transform"
+         x-transition:enter-start="translate-x-full"
+         x-transition:enter-end="translate-x-0"
+         x-transition:leave="transition ease-in duration-200 transform"
+         x-transition:leave-start="translate-x-0"
+         x-transition:leave-end="translate-x-full"
+         class="cart-drawer" 
+         style="display: none;">
+        
+        <div class="cart-header">
+            <h3>Bolsa de Compras (<span x-text="cartCount"></span>)</h3>
+            <button @click="cartDrawer = false" class="cart-close-btn" aria-label="Cerrar bolsa">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 1.5rem; height: 1.5rem; stroke-width: 2.5;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="cart-body">
+            <template x-for="item in cart" :key="item.id">
+                <div class="cart-item">
+                    <img :src="item.image" :alt="item.name" class="cart-item-img">
+                    <div class="cart-item-info">
+                        <h4 class="cart-item-name" x-text="item.name"></h4>
+                        <span class="cart-item-price" x-text="'$' + item.price.toLocaleString('es-CL')"></span>
+                        
+                        <div class="cart-item-actions">
+                            <button @click="updateQty(item.id, -1)" class="qty-btn">-</button>
+                            <span class="qty-val" x-text="item.qty"></span>
+                            <button @click="updateQty(item.id, 1)" class="qty-btn">+</button>
+                        </div>
+                    </div>
+                    <button @click="removeFromCart(item.id)" class="cart-item-remove" aria-label="Eliminar">Quitar</button>
+                </div>
+            </template>
+
+            <div x-show="cart.length === 0" class="cart-empty-message">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <p>Tu bolsa de compras está vacía.</p>
+            </div>
+        </div>
+
+        <div x-show="cart.length > 0" class="cart-footer">
+            <div class="cart-total-row">
+                <span>Total Estimado</span>
+                <span x-text="'$' + cartTotal.toLocaleString('es-CL')"></span>
+            </div>
+            
+            <button @click="openCheckout()" class="btn-organic btn-clay" style="width: 100%;">Proceder al Despacho</button>
+        </div>
+    </div>
+
+    <!-- CHECKOUT DETAILS MODAL (Form with NO memory/cache) -->
+    <div x-show="checkoutModal" 
+         class="modal-overlay-bg" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         style="display: none;">
+        
+        <div class="modal-card" 
+             x-show="checkoutModal"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95 translate-y-[20px]"
+             x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+             x-transition:leave-end="opacity-0 scale-95 translate-y-[20px]"
+             @click.away="closeCheckout()">
+            
+            <div class="modal-header">
+                <h3>Detalles de Entrega & WhatsApp</h3>
+                <button @click="closeCheckout()" class="cart-close-btn" aria-label="Cerrar modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 1.25rem; height: 1.25rem; stroke-width: 2.5;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <form @submit.prevent="submitCheckout()">
+                    <!-- Name & Phone -->
+                    <div class="form-group-grid">
+                        <div class="form-group">
+                            <label class="form-label">Nombre Completo *</label>
+                            <input type="text" x-model="formName" required class="form-input" placeholder="Ej: Pedro Valdivia" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Teléfono / WhatsApp *</label>
+                            <input type="tel" x-model="formPhone" required class="form-input" placeholder="Ej: +56 9 1234 5678" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <!-- Delivery Choice (Presencial/Retiro listed first by default) -->
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Despacho *</label>
+                        <select x-model="formSector" class="form-input">
+                            <option value="presencial">Presencial - Retiro en local de origen</option>
+                            <option value="envio">Envío a Domicilio (Starken/Chilexpress por pagar)</option>
+                        </select>
+                    </div>
+
+                    <!-- Address (Only mandatory if delivery is shipping) -->
+                    <div class="form-group" x-show="formSector === 'envio'">
+                        <label class="form-label">Dirección de Despacho *</label>
+                        <input type="text" x-model="formAddress" :required="formSector === 'envio'" class="form-input" placeholder="Calle, Número, Comuna, Ciudad" autocomplete="off">
+                    </div>
+
+                    <!-- Additional details / instructions -->
+                    <div class="form-group">
+                        <label class="form-label">Notas Adicionales del Pedido</label>
+                        <textarea x-model="formComment" class="form-input" placeholder="Instrucciones para embalaje, envoltorio de regalo o indicaciones de despacho..." style="resize: vertical; min-height: 80px;" autocomplete="off"></textarea>
+                    </div>
+
+                    <!-- Cart summary reference inside the modal -->
+                    <div class="form-group" style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; font-weight: 800; color: var(--primary-forest);">
+                            <span>Total del Pedido:</span>
+                            <span x-text="'$' + cartTotal.toLocaleString('es-CL')"></span>
+                        </div>
+                    </div>
+
+                    <!-- Form actions -->
+                    <div class="form-actions">
+                        <button type="button" @click="closeCheckout()" class="btn-organic btn-outline-forest" style="border-width: 1px;">Cancelar</button>
+                        <button type="submit" class="btn-organic btn-clay">Confirmar Pedido</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
