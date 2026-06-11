@@ -23,13 +23,13 @@
 
     <style>
         :root {
-            --bg-darkest: #0f172a;
-            --bg-card: #1e293b;
-            --primary: #f97316; /* Neon Orange */
-            --primary-hover: #ea580c;
+            --bg-darkest: #0b0c10;
+            --bg-card: #14161f;
+            --primary: #e08c38; /* Premium Wood Copper Gold */
+            --primary-hover: #f2a34e;
             --text-light: #f8fafc;
             --text-muted: #94a3b8;
-            --border: rgba(255, 255, 255, 0.08);
+            --border: rgba(224, 140, 56, 0.15); /* Accent-tinted border */
             --font-headings: 'Outfit', sans-serif;
             --font-body: 'Inter', sans-serif;
             --success: #10b981;
@@ -128,20 +128,29 @@
         }
 
         .cta-btn {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 12px;
             font-weight: 700;
             font-size: 0.85rem;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             border: none;
             cursor: pointer;
+            box-shadow: 0 4px 14px rgba(224, 140, 56, 0.2);
         }
 
-        .cta-btn:hover {
-            background-color: var(--primary-hover);
+        .cta-btn:hover:not(:disabled) {
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(224, 140, 56, 0.35);
+        }
+
+        .cta-btn:disabled {
+            background: #334155;
+            color: #64748b;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none !important;
         }
 
         /* Store Closed Banner */
@@ -157,27 +166,49 @@
 
         /* Hero */
         .hero {
-            padding-top: 150px;
-            padding-bottom: 60px;
+            padding-top: 220px;
+            padding-bottom: 120px;
             text-align: center;
-            background: radial-gradient(circle at top, rgba(249, 115, 22, 0.08) 0%, transparent 60%);
+            background: linear-gradient(to bottom, rgba(11, 12, 16, 0.82) 0%, rgba(11, 12, 16, 0.95) 100%), url('hero.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--bg-darkest) 0%, transparent 100%);
+            pointer-events: none;
         }
 
         .hero h1 {
-            font-size: 3rem;
-            max-width: 800px;
+            font-size: 3.8rem;
+            max-width: 900px;
             margin: 0 auto 20px;
+            line-height: 1.2;
+            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+            letter-spacing: -0.02em;
         }
 
         .hero h1 span {
             color: var(--primary);
+            background: linear-gradient(to right, var(--primary) 0%, var(--primary-hover) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto 30px;
+            color: #cbd5e1;
+            font-size: 1.25rem;
+            max-width: 650px;
+            margin: 0 auto 35px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            line-height: 1.6;
         }
 
         /* Products Grid */
@@ -199,18 +230,38 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(224, 140, 56, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(224, 140, 56, 0.18);
+        }
+
+        .product-img-wrapper {
+            overflow: hidden;
+            width: 100%;
+            height: 240px;
+            background-color: #12141a;
+            position: relative;
         }
 
         .product-img {
-            height: 200px;
+            height: 100%;
             width: 100%;
-            background-color: #334155;
+            background-color: #12141a;
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.08);
         }
 
         .product-info {
@@ -515,6 +566,13 @@
             font-weight: 600;
             font-size: 0.9rem;
         }
+
+        @media (max-width: 768px) {
+            .grid-configurator {
+                grid-template-columns: 1fr !important;
+                gap: 30px !important;
+            }
+        }
     </style>
 </head>
 <body x-data="loadStore()">
@@ -531,41 +589,75 @@
             <div class="logo">Roble<span>&Co</span></div>
             <nav>
                 <a href="#inicio">Inicio</a>
+                <a href="#pilares">Calidad</a>
                 <a href="#tienda">Tienda</a>
+                <a href="#configurador">Simulador</a>
+                <a href="#galeria">Inspiración</a>
                 <a @click="openAdminModal()">💻 Panel Administrador</a>
                 <button class="cta-btn" @click="isCartOpen = true">Carrito (<span x-text="cart.length"></span>)</button>
             </nav>
         </div>
     </header>
-
+ 
     <!-- CLOSED STORE BANNER -->
     <div x-show="isStoreClosed()" class="closed-banner" x-cloak>
         🔒 La tienda está temporalmente cerrada. Puedes ver productos y armar tu carro, pero las compras están deshabilitadas hasta el horario de apertura.
     </div>
-
+ 
     <!-- HERO -->
     <section id="inicio" class="hero">
         <div class="container">
-            <h1>Muebles de <span>Madera Nativa</span> Hechos a Mano</h1>
+            <h1>Muebles de <span>Madera Nativa</span><br>Hechos a Mano para toda la vida</h1>
             <p>Diseño escandinavo y maderas chilenas de origen sustentable. Creados para durar toda la vida.</p>
             <a href="#tienda" class="cta-btn" style="padding: 15px 35px; font-size: 1rem;">Comprar Catálogo</a>
         </div>
     </section>
 
+    <!-- PILARES -->
+    <section id="pilares" style="padding: 80px 0; background-color: var(--bg-darkest); border-bottom: 1px solid var(--border);">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;">Calidad de Origen</span>
+                <h2 style="font-size: 2.2rem; margin: 10px 0; font-family: var(--font-headings);">Nuestra Promesa de Calidad</h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 0.95rem;">Madera 100% noble seleccionada y secada artificialmente para asegurar estabilidad y durabilidad en cada pieza.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                <div style="background-color: var(--bg-card); border: 1px solid var(--border); padding: 30px; border-radius: 20px; text-align: center; transition: all 0.3s;" onmouseover="this.style.borderColor='rgba(224, 140, 56, 0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🪵</div>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 10px;">Maderas Certificadas</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Utilizamos exclusivamente roble, avellano y ciprés de bosques con manejo sustentable certificado en el sur de Chile.</p>
+                </div>
+                <div style="background-color: var(--bg-card); border: 1px solid var(--border); padding: 30px; border-radius: 20px; text-align: center; transition: all 0.3s;" onmouseover="this.style.borderColor='rgba(224, 140, 56, 0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🪚</div>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 10px;">Artesanía de Precisión</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Cada unión y detalle de ensamble es trabajado a mano por maestros mueblistas chilenos de amplia experiencia.</p>
+                </div>
+                <div style="background-color: var(--bg-card); border: 1px solid var(--border); padding: 30px; border-radius: 20px; text-align: center; transition: all 0.3s;" onmouseover="this.style.borderColor='rgba(224, 140, 56, 0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🛡️</div>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 10px;">Garantía de 10 Años</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Confiamos plenamente en nuestra técnica constructiva. Garantizamos la estructura de todos nuestros muebles por una década.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
     <!-- STOREFRONT -->
-    <section id="tienda" class="store-section">
+    <section id="tienda" class="store-section" style="border-bottom: 1px solid var(--border);">
         <div class="container">
             <div style="text-align: center; margin-bottom: 40px;">
-                <h2>Catálogo de Productos</h2>
-                <p style="color: var(--text-muted); margin-top: 8px;">Gestionado dinámicamente mediante Base de Datos local (CRUD de Administrador).</p>
+                <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;">Showroom Digital</span>
+                <h2 style="font-size: 2.2rem; margin: 10px 0; font-family: var(--font-headings);">Catálogo de Productos</h2>
+                <p style="color: var(--text-muted); margin-top: 8px; font-size: 0.95rem;">Gestionado dinámicamente mediante Base de Datos local (CRUD de Administrador).</p>
             </div>
-
+ 
             <!-- Products Grid -->
             <div class="products-grid">
                 <template x-for="p in products" :key="p.id">
                     <div class="product-card" x-show="p.active">
-                        <div class="product-img" :style="'background-image: url(' + p.image + ')'">
-                            <span x-show="!p.image" style="font-size: 3rem;">🪵</span>
+                        <div class="product-img-wrapper">
+                            <div class="product-img" :style="'background-image: url(\'' + p.image + '\')'">
+                                <span x-show="!p.image" style="font-size: 3rem;">🪵</span>
+                            </div>
                         </div>
                         <div class="product-info">
                             <h3 x-text="p.name"></h3>
@@ -580,6 +672,136 @@
             </div>
         </div>
     </section>
+
+    <!-- CONFIGURADOR INTERACTIVO -->
+    <section id="configurador" style="padding: 80px 0; background-color: var(--bg-darkest); border-bottom: 1px solid var(--border);" x-data="configuratorData()">
+        <div class="container">
+            <div style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(20, 22, 31, 0.8) 100%); border: 1px solid var(--border); border-radius: 30px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;" class="grid-configurator">
+                    <div>
+                        <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; uppercase tracking-widest;">Simulador Premium</span>
+                        <h2 style="font-size: 2.2rem; margin: 10px 0 20px; font-family: var(--font-headings);">Cotiza tu Mueble a Medida</h2>
+                        <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.95rem; line-height: 1.6;">Selecciona la categoría del mueble, el tipo de madera nativa y las dimensiones para calcular un presupuesto aproximado en tiempo real.</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <div>
+                                <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; color: var(--text-light);">1. Tipo de Mueble</label>
+                                <select x-model="muebleType" style="width: 100%; background: var(--bg-darkest); border: 1px solid var(--border); padding: 12px; border-radius: 10px; color: white; font-family: inherit;">
+                                    <option value="mesa">Mesa de Comedor</option>
+                                    <option value="repisa">Repisa / Estantería</option>
+                                    <option value="silla">Silla / Poltrona</option>
+                                    <option value="arrimo">Arrimo de Pasillo</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; color: var(--text-light);">2. Tipo de Madera</label>
+                                <select x-model="maderaType" style="width: 100%; background: var(--bg-darkest); border: 1px solid var(--border); padding: 12px; border-radius: 10px; color: white; font-family: inherit;">
+                                    <option value="roble">Roble Chileno (+20% Dureza y Calidad)</option>
+                                    <option value="avellano">Avellano (Veta fina, tono cálido)</option>
+                                    <option value="cipres">Ciprés (Aroma agradable y alta resistencia)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; color: var(--text-light);">3. Largo Deseado (Metros)</label>
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <input type="range" min="0.5" max="3.0" step="0.1" x-model="largo" style="flex-grow: 1; accent-color: var(--primary);">
+                                    <span style="font-weight: 700; width: 60px; text-align: right;" x-text="largo + ' m'"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background-color: var(--bg-darkest); border: 1px solid var(--border); border-radius: 20px; padding: 35px; text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 300px;">
+                        <h3 style="font-size: 1.1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 15px;">Presupuesto Estimado</h3>
+                        <div style="font-size: 3rem; font-weight: 900; color: var(--primary); font-family: var(--font-headings); margin-bottom: 10px;" x-text="formatCLP(calculatePrice())"></div>
+                        <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 25px;">*Precio aproximado incluye IVA. Sujeto a confirmación de stock de veta y detalles de terminación.</p>
+                        
+                        <button class="cta-btn" @click="sendCustomQuote()" style="width: 100%; padding: 15px; font-size: 1rem;">
+                            Solicitar por WhatsApp a Medida
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIA DE INSPIRACION -->
+    <section id="galeria" style="padding: 80px 0; background-color: #0f1115; border-bottom: 1px solid var(--border);">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;">Inspiración</span>
+                <h2 style="font-size: 2.2rem; margin: 10px 0; font-family: var(--font-headings);">Espacios Diseñados para Inspirar</h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 0.95rem;">Echa un vistazo a cómo lucen nuestros muebles de madera nativa en proyectos reales realizados en Chile.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+                <div style="border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background-color: var(--bg-card); transition: all 0.3s;" class="gallery-card">
+                    <div style="overflow: hidden; height: 280px;">
+                        <img src="comedor_interior.png" alt="Living Comedor Roble" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </div>
+                    <div style="padding: 20px;">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 5px;">Mesa de Comedor Roble en Vitacura</h4>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">Proyecto a medida para comedor familiar integrado, roble rústico con barniz poliuretano mate.</p>
+                    </div>
+                </div>
+                <div style="border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background-color: var(--bg-card); transition: all 0.3s;" class="gallery-card">
+                    <div style="overflow: hidden; height: 280px;">
+                        <img src="living_wood.png" alt="Living Coffee Table" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </div>
+                    <div style="padding: 20px;">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 5px;">Mesa de Centro y Repisas en Lo Barnechea</h4>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">Mesa de centro con canto vivo natural y repisa de pared iluminada en madera nativa seleccionada.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background-color: #0b0c10; padding: 60px 0 30px; border-top: 1px solid var(--border); font-size: 0.9rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <div class="logo" style="margin-bottom: 20px; color: var(--primary);">Roble<span style="color: var(--text-light);">&Co</span></div>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Muebles de madera nativa hechos a mano por maestros mueblistas chilenos. Sostenibilidad, diseño y tradición.</p>
+                </div>
+                <div>
+                    <h4 style="font-size: 1rem; margin-bottom: 20px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-headings);">Navegación</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; padding: 0;">
+                        <li><a href="#inicio" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'">Inicio</a></li>
+                        <li><a href="#pilares" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'">Nuestra Calidad</a></li>
+                        <li><a href="#tienda" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'">Tienda Online</a></li>
+                        <li><a href="#configurador" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'">Simulador a Medida</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-size: 1rem; margin-bottom: 20px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-headings);">Contacto</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; color: var(--text-muted); padding: 0;">
+                        <li>📍 Taller: Templeman 154, Cerro Alegre, Valparaíso</li>
+                        <li>📞 Celular: +56 9 9904 0150</li>
+                        <li>✉️ Email: contacto@robleandco.cl</li>
+                        <li>🕒 Lun - Vie: 09:00 - 20:00</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-size: 1rem; margin-bottom: 20px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-headings);">Medios de Pago</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 15px; font-size: 0.85rem; line-height: 1.5;">Aceptamos tarjetas de débito/crédito mediante pasarelas locales.</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <span style="background-color: var(--bg-card); border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; color: var(--text-light);">Webpay</span>
+                        <span style="background-color: var(--bg-card); border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; color: var(--text-light);">Flow</span>
+                        <span style="background-color: var(--bg-card); border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; color: var(--text-light);">MercadoPago</span>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border); padding-top: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; color: var(--text-muted); font-size: 0.8rem;">
+                <p>&copy; 2026 Roble & Co. Todos los derechos reservados. Desarrollado con el Plan Premium.</p>
+                <div style="display: flex; gap: 20px;">
+                    <a href="../index.html" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'">Ver otros Planes</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- CART DRAWER -->
     <div x-show="isCartOpen" class="modal-overlay" x-cloak @click.self="isCartOpen = false">
@@ -887,6 +1109,45 @@
     </style>
 
     <script>
+        function configuratorData() {
+            return {
+                muebleType: 'mesa',
+                maderaType: 'roble',
+                largo: 1.8,
+                basePrices: {
+                    mesa: 250000,
+                    repisa: 60000,
+                    silla: 80000,
+                    arrimo: 140000
+                },
+                woodMultipliers: {
+                    roble: 1.4,
+                    avellano: 1.2,
+                    cipres: 1.0
+                },
+                calculatePrice() {
+                    let base = this.basePrices[this.muebleType] || 100000;
+                    let mult = this.woodMultipliers[this.maderaType] || 1.0;
+                    let lengthFactor = this.largo * 0.9;
+                    if (this.muebleType === 'silla') lengthFactor = 1.0;
+                    return Math.round(base * mult * lengthFactor);
+                },
+                formatCLP(val) {
+                    return '$' + val.toLocaleString('es-CL');
+                },
+                sendCustomQuote() {
+                    let total = this.calculatePrice();
+                    let msg = `Hola Roble & Co! Me interesa cotizar un mueble a medida:%0A` +
+                              `- *Mueble:* ${this.muebleType.toUpperCase()}%0A` +
+                              `- *Madera:* ${this.maderaType.toUpperCase()}%0A` +
+                              `- *Largo:* ${this.largo} metros%0A` +
+                              `- *Presupuesto Estimado:* ${this.formatCLP(total)}%0A` +
+                              `¿Me podrían dar más detalles sobre los plazos de entrega?`;
+                    window.open(`https://wa.me/5699904015?text=${msg}`, '_blank');
+                }
+            }
+        }
+
         function loadStore() {
             return {
                 isCartOpen: false,
@@ -926,12 +1187,20 @@
                     // Initialize products
                     const savedProducts = localStorage.getItem('premium_products');
                     if (savedProducts) {
-                        this.products = JSON.parse(savedProducts);
+                        let parsed = JSON.parse(savedProducts);
+                        // Upgrade old data to use new real photos if image field is empty
+                        parsed.forEach(p => {
+                            if (p.id === 1 && !p.image) p.image = 'comedor.png';
+                            if (p.id === 2 && !p.image) p.image = 'repisa.png';
+                            if (p.id === 3 && !p.image) p.image = 'silla.png';
+                        });
+                        this.products = parsed;
+                        this.saveProducts();
                     } else {
                         this.products = [
-                            { id: 1, name: 'Comedor Roble Escandinavo', price: 490000, description: 'Mesa de comedor tallada en roble sólido. Dimensiones: 200x90cm.', active: true, image: '' },
-                            { id: 2, name: 'Repisa Colgante Avellano', price: 89000, description: 'Repisa minimalista flotante de madera de avellano seleccionada.', active: true, image: '' },
-                            { id: 3, name: 'Silla Terrazas Ciprés', price: 120000, description: 'Silla ergonómica tratada contra la humedad. Ideal para exterior.', active: true, image: '' }
+                            { id: 1, name: 'Comedor Roble Escandinavo', price: 490000, description: 'Mesa de comedor tallada en roble sólido. Dimensiones: 200x90cm.', active: true, image: 'comedor.png' },
+                            { id: 2, name: 'Repisa Colgante Avellano', price: 89000, description: 'Repisa minimalista flotante de madera de avellano seleccionada.', active: true, image: 'repisa.png' },
+                            { id: 3, name: 'Silla Terrazas Ciprés', price: 120000, description: 'Silla ergonómica tratada contra la humedad. Ideal para exterior.', active: true, image: 'silla.png' }
                         ];
                         this.saveProducts();
                     }
