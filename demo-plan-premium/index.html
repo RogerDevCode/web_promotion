@@ -845,8 +845,8 @@
 
     <!-- CHECKOUT DETAILS FORM -->
     <div x-show="isCheckoutOpen" class="modal-overlay" x-cloak @click.self="closeCheckout()">
-        <div class="modal-content">
-            <h3 style="margin-bottom: 20px;">Datos de Envío y Contacto</h3>
+        <div class="modal-content" style="max-width: 500px; max-height: 90vh; overflow-y: auto;">
+            <h3 style="margin-bottom: 20px; font-family: var(--font-headings);">Datos de Envío y Facturación</h3>
             
             <form @submit.prevent="openGateway()">
                 <div class="form-group">
@@ -869,8 +869,74 @@
                 </div>
 
                 <div class="form-group" x-show="checkoutMethod === 'despacho'">
+                    <label for="bill-courier">Empresa de Despacho</label>
+                    <select id="bill-courier" x-model="checkoutCourier" class="form-control">
+                        <option value="starken-domicilio">Starken - Despacho a Domicilio</option>
+                        <option value="starken-sucursal">Starken - Retiro en Sucursal</option>
+                        <option value="chilexpress">Chilexpress - Despacho Exprés</option>
+                    </select>
+                </div>
+
+                <div class="form-group" x-show="checkoutMethod === 'despacho'">
+                    <label for="bill-commune">Comuna de Destino</label>
+                    <select id="bill-commune" x-model="checkoutCommune" class="form-control">
+                        <option value="santiago">Santiago Centro</option>
+                        <option value="providencia">Providencia / Las Condes</option>
+                        <option value="valparaiso">Valparaíso / Viña del Mar</option>
+                        <option value="concepcion">Concepción Centro</option>
+                        <option value="temuco">Temuco Centro</option>
+                        <option value="puertomontt">Puerto Montt Centro</option>
+                        <option value="otra">Otra Comuna (Regiones)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" x-show="checkoutMethod === 'despacho'">
                     <label for="bill-address">Dirección de Despacho</label>
                     <input id="bill-address" type="text" x-model="checkoutAddress" class="form-control" placeholder="Ej: Los Leones 250, Providencia">
+                </div>
+
+                <div class="form-group">
+                    <label for="bill-document">Tipo de Documento Tributario</label>
+                    <select id="bill-document" x-model="checkoutDocument" class="form-control">
+                        <option value="boleta">Boleta de Ventas y Servicios</option>
+                        <option value="factura">Factura de Ventas y Servicios (SII)</option>
+                    </select>
+                </div>
+
+                <div x-show="checkoutDocument === 'factura'" style="background-color: rgba(255,255,255,0.02); padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px;" x-cloak>
+                    <div class="form-group">
+                        <label for="bill-rut">RUT de la Empresa</label>
+                        <input id="bill-rut" type="text" x-model="checkoutRut" class="form-control" placeholder="Ej: 76.123.456-7" @input="formatRutInput()">
+                        <span x-show="checkoutRutError" style="color: #ef4444; font-size: 0.8rem; margin-top: 4px; display: block;" x-text="checkoutRutError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="bill-razon">Razón Social</label>
+                        <input id="bill-razon" type="text" x-model="checkoutRazon" class="form-control" placeholder="Ej: Comercial Roble Limitada">
+                    </div>
+                    <div class="form-group">
+                        <label for="bill-giro">Giro Comercial</label>
+                        <input id="bill-giro" type="text" x-model="checkoutGiro" class="form-control" placeholder="Ej: Venta de Muebles y Madera">
+                    </div>
+                    <div class="form-group">
+                        <label for="bill-direccion-trib">Dirección Tributaria</label>
+                        <input id="bill-direccion-trib" type="text" x-model="checkoutDireccionTrib" class="form-control" placeholder="Ej: Av. Vitacura 200, Santiago">
+                    </div>
+                </div>
+
+                <!-- Pricing breakdown inside checkout -->
+                <div style="background-color: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-top: 15px; margin-bottom: 15px; font-size: 0.9rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span style="color: var(--text-muted);">Subtotal Muebles:</span>
+                        <span style="color: var(--text-light);" x-text="formatPrice(getCartTotal())"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;" x-show="checkoutMethod === 'despacho'">
+                        <span style="color: var(--text-muted);">Costo de Envío (<span x-text="checkoutCourierLabel()"></span>):</span>
+                        <span style="color: var(--text-light);" x-text="formatPrice(calculateShippingCost())"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; border-top: 1px solid var(--border); padding-top: 8px; margin-top: 8px; color: var(--primary);">
+                        <span>Total a Pagar:</span>
+                        <span x-text="formatPrice(getCartTotal() + calculateShippingCost())"></span>
+                    </div>
                 </div>
 
                 <div class="modal-buttons">
@@ -892,7 +958,7 @@
                 
                 <div style="background-color: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; font-size: 0.85rem;">
                     <p><strong>Comercio:</strong> Muebles Roble Premium</p>
-                    <p><strong>Monto:</strong> <span x-text="formatPrice(getCartTotal())" style="font-weight: 800; color: var(--primary);"></span></p>
+                    <p><strong>Monto:</strong> <span x-text="formatPrice(getCartTotal() + calculateShippingCost())" style="font-weight: 800; color: #d52b1e;"></span></p>
                 </div>
 
                 <div x-show="!gatewayProcessing">
@@ -923,13 +989,85 @@
         </div>
     </div>
 
-    <!-- SUCCESS PAYMENT MODAL -->
-    <div x-show="showSuccessModal" class="modal-overlay" x-cloak @click.self="showSuccessModal = false">
-        <div class="modal-content" style="text-align: center;">
-            <div style="width: 70px; height: 70px; border-radius: 50%; background-color: rgba(16, 185, 129, 0.1); color: var(--success); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 20px;">✓</div>
-            <h3 style="font-size: 1.8rem; margin-bottom: 10px;">¡Pago Exitoso!</h3>
-            <p style="color: var(--text-muted); margin-bottom: 20px;">Tu pedido ha sido recibido y registrado en el Panel de Administración de la tienda.</p>
-            <button class="cta-btn" @click="showSuccessModal = false">Cerrar</button>
+    <!-- SUCCESS PAYMENT MODAL (WOW Receipt) -->
+    <div x-show="showSuccessModal" class="modal-overlay" x-cloak>
+        <div class="modal-content" style="max-width: 550px; text-align: left; padding: 30px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+            <div style="text-align: center; margin-bottom: 25px;">
+                <div style="width: 60px; height: 60px; border-radius: 50%; background-color: rgba(16, 185, 129, 0.1); color: var(--success); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 15px;">✓</div>
+                <h3 style="font-size: 1.6rem; color: var(--text-light); font-family: var(--font-headings);">¡Pago Procesado con Éxito!</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Tu transacción ha sido autorizada por Webpay Plus.</p>
+            </div>
+
+            <!-- Receipt layout -->
+            <div id="printable-receipt" style="background-color: var(--bg-darkest); border: 1px solid var(--border); padding: 20px; border-radius: 16px; font-size: 0.85rem; color: var(--text-light); line-height: 1.5; margin-bottom: 25px;">
+                <div style="border-bottom: 1px dashed var(--border); padding-bottom: 12px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 800; font-family: var(--font-headings); font-size: 1.1rem; color: var(--primary);">ROBLE & CO.</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);" x-text="lastOrderReceipt ? new Date(lastOrderReceipt.date).toLocaleString('es-CL') : ''"></span>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 0.75rem;">Nº Transacción:</p>
+                        <p style="font-weight: 600;" x-text="lastOrderReceipt ? lastOrderReceipt.id : ''"></p>
+                    </div>
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 0.75rem;">Código Autorización:</p>
+                        <p style="font-weight: 600;" x-text="lastOrderReceipt ? lastOrderReceipt.authCode : ''"></p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+                    <p style="color: var(--text-muted); font-size: 0.75rem; margin-bottom: 4px;">Cliente y Despacho:</p>
+                    <p x-text="lastOrderReceipt ? `Nombre: ${lastOrderReceipt.name}` : ''"></p>
+                    <p x-text="lastOrderReceipt ? `WhatsApp: ${lastOrderReceipt.phone}` : ''"></p>
+                    <p x-text="lastOrderReceipt ? (lastOrderReceipt.method === 'presencial' ? 'Modalidad: Retiro Presencial en Taller' : `Despacho: ${lastOrderReceipt.courier} (${lastOrderReceipt.commune}) - ${lastOrderReceipt.address}`) : ''"></p>
+                </div>
+
+                <div style="margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 12px;" x-show="lastOrderReceipt && lastOrderReceipt.documentType === 'factura'">
+                    <p style="color: var(--text-muted); font-size: 0.75rem; margin-bottom: 4px;">Detalles de Facturación (SII):</p>
+                    <p x-text="lastOrderReceipt ? `RUT Empresa: ${lastOrderReceipt.rut}` : ''"></p>
+                    <p x-text="lastOrderReceipt ? `Razón Social: ${lastOrderReceipt.razonSocial}` : ''"></p>
+                    <p x-text="lastOrderReceipt ? `Giro: ${lastOrderReceipt.giro}` : ''"></p>
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <p style="color: var(--text-muted); font-size: 0.75rem; margin-bottom: 4px;">Productos pagados:</p>
+                    <template x-if="lastOrderReceipt">
+                        <div style="display: flex; flex-direction: column; gap: 4px;">
+                            <template x-for="item in lastOrderReceipt.items">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span x-text="item.name"></span>
+                                    <span x-text="formatPrice(item.price)"></span>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+
+                <div style="border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 10px; display: flex; flex-direction: column; gap: 4px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);" x-show="lastOrderReceipt && lastOrderReceipt.shippingCost > 0">
+                        <span>Costo Despacho:</span>
+                        <span x-text="lastOrderReceipt ? formatPrice(lastOrderReceipt.shippingCost) : ''"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; color: var(--primary); font-size: 1.1rem; margin-top: 4px;">
+                        <span>Total Pagado:</span>
+                        <span x-text="lastOrderReceipt ? formatPrice(lastOrderReceipt.total) : ''"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button class="cta-btn" @click="sendReceiptToWhatsApp()" style="width: 100%; padding: 14px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <svg style="width: 18px; height: 18px;" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.613.613l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-2.278 0-4.381-.762-6.065-2.046l-.424-.328-2.643.886.886-2.643-.328-.424A9.72 9.72 0 012.25 12 9.75 9.75 0 0112 2.25 9.75 9.75 0 0121.75 12 9.75 9.75 0 0112 21.75z"/></svg>
+                    Confirmar y Enviar a WhatsApp
+                </button>
+                <button class="btn-cancel" @click="window.print()" style="width: 100%; border-color: var(--primary); color: var(--primary); padding: 12px; font-weight: bold; border-radius: 9999px;">
+                    🖨️ Imprimir / Guardar en PDF
+                </button>
+                <button class="btn-cancel" @click="showSuccessModal = false; resetCheckoutForm();" style="width: 100%; padding: 12px;">
+                    Volver a la Tienda
+                </button>
+            </div>
         </div>
     </div>
 
@@ -1196,10 +1334,19 @@
                 checkoutPhone: '',
                 checkoutMethod: 'presencial', // Priority delivery: Presencial listed and selected first
                 checkoutAddress: '',
+                checkoutDocument: 'boleta',
+                checkoutRut: '',
+                checkoutRazon: '',
+                checkoutGiro: '',
+                checkoutDireccionTrib: '',
+                checkoutRutError: '',
+                checkoutCourier: 'starken-domicilio',
+                checkoutCommune: 'santiago',
                 
                 // Gateway simulation fields
                 gatewayProcessing: false,
                 showSuccessModal: false,
+                lastOrderReceipt: null,
                 
                 // Add Product inputs
                 newProdName: '',
@@ -1334,9 +1481,132 @@
                     this.checkoutPhone = '';
                     this.checkoutMethod = 'presencial'; // Presencial listed first
                     this.checkoutAddress = '';
+                    this.checkoutDocument = 'boleta';
+                    this.checkoutRut = '';
+                    this.checkoutRazon = '';
+                    this.checkoutGiro = '';
+                    this.checkoutDireccionTrib = '';
+                    this.checkoutRutError = '';
+                    this.checkoutCourier = 'starken-domicilio';
+                    this.checkoutCommune = 'santiago';
+                },
+
+                formatRutInput() {
+                    let value = this.checkoutRut.replace(/[^0-9kK]/g, '');
+                    if (value.length > 9) {
+                        value = value.slice(0, 9);
+                    }
+                    if (value.length > 1) {
+                        const dv = value.slice(-1);
+                        const body = value.slice(0, -1);
+                        this.checkoutRut = body.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "-" + dv.toUpperCase();
+                    } else {
+                        this.checkoutRut = value.toUpperCase();
+                    }
+                    this.validateRut();
+                },
+
+                validateRut() {
+                    if (!this.checkoutRut) {
+                        this.checkoutRutError = 'El RUT es requerido para Factura.';
+                        return false;
+                    }
+                    let clean = this.checkoutRut.replace(/\./g, '').replace(/-/g, '').toUpperCase();
+                    if (clean.length < 2) {
+                        this.checkoutRutError = 'RUT muy corto.';
+                        return false;
+                    }
+                    let body = clean.slice(0, -1);
+                    let dv = clean.slice(-1);
+                    
+                    let sum = 0;
+                    let mul = 2;
+                    for (let i = body.length - 1; i >= 0; i--) {
+                        sum += parseInt(body.charAt(i)) * mul;
+                        mul = mul === 7 ? 2 : mul + 1;
+                    }
+                    let res = 11 - (sum % 11);
+                    let expectedDv = res === 11 ? '0' : (res === 10 ? 'K' : res.toString());
+                    
+                    if (dv !== expectedDv) {
+                        this.checkoutRutError = 'RUT inválido.';
+                        return false;
+                    }
+                    this.checkoutRutError = '';
+                    return true;
+                },
+
+                calculateShippingCost() {
+                    if (this.checkoutMethod === 'presencial') return 0;
+                    
+                    const rates = {
+                        'starken-domicilio': {
+                            santiago: 8000,
+                            providencia: 8000,
+                            valparaiso: 5000,
+                            concepcion: 9000,
+                            temuco: 12000,
+                            puertomontt: 15000,
+                            otra: 15000
+                        },
+                        'starken-sucursal': {
+                            santiago: 6000,
+                            providencia: 6000,
+                            valparaiso: 4000,
+                            concepcion: 7000,
+                            temuco: 10000,
+                            puertomontt: 12000,
+                            otra: 12000
+                        },
+                        'chilexpress': {
+                            santiago: 10000,
+                            providencia: 10000,
+                            valparaiso: 7000,
+                            concepcion: 11000,
+                            temuco: 14000,
+                            puertomontt: 18000,
+                            otra: 18000
+                        }
+                    };
+                    
+                    const courierRates = rates[this.checkoutCourier] || {};
+                    return courierRates[this.checkoutCommune] || 15000;
+                },
+
+                checkoutCourierLabel() {
+                    const labels = {
+                        'starken-domicilio': 'Starken Domicilio',
+                        'starken-sucursal': 'Starken Sucursal',
+                        'chilexpress': 'Chilexpress Domicilio'
+                    };
+                    return labels[this.checkoutCourier] || '';
+                },
+
+                checkoutCommuneLabel() {
+                    const labels = {
+                        santiago: 'Santiago Centro',
+                        providencia: 'Providencia / Las Condes',
+                        valparaiso: 'Valparaíso / Viña del Mar',
+                        concepcion: 'Concepción Centro',
+                        temuco: 'Temuco Centro',
+                        puertomontt: 'Puerto Montt Centro',
+                        otra: 'Otra Comuna (Regiones)'
+                    };
+                    return labels[this.checkoutCommune] || '';
                 },
 
                 openGateway() {
+                    if (this.checkoutDocument === 'factura') {
+                        const isValid = this.validateRut();
+                        if (!isValid) {
+                            alert('Por favor, ingresa un RUT válido antes de proceder al pago.');
+                            return;
+                        }
+                        if (!this.checkoutRazon || !this.checkoutGiro || !this.checkoutDireccionTrib) {
+                            alert('Por favor, completa todos los datos tributarios requeridos para Factura.');
+                            return;
+                        }
+                    }
                     this.isCheckoutOpen = false;
                     this.isGatewayOpen = true;
                 },
@@ -1347,6 +1617,9 @@
                         this.gatewayProcessing = false;
                         this.isGatewayOpen = false;
                         
+                        const shippingCost = this.calculateShippingCost();
+                        const orderTotal = this.getCartTotal() + shippingCost;
+                        
                         // Register new order in database
                         const newOrder = {
                             id: Date.now(),
@@ -1354,19 +1627,66 @@
                             name: this.checkoutName,
                             phone: this.checkoutPhone,
                             method: this.checkoutMethod,
+                            courier: this.checkoutMethod === 'despacho' ? this.checkoutCourierLabel() : '',
+                            commune: this.checkoutMethod === 'despacho' ? this.checkoutCommuneLabel() : '',
                             address: this.checkoutMethod === 'despacho' ? this.checkoutAddress : '',
+                            documentType: this.checkoutDocument,
+                            rut: this.checkoutDocument === 'factura' ? this.checkoutRut : '',
+                            razonSocial: this.checkoutDocument === 'factura' ? this.checkoutRazon : '',
+                            giro: this.checkoutDocument === 'factura' ? this.checkoutGiro : '',
+                            direccionTrib: this.checkoutDocument === 'factura' ? this.checkoutDireccionTrib : '',
                             items: JSON.parse(JSON.stringify(this.cart)),
-                            total: this.getCartTotal(),
-                            status: 'pendiente'
+                            shippingCost: shippingCost,
+                            total: orderTotal,
+                            status: 'pendiente',
+                            authCode: Math.floor(100000 + Math.random() * 90000).toString(),
+                            cardSnippet: 'XXXX XXXX XXXX 1234'
                         };
                         this.orders.unshift(newOrder);
                         this.saveOrders();
 
-                        // Reset shopping state
+                        // Save order receipt for printing/downloading
+                        this.lastOrderReceipt = newOrder;
+
+                        // Reset shopping state, but KEEP the lastOrderReceipt for modal
                         this.cart = [];
-                        this.closeCheckout();
+                        this.isCartOpen = false;
+                        this.isCheckoutOpen = false;
                         this.showSuccessModal = true;
-                    }, 2000);
+                    }, 1500);
+                },
+
+                sendReceiptToWhatsApp() {
+                    if (!this.lastOrderReceipt) return;
+                    const r = this.lastOrderReceipt;
+                    const itemsText = r.items.map(item => `- ${item.name} (${this.formatPrice(item.price)})`).join('%0A');
+                    const shippingText = r.shippingCost > 0 ? `%0A*Envío (${r.courier}):* ${this.formatPrice(r.shippingCost)}` : '';
+                    
+                    let taxDetails = `%0A*Documento:* Boleta`;
+                    if (r.documentType === 'factura') {
+                        taxDetails = `%0A*Documento:* Factura (SII)` +
+                                     `%0A*RUT:* ${r.rut}` +
+                                     `%0A*Razón Social:* ${r.razonSocial}` +
+                                     `%0A*Giro:* ${r.giro}`;
+                    }
+
+                    const message = `Hola Roble & Co, acabo de realizar un pago exitoso por mi pedido.%0A%0A` +
+                                    `*Nº Pedido:* ${r.id}%0A` +
+                                    `*Cód. Autorización:* ${r.authCode}%0A` +
+                                    `*Cliente:* ${r.name}%0A` +
+                                    `*WhatsApp:* ${r.phone}%0A` +
+                                    `*Método:* ${r.method === 'presencial' ? 'Retiro Presencial en Taller' : 'Despacho a Domicilio'}` +
+                                    (r.method === 'despacho' ? `%0A*Destino:* ${r.commune} - ${r.address}` : '') +
+                                    taxDetails +
+                                    shippingText +
+                                    `%0A%0A*Detalle Muebles:*%0A${itemsText}%0A%0A` +
+                                    `*Total Transacción:* ${this.formatPrice(r.total)}%0A%0A` +
+                                    `¡Quedo a la espera de la confirmación del despacho!`;
+                                    
+                    const waUrl = `https://wa.me/5699904015?text=${message}`;
+                    window.open(waUrl, '_blank');
+                    this.showSuccessModal = false;
+                    this.resetCheckoutForm();
                 },
 
                 // CRUD Methods

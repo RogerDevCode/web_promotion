@@ -774,20 +774,86 @@
     </section>
 
     <!-- PAYMENT SIMULATOR -->
-    <section class="payment-sim">
-        <div class="container" style="text-align: center;">
-            <h3 style="font-size: 1.8rem; margin-bottom: 10px;">Simulador de Pasarelas de Pago</h3>
-            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 30px;">
-                El Plan Profesional incluye botones y links de pago directos. Haz clic en cualquiera para simular el cobro de un anticipo.
-            </p>
-            <div class="payment-buttons-grid">
-                <button class="pay-btn webpay-btn" @click="simulatePayment('Webpay')">💳 Pagar con Webpay</button>
-                <button class="pay-btn flow-btn" @click="simulatePayment('Flow')">⚡ Pagar con Flow</button>
-                <button class="pay-btn mercadopago-btn" @click="simulatePayment('Mercado Pago')">💙 Pagar con Mercado Pago</button>
+    <section class="payment-sim" id="simulador-financiamiento">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 30px; text-align: center;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 10px; font-family: var(--font-headings);">Simulador de Financiamiento y Pago</h3>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 30px;">
+                    Simula el pago de tu proyecto en cuotas precio contado Transbank o paga un anticipo simulado de inmediato.
+                </p>
             </div>
             
-            <div x-show="showPaymentSuccess" x-transition class="alert-success" x-cloak>
-                <span x-text="paymentSuccessMsg"></span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; text-align: left; background-color: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 30px; border-radius: 24px; max-width: 900px; margin: 0 auto;">
+                <!-- Left: Simulator controls -->
+                <div>
+                    <h4 style="font-size: 1.2rem; color: var(--primary); margin-bottom: 20px; font-family: var(--font-headings);">Calculadora de Cuotas</h4>
+                    
+                    <div class="form-group">
+                        <label for="sim-amount" style="display: block; margin-bottom: 8px; font-size: 0.85rem; font-weight: 600;">Monto a Financiar (CLP)</label>
+                        <div style="position: relative; display: flex; align-items: center;">
+                            <input id="sim-amount" type="number" x-model.number="simAmount" class="form-control" style="padding-left: 30px; width: 100%;">
+                            <span style="position: absolute; left: 12px; color: var(--text-muted); font-weight: bold;">$</span>
+                        </div>
+                        <button type="button" @click="simAmount = getCartTotal() > 0 ? getCartTotal() : 249990" style="background: none; border: none; color: var(--primary); font-size: 0.8rem; cursor: pointer; text-decoration: underline; margin-top: 8px; display: block;" x-show="getCartTotal() > 0">
+                            Usar total de la lista de cotización (<span x-text="formatPrice(getCartTotal())"></span>)
+                        </button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sim-installments-type" style="display: block; margin-bottom: 8px; font-size: 0.85rem; font-weight: 600;">Tipo de Cuotas</label>
+                        <select id="sim-installments-type" x-model="simInstallmentsType" class="form-control" style="width: 100%;">
+                            <option value="sin-interes">3 cuotas sin interés (Precio Contado)</option>
+                            <option value="con-interes-6">6 cuotas con interés bancario</option>
+                            <option value="con-interes-12">12 cuotas con interés bancario</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Right: Breakdown -->
+                <div style="background-color: var(--bg-card); border: 1px solid var(--border); padding: 25px; border-radius: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <h4 style="font-size: 1.1rem; margin-bottom: 20px; font-family: var(--font-headings); display: flex; align-items: center; gap: 8px;">
+                            <span>📊</span> Desglose de Pago
+                        </h4>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.95rem;">
+                                <span style="color: var(--text-muted);">Monto Total:</span>
+                                <span style="font-weight: 600;" x-text="formatPrice(simAmount)"></span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.95rem;">
+                                <span style="color: var(--text-muted);">Número de Cuotas:</span>
+                                <span style="font-weight: 600;" x-text="simInstallmentsType === 'sin-interes' ? '3 cuotas' : (simInstallmentsType === 'con-interes-6' ? '6 cuotas' : '12 cuotas')"></span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.95rem;">
+                                <span style="color: var(--text-muted);">Costo por Cuota:</span>
+                                <span style="font-weight: bold; color: var(--success); font-size: 1.1rem;" x-text="formatPrice(calculateInstallmentFee())"></span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.95rem; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 10px;">
+                                <span style="color: var(--text-light); font-weight: 600;">Total a Pagar:</span>
+                                <span style="font-weight: bold; color: var(--primary);" x-text="formatPrice(calculateInstallmentTotal())"></span>
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; line-height: 1.4;">
+                                <span x-show="simInstallmentsType === 'sin-interes'">* Promoción válida para todas las tarjetas de crédito chilenas (Transbank Webpay Plus).</span>
+                                <span x-show="simInstallmentsType !== 'sin-interes'">* Simulación aproximada. Incluye tasa de interés promedio de mercado (CAE ~1.45% mensual bancario).</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instant payment simulator -->
+            <div style="margin-top: 40px; text-align: center;">
+                <h4 style="font-size: 1.1rem; margin-bottom: 20px; font-family: var(--font-headings);">Pagar Anticipo del Proyecto</h4>
+                <div class="payment-buttons-grid" style="margin-top: 10px;">
+                    <button class="pay-btn webpay-btn" @click="simulatePayment('Webpay')">💳 Pagar con Webpay</button>
+                    <button class="pay-btn flow-btn" @click="simulatePayment('Flow')">⚡ Pagar con Flow</button>
+                    <button class="pay-btn mercadopago-btn" @click="simulatePayment('Mercado Pago')">💙 Pagar con Mercado Pago</button>
+                </div>
+                
+                <div x-show="showPaymentSuccess" x-transition class="alert-success" style="max-width: 600px; margin: 20px auto 0;" x-cloak>
+                    <span x-text="paymentSuccessMsg"></span>
+                </div>
             </div>
         </div>
     </section>
@@ -876,8 +942,48 @@
                 </div>
 
                 <div class="form-group" x-show="checkoutMethod === 'presencial'">
+                    <label for="quote-commune">Comuna del Proyecto</label>
+                    <select id="quote-commune" x-model="checkoutCommune" class="form-control">
+                        <option value="valparaiso">Valparaíso Centro (Gratis)</option>
+                        <option value="vinadelmar">Viña del Mar (Gratis)</option>
+                        <option value="concon">Concón (+$5.000 CLP)</option>
+                        <option value="quilpue">Quilpué / Villa Alemana (+$8.000 CLP)</option>
+                        <option value="placilla">Placilla / Curauma (+$5.000 CLP)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" x-show="checkoutMethod === 'presencial'">
                     <label for="quote-address">Dirección del Proyecto</label>
                     <input id="quote-address" type="text" x-model="checkoutAddress" class="form-control" placeholder="Ej: Av. Alemania 450, Valparaíso">
+                </div>
+
+                <div class="form-group">
+                    <label for="quote-date">Fecha Solicitada para Visita / Reunión</label>
+                    <input id="quote-date" type="date" x-model="checkoutDate" :min="new Date().toISOString().split('T')[0]" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="quote-time-block">Bloque Horario Preferido</label>
+                    <select id="quote-time-block" x-model="checkoutTimeBlock" class="form-control">
+                        <option value="mañana">Mañana (09:00 - 13:00)</option>
+                        <option value="tarde">Tarde (15:00 - 19:00)</option>
+                    </select>
+                </div>
+
+                <!-- Dynamic pricing breakdown inside modal -->
+                <div style="background-color: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-top: 20px; font-size: 0.9rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span style="color: var(--text-muted);">Subtotal Servicios:</span>
+                        <span style="color: var(--text-light);" x-text="formatPrice(getCartTotal())"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;" x-show="checkoutMethod === 'presencial'">
+                        <span style="color: var(--text-muted);">Traslado Comuna:</span>
+                        <span style="color: var(--text-light);" x-text="formatPrice(checkoutCommuneSurcharge())"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; border-top: 1px solid var(--border); padding-top: 8px; margin-top: 8px; color: var(--primary);">
+                        <span>Total de Cotización:</span>
+                        <span x-text="formatPrice(getCartTotal() + (checkoutMethod === 'presencial' ? checkoutCommuneSurcharge() : 0))"></span>
+                    </div>
                 </div>
 
                 <div class="modal-buttons">
@@ -927,10 +1033,15 @@
                 checkoutPhone: '',
                 checkoutMethod: 'presencial', // Priority delivery option: "Presencial" listed and selected first
                 checkoutAddress: '',
+                checkoutDate: '',
+                checkoutTimeBlock: 'mañana',
+                checkoutCommune: 'valparaiso',
                 
                 // Payment simulator fields
                 showPaymentSuccess: false,
                 paymentSuccessMsg: '',
+                simAmount: 249990,
+                simInstallmentsType: 'sin-interes',
                 
                 servicesItems: [
                     { id: 1, name: 'Remodelación de Cocina Estándar', category: 'cocinas', emoji: '🍳', price: 1500000, description: 'Instalación de cerámicas, cañerías de cobre nuevas, cubierta de cuarzo y muebles flotantes.' },
@@ -981,19 +1092,81 @@
                     this.checkoutPhone = '';
                     this.checkoutMethod = 'presencial';
                     this.checkoutAddress = '';
+                    this.checkoutDate = '';
+                    this.checkoutTimeBlock = 'mañana';
+                    this.checkoutCommune = 'valparaiso';
+                },
+
+                checkoutCommuneLabel() {
+                    const labels = {
+                        valparaiso: 'Valparaíso Centro (Gratis)',
+                        vinadelmar: 'Viña del Mar (Gratis)',
+                        concon: 'Concón (+$5.000 CLP)',
+                        quilpue: 'Quilpué / Villa Alemana (+$8.000 CLP)',
+                        placilla: 'Placilla / Curauma (+$5.000 CLP)'
+                    };
+                    return labels[this.checkoutCommune] || '';
+                },
+
+                checkoutCommuneSurcharge() {
+                    const surcharges = {
+                        valparaiso: 0,
+                        vinadelmar: 0,
+                        concon: 5000,
+                        quilpue: 8000,
+                        placilla: 5000
+                    };
+                    return surcharges[this.checkoutCommune] || 0;
+                },
+
+                calculateInstallmentFee() {
+                    if (this.simInstallmentsType === 'sin-interes') {
+                        return Math.round(this.simAmount / 3);
+                    } else if (this.simInstallmentsType === 'con-interes-6') {
+                        const months = 6;
+                        const r = 0.0145; // 1.45% interest per month
+                        const factor = (r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+                        return Math.round(this.simAmount * factor);
+                    } else {
+                        const months = 12;
+                        const r = 0.0145; // 1.45% interest per month
+                        const factor = (r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+                        return Math.round(this.simAmount * factor);
+                    }
+                },
+
+                calculateInstallmentTotal() {
+                    const fee = this.calculateInstallmentFee();
+                    if (this.simInstallmentsType === 'sin-interes') {
+                        return this.simAmount;
+                    } else if (this.simInstallmentsType === 'con-interes-6') {
+                        return fee * 6;
+                    } else {
+                        return fee * 12;
+                    }
                 },
 
                 submitQuote() {
                     // Compile items
                     const itemsText = this.cart.map(item => `- ${item.name} (${this.formatPrice(item.price)})`).join('%0A');
-                    const totalText = this.formatPrice(this.getCartTotal());
+                    const surcharge = this.checkoutMethod === 'presencial' ? this.checkoutCommuneSurcharge() : 0;
+                    const surchargeText = surcharge > 0 ? `%0A*Recargo Traslado:* ${this.formatPrice(surcharge)}` : '';
+                    const totalText = this.formatPrice(this.getCartTotal() + surcharge);
                     
+                    const dateText = this.checkoutDate ? `%0A*Fecha Visita:* ${this.checkoutDate}` : '';
+                    const timeText = this.checkoutDate ? `%0A*Bloque Horario:* ${this.checkoutTimeBlock === 'mañana' ? 'Mañana (09:00 - 13:00)' : 'Tarde (15:00 - 19:00)'}` : '';
+                    const communeText = this.checkoutMethod === 'presencial' ? `%0A*Comuna:* ${this.checkoutCommuneLabel()}` : '';
+
                     const message = `Hola Altiplano.cl, me interesa cotizar una remodelación.%0A%0A` +
                                     `*Nombre:* ${this.checkoutName}%0A` +
                                     `*WhatsApp:* ${this.checkoutPhone}%0A` +
-                                    `*Modalidad:* ${this.checkoutMethod === 'presencial' ? 'Visita Presencial' : 'Reunión Online'}%0A` +
-                                    (this.checkoutMethod === 'presencial' ? `*Dirección:* ${this.checkoutAddress}%0A` : '') +
-                                    `%0A*Servicios solicitados:*%0A${itemsText}%0A%0A` +
+                                    `*Modalidad:* ${this.checkoutMethod === 'presencial' ? 'Visita Presencial' : 'Reunión Online'}` +
+                                    communeText +
+                                    (this.checkoutMethod === 'presencial' ? `%0A*Dirección:* ${this.checkoutAddress}` : '') +
+                                    dateText +
+                                    timeText +
+                                    surchargeText +
+                                    `%0A%0A*Servicios solicitados:*%0A${itemsText}%0A%0A` +
                                     `*Total Estimado:* ${totalText}`;
 
                     const waUrl = `https://wa.me/5699904015?text=${message}`;
@@ -1007,7 +1180,7 @@
                 simulatePayment(gateway) {
                     this.showPaymentSuccess = false;
                     setTimeout(() => {
-                        this.paymentSuccessMsg = `¡Simulación Exitosa! El anticipo del proyecto se procesó correctamente mediante ${gateway}.`;
+                        this.paymentSuccessMsg = `¡Simulación Exitosa! El pago de ${this.formatPrice(this.simAmount)} se procesó correctamente mediante la pasarela de ${gateway}.`;
                         this.showPaymentSuccess = true;
                     }, 500);
                 }
