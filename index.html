@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Páginas Web Profesionales para tu Negocio en Chile | Más Clientes, Más Confianza</title>
+  <title>TuWebPro | Demos de Páginas Web Profesionales para Negocios</title>
   <meta name="description" content="Diseño páginas web profesionales para negocios, PYMEs y emprendedores en Chile. Sin complicaciones, con resultado real. Cotiza gratis por WhatsApp." />
   <meta name="theme-color" content="#282A36" />
   <meta name="robots" content="index, follow" />
@@ -1702,32 +1702,6 @@
       });
     });
 
-    // Dynamic tab title when user changes tabs
-    (function() {
-      const originalTitle = document.title;
-      const dynamicTitles = [
-        "👀 ¡No te vayas! Cotiza tu web gratis",
-        "🚀 Diseños premium listos para ver",
-        "📈 Tu negocio online hoy mismo"
-      ];
-      let titleIndex = 0;
-      let intervalId = null;
-
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-          intervalId = setInterval(() => {
-            document.title = dynamicTitles[titleIndex];
-            titleIndex = (titleIndex + 1) % dynamicTitles.length;
-          }, 3000);
-        } else {
-          if (intervalId) {
-            clearInterval(intervalId);
-            intervalId = null;
-          }
-          document.title = originalTitle;
-        }
-      });
-    })();
   </script>
 </body>
 </html>
