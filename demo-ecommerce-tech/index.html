@@ -1197,6 +1197,11 @@
                         </div>
                     </div>
                 </template>
+                <div x-show="getFilteredProducts().filter(p => p.active).length === 0" style="grid-column: 1 / -1; background-color: var(--bg-dark); border: 1px solid var(--bg-light); padding: 50px 30px; border-radius: 20px; text-align: center; color: var(--text-muted); width: 100%;" x-cloak>
+                    <div style="font-size: 3.5rem; margin-bottom: 20px;">📦</div>
+                    <h3 style="color: var(--text-light); margin-bottom: 12px; font-size: 1.5rem;">No hay productos disponibles</h3>
+                    <p style="font-size: 0.95rem; max-width: 500px; margin: 0 auto; line-height: 1.6;">Actualmente no tenemos productos disponibles en esta categoría. Agrega nuevos productos desde el panel de control o vuelve a consultar más tarde.</p>
+                </div>
             </div>
         </div>
     </section>

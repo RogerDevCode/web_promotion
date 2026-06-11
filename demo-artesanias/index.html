@@ -1263,8 +1263,10 @@
                             </div>
                         </template>
                         
-                        <div x-show="filteredProducts.length === 0" class="cart-empty-message" style="grid-column: span 3; padding: 4rem 0;">
-                            <p>No se encontraron piezas artesanales con ese nombre.</p>
+                        <div x-show="filteredProducts.length === 0" style="grid-column: 1 / -1; background-color: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 50px 30px; border-radius: 20px; text-align: center; color: var(--text-muted); width: 100%;" x-cloak>
+                            <div style="font-size: 3rem; margin-bottom: 20px;">🏺</div>
+                            <h3 style="color: var(--text-light); margin-bottom: 12px; font-size: 1.3rem;">No se encontraron piezas artesanales</h3>
+                            <p style="font-size: 0.9rem; max-width: 400px; margin: 0 auto; line-height: 1.6;">No tenemos piezas disponibles que coincidan con tu búsqueda o categoría seleccionada.</p>
                         </div>
                     </div>
                 </main>

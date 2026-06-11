@@ -586,7 +586,7 @@
     <!-- HEADER -->
     <header>
         <div class="container header-content">
-            <div class="logo">Roble<span>&Co</span></div>
+            <a href="#inicio" class="logo" style="text-decoration: none;">Roble<span>&Co</span></a>
             <nav>
                 <a href="#inicio">Inicio</a>
                 <a href="#pilares">Calidad</a>
@@ -669,6 +669,11 @@
                         </div>
                     </div>
                 </template>
+                <div x-show="products.filter(p => p.active).length === 0" style="grid-column: 1 / -1; background-color: var(--bg-card); border: 1px solid var(--border); padding: 50px 30px; border-radius: 20px; text-align: center; color: var(--text-muted); width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.25);" x-cloak>
+                    <div style="font-size: 3.5rem; margin-bottom: 20px;">📦</div>
+                    <h3 style="color: var(--text-light); margin-bottom: 12px; font-family: var(--font-headings); font-size: 1.5rem;">No hay productos disponibles</h3>
+                    <p style="font-size: 0.95rem; max-width: 500px; margin: 0 auto; line-height: 1.6;">Actualmente no tenemos productos activos en exhibición. Puedes añadir tus propios productos en el Panel Administrador o volver más tarde.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -763,7 +768,7 @@
         <div class="container">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
                 <div>
-                    <div class="logo" style="margin-bottom: 20px; color: var(--primary);">Roble<span style="color: var(--text-light);">&Co</span></div>
+                    <a href="#inicio" class="logo" style="margin-bottom: 20px; color: var(--primary); text-decoration: none;">Roble<span style="color: var(--text-light);">&Co</span></a>
                     <p style="color: var(--text-muted); line-height: 1.6;">Muebles de madera nativa hechos a mano por maestros mueblistas chilenos. Sostenibilidad, diseño y tradición.</p>
                 </div>
                 <div>
@@ -970,6 +975,35 @@
                     </div>
                 </div>
 
+                <!-- EDIT PRODUCT CARD (Shown only when editing) -->
+                <template x-if="editingProduct">
+                    <div style="margin-bottom: 20px; background-color: var(--bg-darkest); padding: 20px; border-radius: 12px; border: 1px solid var(--primary); box-shadow: 0 4px 20px rgba(224,140,56,0.15);">
+                        <h4 style="margin-bottom: 15px; color: var(--primary);">Editar Producto</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div>
+                                <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 5px;">Nombre</label>
+                                <input type="text" x-model="editingProduct.name" class="form-control">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 5px;">Precio (CLP)</label>
+                                <input type="number" x-model="editingProduct.price" class="form-control">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 5px;">Cargar Nueva Imagen (Opcional)</label>
+                                <input type="file" @change="handleEditImageUpload($event)" class="form-control" style="font-size: 0.75rem;">
+                            </div>
+                            <div style="grid-column: 1 / -1;">
+                                <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 5px;">Descripción</label>
+                                <input type="text" x-model="editingProduct.description" class="form-control">
+                            </div>
+                            <div style="grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 10px;">
+                                <button class="cta-btn" style="background: #334155; color: white;" @click="editingProduct = null">Cancelar</button>
+                                <button class="cta-btn" @click="updateProduct()">Guardar Cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
                 <h4 style="margin-bottom: 10px;">Inventario</h4>
                 <div style="overflow-x: auto;">
                     <table class="admin-table">
@@ -998,6 +1032,7 @@
                                         <button class="badge" :class="p.active ? 'badge-delivered' : 'badge-pending'" @click="toggleProductActive(p.id)" x-text="p.active ? 'Activo' : 'Inactivo'"></button>
                                     </td>
                                     <td>
+                                        <button @click="editProduct(p)" style="color: var(--primary); background: none; border: none; cursor: pointer; font-weight: 700; margin-right: 12px;">Editar</button>
                                         <button @click="deleteProduct(p.id)" style="color: var(--danger); background: none; border: none; cursor: pointer; font-weight: 700;">Eliminar</button>
                                     </td>
                                 </tr>
@@ -1171,6 +1206,7 @@
                 newProdPrice: '',
                 newProdDesc: '',
                 newProdImage: '',
+                editingProduct: null,
 
                 // Store hours settings
                 storeHours: {
@@ -1334,6 +1370,38 @@
                 },
 
                 // CRUD Methods
+                handleEditImageUpload(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            if (this.editingProduct) {
+                                this.editingProduct.image = e.target.result; // base64 string
+                            }
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                },
+
+                editProduct(product) {
+                    this.editingProduct = JSON.parse(JSON.stringify(product));
+                },
+
+                updateProduct() {
+                    if (!this.editingProduct || !this.editingProduct.name || !this.editingProduct.price) {
+                        alert('El nombre y el precio son obligatorios.');
+                        return;
+                    }
+                    this.products = this.products.map(p => {
+                        if (p.id === this.editingProduct.id) {
+                            return { ...this.editingProduct, price: parseFloat(this.editingProduct.price) };
+                        }
+                        return p;
+                    });
+                    this.saveProducts();
+                    this.editingProduct = null;
+                },
+
                 handleImageUpload(event) {
                     const file = event.target.files[0];
                     if (file) {
