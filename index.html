@@ -1701,6 +1701,33 @@
         }
       });
     });
+
+    // Dynamic tab title when user changes tabs
+    (function() {
+      const originalTitle = document.title;
+      const dynamicTitles = [
+        "👀 ¡No te vayas! Cotiza tu web gratis",
+        "🚀 Diseños premium listos para ver",
+        "📈 Tu negocio online hoy mismo"
+      ];
+      let titleIndex = 0;
+      let intervalId = null;
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          intervalId = setInterval(() => {
+            document.title = dynamicTitles[titleIndex];
+            titleIndex = (titleIndex + 1) % dynamicTitles.length;
+          }, 3000);
+        } else {
+          if (intervalId) {
+            clearInterval(intervalId);
+            intervalId = null;
+          }
+          document.title = originalTitle;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
