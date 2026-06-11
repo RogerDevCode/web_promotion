@@ -1580,5 +1580,14 @@
         </div>
     </div>
 
+    <!-- Botón Flotante para Volver al Showcase -->
+    <a href="../index.html#demos" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" 
+       style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #bd93f9; color: #1e1f29; padding: 12px 20px; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(189, 147, 249, 0.4); border: 2px solid #1e1f29; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
+       onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(189, 147, 249, 0.6)';"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(189, 147, 249, 0.4)';"
+       class="no-print">
+         <span>⬅️ Volver al Showcase</span>
+    </a>
+
 </body>
 </html>
