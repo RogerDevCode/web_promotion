@@ -759,7 +759,12 @@
                             <span class="product-category" x-text="item.category"></span>
                             <h4 x-text="item.name"></h4>
                             <p x-text="item.description"></p>
-                            <div class="product-price" x-text="formatPrice(item.price)"></div>
+                            <div class="product-price">
+                                <span style="font-size: 70%; font-weight: normal; color: var(--text-muted); margin-right: 4px; vertical-align: middle;">Desde</span>
+                                <span x-text="formatPrice(item.price)"></span>
+                                <span style="font-size: 70%; font-weight: normal; color: var(--text-muted); margin-left: 4px; vertical-align: middle;">CLP</span>
+                                <span style="font-size: 60%; font-weight: normal; color: var(--text-muted); margin-left: 4px; vertical-align: middle;">neto + IVA</span>
+                            </div>
                             <button class="cta-btn" style="width: 100%;" @click="addToCart(item)">Añadir a la Lista</button>
                         </div>
                     </div>
@@ -795,7 +800,7 @@
                             <span style="position: absolute; left: 12px; color: var(--text-muted); font-weight: bold;">$</span>
                         </div>
                         <button type="button" @click="simAmount = getCartTotal() > 0 ? getCartTotal() : 249990" style="background: none; border: none; color: var(--primary); font-size: 0.8rem; cursor: pointer; text-decoration: underline; margin-top: 8px; display: block;" x-show="getCartTotal() > 0">
-                            Usar total de la lista de cotización (<span x-text="formatPrice(getCartTotal())"></span>)
+                            Usar total de la lista de cotización (<span x-text="formatPrice(getCartTotal())"></span> <span style="font-size: 85%; font-weight: normal; opacity: 0.8;">CLP neto</span>)
                         </button>
                     </div>
                     
@@ -818,20 +823,32 @@
                         
                         <div style="display: flex; flex-direction: column; gap: 10px;">
                             <div style="display: flex; justify-content: space-between; font-size: 0.95rem;">
-                                <span style="color: var(--text-muted);">Monto Total:</span>
-                                <span style="font-weight: 600;" x-text="formatPrice(simAmount)"></span>
+                                <span style="color: var(--text-muted);">Monto Total (neto):</span>
+                                <span style="font-weight: 600;">
+                                    <span x-text="formatPrice(simAmount)"></span>
+                                    <span style="font-size: 75%; font-weight: normal; color: var(--text-muted); margin-left: 2px;">CLP</span>
+                                    <span style="font-size: 67%; font-weight: normal; color: var(--text-muted); margin-left: 2px;">neto</span>
+                                </span>
                             </div>
                             <div style="display: flex; justify-content: space-between; font-size: 0.95rem;">
                                 <span style="color: var(--text-muted);">Número de Cuotas:</span>
                                 <span style="font-weight: 600;" x-text="simInstallmentsType === 'sin-interes' ? '3 cuotas' : (simInstallmentsType === 'con-interes-6' ? '6 cuotas' : '12 cuotas')"></span>
                             </div>
                             <div style="display: flex; justify-content: space-between; font-size: 0.95rem;">
-                                <span style="color: var(--text-muted);">Costo por Cuota:</span>
-                                <span style="font-weight: bold; color: var(--success); font-size: 1.1rem;" x-text="formatPrice(calculateInstallmentFee())"></span>
+                                <span style="color: var(--text-muted);">Costo por Cuota (neto):</span>
+                                <span style="font-weight: bold; color: var(--success); font-size: 1.1rem;">
+                                    <span x-text="formatPrice(calculateInstallmentFee())"></span>
+                                    <span style="font-size: 75%; font-weight: normal; color: var(--success); margin-left: 2px;">CLP</span>
+                                    <span style="font-size: 67%; font-weight: normal; color: var(--text-muted); margin-left: 2px;">neto</span>
+                                </span>
                             </div>
                             <div style="display: flex; justify-content: space-between; font-size: 0.95rem; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 10px;">
-                                <span style="color: var(--text-light); font-weight: 600;">Total a Pagar:</span>
-                                <span style="font-weight: bold; color: var(--primary);" x-text="formatPrice(calculateInstallmentTotal())"></span>
+                                <span style="color: var(--text-light); font-weight: 600;">Total a Pagar (neto):</span>
+                                <span style="font-weight: bold; color: var(--primary);">
+                                    <span x-text="formatPrice(calculateInstallmentTotal())"></span>
+                                    <span style="font-size: 75%; font-weight: normal; color: var(--primary); margin-left: 2px;">CLP</span>
+                                    <span style="font-size: 67%; font-weight: normal; color: var(--text-muted); margin-left: 2px;">neto + IVA</span>
+                                </span>
                             </div>
                             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; line-height: 1.4;">
                                 <span x-show="simInstallmentsType === 'sin-interes'">* Promoción válida para todas las tarjetas de crédito chilenas (Transbank Webpay Plus).</span>
@@ -900,7 +917,11 @@
                     <div class="cart-item">
                         <div class="cart-item-info">
                             <h5 x-text="item.name"></h5>
-                            <p x-text="formatPrice(item.price)"></p>
+                            <p>
+                                <span x-text="formatPrice(item.price)"></span>
+                                <span style="font-size: 75%; font-weight: normal; color: var(--text-muted); margin-left: 4px;">CLP</span>
+                                <span style="font-size: 67%; font-weight: normal; color: var(--text-muted); margin-left: 4px;">neto</span>
+                            </p>
                         </div>
                         <button class="remove-btn" @click="removeFromCart(item.id)">Eliminar</button>
                     </div>
@@ -910,7 +931,11 @@
             <div class="cart-footer">
                 <div class="cart-total">
                     <span>Estimación Total:</span>
-                    <span x-text="formatPrice(getCartTotal())"></span>
+                    <span>
+                        <span x-text="formatPrice(getCartTotal())"></span>
+                        <span style="font-size: 75%; font-weight: normal; color: var(--text-muted); margin-left: 4px; vertical-align: middle;">CLP</span>
+                        <span style="font-size: 67%; font-weight: normal; color: var(--text-muted); margin-left: 4px; vertical-align: middle;">neto + IVA</span>
+                    </span>
                 </div>
                 <button class="cta-btn" style="width: 100%; padding: 15px; font-size: 1rem;" @click="openCheckout()">
                     Cotizar por WhatsApp
@@ -976,16 +1001,28 @@
                 <!-- Dynamic pricing breakdown inside modal -->
                 <div style="background-color: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-top: 20px; font-size: 0.9rem;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                        <span style="color: var(--text-muted);">Subtotal Servicios:</span>
-                        <span style="color: var(--text-light);" x-text="formatPrice(getCartTotal())"></span>
+                        <span style="color: var(--text-muted);">Subtotal Servicios (neto):</span>
+                        <span style="color: var(--text-light);">
+                            <span x-text="formatPrice(getCartTotal())"></span>
+                            <span style="font-size: 75%; font-weight: normal; color: var(--text-muted); margin-left: 2px;">CLP</span>
+                            <span style="font-size: 67%; font-weight: normal; color: var(--text-muted); margin-left: 2px;">neto</span>
+                        </span>
                     </div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 5px;" x-show="checkoutMethod === 'presencial'">
-                        <span style="color: var(--text-muted);">Traslado Comuna:</span>
-                        <span style="color: var(--text-light);" x-text="formatPrice(checkoutCommuneSurcharge())"></span>
+                        <span style="color: var(--text-muted);">Traslado Comuna (neto):</span>
+                        <span style="color: var(--text-light);">
+                            <span x-text="formatPrice(checkoutCommuneSurcharge())"></span>
+                            <span style="font-size: 75%; font-weight: normal; color: var(--text-muted); margin-left: 2px;">CLP</span>
+                            <span style="font-size: 67%; font-weight: normal; color: var(--text-muted); margin-left: 2px;">neto</span>
+                        </span>
                     </div>
                     <div style="display: flex; justify-content: space-between; font-weight: bold; border-top: 1px solid var(--border); padding-top: 8px; margin-top: 8px; color: var(--primary);">
                         <span>Total de Cotización:</span>
-                        <span x-text="formatPrice(getCartTotal() + (checkoutMethod === 'presencial' ? checkoutCommuneSurcharge() : 0))"></span>
+                        <span>
+                            <span x-text="formatPrice(getCartTotal() + (checkoutMethod === 'presencial' ? checkoutCommuneSurcharge() : 0))"></span>
+                            <span style="font-size: 75%; font-weight: normal; color: var(--primary); margin-left: 2px; vertical-align: middle;">CLP</span>
+                            <span style="font-size: 67%; font-weight: normal; color: var(--text-muted); margin-left: 4px; vertical-align: middle;">neto + IVA</span>
+                        </span>
                     </div>
                 </div>
 
@@ -1183,7 +1220,7 @@
                 simulatePayment(gateway) {
                     this.showPaymentSuccess = false;
                     setTimeout(() => {
-                        this.paymentSuccessMsg = `¡Simulación Exitosa! El pago de ${this.formatPrice(this.simAmount)} se procesó correctamente mediante la pasarela de ${gateway}.`;
+                        this.paymentSuccessMsg = `¡Simulación Exitosa! El pago de ${this.formatPrice(this.simAmount)} CLP neto (+ IVA) se procesó correctamente mediante la pasarela de ${gateway}.`;
                         this.showPaymentSuccess = true;
                     }, 500);
                 }
