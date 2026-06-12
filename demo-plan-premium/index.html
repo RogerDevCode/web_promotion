@@ -609,6 +609,273 @@
                 opacity: 0.95 !important;
             }
         }
+
+        /* Chatbot Widget Styles */
+        .chatbot-widget {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            font-family: var(--font-body);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        /* Chat bubble trigger */
+        .chatbot-bubble {
+            background-color: var(--primary);
+            color: #1e1f29;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(224, 140, 56, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        .chatbot-bubble:hover {
+            transform: scale(1.05) translateY(-2px);
+            background-color: var(--primary-hover);
+            box-shadow: 0 6px 24px rgba(224, 140, 56, 0.6);
+        }
+        .chatbot-bubble svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+        /* Chat Window */
+        .chatbot-window {
+            width: 380px;
+            max-width: 90vw;
+            height: 480px;
+            max-height: 80vh;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin-bottom: 15px;
+            animation: chatbotFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(10px);
+        }
+        @keyframes chatbotFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Chat Header */
+        .chatbot-header {
+            background-color: rgba(224, 140, 56, 0.1);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chatbot-header-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .chatbot-header-status {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success);
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .chatbot-header-title {
+            font-family: var(--font-headings);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+        .chatbot-header-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .chatbot-close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.5rem;
+            line-height: 1;
+            padding: 5px;
+            transition: color 0.2s;
+        }
+        .chatbot-close-btn:hover {
+            color: var(--text-light);
+        }
+        /* Chat Body */
+        .chatbot-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: radial-gradient(circle at top right, rgba(224, 140, 56, 0.03), transparent 60%);
+        }
+        .chatbot-msg {
+            display: flex;
+            flex-direction: column;
+            max-width: 85%;
+            font-size: 0.9rem;
+        }
+        .chatbot-msg.bot {
+            align-self: flex-start;
+        }
+        .chatbot-msg.user {
+            align-self: flex-end;
+        }
+        .chatbot-msg-bubble {
+            padding: 12px 16px;
+            border-radius: 16px;
+            line-height: 1.4;
+        }
+        .chatbot-msg.bot .chatbot-msg-bubble {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            border-bottom-left-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .chatbot-msg.user .chatbot-msg-bubble {
+            background-color: var(--primary);
+            color: #1e1f29;
+            border-bottom-right-radius: 4px;
+            font-weight: 500;
+        }
+        /* Typing Indicator */
+        .chatbot-typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 10px 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            width: fit-content;
+            border-bottom-left-radius: 4px;
+        }
+        .chatbot-typing-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--text-muted);
+            border-radius: 50%;
+            animation: chatbotTypingBounce 1.4s infinite ease-in-out both;
+        }
+        .chatbot-typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .chatbot-typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes chatbotTypingBounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        /* Quick suggestions */
+        .chatbot-quick-suggestions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 5px;
+        }
+        .chatbot-quick-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--primary);
+            padding: 10px 14px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            line-height: 1.3;
+        }
+        .chatbot-quick-btn:hover {
+            background-color: rgba(224, 140, 56, 0.1);
+            border-color: var(--primary);
+        }
+        /* Chat Footer */
+        .chatbot-footer-input {
+            padding: 15px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+            background-color: rgba(11, 12, 16, 0.5);
+        }
+        .chatbot-input-field {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 10px 18px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .chatbot-input-field:focus {
+            border-color: var(--primary);
+        }
+        .chatbot-send-btn {
+            background-color: var(--primary);
+            color: #1e1f29;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .chatbot-send-btn:hover {
+            background-color: var(--primary-hover);
+            transform: scale(1.05);
+        }
+        .chatbot-send-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            transform: translate(1px, 0px);
+        }
+        
+        /* Mobile responsiveness check for chatbot */
+        @media (max-width: 576px) {
+            .chatbot-window {
+                width: 320px;
+                height: 420px;
+                bottom: 10px;
+                right: 10px;
+            }
+            .chatbot-widget {
+                bottom: 15px;
+                right: 15px;
+            }
+            .chatbot-bubble {
+                padding: 10px 18px;
+                font-size: 0.875rem !important;
+            }
+            .chatbot-msg-bubble {
+                font-size: 0.875rem !important;
+            }
+            .chatbot-quick-btn {
+                font-size: 0.875rem !important;
+            }
+            .chatbot-input-field {
+                font-size: 0.875rem !important;
+            }
+        }
     </style>
 </head>
 <body x-data="loadStore()">
@@ -1391,6 +1658,65 @@
         </div>
     </div>
 
+    <!-- SIMULATED CHATBOT WIDGET -->
+    <div class="chatbot-widget" x-cloak>
+        <!-- Chat Window -->
+        <div x-show="isChatOpen" class="chatbot-window" x-transition>
+            <!-- Chat Header -->
+            <div class="chatbot-header">
+                <div class="chatbot-header-info">
+                    <span class="chatbot-header-status"></span>
+                    <div>
+                        <h4 class="chatbot-header-title">Asesor Digital</h4>
+                        <p class="chatbot-header-subtitle">En línea • Roble & Co.</p>
+                    </div>
+                </div>
+                <button type="button" @click="isChatOpen = false; resetChat();" class="chatbot-close-btn" aria-label="Cerrar chat">&times;</button>
+            </div>
+            
+            <!-- Chat Body -->
+            <div id="chat-body-container" class="chatbot-body">
+                <template x-for="(msg, idx) in chatMessages" :key="idx">
+                    <div :class="'chatbot-msg ' + msg.sender">
+                        <div class="chatbot-msg-bubble" x-text="msg.text"></div>
+                    </div>
+                </template>
+                
+                <!-- Typing Indicator -->
+                <div x-show="isTyping" class="chatbot-typing-indicator">
+                    <span class="chatbot-typing-dot"></span>
+                    <span class="chatbot-typing-dot"></span>
+                    <span class="chatbot-typing-dot"></span>
+                </div>
+                
+                <!-- Quick Suggestion Buttons -->
+                <div x-show="chatMessages.length === 1 && !isTyping" class="chatbot-quick-suggestions">
+                    <template x-for="q in quickQuestions" :key="q.text">
+                        <button type="button" class="chatbot-quick-btn" @click="selectQuickQuestion(q)" x-text="q.text"></button>
+                    </template>
+                </div>
+            </div>
+            
+            <!-- Chat Footer -->
+            <form @submit.prevent="sendChatMessage()" class="chatbot-footer-input">
+                <input type="text" x-model="chatInput" class="chatbot-input-field" placeholder="Escribe tu consulta..." :disabled="isTyping" aria-label="Mensaje del chat">
+                <button type="submit" class="chatbot-send-btn" :disabled="isTyping" aria-label="Enviar mensaje">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+        
+        <!-- Chat Bubble Trigger -->
+        <button type="button" x-show="!isChatOpen" @click="isChatOpen = true; scrollChat();" class="chatbot-bubble">
+            <svg viewBox="0 0 24 24">
+                <path d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M20,16H5.17L4,17.17V4H20V16Z"/>
+            </svg>
+            <span>Pregúntanos</span>
+        </button>
+    </div>
+
     <!-- STYLE FOR TRANSITIONS & SPIN ANIMATION -->
     <style>
         [x-cloak] { display: none !important; }
@@ -1447,6 +1773,19 @@
                 isAdminOpen: false,
                 adminTab: 'productos',
                 currentTheme: 'dark',
+                
+                // Chatbot Simulation State
+                isChatOpen: false,
+                chatInput: '',
+                isTyping: false,
+                chatMessages: [
+                    { sender: 'bot', text: '¡Hola! 👋 Ud. está hablando con nuestro Asesor Digital de Roble & Co. ¿En qué puedo ayudarte hoy?' }
+                ],
+                quickQuestions: [
+                    { text: '¿Qué maderas usan?', reply: 'Usamos maderas nobles chilenas seleccionadas y secadas en cámara: Roble nativo, Avellano, Ciprés y Pino Oregón.' },
+                    { text: '¿Cómo cotizar un mueble?', reply: 'Puedes usar el configurador interactivo "Diseña a Medida" en esta web para calcular tu mueble y enviarlo directo por WhatsApp.' },
+                    { text: '¿Hacen despachos a regiones?', reply: 'Sí, despachamos a todo Chile a través de Starken o Chilexpress, con opción de retiro presencial en nuestro taller en Santiago.' }
+                ],
                 
                 // Checkout form fields
                 checkoutName: '',
@@ -1958,6 +2297,49 @@
                         this.orders = this.orders.filter(o => o.id !== orderId);
                         this.saveOrders();
                     }
+                },
+
+                selectQuickQuestion(q) {
+                    if (this.isTyping) return;
+                    this.chatMessages.push({ sender: 'user', text: q.text });
+                    this.isTyping = true;
+                    this.scrollChat();
+                    setTimeout(() => {
+                        this.isTyping = false;
+                        this.chatMessages.push({ sender: 'bot', text: q.reply });
+                        this.scrollChat();
+                    }, 1000);
+                },
+                sendChatMessage() {
+                    if (!this.chatInput.trim() || this.isTyping) return;
+                    const userText = this.chatInput;
+                    this.chatMessages.push({ sender: 'user', text: userText });
+                    this.chatInput = '';
+                    this.isTyping = true;
+                    this.scrollChat();
+                    setTimeout(() => {
+                        this.isTyping = false;
+                        this.chatMessages.push({
+                            sender: 'bot',
+                            text: '¡Buena pregunta! Esta es una simulación interactiva de chatbot. En tu sitio web real, podemos conectar este chat a un servicio de Inteligencia Artificial (LLM + RAG) entrenado con todo tu catálogo y preguntas frecuentes, o conectarlo a WhatsApp Web.'
+                        });
+                        this.scrollChat();
+                    }, 1200);
+                },
+                scrollChat() {
+                    this.$nextTick(() => {
+                        const container = document.getElementById('chat-body-container');
+                        if (container) {
+                            container.scrollTop = container.scrollHeight;
+                        }
+                    });
+                },
+                resetChat() {
+                    this.chatInput = '';
+                    this.isTyping = false;
+                    this.chatMessages = [
+                        { sender: 'bot', text: '¡Hola! 👋 Ud. está hablando con nuestro Asesor Digital de Roble & Co. ¿En qué puedo ayudarte hoy?' }
+                    ];
                 },
 
                 openAdminModal() {
