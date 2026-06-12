@@ -142,6 +142,21 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    /* Responsive typography legibility overrides for mobile devices */
+    @media (max-width: 768px) {
+      .text-xs {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+      }
+      .text-sm {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+      }
+      .text-drac-comment {
+        color: #a9aab5 !important; /* Brighter gray on mobile for higher accessibility contrast */
+      }
+    }
+
     body {
       font-family: 'Inter', system-ui, sans-serif;
       background: #1E1F29;
@@ -1175,8 +1190,8 @@
           <div class="reveal rounded-[2rem] border border-drac-current/40 bg-drac-bg/80 overflow-hidden transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover hover:-translate-y-1 flex flex-col h-full">
             <div class="p-8 flex-grow">
               <p class="text-sm font-bold uppercase tracking-[0.2em] text-chile-blueLight">Esencial</p>
-              <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$149.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 67%; font-weight: normal; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
-              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 2 cuotas precio contado de $74.995 CLP <span style="font-size: 67%; font-weight: normal; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
+              <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$149.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 75%; font-weight: 500; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
+              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 2 cuotas precio contado de $74.995 CLP <span style="font-size: 75%; font-weight: 500; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
               <p class="mt-1 text-xs text-drac-comment">Pago único • Hosting por 12 meses</p>
               <div class="mt-6 h-px bg-drac-current/30"></div>
               <ul class="mt-6 space-y-3">
@@ -1219,8 +1234,8 @@
           <div class="reveal rounded-[2rem] border border-drac-current/40 bg-drac-bg/80 overflow-hidden transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover hover:-translate-y-1 flex flex-col h-full" style="transition-delay: .04s">
             <div class="p-8 flex-grow">
               <p class="text-sm font-bold uppercase tracking-[0.2em] text-chile-blueLight">Local / Mapa</p>
-              <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$199.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 67%; font-weight: normal; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
-              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 3 cuotas precio contado de $66.663 CLP <span style="font-size: 67%; font-weight: normal; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
+              <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$199.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 75%; font-weight: 500; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
+              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 3 cuotas precio contado de $66.663 CLP <span style="font-size: 75%; font-weight: 500; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
               <p class="mt-1 text-xs text-drac-comment">Pago único • Ideal para locales físicos</p>
               <div class="mt-6 h-px bg-drac-current/30"></div>
               <ul class="mt-6 space-y-3">
@@ -1263,8 +1278,8 @@
             </div>
             <div class="p-8 flex-grow">
               <p class="text-sm font-bold uppercase tracking-[0.2em] text-chile-blueLight">Profesional</p>
-              <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$249.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 67%; font-weight: normal; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
-              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 3 cuotas precio contado de $83.330 CLP <span style="font-size: 67%; font-weight: normal; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
+              <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$249.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 75%; font-weight: 500; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
+              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 3 cuotas precio contado de $83.330 CLP <span style="font-size: 75%; font-weight: 500; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
               <p class="mt-1 text-xs text-drac-comment">Pago único • Hosting por 12 meses</p>
               <ul class="mt-6 space-y-3">
                 <li class="flex items-start gap-3 text-sm text-drac-fg font-medium">
@@ -1316,8 +1331,8 @@
           <div class="reveal rounded-[2rem] border border-drac-current/40 bg-drac-bg/80 overflow-hidden transition-all duration-300 hover:border-drac-purple/30 hover:shadow-card-hover hover:-translate-y-1 flex flex-col h-full" style="transition-delay: .16s">
             <div class="p-8 flex-grow">
               <p class="text-sm font-bold uppercase tracking-[0.2em] text-drac-purple">Premium</p>
-              <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$449.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 67%; font-weight: normal; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
-              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 3 cuotas precio contado de $149.997 CLP <span style="font-size: 67%; font-weight: normal; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
+              <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$449.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 75%; font-weight: 500; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
+              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 3 cuotas precio contado de $149.997 CLP <span style="font-size: 75%; font-weight: 500; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
               <p class="mt-1 text-xs text-drac-comment">Pago único • Dominio .cl gratis 1er año</p>
               <div class="mt-6 h-px bg-drac-current/30"></div>
               <ul class="mt-6 space-y-3">
