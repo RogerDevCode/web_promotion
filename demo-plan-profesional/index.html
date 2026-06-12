@@ -624,6 +624,32 @@
             font-weight: 600;
             font-size: 0.9rem;
         }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 0.95rem;
+            }
+            .header-content {
+                flex-direction: column;
+                height: auto;
+                padding: 10px 0;
+                gap: 10px;
+            }
+            nav {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .demo-bar {
+                margin-top: 90px;
+            }
+            .hero {
+                padding-top: 100px;
+            }
+        }
     </style>
 </head>
 <body x-data="loadStore()">
