@@ -171,17 +171,32 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     /* Responsive typography legibility overrides for mobile devices */
+    /* Responsive custom typography system without !important */
+    .text-responsive-detail {
+      font-size: 12px;
+    }
+    .text-responsive-caption {
+      font-size: 10px;
+    }
+    .text-responsive-disclaimer {
+      font-size: 10px;
+    }
     @media (max-width: 768px) {
-      .text-xs {
-        font-size: 14px !important; /* Standardized minimum font size for B2C/B2B legibility */
-        line-height: 1.45 !important;
+      html body .text-responsive-detail,
+      html body .text-responsive-caption,
+      html body .text-responsive-disclaimer,
+      html body .text-xs,
+      html body .demo-bar a,
+      html body .demo-bar span {
+        font-size: 14px;
+        line-height: 1.45;
       }
-      .text-sm {
-        font-size: 15px !important;
-        line-height: 1.5 !important;
+      html body .text-sm {
+        font-size: 15px;
+        line-height: 1.5;
       }
       .text-drac-comment {
-        color: #c5c6d0 !important; /* Brighter high-contrast text color on mobile for maximum legibility */
+        color: #c5c6d0 !important; /* Kept only for color contrast override */
       }
     }
 
@@ -403,7 +418,7 @@
         </span>
         <div>
           <p class="text-sm font-extrabold tracking-tight text-drac-fg font-display">TuWebPro<span class="text-chile-red">.cl</span></p>
-          <p class="text-[10px] font-medium text-drac-comment tracking-wider uppercase">Diseño Web Profesional</p>
+          <p class="text-responsive-caption font-medium text-drac-comment tracking-wider uppercase">Diseño Web Profesional</p>
         </div>
       </a>
 
@@ -524,19 +539,19 @@
                       tunegocio.cl
                     </div>
                   </div>
-                  <span class="rounded-full bg-chile-blue/15 px-3 py-1 text-[10px] font-bold text-chile-blueLight uppercase tracking-wider">Vista previa</span>
+                  <span class="rounded-full bg-chile-blue/15 px-3 py-1 text-responsive-caption font-bold text-chile-blueLight uppercase tracking-wider">Vista previa</span>
                 </div>
 
                 <!-- Mock website content -->
                 <div class="p-5 space-y-4">
                   <!-- Mini hero -->
                   <div class="rounded-2xl bg-gradient-to-br from-chile-blue via-chile-blueLight to-chile-blueDark p-6 text-white">
-                    <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">Tu marca aquí</p>
+                    <p class="text-responsive-caption font-bold uppercase tracking-[0.2em] text-white/60">Tu marca aquí</p>
                     <h2 class="mt-2 font-display text-xl font-bold leading-tight">Soluciones profesionales para tu hogar</h2>
                     <p class="mt-2 text-xs text-white/70 leading-relaxed">Más de 10 años de experiencia al servicio de tu tranquilidad.</p>
                     <div class="mt-4 flex gap-2">
-                      <span class="rounded-full bg-white/20 px-3 py-1.5 text-[10px] font-bold">Cotizar Ahora</span>
-                      <span class="rounded-full border border-white/30 px-3 py-1.5 text-[10px] font-bold">Ver Servicios</span>
+                      <span class="rounded-full bg-white/20 px-3 py-1.5 text-responsive-caption font-bold">Cotizar Ahora</span>
+                      <span class="rounded-full border border-white/30 px-3 py-1.5 text-responsive-caption font-bold">Ver Servicios</span>
                     </div>
                   </div>
 
@@ -544,15 +559,15 @@
                   <div class="grid grid-cols-3 gap-2">
                     <div class="rounded-xl bg-drac-current/40 p-3 text-center">
                       <div class="mx-auto h-8 w-8 rounded-lg bg-chile-blue/20 flex items-center justify-center text-chile-blueLight text-sm">⚡</div>
-                      <p class="mt-2 text-[9px] font-bold text-drac-fg">Rápido</p>
+                      <p class="mt-2 text-responsive-caption font-bold text-drac-fg">Rápido</p>
                     </div>
                     <div class="rounded-xl bg-drac-current/40 p-3 text-center">
                       <div class="mx-auto h-8 w-8 rounded-lg bg-drac-green/20 flex items-center justify-center text-drac-green text-sm">✓</div>
-                      <p class="mt-2 text-[9px] font-bold text-drac-fg">Confiable</p>
+                      <p class="mt-2 text-responsive-caption font-bold text-drac-fg">Confiable</p>
                     </div>
                     <div class="rounded-xl bg-drac-current/40 p-3 text-center">
                       <div class="mx-auto h-8 w-8 rounded-lg bg-chile-red/20 flex items-center justify-center text-chile-red text-sm">★</div>
-                      <p class="mt-2 text-[9px] font-bold text-drac-fg">Premium</p>
+                      <p class="mt-2 text-responsive-caption font-bold text-drac-fg">Premium</p>
                     </div>
                   </div>
 
@@ -561,18 +576,18 @@
                     <div class="flex items-center gap-3">
                       <div class="h-8 w-8 rounded-full bg-gradient-to-br from-chile-blue to-drac-purple flex items-center justify-center text-white text-xs font-bold">MC</div>
                       <div>
-                        <p class="text-[10px] font-bold text-drac-fg">María C. — Peluquería</p>
+                        <p class="text-responsive-caption font-bold text-drac-fg">María C. — Peluquería</p>
                         <div class="flex gap-0.5 mt-0.5">
-                          <span class="text-drac-orange text-[8px]">★★★★★</span>
+                          <span class="text-drac-orange text-responsive-caption">★★★★★</span>
                         </div>
                       </div>
                     </div>
-                    <p class="mt-2 text-[9px] text-drac-comment leading-relaxed italic">"Desde que tengo mi página me llegan clientes nuevos cada semana"</p>
+                    <p class="mt-2 text-responsive-detail text-drac-comment leading-relaxed italic">"Desde que tengo mi página me llegan clientes nuevos cada semana"</p>
                   </div>
 
                   <!-- WhatsApp bar -->
                   <div class="rounded-xl bg-[#25D366]/15 border border-[#25D366]/20 p-3 flex items-center justify-between">
-                    <span class="text-[10px] font-bold text-[#25D366]">💬 Contactar por WhatsApp</span>
+                    <span class="text-responsive-caption font-bold text-[#25D366]">💬 Contactar por WhatsApp</span>
                     <span class="h-2 w-2 rounded-full bg-[#25D366] animate-pulse-soft"></span>
                   </div>
                 </div>
@@ -585,8 +600,8 @@
                     <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                   </span>
                   <div>
-                    <p class="text-[10px] font-bold text-drac-fg">Adaptada a Celular</p>
-                    <p class="text-[9px] text-drac-comment">Se ve perfecto en todo</p>
+                    <p class="text-responsive-caption font-bold text-drac-fg">Adaptada a Celular</p>
+                    <p class="text-responsive-caption text-drac-comment">Se ve perfecto en todo</p>
                   </div>
                 </div>
               </div>
@@ -598,8 +613,8 @@
                     <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
                   </span>
                   <div>
-                    <p class="text-[10px] font-bold text-drac-fg">Carga Ultra Rápida</p>
-                    <p class="text-[9px] text-drac-comment">Menos de 1 segundo</p>
+                    <p class="text-responsive-caption font-bold text-drac-fg">Carga Ultra Rápida</p>
+                    <p class="text-responsive-caption text-drac-comment">Menos de 1 segundo</p>
                   </div>
                 </div>
               </div>
@@ -1062,7 +1077,7 @@
                   <div class="flex-1">
                     <div class="flex items-center gap-3 mb-3">
                       <h3 class="text-xl font-bold text-drac-fg">Conversamos sobre tu negocio</h3>
-                      <span class="rounded-full bg-chile-blue/10 px-3 py-1 text-[10px] font-bold text-chile-blueLight uppercase tracking-wider">15 min</span>
+                      <span class="rounded-full bg-chile-blue/10 px-3 py-1 text-responsive-caption font-bold text-chile-blueLight uppercase tracking-wider">15 min</span>
                     </div>
                     <p class="text-sm leading-relaxed text-drac-comment">Me cuentas qué haces, a quién le vendes y qué quieres lograr con tu página. Es una conversación relajada por WhatsApp o videollamada. Sin compromisos.</p>
                   </div>
@@ -1085,7 +1100,7 @@
                   <div class="flex-1">
                     <div class="flex items-center gap-3 mb-3">
                       <h3 class="text-xl font-bold text-drac-fg">Armo el contenido y estructura</h3>
-                      <span class="rounded-full bg-chile-red/10 px-3 py-1 text-[10px] font-bold text-chile-red uppercase tracking-wider">2–3 días</span>
+                      <span class="rounded-full bg-chile-red/10 px-3 py-1 text-responsive-caption font-bold text-chile-red uppercase tracking-wider">2–3 días</span>
                     </div>
                     <p class="text-sm leading-relaxed text-drac-comment">Organizo las secciones de tu página, escribo los textos que mejor comunican lo que haces y defino la estructura que va a convencer a tus clientes.</p>
                   </div>
@@ -1108,7 +1123,7 @@
                   <div class="flex-1">
                     <div class="flex items-center gap-3 mb-3">
                       <h3 class="text-xl font-bold text-drac-fg">Diseño y ajustes contigo</h3>
-                      <span class="rounded-full bg-drac-purple/10 px-3 py-1 text-[10px] font-bold text-drac-purple uppercase tracking-wider">3–5 días</span>
+                      <span class="rounded-full bg-drac-purple/10 px-3 py-1 text-responsive-caption font-bold text-drac-purple uppercase tracking-wider">3–5 días</span>
                     </div>
                     <p class="text-sm leading-relaxed text-drac-comment">Construyo tu página con diseño profesional. Te muestro un borrador para que lo revises y hacemos los ajustes que necesites hasta que quede como tú quieres.</p>
                   </div>
@@ -1131,7 +1146,7 @@
                   <div class="flex-1">
                     <div class="flex items-center gap-3 mb-3">
                       <h3 class="text-xl font-bold text-drac-fg">¡Tu página queda online!</h3>
-                      <span class="rounded-full bg-drac-green/10 px-3 py-1 text-[10px] font-bold text-drac-green uppercase tracking-wider">1 día</span>
+                      <span class="rounded-full bg-drac-green/10 px-3 py-1 text-responsive-caption font-bold text-drac-green uppercase tracking-wider">1 día</span>
                     </div>
                     <p class="text-sm leading-relaxed text-drac-comment">Publico tu página en internet, configuro todo lo técnico y te la entrego funcionando. Listo, ya puedes compartir tu link con todos tus clientes.</p>
                   </div>
@@ -1221,7 +1236,7 @@
             <div class="p-8 flex-grow">
               <p class="text-sm font-bold uppercase tracking-[0.2em] text-chile-blueLight">Esencial</p>
               <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$149.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 80%; font-weight: 600; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
-              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 2 cuotas precio contado de $74.995 CLP <span style="font-size: 80%; font-weight: 600; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
+              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 2 cuotas precio contado de $74.995 CLP <span class="text-responsive-detail" style="font-weight: 600; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
               <p class="mt-1 text-xs text-drac-comment">Pago único • Hosting por 12 meses</p>
               <div class="mt-6 h-px bg-drac-current/30"></div>
               <ul class="mt-6 space-y-3">
@@ -1278,7 +1293,7 @@
             <div class="p-8 flex-grow">
               <p class="text-sm font-bold uppercase tracking-[0.2em] text-chile-blueLight">Local / Mapa</p>
               <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$199.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 80%; font-weight: 600; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
-              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 3 cuotas precio contado de $66.663 CLP <span style="font-size: 80%; font-weight: 600; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
+              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 3 cuotas precio contado de $66.663 CLP <span class="text-responsive-detail" style="font-weight: 600; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
               <p class="mt-1 text-xs text-drac-comment">Pago único • Ideal para locales físicos</p>
               <div class="mt-6 h-px bg-drac-current/30"></div>
               <ul class="mt-6 space-y-3">
@@ -1335,7 +1350,7 @@
             <div class="p-8 flex-grow">
               <p class="text-sm font-bold uppercase tracking-[0.2em] text-chile-blueLight">Profesional</p>
               <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$249.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 80%; font-weight: 600; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
-              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 3 cuotas precio contado de $83.330 CLP <span style="font-size: 80%; font-weight: 600; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
+              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 3 cuotas precio contado de $83.330 CLP <span class="text-responsive-detail" style="font-weight: 600; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
               <p class="mt-1 text-xs text-drac-comment">Pago único • Hosting por 12 meses</p>
               <ul class="mt-6 space-y-3">
                 <li class="flex items-start gap-3 text-sm text-drac-fg font-medium">
@@ -1412,7 +1427,7 @@
             <div class="p-8 flex-grow">
               <p class="text-sm font-bold uppercase tracking-[0.2em] text-drac-purple">Premium</p>
               <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$449.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 80%; font-weight: 600; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
-              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 3 cuotas precio contado de $149.997 CLP <span style="font-size: 80%; font-weight: 600; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
+              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 3 cuotas precio contado de $149.997 CLP <span class="text-responsive-detail" style="font-weight: 600; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
               <p class="mt-1 text-xs text-drac-comment">Pago único • Dominio .cl gratis 1er año</p>
               <div class="mt-6 h-px bg-drac-current/30"></div>
               <ul class="mt-6 space-y-3">
@@ -1798,7 +1813,7 @@
             </span>
             <div>
               <p class="text-sm font-bold text-drac-fg">TuWebPro<span class="text-chile-red">.cl</span></p>
-              <p class="text-[10px] text-drac-comment">Diseño Web Profesional</p>
+              <p class="text-responsive-caption text-drac-comment">Diseño Web Profesional</p>
             </div>
           </div>
           <p class="text-xs text-drac-comment leading-relaxed">Páginas web profesionales para negocios, PYMEs y emprendedores en Chile. Sin complicaciones, con resultado real.</p>
@@ -1830,7 +1845,7 @@
           </div>
 
           <div class="mt-6 rounded-xl border border-drac-current/30 bg-drac-bg/40 p-3">
-            <p class="text-[10px] text-drac-comment leading-relaxed">
+            <p class="text-responsive-caption text-drac-comment leading-relaxed">
               <span class="text-drac-green font-bold">●</span> Hosting gratuito en GitHub Pages / Vercel<br>
               <span class="text-chile-blueLight font-bold">●</span> Certificado SSL incluido (HTTPS)<br>
               <span class="text-drac-orange font-bold">●</span> Página 100% autocontenida
@@ -1840,14 +1855,14 @@
       </div>
 
       <div class="mt-8 border-t border-drac-current/10 pt-6">
-        <p class="text-[10px] text-drac-comment leading-relaxed max-w-4xl mx-auto text-center">
+        <p class="text-responsive-caption text-drac-comment leading-relaxed max-w-4xl mx-auto text-center">
           * La integración de pasarelas (Webpay, MercadoPago, Flow) es opcional. El cliente debe abrir una cuenta comercial en la plataforma elegida (como empresa o persona natural con inicio de actividades en el SII) y entregar las credenciales de conexión para habilitarla en la web.
         </p>
       </div>
 
       <div class="mt-10 flex flex-col items-center gap-3 border-t border-drac-current/20 pt-8 text-center sm:flex-row sm:justify-between">
         <p class="text-xs text-drac-comment">© 2026 TuWebPro.cl — Todos los derechos reservados</p>
-        <p class="text-[10px] text-drac-comment/50">Hecho con ❤️ en Chile • HTML + Tailwind CSS + Alpine.js</p>
+        <p class="text-responsive-caption text-drac-comment/50">Hecho con ❤️ en Chile • HTML + Tailwind CSS + Alpine.js</p>
       </div>
     </div>
   </footer>

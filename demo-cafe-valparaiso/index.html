@@ -1235,6 +1235,42 @@
                 opacity: 1;
             }
         }
+
+        .text-responsive-detail {
+            font-size: 0.85rem;
+        }
+        .text-responsive-caption {
+            font-size: 0.75rem;
+        }
+        .text-responsive-disclaimer {
+            font-size: 0.7rem;
+        }
+        @media (max-width: 768px) {
+            html body .text-responsive-detail,
+            html body .text-responsive-caption,
+            html body .text-responsive-disclaimer,
+            html body .tag,
+            html body .tag-special,
+            html body .demo-bar a,
+            html body .demo-bar span,
+            html body footer p,
+            html body .scroll-down,
+            html body .scroll-down span {
+                font-size: 14px;
+                line-height: 1.45;
+            }
+        }
+
+        .showcase-back-btn {
+            font-size: 0.85rem;
+        }
+        @media (max-width: 768px) {
+            html body .showcase-back-btn,
+            html body .showcase-back-btn span {
+                font-size: 14px;
+                line-height: 1.45;
+            }
+        }
     </style>
 </head>
 <body x-data="{ 
@@ -1468,7 +1504,7 @@
                 <div class="bento-card bento-card-large-double">
                     <div class="bento-img-bg" style="background-image: linear-gradient(rgba(44, 30, 23, 0.4), rgba(44, 30, 23, 0.85)), url('coffee.png');">
                         <div class="card-content">
-                            <span style="color: var(--accent); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Nuestra Pasión</span>
+                            <span class="text-responsive-detail" style="color: var(--accent); font-weight: 700;  text-transform: uppercase; letter-spacing: 1px;">Nuestra Pasión</span>
                             <h3 style="color: var(--text-light); font-size: 1.8rem; margin-top: 0.5rem; margin-bottom: 1rem;">Cafetería de Especialidad</h3>
                             <p>Tostamos granos seleccionados de cooperativas sustentables de todo el mundo. Cada taza es preparada por baristas dedicados, destacando notas frutales, dulces y un cuerpo balanceado que complementa la brisa del puerto.</p>
                         </div>
@@ -1505,7 +1541,7 @@
                 <div class="bento-card bento-card-double">
                     <div class="bento-img-bg" style="background-image: linear-gradient(rgba(44, 30, 23, 0.4), rgba(44, 30, 23, 0.85)), url('cazuela.png');">
                         <div class="card-content">
-                            <span style="color: var(--accent); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Almuerzos Tradicionales</span>
+                            <span class="text-responsive-detail" style="color: var(--accent); font-weight: 700;  text-transform: uppercase; letter-spacing: 1px;">Almuerzos Tradicionales</span>
                             <h3 style="color: var(--text-light); font-size: 1.6rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">El Menú Casero de la Abuela</h3>
                             <p>Todos los días servimos platos clásicos chilenos como nuestra famosa cazuela de vacuno en vasija de greda, empanadas de pino y pastel de choclo, acompañados de pan amasado calentito.</p>
                         </div>
@@ -1536,7 +1572,7 @@
                     <div class="bento-img-bg" style="background-image: linear-gradient(rgba(44, 30, 23, 0.5), rgba(44, 30, 23, 0.95)), url('exterior.png'); padding: 1.5rem;">
                         <div class="card-content">
                             <h3 style="color: var(--text-light); font-size: 1.25rem; margin-bottom: 0.5rem;">Vista Privilegiada</h3>
-                            <p style="font-size: 0.85rem; line-height: 1.4;">Disfruta tu café con una vista única al Cerro Concepción y los cerros patrimoniales.</p>
+                            <p class="text-responsive-detail" style=" line-height: 1.4;">Disfruta tu café con una vista única al Cerro Concepción y los cerros patrimoniales.</p>
                         </div>
                     </div>
                 </div>
@@ -1566,9 +1602,9 @@
             <!-- COMBO RÁPIDO: Fast One-Click Order -->
             <div style="background: linear-gradient(135deg, #c85c32 0%, #8B3A1F 100%); border-radius: 16px; padding: 20px 24px; margin-bottom: 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: 0 8px 24px rgba(200, 92, 50, 0.25);">
               <div>
-                <p style="font-size: 0.7rem; color: rgba(255,255,255,0.7); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;">⚡ PEDIDO RÁPIDO</p>
+                <p class="text-responsive-disclaimer" style=" color: rgba(255,255,255,0.7); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;">⚡ PEDIDO RÁPIDO</p>
                 <h3 style="color: #fff; font-family: var(--font-headings); font-size: 1.25rem; margin-bottom: 4px;" x-text="timeOfDay === 'manana' ? 'Combo Brunch: Café + Tostada Artesanal' : timeOfDay === 'almuerzo' ? 'Combo Almuerzo: Cazuela + Bebida' : 'Combo Tarde: Café + Pastel del Día'"></h3>
-                <p style="color: rgba(255,255,255,0.8); font-size: 0.85rem;" x-text="timeOfDay === 'manana' ? '$6.800 · Listo en 12 min' : timeOfDay === 'almuerzo' ? '$9.500 · Plato del día incluido' : '$5.200 · Café de especialidad'"></p>
+                <p class="text-responsive-detail" style="color: rgba(255,255,255,0.8); " x-text="timeOfDay === 'manana' ? '$6.800 · Listo en 12 min' : timeOfDay === 'almuerzo' ? '$9.500 · Plato del día incluido' : '$5.200 · Café de especialidad'"></p>
               </div>
               <a :href="`https://wa.me/56987654321?text=${encodeURIComponent('Hola Café La Ruta! Quiero pedir el ' + (timeOfDay === 'manana' ? 'Combo Brunch: Café + Tostada Artesanal ($6.800)' : timeOfDay === 'almuerzo' ? 'Combo Almuerzo: Cazuela + Bebida ($9.500)' : 'Combo Tarde: Café + Pastel del Día ($5.200)') + ' para retiro en tienda. Cuándo está listo?')}`"
                  target="_blank"
@@ -1767,8 +1803,8 @@
             <span class="order-preview-price" x-text="'$' + orderTotal.toLocaleString('es-CL')">0</span>
         </div>
         <div style="display: flex; gap: 0.5rem;">
-            <button @click="resetOrder()" class="btn btn-outline-white" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Limpiar</button>
-            <button @click="openBooking()" class="btn btn-primary" style="background-color: var(--primary); padding: 0.5rem 1.25rem; font-size: 0.85rem;">Reservar Mesa</button>
+            <button @click="resetOrder()" class="btn btn-outline-white" class="text-responsive-detail" style="padding: 0.5rem 1rem; ">Limpiar</button>
+            <button @click="openBooking()" class="btn btn-primary" class="text-responsive-detail" style="background-color: var(--primary); padding: 0.5rem 1.25rem; ">Reservar Mesa</button>
         </div>
     </div>
 
@@ -1862,7 +1898,7 @@
                         </div>
                         <div>
                             <h5 style="color: var(--secondary); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem;">¿Dudas rápidas?</h5>
-                            <p style="font-size: 0.8rem; margin: 0; color: var(--text-muted);">Escríbenos directamente al chat de asistencia.</p>
+                            <p class="text-responsive-detail" style=" margin: 0; color: var(--text-muted);">Escríbenos directamente al chat de asistencia.</p>
                         </div>
                     </div>
                 </div>
@@ -1970,7 +2006,7 @@
                 <p>&copy; 2026 Café La Ruta - Todos los derechos reservados.</p>
                 <p>Diseño web optimizado para el usuario chileno.</p>
             </div>
-            <div style="border-top: 1px solid rgba(250, 243, 232, 0.1); padding-top: 15px; margin-top: 15px; text-align: center; font-size: 0.75rem; color: rgba(250, 243, 232, 0.5); line-height: 1.5;">
+            <div class="text-responsive-caption" style="border-top: 1px solid rgba(250, 243, 232, 0.1); padding-top: 15px; margin-top: 15px; text-align: center;  color: rgba(250, 243, 232, 0.5); line-height: 1.5;">
                 * La integración de pasarelas (Webpay, MercadoPago, Flow) es opcional. El cliente debe abrir una cuenta comercial en la plataforma elegida (como empresa o persona natural con inicio de actividades en el SII) y entregar las credenciales de conexión para habilitarla en la web.
             </div>
         </div>
@@ -2117,10 +2153,9 @@
 
     <!-- Botón Flotante para Volver al Showcase -->
     <a href="../index.html#demos" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" 
-       style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #bd93f9; color: #1e1f29; padding: 12px 20px; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(189, 147, 249, 0.4); border: 2px solid #1e1f29; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
+       class="showcase-back-btn no-print text-responsive-detail" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #bd93f9; color: #1e1f29; padding: 12px 20px; border-radius: 50px; font-family: 'Inter', sans-serif;  font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(189, 147, 249, 0.4); border: 2px solid #1e1f29; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
        onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(189, 147, 249, 0.6)';"
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(189, 147, 249, 0.4)';"
-       class="no-print">
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(189, 147, 249, 0.4)';">
          <span>⬅️ Volver al Showcase</span>
     </a>
 

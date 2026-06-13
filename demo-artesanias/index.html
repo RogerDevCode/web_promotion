@@ -997,6 +997,44 @@
             50% { transform: scale(1.3); opacity: 0.7; }
             100% { transform: scale(0.9); opacity: 1; }
         }
+
+        .text-responsive-detail {
+            font-size: 0.85rem;
+        }
+        .text-responsive-caption {
+            font-size: 0.75rem;
+        }
+        .text-responsive-disclaimer {
+            font-size: 0.6rem;
+        }
+        @media (max-width: 768px) {
+            html body .text-responsive-detail,
+            html body .text-responsive-caption,
+            html body .text-responsive-disclaimer,
+            html body .filter-btn-qty,
+            html body .product-origin,
+            html body .product-desc,
+            html body .origin-stamp,
+            html body .origin-stamp span,
+            html body footer p,
+            html body footer div,
+            html body .demo-bar a,
+            html body .demo-bar span {
+                font-size: 14px;
+                line-height: 1.45;
+            }
+        }
+
+        .showcase-back-btn {
+            font-size: 0.85rem;
+        }
+        @media (max-width: 768px) {
+            html body .showcase-back-btn,
+            html body .showcase-back-btn span {
+                font-size: 14px;
+                line-height: 1.45;
+            }
+        }
     </style>
 </head>
 <body x-data="{
@@ -1172,8 +1210,8 @@
          @click="cartDrawer = true; showMiniCart = false">
         <span>🛒</span>
         <span x-text="cartCount + (cartCount === 1 ? ' artículo' : ' artículos')"></span>
-        <span style="background: var(--accent-gold); color: var(--primary-forest); padding: 2px 10px; border-radius: 20px; font-size: 0.8rem;" x-text="'$' + cartTotal.toLocaleString('es-CL')"></span>
-        <span style="opacity: 0.7; font-size: 0.75rem;">Ver →</span>
+        <span class="text-responsive-caption" style="background: var(--accent-gold); color: var(--primary-forest); padding: 2px 10px; border-radius: 20px; " x-text="'$' + cartTotal.toLocaleString('es-CL')"></span>
+        <span class="text-responsive-caption" style="opacity: 0.7; ">Ver →</span>
     </div>
 
     <!-- Success Toast -->
@@ -1293,7 +1331,7 @@
                                     <img :src="product.image" :alt="product.name" class="product-img">
                                     <div class="origin-stamp">
                                         <span>Origen</span>
-                                        <span x-text="product.origin" style="color: var(--accent-gold); font-size: 0.55rem; font-weight: 800;"></span>
+                                        <span x-text="product.origin" class="text-responsive-disclaimer" style="color: var(--accent-gold);  font-weight: 800;"></span>
                                     </div>
                                 </div>
                                 
@@ -1353,7 +1391,7 @@
                         </svg>
                         <span>Artesanías del Sur</span>
                     </div>
-                    <p style="opacity: 0.8; font-size: 0.85rem; max-width: 300px; line-height: 1.4;">Comercio justo directo de origen. Cada pieza es única, tejida y tallada a mano en la Patagonia y zona central chilena.</p>
+                    <p class="text-responsive-detail" style="opacity: 0.8;  max-width: 300px; line-height: 1.4;">Comercio justo directo de origen. Cada pieza es única, tejida y tallada a mano en la Patagonia y zona central chilena.</p>
                 </div>
                 <div>
                     <h4 class="filter-title" style="color: var(--accent-gold); font-size: 1rem;">Líneas de Trabajo</h4>
@@ -1377,7 +1415,7 @@
                 <p>&copy; 2026 Artesanías del Sur. Comercio Justo.</p>
                 <p>Hecho a mano con materiales 100% orgánicos.</p>
             </div>
-            <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px; margin-top: 15px; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.5;">
+            <div class="text-responsive-caption" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px; margin-top: 15px; text-align: center;  color: rgba(255,255,255,0.5); line-height: 1.5;">
                 * La integración de pasarelas (Webpay, MercadoPago, Flow) es opcional. El cliente debe abrir una cuenta comercial en la plataforma elegida (como empresa o persona natural con inicio de actividades en el SII) y entregar las credenciales de conexión para habilitarla en la web.
             </div>
         </div>
@@ -1517,12 +1555,12 @@
                             <span x-show="!geoLoading">📍 Detectar mi ubicación automáticamente</span>
                             <span x-show="geoLoading" style="display: none;">⏳ Detectando...</span>
                         </button>
-                        <div x-show="geoCommune" style="margin-top: 8px; background: rgba(30,63,32,0.08); border-left: 3px solid var(--primary-forest); padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; color: var(--primary-forest); display: none;">
+                        <div x-show="geoCommune" class="text-responsive-caption" style="margin-top: 8px; background: rgba(30,63,32,0.08); border-left: 3px solid var(--primary-forest); padding: 8px 12px; border-radius: 6px;  color: var(--primary-forest); display: none;">
                             📦 Envío detectado hacia: <strong x-text="geoCommune"></strong>
                             <span style="margin-left: 8px; opacity: 0.7;">(courier más rápido: Starken)</span>
-                            <button type="button" @click="formAddress = geoCommune" style="background: var(--primary-forest); color: #fff; border: none; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; cursor: pointer; margin-left: 8px;">Usar esta</button>
+                            <button type="button" @click="formAddress = geoCommune" class="text-responsive-caption" style="background: var(--primary-forest); color: #fff; border: none; padding: 2px 8px; border-radius: 10px;  cursor: pointer; margin-left: 8px;">Usar esta</button>
                         </div>
-                        <p x-show="geoError" style="color: var(--secondary-clay); font-size: 0.75rem; margin-top: 4px; display: none;" x-text="geoError"></p>
+                        <p x-show="geoError" class="text-responsive-caption" style="color: var(--secondary-clay);  margin-top: 4px; display: none;" x-text="geoError"></p>
                     </div>
 
                     <!-- Additional details / instructions -->
@@ -1551,10 +1589,9 @@
 
     <!-- Botón Flotante para Volver al Showcase -->
     <a href="../index.html#demos" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" 
-       style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #bd93f9; color: #1e1f29; padding: 12px 20px; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(189, 147, 249, 0.4); border: 2px solid #1e1f29; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
+       class="showcase-back-btn no-print text-responsive-detail" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #bd93f9; color: #1e1f29; padding: 12px 20px; border-radius: 50px; font-family: 'Inter', sans-serif;  font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(189, 147, 249, 0.4); border: 2px solid #1e1f29; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
        onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(189, 147, 249, 0.6)';"
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(189, 147, 249, 0.4)';"
-       class="no-print">
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(189, 147, 249, 0.4)';">
          <span>⬅️ Volver al Showcase</span>
     </a>
 

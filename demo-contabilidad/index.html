@@ -899,16 +899,34 @@
                 gap: 2.5rem;
             }
             /* Legibility improvements for small texts on mobile viewports */
-            .demo-bar, footer, .form-group label, .form-input, .form-select, .form-textarea, .calc-badge {
-                font-size: 0.875rem !important; /* Standardized 14px minimum */
+            html body .demo-bar, 
+            html body footer, 
+            html body .form-group label, 
+            html body .form-input, 
+            html body .form-select, 
+            html body .form-textarea, 
+            html body .calc-badge, 
+            html body .result-price-period, 
+            html body .text-responsive-detail, 
+            html body .text-responsive-caption, 
+            html body .text-responsive-disclaimer,
+            html body .testimonial-card p,
+            html body .testimonial-author p,
+            html body footer p,
+            html body footer div,
+            html body footer span,
+            html body .demo-bar a,
+            html body .demo-bar span {
+                font-size: 14px;
+                line-height: 1.45;
             }
-            .result-price-period, span[style*="font-size: 67%"] {
-                font-size: 82% !important;
-                font-weight: 600 !important;
-                opacity: 0.95 !important;
+            html body span[style*="font-size: 67%"] {
+                font-size: 14px;
+                font-weight: 600;
+                opacity: 0.95;
             }
-            .form-group label {
-                font-weight: 600 !important;
+            html body .form-group label {
+                font-weight: 600;
             }
         }
 
@@ -1020,6 +1038,42 @@
             0% { transform: scale(0.9); opacity: 1; }
             50% { transform: scale(1.3); opacity: 0.7; }
             100% { transform: scale(0.9); opacity: 1; }
+        }
+
+        .text-responsive-detail {
+            font-size: 0.85rem;
+        }
+        .text-responsive-caption {
+            font-size: 0.75rem;
+        }
+        .text-responsive-disclaimer {
+            font-size: 0.7rem;
+        }
+        @media (max-width: 768px) {
+            html body .text-responsive-detail,
+            html body .text-responsive-caption,
+            html body .text-responsive-disclaimer,
+            html body .result-price-period,
+            html body .testimonial-card p,
+            html body .testimonial-author p,
+            html body footer p,
+            html body footer div,
+            html body .demo-bar a,
+            html body .demo-bar span {
+                font-size: 14px;
+                line-height: 1.45;
+            }
+        }
+
+        .showcase-back-btn {
+            font-size: 0.85rem;
+        }
+        @media (max-width: 768px) {
+            html body .showcase-back-btn,
+            html body .showcase-back-btn span {
+                font-size: 14px;
+                line-height: 1.45;
+            }
         }
     </style>
 </head>
@@ -1313,7 +1367,7 @@
                             <input type="range" min="0" max="30" x-model="trabajadores" class="calc-slider">
                         </div>
                         
-                        <div style="margin-top: 1.5rem; padding: 1.5rem; background-color: var(--bg-light); border-radius: 12px; border: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-muted);">
+                        <div class="text-responsive-detail" style="margin-top: 1.5rem; padding: 1.5rem; background-color: var(--bg-light); border-radius: 12px; border: 1px solid var(--border-color);  color: var(--text-muted);">
                             <p><strong>Nota:</strong> Las tarifas incluyen la declaración mensual de IVA (F29). Las declaraciones juradas y renta anual (F22) se cotizan adicionalmente al cierre del año comercial.</p>
                         </div>
                     </div>
@@ -1322,13 +1376,13 @@
                     <div class="calc-result-card pulse-effect" :key="highlightedPlan">
                         <div>
                             <span class="result-plan-name" x-text="calcPlanName">Plan Emprendedor</span>
-                            <p style="font-size: 0.85rem; opacity: 0.85;">Recomendado para la escala de tu negocio.</p>
+                            <p class="text-responsive-detail" style=" opacity: 0.85;">Recomendado para la escala de tu negocio.</p>
                             
                             <div class="result-price-row" style="display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px;">
                                 <span style="font-size: 1rem; color: var(--text-muted); font-weight: 500;">Desde</span>
                                 <span class="result-price" x-text="'$' + calcPlanPrice.toLocaleString('es-CL')"></span>
                                 <span style="font-size: 1.2rem; font-weight: 700; color: var(--text-light); margin-left: 4px;">CLP</span>
-                                <span class="result-price-period" style="font-size: 67%; font-weight: normal; color: var(--text-muted); margin-left: 6px; vertical-align: middle;">neto + IVA / mes</span>
+                                <span class="result-price-period" style="font-weight: normal; color: var(--text-muted); margin-left: 6px; vertical-align: middle;">neto + IVA / mes</span>
                             </div>
                             
                             <ul class="result-features-list">
@@ -1466,7 +1520,7 @@
             <div class="footer-grid">
                 <div>
                     <div class="footer-logo">Conta<span>Digital</span></div>
-                    <p style="opacity: 0.8; font-size: 0.85rem; max-width: 300px; line-height: 1.4;">Servicios contables, tributarios y de remuneraciones certificados en Santiago de Chile. Claridad financiera B2B.</p>
+                    <p class="text-responsive-detail" style="opacity: 0.8;  max-width: 300px; line-height: 1.4;">Servicios contables, tributarios y de remuneraciones certificados en Santiago de Chile. Claridad financiera B2B.</p>
                 </div>
                 <div>
                     <h4 class="footer-title">Enlaces</h4>
@@ -1491,7 +1545,7 @@
                 <p>&copy; 2026 ContaDigital Ltda. Todos los derechos reservados.</p>
                 <p>Respaldado por contadores auditores colegiados de Chile.</p>
             </div>
-            <div style="border-top: 1px solid rgba(244, 247, 246, 0.1); padding-top: 15px; margin-top: 15px; text-align: center; font-size: 0.75rem; color: rgba(244, 247, 246, 0.5); line-height: 1.5;">
+            <div class="text-responsive-caption" style="border-top: 1px solid rgba(244, 247, 246, 0.1); padding-top: 15px; margin-top: 15px; text-align: center;  color: rgba(244, 247, 246, 0.5); line-height: 1.5;">
                 * La integración de pasarelas (Webpay, MercadoPago, Flow) es opcional. El cliente debe abrir una cuenta comercial en la plataforma elegida (como empresa o persona natural con inicio de actividades en el SII) y entregar las credenciales de conexión para habilitarla en la web.
             </div>
         </div>
@@ -1547,7 +1601,7 @@
                         <label class="form-label">RUT Empresa (Opcional — autocompletamos tu razón social)</label>
                         <input type="text" x-model="formRut" @blur="validateRut(formRut)" @input.debounce.600ms="validateRut(formRut)"
                                placeholder="Ej: 76.123.456-7" class="form-input" autocomplete="off" id="rut-input">
-                        <div x-show="rutValidating" style="font-size: 0.75rem; color: var(--accent-cyan); margin-top: 6px; display: none;">
+                        <div x-show="rutValidating" class="text-responsive-caption" style=" color: var(--accent-cyan); margin-top: 6px; display: none;">
                             ⏳ Consultando SII...
                         </div>
                         <div x-show="rutData && !rutValidating" 
@@ -1620,10 +1674,9 @@
 
     <!-- Botón Flotante para Volver al Showcase -->
     <a href="../index.html#demos" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" 
-       style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #bd93f9; color: #1e1f29; padding: 12px 20px; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(189, 147, 249, 0.4); border: 2px solid #1e1f29; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
+       class="showcase-back-btn no-print text-responsive-detail" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #bd93f9; color: #1e1f29; padding: 12px 20px; border-radius: 50px; font-family: 'Inter', sans-serif;  font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(189, 147, 249, 0.4); border: 2px solid #1e1f29; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
        onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(189, 147, 249, 0.6)';"
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(189, 147, 249, 0.4)';"
-       class="no-print">
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(189, 147, 249, 0.4)';">
          <span>⬅️ Volver al Showcase</span>
     </a>
 

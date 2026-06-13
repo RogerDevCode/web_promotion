@@ -94,6 +94,36 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
+        .text-responsive-detail {
+            font-size: 0.75rem; /* 12px */
+        }
+        .text-responsive-caption {
+            font-size: 0.75rem; /* 12px */
+        }
+        .text-responsive-disclaimer {
+            font-size: 10px;
+        }
+        @media (max-width: 768px) {
+            html body .text-responsive-detail,
+            html body .text-responsive-caption,
+            html body .text-responsive-disclaimer,
+            html body .demo-bar a,
+            html body .demo-bar span {
+                font-size: 14px;
+                line-height: 1.45;
+            }
+        }
+
+        .showcase-back-btn {
+            font-size: 0.85rem;
+        }
+        @media (max-width: 768px) {
+            html body .showcase-back-btn,
+            html body .showcase-back-btn span {
+                font-size: 14px;
+                line-height: 1.45;
+            }
+        }
     </style>
 </head>
 <body class="bg-sand-50 font-sans text-slate-800 antialiased selection:bg-sage-200 selection:text-sage-900 min-h-screen flex flex-col" 
@@ -203,7 +233,7 @@
                 </div>
                 <div>
                     <span class="block font-serif text-lg font-semibold tracking-wide text-sage-900 leading-tight">Clara Altieri</span>
-                    <span class="block text-xs uppercase tracking-widest text-sage-500 font-medium">Psicóloga Clínica</span>
+                    <span class="block text-responsive-detail uppercase tracking-widest text-sage-500 font-medium">Psicóloga Clínica</span>
                 </div>
             </a>
             
@@ -265,7 +295,7 @@
             <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 <!-- Hero Text -->
                 <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
-                    <div class="inline-flex items-center space-x-2 bg-sage-100/80 text-sage-800 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
+                    <div class="inline-flex items-center space-x-2 bg-sage-100/80 text-sage-800 px-4 py-1.5 rounded-full text-responsive-detail font-semibold uppercase tracking-wider">
                         <span>Atención Presencial en Santiago & Online a todo Chile</span>
                     </div>
                     <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-sage-900 leading-tight font-medium">
@@ -302,7 +332,7 @@
                             <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
                             <div class="w-full border border-white/20 p-6 rounded-2xl bg-white/10 backdrop-blur-md">
                                 <span class="font-serif italic text-2xl block mb-2">"La terapia no se trata de cambiar quién eres, sino de descubrir y abrazar quién has sido siempre."</span>
-                                <span class="text-xs uppercase tracking-wider opacity-80">— Ps. Clara Altieri</span>
+                                <span class="text-responsive-detail uppercase tracking-wider opacity-80">— Ps. Clara Altieri</span>
                             </div>
                         </div>
                         
@@ -320,7 +350,7 @@
         <section id="enfoque" class="py-20 bg-white border-y border-sage-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
-                    <span class="text-xs font-semibold uppercase tracking-widest text-sage-500">Filosofía de Trabajo</span>
+                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-500">Filosofía de Trabajo</span>
                     <h2 class="font-serif text-3xl md:text-4xl text-sage-900 font-medium">Un enfoque humano, respetuoso y riguroso</h2>
                     <div class="w-12 h-1 bg-sage-500 mx-auto rounded-full"></div>
                     <p class="text-sage-700 font-light max-w-xl mx-auto">
@@ -373,8 +403,8 @@
                         <div class="w-full max-w-sm rounded-3xl bg-sage-600 aspect-[4/5] relative overflow-hidden shadow-xl border border-white">
                             <div class="absolute inset-0 bg-gradient-to-b from-sage-500/80 to-sage-900 flex flex-col justify-end p-8 text-white">
                                 <span class="block font-serif text-2xl font-semibold">Ps. Clara Altieri</span>
-                                <span class="block text-xs uppercase tracking-widest text-sage-200 mt-1">Nº Registro Superintendencia: 482910</span>
-                                <div class="mt-4 pt-4 border-t border-white/10 flex justify-between text-xs text-sage-100">
+                                <span class="block text-responsive-detail uppercase tracking-widest text-sage-200 mt-1">Nº Registro Superintendencia: 482910</span>
+                                <div class="mt-4 pt-4 border-t border-white/10 flex justify-between text-responsive-detail text-sage-100">
                                     <span>Psicóloga Univ. de Buenos Aires</span>
                                     <span>Mención Clínica</span>
                                 </div>
@@ -384,7 +414,7 @@
 
                     <!-- Bio Text -->
                     <div class="lg:col-span-7 space-y-6">
-                        <span class="text-xs font-semibold uppercase tracking-widest text-sage-500">¿Quién te acompañará?</span>
+                        <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-500">¿Quién te acompañará?</span>
                         <h2 class="font-serif text-3xl md:text-4xl text-sage-900 font-medium">Hola, soy Clara.</h2>
                         <p class="text-sage-800 leading-relaxed font-light">
                             Mi propósito es entregarte un espacio de contención genuino, seguro y estructurado donde podamos explorar las dificultades que hoy te restan bienestar. 
@@ -395,11 +425,11 @@
                         <div class="grid grid-cols-2 gap-6 pt-4 border-t border-sage-200">
                             <div>
                                 <span class="block font-serif text-2xl text-sage-700 font-semibold">8+</span>
-                                <span class="text-xs text-sage-500 uppercase tracking-wider font-medium">Años de experiencia</span>
+                                <span class="text-responsive-detail text-sage-500 uppercase tracking-wider font-medium">Años de experiencia</span>
                             </div>
                             <div>
                                 <span class="block font-serif text-2xl text-sage-700 font-semibold">1.200+</span>
-                                <span class="text-xs text-sage-500 uppercase tracking-wider font-medium">Sesiones clínicas</span>
+                                <span class="text-responsive-detail text-sage-500 uppercase tracking-wider font-medium">Sesiones clínicas</span>
                             </div>
                         </div>
                     </div>
@@ -411,7 +441,7 @@
         <section id="servicios" class="py-20 bg-white border-t border-sage-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
-                    <span class="text-xs font-semibold uppercase tracking-widest text-sage-500">Áreas de Trabajo</span>
+                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-500">Áreas de Trabajo</span>
                     <h2 class="font-serif text-3xl md:text-4xl text-sage-900 font-medium">¿En qué áreas te puedo acompañar?</h2>
                     <div class="w-12 h-1 bg-sage-500 mx-auto rounded-full"></div>
                 </div>
@@ -428,7 +458,7 @@
                                 ¿Sientes que el miedo, la rumiación mental o el estrés constante dominan tu vida? Trabajamos identificando los desencadenantes y reestructurando los patrones de pensamiento para devolverte el control emocional.
                             </p>
                         </div>
-                        <span class="text-xs uppercase tracking-wider text-sage-500 mt-6 font-semibold block">Terapia Adultos & Jóvenes</span>
+                        <span class="text-responsive-detail uppercase tracking-wider text-sage-500 mt-6 font-semibold block">Terapia Adultos & Jóvenes</span>
                     </div>
 
                     <!-- Box 2 -->
@@ -438,11 +468,11 @@
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </div>
                             <h3 class="font-serif text-xl text-sage-900 font-medium mb-3">Autoestima y Crecimiento</h3>
-                            <p class="text-xs text-sage-700 font-light leading-relaxed">
+                            <p class="text-responsive-detail text-sage-700 font-light leading-relaxed">
                                 Fortalecimiento de la relación contigo mismo, estableciendo límites saludables y reconociendo tus fortalezas para mejorar la autovaloración.
                             </p>
                         </div>
-                        <span class="text-xs uppercase tracking-wider text-sand-600 mt-6 font-semibold block">Proceso Individual</span>
+                        <span class="text-responsive-detail uppercase tracking-wider text-sand-600 mt-6 font-semibold block">Proceso Individual</span>
                     </div>
 
                     <!-- Box 3 -->
@@ -452,11 +482,11 @@
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                             </div>
                             <h3 class="font-serif text-xl text-sage-900 font-medium mb-3">Depresión y Estado de Ánimo</h3>
-                            <p class="text-xs text-sage-700 font-light leading-relaxed">
+                            <p class="text-responsive-detail text-sage-700 font-light leading-relaxed">
                                 Acompañamiento en procesos de apatía profunda, duelos no resueltos y desmotivación existencial para recuperar el sentido de propósito y vitalidad.
                             </p>
                         </div>
-                        <span class="text-xs uppercase tracking-wider text-sand-600 mt-6 font-semibold block">Terapia Adultos</span>
+                        <span class="text-responsive-detail uppercase tracking-wider text-sand-600 mt-6 font-semibold block">Terapia Adultos</span>
                     </div>
 
                     <!-- Box 4 -->
@@ -470,7 +500,7 @@
                                 Mudanzas de país, quiebres afectivos, cambios laborales o crisis propias de la edad. Te ayudo a reorganizar tus recursos cognitivos y emocionales frente a los quiebres vitales obligados o deseados.
                             </p>
                         </div>
-                        <span class="text-xs uppercase tracking-wider text-sage-500 mt-6 font-semibold block">Asesoría Individual</span>
+                        <span class="text-responsive-detail uppercase tracking-wider text-sage-500 mt-6 font-semibold block">Asesoría Individual</span>
                     </div>
                 </div>
             </div>
@@ -480,7 +510,7 @@
         <section id="como-funciona" class="py-20 bg-sand-50/50">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
-                    <span class="text-xs font-semibold uppercase tracking-widest text-sage-500">¿Cómo empezar?</span>
+                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-500">¿Cómo empezar?</span>
                     <h2 class="font-serif text-3xl md:text-4xl text-sage-900 font-medium">El camino hacia tu bienestar</h2>
                     <div class="w-12 h-1 bg-sage-500 mx-auto rounded-full"></div>
                 </div>
@@ -490,7 +520,7 @@
                     <div class="text-center space-y-4 relative">
                         <div class="w-12 h-12 rounded-full bg-sage-600 text-white font-serif text-lg font-medium flex items-center justify-center mx-auto shadow-sm">1</div>
                         <h3 class="font-serif text-lg text-sage-900 font-medium">Agendar Cita</h3>
-                        <p class="text-xs text-sage-700 font-light max-w-xs mx-auto">
+                        <p class="text-responsive-detail text-sage-700 font-light max-w-xs mx-auto">
                             Selecciona el día y horario que mejor te acomode desde nuestro formulario de reservas web.
                         </p>
                     </div>
@@ -499,7 +529,7 @@
                     <div class="text-center space-y-4">
                         <div class="w-12 h-12 rounded-full bg-sage-100 text-sage-800 font-serif text-lg font-medium flex items-center justify-center mx-auto shadow-sm">2</div>
                         <h3 class="font-serif text-lg text-sage-900 font-medium">Evaluación</h3>
-                        <p class="text-xs text-sage-700 font-light max-w-xs mx-auto">
+                        <p class="text-responsive-detail text-sage-700 font-light max-w-xs mx-auto">
                             Durante las primeras 2 sesiones exploramos tu situación actual e historia para levantar un diagnóstico descriptivo.
                         </p>
                     </div>
@@ -508,7 +538,7 @@
                     <div class="text-center space-y-4">
                         <div class="w-12 h-12 rounded-full bg-sage-100 text-sage-800 font-serif text-lg font-medium flex items-center justify-center mx-auto shadow-sm">3</div>
                         <h3 class="font-serif text-lg text-sage-900 font-medium">Plan Terapéutico</h3>
-                        <p class="text-xs text-sage-700 font-light max-w-xs mx-auto">
+                        <p class="text-responsive-detail text-sage-700 font-light max-w-xs mx-auto">
                             Definimos objetivos claros y específicos en conjunto, junto con la frecuencia sugerida (semanal o quincenal).
                         </p>
                     </div>
@@ -517,7 +547,7 @@
                     <div class="text-center space-y-4">
                         <div class="w-12 h-12 rounded-full bg-sage-100 text-sage-800 font-serif text-lg font-medium flex items-center justify-center mx-auto shadow-sm">4</div>
                         <h3 class="font-serif text-lg text-sage-900 font-medium">Seguimiento y Alta</h3>
-                        <p class="text-xs text-sage-700 font-light max-w-xs mx-auto">
+                        <p class="text-responsive-detail text-sage-700 font-light max-w-xs mx-auto">
                             A medida que consolidas tus herramientas, espaciamos las sesiones hasta concluir formalmente el proceso terapéutico.
                         </p>
                     </div>
@@ -535,7 +565,7 @@
         <section class="py-20 bg-white border-y border-sage-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
-                    <span class="text-xs font-semibold uppercase tracking-widest text-sage-500">Testimonios Reales</span>
+                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-500">Testimonios Reales</span>
                     <h2 class="font-serif text-3xl md:text-4xl text-sage-900 font-medium">Experiencias de consultantes</h2>
                     <div class="w-12 h-1 bg-sage-500 mx-auto rounded-full"></div>
                 </div>
@@ -548,7 +578,7 @@
                         </p>
                         <div>
                             <span class="block font-semibold text-sm text-sage-900">Paula A.</span>
-                            <span class="block text-xs text-sage-500">Ingeniera, 34 años</span>
+                            <span class="block text-responsive-detail text-sage-500">Ingeniera, 34 años</span>
                         </div>
                     </div>
 
@@ -559,7 +589,7 @@
                         </p>
                         <div>
                             <span class="block font-semibold text-sm text-sage-900">Martín S.</span>
-                            <span class="block text-xs text-sage-500">Diseñador, 29 años</span>
+                            <span class="block text-responsive-detail text-sage-500">Diseñador, 29 años</span>
                         </div>
                     </div>
 
@@ -570,7 +600,7 @@
                         </p>
                         <div>
                             <span class="block font-semibold text-sm text-sage-900">Catalina R.</span>
-                            <span class="block text-xs text-sage-500">Docente, 42 años</span>
+                            <span class="block text-responsive-detail text-sage-500">Docente, 42 años</span>
                         </div>
                     </div>
                 </div>
@@ -581,7 +611,7 @@
         <section id="preguntas" class="py-20 bg-sand-50/30">
             <div class="max-w-4xl mx-auto px-6">
                 <div class="text-center space-y-4 mb-16">
-                    <span class="text-xs font-semibold uppercase tracking-widest text-sage-500">Preguntas Frecuentes</span>
+                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-500">Preguntas Frecuentes</span>
                     <h2 class="font-serif text-3xl text-sage-900 font-medium">Respuestas a tus dudas</h2>
                     <div class="w-12 h-1 bg-sage-500 mx-auto rounded-full"></div>
                 </div>
@@ -649,16 +679,16 @@
             <!-- Branding -->
             <div class="space-y-4">
                 <span class="block font-serif text-xl font-semibold tracking-wide">Clara Altieri</span>
-                <span class="block text-xs uppercase tracking-widest text-sage-300 font-medium">Psicóloga Clínica</span>
-                <p class="text-xs text-sage-300 font-light leading-relaxed pt-2">
+                <span class="block text-responsive-detail uppercase tracking-widest text-sage-300 font-medium">Psicóloga Clínica</span>
+                <p class="text-responsive-detail text-sage-300 font-light leading-relaxed pt-2">
                     Espacio clínico enfocado en el bienestar integral y el desarrollo de herramientas individuales con respaldo empírico.
                 </p>
             </div>
 
             <!-- Contact info -->
             <div class="space-y-3">
-                <span class="block text-xs uppercase tracking-widest text-sage-300 font-semibold">Contacto Directo</span>
-                <ul class="text-xs space-y-2 text-sage-100 font-light">
+                <span class="block text-responsive-detail uppercase tracking-widest text-sage-300 font-semibold">Contacto Directo</span>
+                <ul class="text-responsive-detail space-y-2 text-sage-100 font-light">
                     <li class="flex items-center space-x-2">
                         <svg class="w-4 h-4 text-sage-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         <span>contacto@psclaraaltieri.com</span>
@@ -672,8 +702,8 @@
 
             <!-- Links -->
             <div class="space-y-3">
-                <span class="block text-xs uppercase tracking-widest text-sage-300 font-semibold">Navegación</span>
-                <ul class="text-xs space-y-2 text-sage-100 font-light">
+                <span class="block text-responsive-detail uppercase tracking-widest text-sage-300 font-semibold">Navegación</span>
+                <ul class="text-responsive-detail space-y-2 text-sage-100 font-light">
                     <li><a href="#enfoque" class="hover:text-white transition-colors">Mi Enfoque</a></li>
                     <li><a href="#sobre-mi" class="hover:text-white transition-colors">Sobre Mí</a></li>
                     <li><a href="#servicios" class="hover:text-white transition-colors">Especialidades</a></li>
@@ -683,17 +713,17 @@
 
             <!-- Registration detail -->
             <div class="space-y-3">
-                <span class="block text-xs uppercase tracking-widest text-sage-300 font-semibold">Acreditación</span>
-                <div class="text-xs text-sage-200 font-light space-y-2 leading-relaxed">
+                <span class="block text-responsive-detail uppercase tracking-widest text-sage-300 font-semibold">Acreditación</span>
+                <div class="text-responsive-detail text-sage-200 font-light space-y-2 leading-relaxed">
                     <p>Asociación de Psicólogos Registro Nº 29184</p>
                     <p>Acreditada por el Registro Nacional de Prestadores Individuales de Salud de la Superintendencia de Salud de Chile.</p>
                 </div>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-sage-800 text-center text-xs text-sage-400 font-light">
+        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-sage-800 text-center text-responsive-detail text-sage-400 font-light">
             <p>&copy; 2026 Ps. Clara Altieri. Todos los derechos reservados. Diseñado por RogerDevCode.</p>
-            <div class="mt-4 pt-4 border-t border-sage-800 text-[10px] text-sage-400 font-light leading-relaxed max-w-4xl mx-auto text-center">
+            <div class="mt-4 pt-4 border-t border-sage-800 text-responsive-disclaimer text-sage-400 font-light leading-relaxed max-w-4xl mx-auto text-center">
                 * La integración de pasarelas (Webpay, MercadoPago, Flow) es opcional. El cliente debe abrir una cuenta comercial en la plataforma elegida (como empresa o persona natural con inicio de actividades en el SII) y entregar las credenciales de conexión para habilitarla en la web.
             </div>
         </div>
@@ -716,11 +746,11 @@
                 <div class="w-8 h-8 rounded-full bg-sage-500 flex items-center justify-center font-serif italic font-medium">CA</div>
                 <div>
                     <span class="block text-sm font-semibold">Ps. Clara Altieri</span>
-                    <span class="block text-xs opacity-75">Responde en pocos minutos</span>
+                    <span class="block text-responsive-detail opacity-75">Responde en pocos minutos</span>
                 </div>
             </div>
             
-            <div class="p-4 bg-sand-50/50 text-xs text-sage-800 space-y-3">
+            <div class="p-4 bg-sand-50/50 text-responsive-detail text-sage-800 space-y-3">
                 <div class="bg-white p-3 rounded-xl shadow-xs border border-sage-50">
                     Hola, bienvenido. ¿Tienes alguna duda sobre las sesiones de terapia o agendamientos?
                 </div>
@@ -729,7 +759,7 @@
             <div class="p-3 bg-white border-t border-sage-100">
                 <a :href="whatsappHref()" 
                    target="_blank" 
-                   class="flex items-center justify-center space-x-2 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-xl text-xs font-semibold shadow-sm transition-colors">
+                   class="flex items-center justify-center space-x-2 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-xl text-responsive-detail font-semibold shadow-sm transition-colors">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.62.962 3.21 1.6 5.413 1.61 5.437.003 9.856-4.405 9.86-9.84a9.81 9.81 0 0 0-2.873-6.957 9.82 9.82 0 0 0-6.973-2.885c-5.438 0-9.86 4.407-9.864 9.843-.001 2.272.593 4.491 1.72 6.438l-.991 3.613 3.708-.972zm11.724-6.892c-.328-.164-1.94-.959-2.241-1.069-.301-.11-.52-.164-.739.164-.219.328-.847 1.069-1.039 1.288-.192.219-.384.246-.712.083-.328-.164-1.385-.511-2.637-1.628-.974-.869-1.632-1.943-1.823-2.271-.192-.328-.021-.506.143-.669.148-.146.328-.383.493-.574.164-.192.219-.328.328-.547.11-.219.055-.411-.027-.575-.082-.164-.739-1.777-1.012-2.434-.267-.64-.539-.553-.739-.563-.19-.01-.41-.012-.629-.012-.219 0-.575.082-.876.411-.301.328-1.15 1.121-1.15 2.735 0 1.614 1.177 3.172 1.34 3.391.164.219 2.316 3.537 5.611 4.961.783.339 1.396.541 1.873.692.787.25 1.503.215 2.069.13.632-.094 1.94-.793 2.214-1.56.274-.766.274-1.422.192-1.56-.082-.138-.301-.219-.629-.383z"/></svg>
                     <span x-text="selectedSlot ? 'Consultar hora seleccionada' : 'Escríbeme por WhatsApp'"></span>
                 </a>
@@ -768,10 +798,10 @@
                 <div class="bg-sage-600 px-6 py-5 text-white flex justify-between items-center">
                     <div>
                         <h3 class="font-serif text-lg font-semibold leading-tight">Solicitud de Horas</h3>
-                        <span class="text-xs opacity-75">Ingresa tus datos para coordinar tu primera consulta</span>
+                        <span class="text-responsive-detail opacity-75">Ingresa tus datos para coordinar tu primera consulta</span>
                         <!-- URL Badge -->
                         <span x-show="urlBadge" x-cloak
-                              class="inline-block mt-1.5 bg-white/20 backdrop-blur-sm border border-white/30 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                              class="inline-block mt-1.5 bg-white/20 backdrop-blur-sm border border-white/30 text-white text-responsive-disclaimer font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full"
                               x-text="urlBadge"></span>
                     </div>
                     <button @click="bookingModal = false" class="text-white hover:opacity-85 focus:outline-none p-1">
@@ -790,20 +820,20 @@
                          class="flex items-start justify-between gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl px-4 py-3">
                         <div class="flex items-center gap-2 min-w-0">
                             <span class="text-emerald-600 text-base shrink-0">👋</span>
-                            <p class="text-xs text-emerald-800 font-medium leading-snug">
+                            <p class="text-responsive-detail text-emerald-800 font-medium leading-snug">
                                 ¡Hola <span class="font-semibold" x-text="name.split(' ')[0]"></span>!
                                 Tus datos ya están guardados — solo elige tu hora.
                             </p>
                         </div>
                         <button type="button" @click="showAllFields = true"
-                                class="shrink-0 text-[10px] text-emerald-700 hover:text-emerald-900 font-semibold whitespace-nowrap underline underline-offset-2 focus:outline-none">
+                                class="shrink-0 text-responsive-disclaimer text-emerald-700 hover:text-emerald-900 font-semibold whitespace-nowrap underline underline-offset-2 focus:outline-none">
                             ✏️ Cambiar mis datos
                         </button>
                     </div>
 
                     <!-- ⚡ Quick-Pick Time Slots -->
                     <div>
-                        <p class="text-xs font-semibold uppercase tracking-wider text-sage-600 mb-2">⚡ Próximas horas disponibles</p>
+                        <p class="text-responsive-detail font-semibold uppercase tracking-wider text-sage-600 mb-2">⚡ Próximas horas disponibles</p>
                         <div class="flex flex-wrap gap-2">
                             <template x-for="(slot, idx) in timeSlots" :key="idx">
                                 <button type="button"
@@ -811,13 +841,13 @@
                                         :class="selectedSlot === slot
                                             ? 'bg-sage-600 text-white border-sage-600 shadow-md scale-105'
                                             : 'bg-white text-sage-700 border-sage-200 hover:border-sage-400 hover:bg-sage-50'"
-                                        class="px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 focus:outline-none"
+                                        class="px-3 py-1.5 rounded-full text-responsive-detail font-semibold border transition-all duration-200 focus:outline-none"
                                         x-text="slot">
                                 </button>
                             </template>
                         </div>
                         <p x-show="selectedSlot" x-cloak
-                           class="mt-1.5 text-[10px] text-sage-500 font-medium">
+                           class="mt-1.5 text-responsive-disclaimer text-sage-500 font-medium">
                             ✓ Hora seleccionada: <span class="text-sage-700 font-semibold" x-text="selectedSlot"></span> — se enviará con tu solicitud.
                         </p>
                     </div>
@@ -829,19 +859,19 @@
                          x-transition:enter-end="opacity-100 translate-y-0"
                          class="space-y-4">
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-sage-600 mb-1" for="name">Nombre Completo</label>
+                            <label class="block text-responsive-detail font-semibold uppercase tracking-wider text-sage-600 mb-1" for="name">Nombre Completo</label>
                             <input class="w-full px-4 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:border-sage-500 text-sm bg-sand-50/50" 
                                    type="text" id="name" x-model="name" required placeholder="Ej: Juan Pérez" autocomplete="new-password">
                         </div>
                         
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold uppercase tracking-wider text-sage-600 mb-1" for="phone">Teléfono / WhatsApp</label>
+                                <label class="block text-responsive-detail font-semibold uppercase tracking-wider text-sage-600 mb-1" for="phone">Teléfono / WhatsApp</label>
                                 <input class="w-full px-4 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:border-sage-500 text-sm bg-sand-50/50" 
                                        type="tel" id="phone" x-model="phone" required placeholder="Ej: +56 9 1234 5678" autocomplete="new-password">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold uppercase tracking-wider text-sage-600 mb-1" for="email">Correo Electrónico</label>
+                                <label class="block text-responsive-detail font-semibold uppercase tracking-wider text-sage-600 mb-1" for="email">Correo Electrónico</label>
                                 <input class="w-full px-4 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:border-sage-500 text-sm bg-sand-50/50" 
                                        type="email" id="email" x-model="email" required placeholder="Ej: juan@correo.cl" autocomplete="new-password">
                             </div>
@@ -850,30 +880,30 @@
 
                     <!-- Modalidad (always visible) -->
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-sage-600 mb-1">Modalidad Preferida</label>
+                        <label class="block text-responsive-detail font-semibold uppercase tracking-wider text-sage-600 mb-1">Modalidad Preferida</label>
                         <div class="grid grid-cols-2 gap-4 mt-1">
                             <label class="flex items-center space-x-2 border border-sage-200 rounded-xl p-3 bg-sand-50/50 cursor-pointer hover:border-sage-400">
                                 <input type="radio" name="modalidad" value="presencial" x-model="modalidad" class="text-sage-600 focus:ring-sage-500" checked>
-                                <span class="text-xs font-medium text-sage-800">Presencial (Stgo)</span>
+                                <span class="text-responsive-detail font-medium text-sage-800">Presencial (Stgo)</span>
                             </label>
                             <label class="flex items-center space-x-2 border border-sage-200 rounded-xl p-3 bg-sand-50/50 cursor-pointer hover:border-sage-400">
                                 <input type="radio" name="modalidad" value="online" x-model="modalidad" class="text-sage-600 focus:ring-sage-500">
-                                <span class="text-xs font-medium text-sage-800">Online</span>
+                                <span class="text-responsive-detail font-medium text-sage-800">Online</span>
                             </label>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-sage-600 mb-1" for="motivo">Motivo de Consulta (Opcional)</label>
+                        <label class="block text-responsive-detail font-semibold uppercase tracking-wider text-sage-600 mb-1" for="motivo">Motivo de Consulta (Opcional)</label>
                         <textarea class="w-full px-4 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:border-sage-500 text-sm bg-sand-50/50 h-20 resize-none" 
                                   id="motivo" x-model="motivo" placeholder="Cuéntame brevemente qué te motiva a consultar..." autocomplete="new-password"></textarea>
                     </div>
 
                     <div class="pt-4 border-t border-sage-100 flex justify-end space-x-3">
-                        <button type="button" @click="bookingModal = false" class="px-5 py-2.5 border border-sage-200 hover:bg-sand-50 text-sage-700 rounded-full text-xs font-semibold">
+                        <button type="button" @click="bookingModal = false" class="px-5 py-2.5 border border-sage-200 hover:bg-sand-50 text-sage-700 rounded-full text-responsive-detail font-semibold">
                             Cancelar
                         </button>
-                        <button type="submit" class="px-6 py-2.5 bg-sage-600 hover:bg-sage-700 text-white rounded-full text-xs font-semibold shadow-sm hover:shadow">
+                        <button type="submit" class="px-6 py-2.5 bg-sage-600 hover:bg-sage-700 text-white rounded-full text-responsive-detail font-semibold shadow-sm hover:shadow">
                             Enviar Solicitud
                         </button>
                     </div>
@@ -883,11 +913,10 @@
     </div>
 
     <!-- Botón Flotante para Volver al Showcase -->
-    <a href="../index.html#demos" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" 
-       style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #bd93f9; color: #1e1f29; padding: 12px 20px; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(189, 147, 249, 0.4); border: 2px solid #1e1f29; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
+    <a href="../index.html#demos" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" class="showcase-back-btn no-print" 
+       style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #bd93f9; color: #1e1f29; padding: 12px 20px; border-radius: 50px; font-family: 'Inter', sans-serif; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(189, 147, 249, 0.4); border: 2px solid #1e1f29; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
        onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(189, 147, 249, 0.6)';"
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(189, 147, 249, 0.4)';"
-       class="no-print">
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(189, 147, 249, 0.4)';">
         <span>⬅️ Volver al Showcase</span>
     </a>
 

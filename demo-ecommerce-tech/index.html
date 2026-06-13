@@ -1089,6 +1089,39 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
+
+        .text-responsive-detail {
+            font-size: 0.85rem;
+        }
+        .text-responsive-caption {
+            font-size: 0.75rem;
+        }
+        .text-responsive-disclaimer {
+            font-size: 0.7rem;
+        }
+        @media (max-width: 768px) {
+            html body .text-responsive-detail,
+            html body .text-responsive-caption,
+            html body .text-responsive-disclaimer,
+            html body .demo-bar a,
+            html body .demo-bar span,
+            html body footer p,
+            html body footer div {
+                font-size: 14px;
+                line-height: 1.45;
+            }
+        }
+
+        .showcase-back-btn {
+            font-size: 0.85rem;
+        }
+        @media (max-width: 768px) {
+            html body .showcase-back-btn,
+            html body .showcase-back-btn span {
+                font-size: 14px;
+                line-height: 1.45;
+            }
+        }
     </style>
 </head>
 <body x-data="storeApp()" x-init="init()">
@@ -1160,7 +1193,7 @@
     <section id="catalogo" class="catalog-section section-padding">
         <div class="container">
             <div class="section-header">
-                <span style="color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; display: block; margin-bottom: 0.5rem;">CATÁLOGO DE PRODUCTOS</span>
+                <span class="text-responsive-detail" style="color: var(--accent); font-weight: 700; text-transform: uppercase;  letter-spacing: 2px; display: block; margin-bottom: 0.5rem;">CATÁLOGO DE PRODUCTOS</span>
                 <h2 class="section-title">Nuestras Ofertas Tecnológicas</h2>
                 <p class="section-subtitle">Aprovecha precios exclusivos por tiempo limitado en artículos premium</p>
             </div>
@@ -1211,7 +1244,7 @@
         <div class="container">
             <div class="scale-card">
                 <div>
-                    <span style="color: var(--accent-secondary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">CÓMO ESCALAR TU NEGOCIO</span>
+                    <span class="text-responsive-detail" style="color: var(--accent-secondary); font-weight: 700;  text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">CÓMO ESCALAR TU NEGOCIO</span>
                     <h2 style="font-size: 2.25rem; font-weight: 900; margin-bottom: 1.5rem; line-height: 1.2;">De una Landing Page simple a un E-commerce real</h2>
                     <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1rem;">Esta maqueta interactiva simula el funcionamiento de una tienda con base de datos en memoria (`localStorage`). Para llevar este proyecto a un nivel real y comercializable con clientes reales, se implementan tecnologías de backend robustas:</p>
                     
@@ -1378,7 +1411,7 @@
             <div class="modal-header">
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <span style="font-size: 1.3rem;">🔧 Panel de Control Administrativo</span>
-                    <span style="background-color: rgba(14, 165, 233, 0.15); color: var(--accent-secondary); font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px; text-transform: uppercase;">Modo Demo</span>
+                    <span class="text-responsive-disclaimer" style="background-color: rgba(14, 165, 233, 0.15); color: var(--accent-secondary);  font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px; text-transform: uppercase;">Modo Demo</span>
                 </div>
                 <button @click="isAdminOpen = false" class="close-btn" aria-label="Cerrar panel">
                     <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -1408,7 +1441,7 @@
                     <div x-show="adminActiveTab === 'productos'">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                             <h3>Gestión de Productos</h3>
-                            <button @click="openAddProductModal()" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem; border-radius: 8px;">
+                            <button @click="openAddProductModal()" class="btn btn-primary text-responsive-detail" style="padding: 0.5rem 1.25rem;  border-radius: 8px;">
                                 <svg class="icon-inline" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
                                 Agregar Producto
                             </button>
@@ -1432,7 +1465,7 @@
                                             <td><img :src="product.image" :alt="product.name"></td>
                                             <td>
                                                 <div style="font-weight: 700;" x-text="product.name"></div>
-                                                <div style="font-size: 0.75rem; color: var(--text-muted); max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" x-text="product.description"></div>
+                                                <div class="text-responsive-disclaimer" style=" color: var(--text-muted); max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" x-text="product.description"></div>
                                             </td>
                                             <td style="text-transform: capitalize;" x-text="product.category"></td>
                                             <td x-text="formatCLP(product.price)"></td>
@@ -1463,7 +1496,7 @@
                     <div x-show="adminActiveTab === 'pedidos'">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                             <h3>Pedidos en Cola</h3>
-                            <button @click="clearOrders()" class="btn" style="background-color: var(--bg-light); color: var(--danger); padding: 0.5rem 1.25rem; font-size: 0.85rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2)">
+                            <button @click="clearOrders()" class="btn text-responsive-detail" style="background-color: var(--bg-light); color: var(--danger); padding: 0.5rem 1.25rem;  border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2)">
                                 Vaciar Cola
                             </button>
                         </div>
@@ -1493,18 +1526,18 @@
                                         <tr>
                                             <td>
                                                 <div style="font-weight: 700;" x-text="`#${order.id.toString().slice(-4)}`"></div>
-                                                <div style="font-size: 0.75rem; color: var(--text-muted);" x-text="new Date(order.date).toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit'})"></div>
+                                                <div class="text-responsive-disclaimer" style=" color: var(--text-muted);" x-text="new Date(order.date).toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit'})"></div>
                                             </td>
                                             <td>
                                                 <div style="font-weight: 700;" x-text="order.name"></div>
-                                                <div style="font-size: 0.8rem; color: var(--text-muted);" x-text="order.phone"></div>
+                                                <div class="text-responsive-detail" style=" color: var(--text-muted);" x-text="order.phone"></div>
                                             </td>
                                             <td>
                                                 <div style="font-weight: 600; text-transform: capitalize;" x-text="order.method"></div>
-                                                <div style="font-size: 0.75rem; color: var(--text-muted); max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" x-show="order.method === 'despacho'" x-text="order.address"></div>
+                                                <div class="text-responsive-disclaimer" style=" color: var(--text-muted); max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" x-show="order.method === 'despacho'" x-text="order.address"></div>
                                             </td>
                                             <td>
-                                                <div style="font-size: 0.8rem;">
+                                                <div class="text-responsive-detail" style="">
                                                     <template x-for="item in order.items" :key="item.id">
                                                         <div x-text="`${item.qty}x ${item.name}`"></div>
                                                     </template>
@@ -1515,7 +1548,7 @@
                                                 <span class="status-badge" :class="order.status === 'pendiente' ? 'pending' : 'completed'" x-text="order.status"></span>
                                             </td>
                                             <td>
-                                                <button @click="attendOrder(order.id)" class="btn" :disabled="order.status === 'atendido'" :style="order.status === 'atendido' ? 'background: transparent; color: var(--text-muted); cursor: default; padding: 0.4rem;' : 'background-color: var(--success); color: white; padding: 0.4rem 0.8rem; font-size: 0.8rem; border-radius: 6px;'">
+                                                <button @click="attendOrder(order.id)" class="btn text-responsive-detail" :disabled="order.status === 'atendido'" style="order.status === 'atendido' ? 'background: transparent; color: var(--text-muted); cursor: default; padding: 0.4rem;' : 'background-color: var(--success); color: white; padding: 0.4rem 0.8rem;  border-radius: 6px;'">
                                                     <span x-text="order.status === 'pendiente' ? 'Atender' : 'Listo'"></span>
                                                 </button>
                                             </td>
@@ -1546,7 +1579,7 @@
                             <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 1.5rem;">
                                 <div>
                                     <h4 style="font-size: 1rem; margin-bottom: 0.25rem;">Forzar Cierre de la Tienda</h4>
-                                    <p style="color: var(--text-muted); font-size: 0.8rem;">Cierra temporalmente la recepción de pedidos sin importar la hora.</p>
+                                    <p class="text-responsive-detail" style="color: var(--text-muted); ">Cierra temporalmente la recepción de pedidos sin importar la hora.</p>
                                 </div>
                                 <label class="switch">
                                     <input type="checkbox" x-model="storeHours.forcedClosed" @change="saveHours()">
@@ -1603,8 +1636,8 @@
                     
                     <div class="form-group">
                         <label class="form-label" for="product-image">Imagen del Producto (Carga 1 Archivo)</label>
-                        <input id="product-image" type="file" accept="image/*" @change="onProductImageFileChange($event)" class="form-control" style="font-size: 0.85rem;">
-                        <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem;">Carga una foto local. Se guardará directamente en memoria temporal.</p>
+                        <input id="product-image" type="file" accept="image/*" @change="onProductImageFileChange($event)" class="form-control text-responsive-detail" style="">
+                        <p class="text-responsive-disclaimer" style="color: var(--text-muted);  margin-top: 0.25rem;">Carga una foto local. Se guardará directamente en memoria temporal.</p>
                         
                         <div x-show="productFormImageBase64 || currentProduct.image" style="margin-top: 1rem; text-align: center;">
                             <span class="form-label" style="display: block; margin-bottom: 0.5rem;">Previsualización de la Imagen</span>
@@ -1627,14 +1660,14 @@
             <div class="footer-grid">
                 <div>
                     <div class="footer-logo">⚡ Apex<span>Tech</span></div>
-                    <p style="max-width: 250px; font-size: 0.8rem; line-height: 1.4;">Plataforma de demostración interactiva que muestra el potencial de escalabilidad a comercio electrónico.</p>
+                    <p class="text-responsive-detail" style="max-width: 250px;  line-height: 1.4;">Plataforma de demostración interactiva que muestra el potencial de escalabilidad a comercio electrónico.</p>
                 </div>
                 <div>
                     <h4 class="footer-title">Enlaces</h4>
                     <ul class="footer-links">
                         <li><a href="#catalogo">Catálogo</a></li>
                         <li><a href="#" @click.prevent="openAdminModal()">Panel Admin</a></li>
-                        <li><a href="../index.html#demos" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }">Volver al Showcase</a></li>
+                        <li><a href="../index.html#demos" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" class="showcase-back-btn no-print">Volver al Showcase</a></li>
                     </ul>
                 </div>
                 <div>
@@ -1650,7 +1683,7 @@
                 <p>&copy; 2026 Apex Tech Demo. Todos los derechos reservados.</p>
                 <p>Desarrollado con fines demostrativos para el mercado de PYMEs en Chile.</p>
             </div>
-            <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px; margin-top: 15px; text-align: center; font-size: 0.75rem; color: var(--text-muted); line-height: 1.5;">
+            <div class="text-responsive-disclaimer" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px; margin-top: 15px; text-align: center;  color: var(--text-muted); line-height: 1.5;">
                 * La integración de pasarelas (Webpay, MercadoPago, Flow) es opcional. El cliente debe abrir una cuenta comercial en la plataforma elegida (como empresa o persona natural con inicio de actividades en el SII) y entregar las credenciales de conexión para habilitarla en la web.
             </div>
         </div>
@@ -2045,10 +2078,9 @@
     </script>
     <!-- Botón Flotante para Volver al Showcase -->
     <a href="../index.html#demos" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" 
-       style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #bd93f9; color: #1e1f29; padding: 12px 20px; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(189, 147, 249, 0.4); border: 2px solid #1e1f29; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
+       class="text-responsive-detail no-print" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #bd93f9; color: #1e1f29; padding: 12px 20px; border-radius: 50px; font-family: 'Inter', sans-serif;  font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(189, 147, 249, 0.4); border: 2px solid #1e1f29; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
        onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(189, 147, 249, 0.6)';"
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(189, 147, 249, 0.4)';"
-       class="no-print">
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(189, 147, 249, 0.4)';">
          <span>⬅️ Volver al Showcase</span>
     </a>
 

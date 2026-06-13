@@ -276,7 +276,8 @@
             margin-bottom: 10px;
         }
 
-        .product-info p {
+        .product-info p,
+        .product-info-description {
             color: var(--text-muted);
             font-size: 0.85rem;
             margin-bottom: 20px;
@@ -573,10 +574,10 @@
                 gap: 30px !important;
             }
             .hero h1 {
-                font-size: 2.2rem !important;
+                font-size: 2.2rem;
             }
             .hero p {
-                font-size: 1rem !important;
+                font-size: 1rem;
             }
             header {
                 position: relative !important;
@@ -600,13 +601,32 @@
                 gap: 12px;
             }
             /* Legibility improvements for small texts on mobile viewports */
-            .alert-success, .demo-bar, footer, .wa-box-body, .form-group label, .form-input, .form-select, .form-textarea, .closed-banner {
-                font-size: 0.875rem !important; /* Standardized 14px minimum */
+            html body .alert-success,
+            html body .demo-bar, 
+            html body footer, 
+            html body .wa-box-body,
+            html body .form-group label, 
+            html body .form-input, 
+            html body .form-select, 
+            html body .form-textarea, 
+            html body .closed-banner,
+            html body .product-desc,
+            html body .cta-btn,
+            html body label,
+            html body .text-responsive-caption,
+            html body .text-responsive-detail,
+            html body .text-responsive-disclaimer,
+            html body .demo-bar a,
+            html body .demo-bar span,
+            html body footer p,
+            html body footer div,
+            html body .product-info-description {
+                font-size: 0.875rem; /* Standardized 14px minimum */
             }
-            span[style*="font-size: 67%"], span[style*="font-size: 75%"] {
-                font-size: 82% !important;
-                font-weight: 600 !important;
-                opacity: 0.95 !important;
+            html body span[style*="font-size: 67%"], html body span[style*="font-size: 75%"] {
+                font-size: 82%;
+                font-weight: 600;
+                opacity: 0.95;
             }
         }
 
@@ -862,18 +882,39 @@
                 bottom: 15px;
                 right: 15px;
             }
-            .chatbot-bubble {
+            html body .chatbot-bubble {
                 padding: 10px 18px;
-                font-size: 0.875rem !important;
+                font-size: 0.875rem;
             }
-            .chatbot-msg-bubble {
-                font-size: 0.875rem !important;
+            html body .chatbot-msg-bubble {
+                font-size: 0.875rem;
             }
-            .chatbot-quick-btn {
-                font-size: 0.875rem !important;
+            html body .chatbot-quick-btn {
+                font-size: 0.875rem;
             }
-            .chatbot-input-field {
-                font-size: 0.875rem !important;
+            html body .chatbot-input-field {
+                font-size: 0.875rem;
+            }
+        }
+
+        .text-responsive-detail {
+            font-size: 0.85rem;
+        }
+        .text-responsive-caption {
+            font-size: 0.75rem;
+        }
+        .text-responsive-disclaimer {
+            font-size: 0.7rem;
+        }
+
+        .showcase-back-btn {
+            font-size: 0.85rem;
+        }
+        @media (max-width: 768px) {
+            html body .showcase-back-btn,
+            html body .showcase-back-btn span {
+                font-size: 14px;
+                line-height: 1.45;
             }
         }
     </style>
@@ -883,7 +924,7 @@
     <!-- Demo Banner Info -->
     <div class="demo-bar">
         <span>Esta es la DEMO del <strong>PLAN PREMIUM</strong> (E-commerce + Base de Datos + Panel Admin).</span>
-        <a href="../index.html#precios" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }">Regresar al Portafolio</a>
+        <a href="../index.html#precios" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" class="showcase-back-btn no-print">Regresar al Portafolio</a>
     </div>
 
     <!-- HEADER -->
@@ -920,7 +961,7 @@
     <section id="pilares" style="padding: 80px 0; background-color: var(--bg-darkest); border-bottom: 1px solid var(--border);">
         <div class="container">
             <div style="text-align: center; margin-bottom: 50px;">
-                <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;">Calidad de Origen</span>
+                <span class="text-responsive-caption" style="color: var(--primary); font-weight: 700;  text-transform: uppercase; letter-spacing: 0.1em;">Calidad de Origen</span>
                 <h2 style="font-size: 2.2rem; margin: 10px 0; font-family: var(--font-headings);">Nuestra Promesa de Calidad</h2>
                 <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 0.95rem;">Madera 100% noble seleccionada y secada artificialmente para asegurar estabilidad y durabilidad en cada pieza.</p>
             </div>
@@ -948,7 +989,7 @@
     <section id="tienda" class="store-section" style="border-bottom: 1px solid var(--border);">
         <div class="container">
             <div style="text-align: center; margin-bottom: 40px;">
-                <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;">Showroom Digital</span>
+                <span class="text-responsive-caption" style="color: var(--primary); font-weight: 700;  text-transform: uppercase; letter-spacing: 0.1em;">Showroom Digital</span>
                 <h2 style="font-size: 2.2rem; margin: 10px 0; font-family: var(--font-headings);">Catálogo de Productos</h2>
                 <p style="color: var(--text-muted); margin-top: 8px; font-size: 0.95rem;">Gestionado dinámicamente mediante Base de Datos local (CRUD de Administrador).</p>
             </div>
@@ -964,7 +1005,7 @@
                         </div>
                         <div class="product-info">
                             <h3 x-text="p.name"></h3>
-                            <p x-text="p.description"></p>
+                            <p class="product-info-description" x-text="p.description"></p>
                             <div class="product-price-row">
                                 <span class="product-price" x-text="formatPrice(p.price)"></span>
                                 <button class="cta-btn" @click="addToCart(p)" :disabled="isStoreClosed()">Añadir</button>
@@ -987,13 +1028,13 @@
             <div style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(20, 22, 31, 0.8) 100%); border: 1px solid var(--border); border-radius: 30px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;" class="grid-configurator">
                     <div>
-                        <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; uppercase tracking-widest;">Simulador Premium</span>
+                        <span class="text-responsive-caption" style="color: var(--primary); font-weight: 700;  uppercase tracking-widest;">Simulador Premium</span>
                         <h2 style="font-size: 2.2rem; margin: 10px 0 20px; font-family: var(--font-headings);">Cotiza tu Mueble a Medida</h2>
                         <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.95rem; line-height: 1.6;">Selecciona la categoría del mueble, el tipo de madera nativa y las dimensiones para calcular un presupuesto aproximado en tiempo real.</p>
                         
                         <div style="display: flex; flex-direction: column; gap: 20px;">
                             <div>
-                                <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; color: var(--text-light);">1. Tipo de Mueble</label>
+                                <label class="text-responsive-caption" style="display: block;  font-weight: 700; margin-bottom: 8px; color: var(--text-light);">1. Tipo de Mueble</label>
                                 <select x-model="muebleType" style="width: 100%; background: var(--bg-darkest); border: 1px solid var(--border); padding: 12px; border-radius: 10px; color: white; font-family: inherit;">
                                     <option value="mesa">Mesa de Comedor</option>
                                     <option value="repisa">Repisa / Estantería</option>
@@ -1003,7 +1044,7 @@
                             </div>
                             
                             <div>
-                                <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; color: var(--text-light);">2. Tipo de Madera</label>
+                                <label class="text-responsive-caption" style="display: block;  font-weight: 700; margin-bottom: 8px; color: var(--text-light);">2. Tipo de Madera</label>
                                 <select x-model="maderaType" style="width: 100%; background: var(--bg-darkest); border: 1px solid var(--border); padding: 12px; border-radius: 10px; color: white; font-family: inherit;">
                                     <option value="roble">Roble Chileno (+20% Dureza y Calidad)</option>
                                     <option value="avellano">Avellano (Veta fina, tono cálido)</option>
@@ -1012,7 +1053,7 @@
                             </div>
 
                             <div>
-                                <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; color: var(--text-light);">3. Largo Deseado (Metros)</label>
+                                <label class="text-responsive-caption" style="display: block;  font-weight: 700; margin-bottom: 8px; color: var(--text-light);">3. Largo Deseado (Metros)</label>
                                 <div style="display: flex; align-items: center; gap: 15px;">
                                     <input type="range" min="0.5" max="3.0" step="0.1" x-model="largo" style="flex-grow: 1; accent-color: var(--primary);">
                                     <span style="font-weight: 700; width: 60px; text-align: right;" x-text="largo + ' m'"></span>
@@ -1024,7 +1065,7 @@
                     <div style="background-color: var(--bg-darkest); border: 1px solid var(--border); border-radius: 20px; padding: 35px; text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 300px;">
                         <h3 style="font-size: 1.1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 15px;">Presupuesto Estimado</h3>
                         <div style="font-size: 3rem; font-weight: 900; color: var(--primary); font-family: var(--font-headings); margin-bottom: 10px;" x-text="formatCLP(calculatePrice())"></div>
-                        <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 25px;">*Precio aproximado incluye IVA. Sujeto a confirmación de stock de veta y detalles de terminación.</p>
+                        <p class="text-responsive-detail" style="color: var(--text-muted);  margin-bottom: 25px;">*Precio aproximado incluye IVA. Sujeto a confirmación de stock de veta y detalles de terminación.</p>
                         
                         <button class="cta-btn" @click="sendCustomQuote()" style="width: 100%; padding: 15px; font-size: 1rem;">
                             Solicitar por WhatsApp a Medida
@@ -1039,7 +1080,7 @@
     <section id="galeria" style="padding: 80px 0; background-color: #0f1115; border-bottom: 1px solid var(--border);">
         <div class="container">
             <div style="text-align: center; margin-bottom: 50px;">
-                <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;">Inspiración</span>
+                <span class="text-responsive-caption" style="color: var(--primary); font-weight: 700;  text-transform: uppercase; letter-spacing: 0.1em;">Inspiración</span>
                 <h2 style="font-size: 2.2rem; margin: 10px 0; font-family: var(--font-headings);">Espacios Diseñados para Inspirar</h2>
                 <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 0.95rem;">Echa un vistazo a cómo lucen nuestros muebles de madera nativa en proyectos reales realizados en Chile.</p>
             </div>
@@ -1050,7 +1091,7 @@
                     </div>
                     <div style="padding: 20px;">
                         <h4 style="font-size: 1.1rem; margin-bottom: 5px;">Mesa de Comedor Roble en Vitacura</h4>
-                        <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">Proyecto a medida para comedor familiar integrado, roble rústico con barniz poliuretano mate.</p>
+                        <p class="text-responsive-caption" style="color: var(--text-muted);  line-height: 1.5;">Proyecto a medida para comedor familiar integrado, roble rústico con barniz poliuretano mate.</p>
                     </div>
                 </div>
                 <div style="border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background-color: var(--bg-card); transition: all 0.3s;" class="gallery-card">
@@ -1059,7 +1100,7 @@
                     </div>
                     <div style="padding: 20px;">
                         <h4 style="font-size: 1.1rem; margin-bottom: 5px;">Mesa de Centro y Repisas en Lo Barnechea</h4>
-                        <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">Mesa de centro con canto vivo natural y repisa de pared iluminada en madera nativa seleccionada.</p>
+                        <p class="text-responsive-caption" style="color: var(--text-muted);  line-height: 1.5;">Mesa de centro con canto vivo natural y repisa de pared iluminada en madera nativa seleccionada.</p>
                     </div>
                 </div>
             </div>
@@ -1094,20 +1135,20 @@
                 </div>
                 <div>
                     <h4 style="font-size: 1rem; margin-bottom: 20px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-headings);">Medios de Pago</h4>
-                    <p style="color: var(--text-muted); margin-bottom: 15px; font-size: 0.85rem; line-height: 1.5;">Aceptamos tarjetas de débito/crédito mediante pasarelas locales.</p>
+                    <p class="text-responsive-caption" style="color: var(--text-muted); margin-bottom: 15px;  line-height: 1.5;">Aceptamos tarjetas de débito/crédito mediante pasarelas locales.</p>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <span style="background-color: var(--bg-card); border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; color: var(--text-light);">Webpay</span>
-                        <span style="background-color: var(--bg-card); border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; color: var(--text-light);">Flow</span>
-                        <span style="background-color: var(--bg-card); border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; color: var(--text-light);">MercadoPago</span>
+                        <span style="background-color: var(--bg-card); border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; font-weight: 700; color: var(--text-light);">Webpay</span>
+                        <span style="background-color: var(--bg-card); border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; font-weight: 700; color: var(--text-light);">Flow</span>
+                        <span style="background-color: var(--bg-card); border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; font-weight: 700; color: var(--text-light);">MercadoPago</span>
                     </div>
                 </div>
             </div>
-            <div style="border-top: 1px solid var(--border); padding-top: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; color: var(--text-muted); font-size: 0.8rem;">
+            <div class="text-responsive-detail" style="border-top: 1px solid var(--border); padding-top: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; color: var(--text-muted); ">
                 <p>&copy; 2026 Roble & Co. Todos los derechos reservados. Desarrollado con el Plan Premium.</p>
                 <div style="display: flex; gap: 20px;">
                     <a href="../index.html#precios" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'">Ver otros Planes</a>
                 </div>
-                <div style="width: 100%; border-top: 1px solid var(--border); padding-top: 15px; margin-top: 10px; text-align: center; font-size: 0.75rem; color: var(--text-muted); line-height: 1.5;">
+                <div class="text-responsive-disclaimer" style="width: 100%; border-top: 1px solid var(--border); padding-top: 15px; margin-top: 10px; text-align: center; color: var(--text-muted); line-height: 1.5;">
                     * La integración de pasarelas (Webpay, MercadoPago, Flow) es opcional. El cliente debe abrir una cuenta comercial en la plataforma elegida (como empresa o persona natural con inicio de actividades en el SII) y entregar las credenciales de conexión para habilitarla en la web.
                 </div>
             </div>
@@ -1213,7 +1254,7 @@
                     <div class="form-group">
                         <label for="bill-rut">RUT de la Empresa</label>
                         <input id="bill-rut" type="text" x-model="checkoutRut" class="form-control" placeholder="Ej: 76.123.456-7" @input="formatRutInput()">
-                        <span x-show="checkoutRutError" style="color: #ef4444; font-size: 0.8rem; margin-top: 4px; display: block;" x-text="checkoutRutError"></span>
+                        <span x-show="checkoutRutError" class="text-responsive-detail" style="color: #ef4444;  margin-top: 4px; display: block;" x-text="checkoutRutError"></span>
                     </div>
                     <div class="form-group">
                         <label for="bill-razon">Razón Social</label>
@@ -1259,10 +1300,10 @@
             <div class="gateway-card">
                 <div class="gateway-header">
                     <span class="gateway-logo">WebPay <span>Plus</span></span>
-                    <span style="font-size: 0.8rem; font-weight: 700; color: #64748b;">Simulación Segura</span>
+                    <span class="text-responsive-detail" style=" font-weight: 700; color: #64748b;">Simulación Segura</span>
                 </div>
                 
-                <div style="background-color: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; font-size: 0.85rem;">
+                <div class="text-responsive-caption" style="background-color: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; ">
                     <p><strong>Comercio:</strong> Muebles Roble Premium</p>
                     <p><strong>Monto:</strong> <span x-text="formatPrice(getCartTotal() + calculateShippingCost())" style="font-weight: 800; color: #d52b1e;"></span></p>
                 </div>
@@ -1305,7 +1346,7 @@
             </div>
 
             <!-- Receipt layout -->
-            <div id="printable-receipt" style="background-color: var(--bg-darkest); border: 1px solid var(--border); padding: 20px; border-radius: 16px; font-size: 0.85rem; color: var(--text-light); line-height: 1.5; margin-bottom: 25px;">
+            <div id="printable-receipt" class="text-responsive-caption" style="background-color: var(--bg-darkest); border: 1px solid var(--border); padding: 20px; border-radius: 16px;  color: var(--text-light); line-height: 1.5; margin-bottom: 25px;">
                 <div style="border-bottom: 1px dashed var(--border); padding-bottom: 12px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-weight: 800; font-family: var(--font-headings); font-size: 1.1rem; color: var(--primary);">ROBLE & CO.</span>
                     <span style="font-size: 0.75rem; color: var(--text-muted);" x-text="lastOrderReceipt ? new Date(lastOrderReceipt.date).toLocaleString('es-CL') : ''"></span>
@@ -1351,7 +1392,7 @@
                 </div>
 
                 <div style="border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 10px; display: flex; flex-direction: column; gap: 4px;">
-                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);" x-show="lastOrderReceipt && lastOrderReceipt.shippingCost > 0">
+                    <div class="text-responsive-detail" style="display: flex; justify-content: space-between;  color: var(--text-muted);" x-show="lastOrderReceipt && lastOrderReceipt.shippingCost > 0">
                         <span>Costo Despacho:</span>
                         <span x-text="lastOrderReceipt ? formatPrice(lastOrderReceipt.shippingCost) : ''"></span>
                     </div>
@@ -1490,7 +1531,7 @@
             <!-- ORDER QUEUE TAB -->
             <div x-show="adminTab === 'pedidos'">
                 <h4 style="margin-bottom: 10px;">Cola de Pedidos Recibidos</h4>
-                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 15px;">Administra el estado de los pedidos que los clientes realizan en el e-commerce.</p>
+                <p class="text-responsive-detail" style="color: var(--text-muted);  margin-bottom: 15px;">Administra el estado de los pedidos que los clientes realizan en el e-commerce.</p>
                 <div style="overflow-x: auto;">
                     <table class="admin-table">
                         <thead>
@@ -1512,7 +1553,7 @@
                                     <td x-text="o.method === 'presencial' ? 'Retiro' : 'Despacho'"></td>
                                     <td>
                                         <template x-for="item in o.items">
-                                            <div style="font-size: 0.8rem; color: var(--text-muted);" x-text="item.name"></div>
+                                            <div class="text-responsive-detail" style=" color: var(--text-muted);" x-text="item.name"></div>
                                         </template>
                                     </td>
                                     <td x-text="formatPrice(o.total)" style="font-weight: 700; color: var(--primary);"></td>
@@ -1523,7 +1564,7 @@
                                         <div style="display: flex; gap: 8px;">
                                             <button @click="updateOrderStatus(o.id, 'proceso')" x-show="o.status === 'pendiente'" style="background: none; border: 1px solid #0ea5e9; color: #0ea5e9; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-size: 0.75rem;">Atender</button>
                                             <button @click="updateOrderStatus(o.id, 'entregado')" x-show="o.status === 'proceso'" style="background: none; border: 1px solid var(--success); color: var(--success); padding: 4px 8px; border-radius: 6px; cursor: pointer; font-size: 0.75rem;">Completar</button>
-                                            <button @click="deleteOrder(o.id)" style="color: var(--danger); background: none; border: none; cursor: pointer; font-size: 0.8rem; font-weight: 700;">Eliminar</button>
+                                            <button @click="deleteOrder(o.id)" class="text-responsive-detail" style="color: var(--danger); background: none; border: none; cursor: pointer;  font-weight: 700;">Eliminar</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -1536,7 +1577,7 @@
             <!-- HOURS SETTINGS TAB -->
             <div x-show="adminTab === 'horarios'">
                 <h4 style="margin-bottom: 10px;">Configuración de Apertura / Cierre de Tienda</h4>
-                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 20px;">Controla si los clientes pueden hacer pedidos según la hora. Cambia el horario y ve cómo se actualiza la tienda.</p>
+                <p class="text-responsive-detail" style="color: var(--text-muted);  margin-bottom: 20px;">Controla si los clientes pueden hacer pedidos según la hora. Cambia el horario y ve cómo se actualiza la tienda.</p>
                 
                 <div style="background-color: var(--bg-darkest); padding: 25px; border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 20px; max-width: 500px;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1560,7 +1601,7 @@
             <!-- OWNER'S MANUAL TAB (Built-in Support/Training simulation) -->
             <div x-show="adminTab === 'tutorial'" style="display: flex; flex-direction: column; gap: 20px;">
                 <h4 style="margin-bottom: 10px;">Manual de Entrega & Capacitación del Propietario</h4>
-                <p style="color: var(--text-muted); font-size: 0.85rem; leading-relaxed;">
+                <p class="text-responsive-caption" style="color: var(--text-muted);  leading-relaxed;">
                     El Plan Premium incluye una sesión de capacitación de 1 hora y guías de video para autogestionar el sitio sin depender del programador.
                 </p>
                 
@@ -1581,7 +1622,7 @@
                 <!-- Theme Switcher Card -->
                 <div style="background-color: var(--bg-darkest); padding: 25px; border-radius: 16px; border: 1px solid var(--border);">
                     <h5 style="margin-bottom: 15px; color: var(--primary); font-family: var(--font-headings); font-size: 1.1rem;">🎨 Cambiar Tema Visual de la Tienda</h5>
-                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">
+                    <p class="text-responsive-caption" style="color: var(--text-muted);  margin-bottom: 15px;">
                         Cambia instantáneamente la paleta de colores de todo el sitio web (Página de venta, Simulador, Carro y este Panel) asegurando la legibilidad.
                     </p>
                     <div style="display: flex; gap: 15px; flex-wrap: wrap;">
@@ -1595,16 +1636,16 @@
                 <!-- Server Info Card (Entendible por Emprendedores) -->
                 <div style="background-color: var(--bg-darkest); padding: 25px; border-radius: 16px; border: 1px solid var(--border);">
                     <h5 style="margin-bottom: 15px; color: var(--primary); font-family: var(--font-headings); font-size: 1.1rem;">☁️ ¿Por qué mi web necesita un Servidor Dedicado? (Costo de Hosting)</h5>
-                    <p style="color: var(--text-light); font-size: 0.85rem; line-height: 1.6; margin-bottom: 12px;">
+                    <p class="text-responsive-caption" style="color: var(--text-light);  line-height: 1.6; margin-bottom: 12px;">
                         Tanto el <strong>Plan Profesional</strong> como el <strong>Plan Premium</strong> no incluyen el precio del servidor (hosting) donde se alojará la página web.
                     </p>
-                    <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-bottom: 12px;">
+                    <p class="text-responsive-caption" style="color: var(--text-muted);  line-height: 1.6; margin-bottom: 12px;">
                         <strong>En palabras sencillas:</strong> Una web básica (estática) es como un folleto digital que no cambia. Pero tu web profesional o premium es como una <strong>oficina o tienda interactiva activa 24/7</strong>: tiene un catálogo de productos modificable, un carro que calcula envíos, y un panel de control donde guardas datos de clientes. 
                     </p>
-                    <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-bottom: 12px;">
+                    <p class="text-responsive-caption" style="color: var(--text-muted);  line-height: 1.6; margin-bottom: 12px;">
                         Para procesar todos estos datos al instante de forma segura, tu web requiere estar alojada en una "computadora especial en la nube" (un servidor de páginas dinámicas).
                     </p>
-                    <div style="background-color: rgba(224, 140, 56, 0.08); border-left: 4px solid var(--primary); padding: 15px; border-radius: 4px; font-size: 0.85rem; color: var(--text-light); margin-top: 15px; line-height: 1.5;">
+                    <div class="text-responsive-caption" style="background-color: rgba(224, 140, 56, 0.08); border-left: 4px solid var(--primary); padding: 15px; border-radius: 4px;  color: var(--text-light); margin-top: 15px; line-height: 1.5;">
                         📌 <strong>Costo Estimado Mensual:</strong> Entre <strong>20 USD y 50 USD <span style="font-size: 67%; font-weight: normal; opacity: 0.85;">neto + IVA</span></strong> (aproximadamente $19.000 a $47.000 CLP al mes <span style="font-size: 67%; font-weight: normal; opacity: 0.85;">neto + IVA</span>), dependiendo de la cantidad de visitas y del volumen de ventas que procese tu negocio.
                     </div>
                 </div>
@@ -1613,7 +1654,7 @@
                 <div style="background-color: var(--bg-darkest); padding: 25px; border-radius: 16px; border: 1px solid var(--border);">
                     <h5 style="margin-bottom: 15px; color: var(--primary); font-family: var(--font-headings); font-size: 1.1rem;">🚀 Mejoras Exclusivas del Plan Premium vs. Plan Profesional</h5>
                     
-                    <ul style="list-style-type: none; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem; color: var(--text-muted); text-align: left;">
+                    <ul class="text-responsive-caption" style="list-style-type: none; padding: 0; display: flex; flex-direction: column; gap: 10px;  color: var(--text-muted); text-align: left;">
                         <li style="display: flex; align-items: start; gap: 10px;">
                             <span style="color: var(--primary); font-weight: bold;">✔</span>
                             <div>
@@ -1646,7 +1687,7 @@
                         </li>
                     </ul>
 
-                    <div style="background-color: var(--bg-card); padding: 15px; border-radius: 12px; border: 1px dashed var(--border); margin-top: 20px; font-size: 0.8rem; line-height: 1.5; color: var(--text-muted);">
+                    <div class="text-responsive-detail" style="background-color: var(--bg-card); padding: 15px; border-radius: 12px; border: 1px dashed var(--border); margin-top: 20px;  line-height: 1.5; color: var(--text-muted);">
                         💡 <strong>Nota sobre Escalabilidad:</strong> Recuerda que todas estas páginas web corresponden a <strong>demos base del negocio</strong>. Están diseñadas para ser funcionales desde el día uno, pero <strong>pueden escalar y personalizarse</strong> según el crecimiento y los requerimientos específicos de tu empresa en el tiempo.
                     </div>
                 </div>
