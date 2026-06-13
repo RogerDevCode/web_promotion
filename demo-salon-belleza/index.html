@@ -1057,6 +1057,13 @@
     formStylist: 'any',
     formComment: '',
 
+    // Auto-specialist assignment (CHANGE 1)
+    autoStylist: '',
+    autoStylistSpecialty: '',
+
+    // Dynamic slider context (CHANGE 2)
+    activeServiceContext: '',
+
     init() {
         // Init logic if needed
     },
@@ -1071,6 +1078,34 @@
             this.selectedServices.push({ id, title, price, duration });
             this.selectedPrice += price;
             this.selectedDuration += duration;
+        }
+
+        // Auto-assign best specialist based on selected services (CHANGE 1)
+        const hasBalayage = this.selectedServices.some(s => s.title.toLowerCase().includes('balayage') || s.title.toLowerCase().includes('iluminac'));
+        const hasCorte = this.selectedServices.some(s => s.title.toLowerCase().includes('corte') || s.title.toLowerCase().includes('peinado'));
+        if (hasBalayage) {
+            this.autoStylist = 'Valentina Moretti';
+            this.autoStylistSpecialty = 'Especialista en Balayage e Iluminación';
+            this.formStylist = 'stylist1';
+        } else if (hasCorte) {
+            this.autoStylist = 'Ariadna Ruiz';
+            this.autoStylistSpecialty = 'Especialista en Cortes y Peinados';
+            this.formStylist = 'stylist2';
+        } else {
+            this.autoStylist = '';
+            this.autoStylistSpecialty = '';
+            this.formStylist = 'any';
+        }
+
+        // Dynamic slider context (CHANGE 2)
+        const hasColor = this.selectedServices.some(s => s.title.toLowerCase().includes('color') || s.title.toLowerCase().includes('balayage') || s.title.toLowerCase().includes('iluminac') || s.title.toLowerCase().includes('keratina') || s.title.toLowerCase().includes('reconstruc'));
+        const hasCorteCtx = this.selectedServices.some(s => s.title.toLowerCase().includes('corte') || s.title.toLowerCase().includes('peinado'));
+        if (hasColor) {
+            this.activeServiceContext = 'color';
+        } else if (hasCorteCtx) {
+            this.activeServiceContext = 'corte';
+        } else {
+            this.activeServiceContext = '';
         }
     },
 
@@ -1324,6 +1359,9 @@
                     Desliza el tirador dorado hacia los lados para revelar el cambio de frizz y opacidad a una melena de espejo perfectamente hidratada con nuestra técnica de reestructuración orgánica.
                 </p>
 
+                <!-- Adaptive caption (CHANGE 2) -->
+                <p x-show="activeServiceContext" style="text-align: center; color: var(--accent-champagne); font-size: 0.875rem; margin-bottom: 16px; font-style: italic;" x-cloak x-text="activeServiceContext === 'color' ? '🎨 Mira los resultados del servicio de color que seleccionaste' : '✂️ Así luce un corte de autor realizado por nuestros estilistas'"></p>
+
                 <!-- Custom Slider Widget -->
                 <div class="before-after-container" 
                      x-ref="sliderContainer"
@@ -1524,11 +1562,23 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Estilista de Preferencia</label>
-                            <select x-model="formStylist" class="form-input">
-                                <option value="any">Cualquier Profesional Disponible</option>
-                                <option value="stylist1">Valentina Moretti (Directora)</option>
-                                <option value="stylist2">Ariadna Ruiz (Senior)</option>
-                            </select>
+                            <!-- Auto-specialist banner (CHANGE 1) -->
+                            <div x-show="autoStylist" style="background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05)); border: 1px solid rgba(212,175,55,0.3); border-radius: 10px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px;" x-cloak>
+                                <span style="font-size: 1.5rem;">✨</span>
+                                <div>
+                                    <p style="color: var(--accent-gold); font-weight: 600; font-size: 0.875rem; margin-bottom: 2px;" x-text="'Hemos asignado a ' + autoStylist"></p>
+                                    <p style="color: var(--text-muted); font-size: 0.75rem;" x-text="autoStylistSpecialty + ' — la mejor opción para lo que elegiste'"></p>
+                                </div>
+                            </div>
+                            <!-- Stylist selector: hidden when auto-assigned (CHANGE 1) -->
+                            <div x-show="!autoStylist">
+                                <select x-model="formStylist" class="form-input">
+                                    <option value="any">Cualquier Profesional Disponible</option>
+                                    <option value="stylist1">Valentina Moretti (Directora)</option>
+                                    <option value="stylist2">Ariadna Ruiz (Senior)</option>
+                                </select>
+                            </div>
+                            <a href="#" @click.prevent="autoStylist = ''; formStylist = 'any'" x-show="autoStylist" style="font-size: 0.75rem; color: var(--accent-champagne); text-decoration: underline; display: inline-block; margin-top: 6px;" x-cloak>Elegir estilista manualmente</a>
                         </div>
                     </div>
 

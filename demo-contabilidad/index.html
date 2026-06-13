@@ -46,6 +46,14 @@
     
     <!-- Custom Vanilla CSS for Corporate B2B Theme -->
     <style>
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(0, 180, 216, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 180, 216, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 180, 216, 0); }
+        }
+        .pulse-effect {
+            animation: pulse-glow 1s ease-out;
+        }
         /* Design Tokens & Theme Colors (Navy Blue, Steel, Bright Tech Blue) */
         :root {
             --primary-navy: #0A192F;      /* Deep navy corporate background */
@@ -1018,6 +1026,7 @@
 <body x-data="{
     bookingModal: false,
     successToast: false,
+    highlightedPlan: 'Plan Emprendedor',
     
     // Calculator variables
     facturasMes: 10,
@@ -1026,6 +1035,11 @@
     // Selected Plan computed from values
     calcPlanName: 'Plan Emprendedor',
     calcPlanPrice: 45000,
+    
+    // RUT validation and auto-fill (CHANGE 2)
+    formRut: '',
+    rutValidating: false,
+    rutData: null,
     
     // Booking form inputs
     formName: '',
@@ -1056,6 +1070,32 @@
             this.calcPlanName = 'Plan Premium Corporativo';
             this.calcPlanPrice = 185000;
         }
+        this.highlightedPlan = this.calcPlanName;
+    },
+
+    validateRut(rut) {
+        if (!rut || rut.length < 7) return;
+        this.rutValidating = true;
+        // Mock validation: simulate SII API delay
+        setTimeout(() => {
+            const mockDB = {
+                '76.123.456-7': { razonSocial: 'Comercial Los Andes SpA', giro: 'Comercio al por mayor' },
+                '12.345.678-9': { razonSocial: 'Transportes del Sur Ltda.', giro: 'Transporte y logística' },
+                '98.765.432-1': { razonSocial: 'Soluciones Digitales S.A.', giro: 'Desarrollo de software' },
+                '11.111.111-1': { razonSocial: 'Panadería El Trigo Ltda.', giro: 'Elaboración de productos de panadería' },
+            };
+            const cleaned = rut.replace(/\s/g, '');
+            this.rutData = mockDB[cleaned] || null;
+            if (!this.rutData) {
+                if (cleaned.length >= 9) {
+                    this.rutData = { razonSocial: 'Empresa registrada en SII SpA', giro: 'Servicios Profesionales' };
+                }
+            }
+            if (this.rutData && !this.formName) {
+                this.formName = this.rutData.razonSocial;
+            }
+            this.rutValidating = false;
+        }, 800);
     },
 
     openBooking() {
@@ -1072,6 +1112,9 @@
         this.formTime = '';
         this.formSector = 'presencial';
         this.formComment = '';
+        this.formRut = '';
+        this.rutData = null;
+        this.rutValidating = false;
         this.bookingModal = false;
     },
 
@@ -1085,7 +1128,9 @@
         const subject = encodeURIComponent('Nueva Consulta de Asesoría ContaDigital');
         
         const bodyText = `Hola ContaDigital, solicito agendar una reunión de asesoría tributaria:\n\n` +
-            `Nombre: ${this.formName}\n` +
+            `RUT Empresa: ${this.formRut || 'No provisto'}\n` +
+            (this.rutData ? `Razón Social: ${this.rutData.razonSocial}\nGiro: ${this.rutData.giro}\n` : '') +
+            `Nombre Representante: ${this.formName}\n` +
             `Teléfono: ${this.formPhone}\n` +
             `Email: ${this.formEmail || 'No provisto'}\n\n` +
             `Plan Cotizado en Calculadora:\n` +
@@ -1110,6 +1155,9 @@
         this.formTime = '';
         this.formSector = 'presencial';
         this.formComment = '';
+        this.formRut = '';
+        this.rutData = null;
+        this.rutValidating = false;
 
         // Toast de éxito
         this.successToast = true;
@@ -1271,7 +1319,7 @@
                     </div>
 
                     <!-- Computed Plan Card -->
-                    <div class="calc-result-card">
+                    <div class="calc-result-card pulse-effect" :key="highlightedPlan">
                         <div>
                             <span class="result-plan-name" x-text="calcPlanName">Plan Emprendedor</span>
                             <p style="font-size: 0.85rem; opacity: 0.85;">Recomendado para la escala de tu negocio.</p>
@@ -1494,6 +1542,21 @@
             
             <div class="modal-body">
                 <form @submit.prevent="submitBooking()">
+                    <!-- RUT Empresa with auto-fill (CHANGE 2) -->
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label class="form-label">RUT Empresa (Opcional — autocompletamos tu razón social)</label>
+                        <input type="text" x-model="formRut" @blur="validateRut(formRut)" @input.debounce.600ms="validateRut(formRut)"
+                               placeholder="Ej: 76.123.456-7" class="form-input" autocomplete="off" id="rut-input">
+                        <div x-show="rutValidating" style="font-size: 0.75rem; color: var(--accent-cyan); margin-top: 6px; display: none;">
+                            ⏳ Consultando SII...
+                        </div>
+                        <div x-show="rutData && !rutValidating" 
+                             style="background: rgba(0,180,216,0.08); border: 1px solid rgba(0,180,216,0.25); border-radius: 8px; padding: 10px 14px; margin-top: 8px; display: none;">
+                            <p style="font-size: 0.78rem; font-weight: 600; color: var(--accent-cyan); margin-bottom: 2px;" x-text="'✓ ' + (rutData ? rutData.razonSocial : '')"></p>
+                            <p style="font-size: 0.72rem; color: var(--text-muted);" x-text="rutData ? 'Giro: ' + rutData.giro : ''"></p>
+                        </div>
+                    </div>
+
                     <!-- Name & Phone -->
                     <div class="form-group-grid">
                         <div class="form-group">

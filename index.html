@@ -1,5 +1,33 @@
 <!doctype html>
-<html lang="es-CL" x-data="{ mobileMenu: false, showVideo: false }" class="scroll-smooth">
+<html lang="es-CL" x-data="{ 
+    mobileMenu: false, 
+    showVideo: false, 
+    planTimes: { esencial: 0, local: 0, profesional: 0, premium: 0 }, 
+    activePlan: null, 
+    hoverStart: null,
+    startPlanHover(plan) {
+        this.activePlan = plan;
+        this.hoverStart = Date.now();
+    },
+    endPlanHover(plan) {
+        if (this.activePlan === plan && this.hoverStart) {
+            this.planTimes[plan] += Date.now() - this.hoverStart;
+            this.activePlan = null;
+            this.hoverStart = null;
+        }
+    },
+    getMostViewedPlan() {
+        let maxTime = 0;
+        let mostViewed = 'Profesional';
+        for (const [plan, time] of Object.entries(this.planTimes)) {
+            if (time > maxTime) {
+                maxTime = time;
+                mostViewed = plan.charAt(0).toUpperCase() + plan.slice(1);
+            }
+        }
+        return mostViewed;
+    }
+}" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1187,7 +1215,9 @@
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
 
           <!-- Plan Esencial -->
-          <div class="reveal rounded-[2rem] border border-drac-current/40 bg-drac-bg/80 overflow-hidden transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover hover:-translate-y-1 flex flex-col h-full">
+          <div class="reveal rounded-[2rem] border border-drac-current/40 bg-drac-bg/80 overflow-hidden transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover hover:-translate-y-1 flex flex-col h-full"
+               @mouseenter="startPlanHover('esencial')"
+               @mouseleave="endPlanHover('esencial')">
             <div class="p-8 flex-grow">
               <p class="text-sm font-bold uppercase tracking-[0.2em] text-chile-blueLight">Esencial</p>
               <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$149.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 80%; font-weight: 600; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
@@ -1203,9 +1233,20 @@
                   <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                   Diseño profesional adaptado a celular
                 </li>
-                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                <li class="flex items-start gap-3 text-sm text-drac-comment relative cursor-help" x-data="{ tooltip: false }" @mouseenter="tooltip = true" @mouseleave="tooltip = false">
                   <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                  Botón de WhatsApp integrado
+                  <span>Botón de WhatsApp integrado</span>
+                  <div x-show="tooltip" x-cloak
+                       x-transition:enter="transition ease-out duration-200"
+                       x-transition:enter-start="opacity-0 translate-y-1"
+                       x-transition:enter-end="opacity-100 translate-y-0"
+                       x-transition:leave="transition ease-in duration-150"
+                       x-transition:leave-start="opacity-100 translate-y-0"
+                       x-transition:leave-end="opacity-0 translate-y-1"
+                       class="absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-xl bg-drac-darker border border-drac-current/50 p-3 text-xs text-drac-fg shadow-mega pointer-events-none">
+                       <p class="font-bold text-[#25D366] mb-1">💬 Contacto Directo:</p>
+                       Tus clientes te escriben al tiro con un click. Sin formularios difíciles, directo a tu WhatsApp de negocio.
+                  </div>
                 </li>
                 <li class="flex items-start gap-3 text-sm text-drac-comment">
                   <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -1231,7 +1272,9 @@
           </div>
 
           <!-- Plan Local (New) -->
-          <div class="reveal rounded-[2rem] border border-drac-current/40 bg-drac-bg/80 overflow-hidden transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover hover:-translate-y-1 flex flex-col h-full" style="transition-delay: .04s">
+          <div class="reveal rounded-[2rem] border border-drac-current/40 bg-drac-bg/80 overflow-hidden transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover hover:-translate-y-1 flex flex-col h-full" style="transition-delay: .04s"
+               @mouseenter="startPlanHover('local')"
+               @mouseleave="endPlanHover('local')">
             <div class="p-8 flex-grow">
               <p class="text-sm font-bold uppercase tracking-[0.2em] text-chile-blueLight">Local / Mapa</p>
               <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$199.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 80%; font-weight: 600; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
@@ -1247,9 +1290,20 @@
                   <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                   Optimización Google Business Profile
                 </li>
-                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                <li class="flex items-start gap-3 text-sm text-drac-comment relative cursor-help" x-data="{ tooltip: false }" @mouseenter="tooltip = true" @mouseleave="tooltip = false">
                   <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                  SEO Local Georreferenciado en Chile
+                  <span>SEO Local Georreferenciado en Chile</span>
+                  <div x-show="tooltip" x-cloak
+                       x-transition:enter="transition ease-out duration-200"
+                       x-transition:enter-start="opacity-0 translate-y-1"
+                       x-transition:enter-end="opacity-100 translate-y-0"
+                       x-transition:leave="transition ease-in duration-150"
+                       x-transition:leave-start="opacity-100 translate-y-0"
+                       x-transition:leave-end="opacity-0 translate-y-1"
+                       class="absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-xl bg-drac-darker border border-drac-current/50 p-3 text-xs text-drac-fg shadow-mega pointer-events-none">
+                       <p class="font-bold text-chile-blueLight mb-1">📍 Búsquedas Locales:</p>
+                       Aparece destacado en Google y Google Maps cuando personas en tu comuna o ciudad busquen tus servicios.
+                  </div>
                 </li>
                 <li class="flex items-start gap-3 text-sm text-drac-comment">
                   <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -1271,7 +1325,9 @@
           </div>
 
           <!-- Plan Profesional (Featured) -->
-          <div class="reveal rounded-[2rem] border-2 border-chile-blue/50 bg-drac-bg/80 overflow-hidden shadow-glow transition-all duration-300 hover:-translate-y-2 relative flex flex-col h-full" style="transition-delay: .08s">
+          <div class="reveal rounded-[2rem] border-2 border-chile-blue/50 bg-drac-bg/80 overflow-hidden shadow-glow transition-all duration-300 hover:-translate-y-2 relative flex flex-col h-full" style="transition-delay: .08s"
+               @mouseenter="startPlanHover('profesional')"
+               @mouseleave="endPlanHover('profesional')">
             <!-- Popular badge -->
             <div class="bg-gradient-to-r from-chile-blue to-chile-blueLight py-2 px-4 text-center">
               <p class="text-xs font-bold text-white uppercase tracking-[0.2em]">⭐ Más popular</p>
@@ -1290,13 +1346,35 @@
                   <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                   Hasta 7 secciones o multi-página
                 </li>
-                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                <li class="flex items-start gap-3 text-sm text-drac-comment relative cursor-help" x-data="{ tooltip: false }" @mouseenter="tooltip = true" @mouseleave="tooltip = false">
                   <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                  Catálogo con carrito a WhatsApp
+                  <span>Catálogo con carrito a WhatsApp</span>
+                  <div x-show="tooltip" x-cloak
+                       x-transition:enter="transition ease-out duration-200"
+                       x-transition:enter-start="opacity-0 translate-y-1"
+                       x-transition:enter-end="opacity-100 translate-y-0"
+                       x-transition:leave="transition ease-in duration-150"
+                       x-transition:leave-start="opacity-100 translate-y-0"
+                       x-transition:leave-end="opacity-0 translate-y-1"
+                       class="absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-xl bg-drac-darker border border-drac-current/50 p-3 text-xs text-drac-fg shadow-mega pointer-events-none">
+                       <p class="font-bold text-[#25D366] mb-1">🛒 Carro Rápido:</p>
+                       Tus clientes seleccionan productos o servicios y te envían el resumen exacto de su compra directo a tu WhatsApp.
+                  </div>
                 </li>
-                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                <li class="flex items-start gap-3 text-sm text-drac-comment relative cursor-help" x-data="{ tooltip: false }" @mouseenter="tooltip = true" @mouseleave="tooltip = false">
                   <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                  Links de pago (Webpay, Flow o MercadoPago)*
+                  <span>Links de pago (Webpay, Flow o MercadoPago)*</span>
+                  <div x-show="tooltip" x-cloak
+                       x-transition:enter="transition ease-out duration-200"
+                       x-transition:enter-start="opacity-0 translate-y-1"
+                       x-transition:enter-end="opacity-100 translate-y-0"
+                       x-transition:leave="transition ease-in duration-150"
+                       x-transition:leave-start="opacity-100 translate-y-0"
+                       x-transition:leave-end="opacity-0 translate-y-1"
+                       class="absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-xl bg-drac-darker border border-drac-current/50 p-3 text-xs text-drac-fg shadow-mega pointer-events-none">
+                       <p class="font-bold text-chile-blueLight mb-1">💳 Medios de Pago:</p>
+                       Acepta tarjetas de crédito, Redcompra, Webpay y transferencias generando links de cobro automático para tus clientes.
+                  </div>
                 </li>
                 <li class="flex items-start gap-3 text-sm text-drac-comment">
                   <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -1328,7 +1406,9 @@
           </div>
 
           <!-- Plan Premium -->
-          <div class="reveal rounded-[2rem] border border-drac-current/40 bg-drac-bg/80 overflow-hidden transition-all duration-300 hover:border-drac-purple/30 hover:shadow-card-hover hover:-translate-y-1 flex flex-col h-full" style="transition-delay: .16s">
+          <div class="reveal rounded-[2rem] border border-drac-current/40 bg-drac-bg/80 overflow-hidden transition-all duration-300 hover:border-drac-purple/30 hover:shadow-card-hover hover:-translate-y-1 flex flex-col h-full" style="transition-delay: .16s"
+               @mouseenter="startPlanHover('premium')"
+               @mouseleave="endPlanHover('premium')">
             <div class="p-8 flex-grow">
               <p class="text-sm font-bold uppercase tracking-[0.2em] text-drac-purple">Premium</p>
               <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$449.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 80%; font-weight: 600; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
@@ -1344,9 +1424,20 @@
                   <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                   E-commerce autogestionado + Base de Datos
                 </li>
-                <li class="flex items-start gap-3 text-sm text-drac-comment">
+                <li class="flex items-start gap-3 text-sm text-drac-comment relative cursor-help" x-data="{ tooltip: false }" @mouseenter="tooltip = true" @mouseleave="tooltip = false">
                   <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                  Pasarela de pago directa (Flow o MercadoPago API)*
+                  <span>Pasarela de pago directa (Flow o MercadoPago API)*</span>
+                  <div x-show="tooltip" x-cloak
+                       x-transition:enter="transition ease-out duration-200"
+                       x-transition:enter-start="opacity-0 translate-y-1"
+                       x-transition:enter-end="opacity-100 translate-y-0"
+                       x-transition:leave="transition ease-in duration-150"
+                       x-transition:leave-start="opacity-100 translate-y-0"
+                       x-transition:leave-end="opacity-0 translate-y-1"
+                       class="absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-xl bg-drac-darker border border-drac-current/50 p-3 text-xs text-drac-fg shadow-mega pointer-events-none">
+                       <p class="font-bold text-drac-purple mb-1">🔌 Integración API:</p>
+                       Tus clientes completan el pago directamente en tu sitio web. El sistema valida la transacción y despacha el pedido automáticamente.
+                  </div>
                 </li>
                 <li class="flex items-start gap-3 text-sm text-drac-comment">
                   <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -1624,23 +1715,36 @@
               <div class="absolute -inset-3 rounded-[2.5rem] bg-gradient-to-br from-chile-blue/20 via-transparent to-chile-red/15 blur-xl"></div>
               <div class="relative glass rounded-[2rem] p-8 shadow-mega">
                 <h3 class="text-xl font-bold text-drac-fg mb-6">Cuéntame sobre tu negocio</h3>
-                <form class="space-y-4" x-data="{ sent: false }" @submit.prevent="sent = true">
+                <form class="space-y-4" x-data="{ 
+                    formNombre: '', 
+                    formNegocio: '', 
+                    formTelefono: '', 
+                    formMensaje: '',
+                    sent: false,
+                    handleSubmit() {
+                        const plan = getMostViewedPlan();
+                        const text = `Hola! Mi nombre es ${this.formNombre}. Tengo un negocio de ${this.formNegocio}. Me interesa cotizar el Plan ${plan} (estuve revisándolo en la web). Mi WhatsApp es ${this.formTelefono}. Mensaje: ${this.formMensaje}`;
+                        const waUrl = `https://wa.me/5699904015?text=${encodeURIComponent(text)}`;
+                        window.open(waUrl, '_blank');
+                        this.sent = true;
+                    }
+                }" @submit.prevent="handleSubmit()">
                   <div x-show="!sent">
                     <div>
                       <label for="form-nombre" class="mb-2 block text-sm font-bold text-drac-fg">Tu nombre</label>
-                      <input id="form-nombre" type="text" placeholder="Ej: Juan Pérez" required class="w-full rounded-xl border border-drac-current/50 bg-drac-darker/60 px-4 py-3 text-sm text-drac-fg placeholder-drac-comment/50 outline-none transition focus:border-chile-blue focus:ring-2 focus:ring-chile-blue/20" />
+                      <input id="form-nombre" type="text" x-model="formNombre" placeholder="Ej: Juan Pérez" required class="w-full rounded-xl border border-drac-current/50 bg-drac-darker/60 px-4 py-3 text-sm text-drac-fg placeholder-drac-comment/50 outline-none transition focus:border-chile-blue focus:ring-2 focus:ring-chile-blue/20" />
                     </div>
                     <div class="mt-4">
                       <label for="form-negocio" class="mb-2 block text-sm font-bold text-drac-fg">¿Qué negocio o servicio tienes?</label>
-                      <input id="form-negocio" type="text" placeholder="Ej: Peluquería, Electricista, Consultoría, etc." required class="w-full rounded-xl border border-drac-current/50 bg-drac-darker/60 px-4 py-3 text-sm text-drac-fg placeholder-drac-comment/50 outline-none transition focus:border-chile-blue focus:ring-2 focus:ring-chile-blue/20" />
+                      <input id="form-negocio" type="text" x-model="formNegocio" placeholder="Ej: Peluquería, Electricista, Consultoría, etc." required class="w-full rounded-xl border border-drac-current/50 bg-drac-darker/60 px-4 py-3 text-sm text-drac-fg placeholder-drac-comment/50 outline-none transition focus:border-chile-blue focus:ring-2 focus:ring-chile-blue/20" />
                     </div>
                     <div class="mt-4">
                       <label for="form-telefono" class="mb-2 block text-sm font-bold text-drac-fg">Tu WhatsApp (con +56)</label>
-                      <input id="form-telefono" type="tel" placeholder="Ej: +56 9 1234 5678" class="w-full rounded-xl border border-drac-current/50 bg-drac-darker/60 px-4 py-3 text-sm text-drac-fg placeholder-drac-comment/50 outline-none transition focus:border-chile-blue focus:ring-2 focus:ring-chile-blue/20" />
+                      <input id="form-telefono" type="tel" x-model="formTelefono" placeholder="Ej: +56 9 1234 5678" class="w-full rounded-xl border border-drac-current/50 bg-drac-darker/60 px-4 py-3 text-sm text-drac-fg placeholder-drac-comment/50 outline-none transition focus:border-chile-blue focus:ring-2 focus:ring-chile-blue/20" />
                     </div>
                     <div class="mt-4">
                       <label for="form-mensaje" class="mb-2 block text-sm font-bold text-drac-fg">¿Qué te gustaría mostrar en tu página?</label>
-                      <textarea id="form-mensaje" rows="3" placeholder="Cuéntame brevemente qué necesitas..." class="w-full rounded-xl border border-drac-current/50 bg-drac-darker/60 px-4 py-3 text-sm text-drac-fg placeholder-drac-comment/50 outline-none transition focus:border-chile-blue focus:ring-2 focus:ring-chile-blue/20 resize-none"></textarea>
+                      <textarea id="form-mensaje" x-model="formMensaje" rows="3" placeholder="Cuéntame brevemente qué necesitas..." class="w-full rounded-xl border border-drac-current/50 bg-drac-darker/60 px-4 py-3 text-sm text-drac-fg placeholder-drac-comment/50 outline-none transition focus:border-chile-blue focus:ring-2 focus:ring-chile-blue/20 resize-none"></textarea>
                     </div>
                     <button type="submit" class="mt-6 btn-glow flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] px-5 py-4 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
                       <svg class="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.613.613l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
@@ -1656,7 +1760,7 @@
                     </div>
                     <h4 class="text-xl font-bold text-drac-fg">¡Mensaje enviado!</h4>
                     <p class="mt-2 text-sm text-drac-comment">Te contactaré en menos de 24 horas para conversar sobre tu proyecto.</p>
-                    <a href="https://wa.me/5699904015?text=Hola%2C%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio" target="_blank" rel="noopener" class="mt-6 inline-flex items-center justify-center rounded-xl bg-[#25D366] px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5">
+                    <a :href="`https://wa.me/5699904015?text=${encodeURIComponent('Hola! Mi nombre es ' + formNombre + '. Tengo un negocio de ' + formNegocio + '. Me interesa cotizar el Plan ' + getMostViewedPlan() + ' (estuve revisándolo en la web). WhatsApp: ' + formTelefono + '. Mensaje: ' + formMensaje)}`" target="_blank" rel="noopener" class="mt-6 inline-flex items-center justify-center rounded-xl bg-[#25D366] px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5">
                       Ir a WhatsApp directo →
                     </a>
                   </div>

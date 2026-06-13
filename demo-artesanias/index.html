@@ -1006,6 +1006,10 @@
     activeCategory: 'all',
     searchQuery: '',
     shakeCart: false,
+    showMiniCart: false,
+    geoCommune: '',
+    geoLoading: false,
+    geoError: '',
     
     // Products Catalog Data
     products: [
@@ -1053,6 +1057,9 @@
         // Trigger shake cart animation on addition
         this.shakeCart = true;
         setTimeout(() => { this.shakeCart = false; }, 600);
+
+        this.showMiniCart = true;
+        setTimeout(() => { this.showMiniCart = false; }, 3500);
     },
 
     removeFromCart(id) {
@@ -1082,6 +1089,34 @@
         this.formSector = 'presencial';
         this.formComment = '';
         this.checkoutModal = false;
+        this.geoCommune = '';
+        this.geoError = '';
+    },
+
+    detectLocation() {
+        this.geoLoading = true;
+        this.geoError = '';
+        if (!navigator.geolocation) {
+            this.geoError = 'Geolocalización no disponible';
+            this.geoLoading = false;
+            return;
+        }
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                const { latitude: lat, longitude: lon } = pos.coords;
+                if (lat < -40) this.geoCommune = 'Puerto Montt / Puerto Varas';
+                else if (lat < -38) this.geoCommune = 'Temuco';
+                else if (lat < -36) this.geoCommune = 'Concepción';
+                else if (lat < -33.5) this.geoCommune = 'Santiago';
+                else if (lat < -29) this.geoCommune = 'La Serena';
+                else this.geoCommune = 'Antofagasta';
+                this.geoLoading = false;
+            },
+            () => {
+                this.geoError = 'No se pudo detectar la ubicación';
+                this.geoLoading = false;
+            }
+        );
     },
 
     submitCheckout() {
@@ -1124,6 +1159,22 @@
         setTimeout(() => { this.successToast = false; }, 3500);
     }
 }">
+
+    <!-- Mini-cart auto-dismiss bubble -->
+    <div x-show="showMiniCart && cartCount > 0"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 translate-y-2"
+         style="position: fixed; top: 80px; right: 20px; z-index: 9998; background: var(--primary-forest); color: var(--text-light); padding: 12px 18px; border-radius: 50px; display: flex; align-items: center; gap: 12px; box-shadow: 0 8px 24px rgba(30,63,32,0.25); cursor: pointer; font-size: 0.875rem; font-weight: 600; display: none;"
+         @click="cartDrawer = true; showMiniCart = false">
+        <span>🛒</span>
+        <span x-text="cartCount + (cartCount === 1 ? ' artículo' : ' artículos')"></span>
+        <span style="background: var(--accent-gold); color: var(--primary-forest); padding: 2px 10px; border-radius: 20px; font-size: 0.8rem;" x-text="'$' + cartTotal.toLocaleString('es-CL')"></span>
+        <span style="opacity: 0.7; font-size: 0.75rem;">Ver →</span>
+    </div>
 
     <!-- Success Toast -->
     <div x-show="successToast" 
@@ -1458,7 +1509,20 @@
                     <!-- Address (Only mandatory if delivery is shipping) -->
                     <div class="form-group" x-show="formSector === 'envio'">
                         <label class="form-label">Dirección de Despacho *</label>
-                        <input type="text" x-model="formAddress" :required="formSector === 'envio'" class="form-input" placeholder="Calle, Número, Comuna, Ciudad" autocomplete="off">
+                        <input type="text" x-model="formAddress" :required="formSector === 'envio'" class="form-input" placeholder="Calle, Número, Comuna, Ciudad" autocomplete="off" x-ref="communeInput">
+                    </div>
+                    <div class="form-group" x-show="formSector === 'envio'" style="margin-top: 8px;">
+                        <button type="button" @click="detectLocation()" 
+                                style="background: none; border: 1px dashed var(--primary-forest); color: var(--primary-forest); padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; cursor: pointer; display: flex; align-items: center; gap: 6px; font-family: var(--font-body);">
+                            <span x-show="!geoLoading">📍 Detectar mi ubicación automáticamente</span>
+                            <span x-show="geoLoading" style="display: none;">⏳ Detectando...</span>
+                        </button>
+                        <div x-show="geoCommune" style="margin-top: 8px; background: rgba(30,63,32,0.08); border-left: 3px solid var(--primary-forest); padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; color: var(--primary-forest); display: none;">
+                            📦 Envío detectado hacia: <strong x-text="geoCommune"></strong>
+                            <span style="margin-left: 8px; opacity: 0.7;">(courier más rápido: Starken)</span>
+                            <button type="button" @click="formAddress = geoCommune" style="background: var(--primary-forest); color: #fff; border: none; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; cursor: pointer; margin-left: 8px;">Usar esta</button>
+                        </div>
+                        <p x-show="geoError" style="color: var(--secondary-clay); font-size: 0.75rem; margin-top: 4px; display: none;" x-text="geoError"></p>
                     </div>
 
                     <!-- Additional details / instructions -->

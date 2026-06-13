@@ -1248,6 +1248,7 @@
     lightboxImg: '',
     lightboxCaption: '',
     successToast: false,
+    timeOfDay: '',
     
     // Form variables
     formName: '',
@@ -1263,6 +1264,22 @@
         window.addEventListener('scroll', () => {
             this.scrolled = window.scrollY > 50;
         });
+
+        // Time-based menu auto-selection
+        const hour = new Date().getHours();
+        if (hour >= 8 && hour < 13) {
+            // Morning/brunch hours: highlight breakfast items, show cafe tab
+            this.activeTab = 'cafe';
+            this.timeOfDay = 'manana'; // 'mañana' (8-13): desayunos y brunch
+        } else if (hour >= 13 && hour < 16) {
+            // Lunch hours: switch to 'cocina' tab automatically
+            this.activeTab = 'cocina';
+            this.timeOfDay = 'almuerzo'; // (13-16): almuerzos
+        } else {
+            // Afternoon/evening: cafe & pastries
+            this.activeTab = 'cafe';
+            this.timeOfDay = 'tarde'; // (16+): café de especialidad y repostería
+        }
     },
 
     openLightbox(img, caption) {
@@ -1533,6 +1550,31 @@
             <div class="section-title-wrapper">
                 <span class="section-subtitle">Nuestra Carta</span>
                 <h2 class="section-title">Sabores Porteños</h2>
+            </div>
+
+            <!-- SMART BANNER: Time-based contextual message -->
+            <div x-show="timeOfDay !== ''"
+                 :class="{
+                     'time-banner-manana': timeOfDay === 'manana',
+                     'time-banner-almuerzo': timeOfDay === 'almuerzo',
+                     'time-banner-tarde': timeOfDay === 'tarde'
+                 }"
+                 style="background: rgba(200, 92, 50, 0.08); border-left: 3px solid var(--primary); border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 0.875rem; color: var(--primary); font-weight: 500;"
+                 x-text="timeOfDay === 'manana' ? '☀️ Buenos días! Para este momento del día, te destacamos nuestros desayunos y brunchs.' : timeOfDay === 'almuerzo' ? '🍽️ Es hora de almorzar! Te mostramos nuestros platos del día.' : '☕ Buenas tardes! El mejor momento para el café de especialidad y repostería.'">
+            </div>
+
+            <!-- COMBO RÁPIDO: Fast One-Click Order -->
+            <div style="background: linear-gradient(135deg, #c85c32 0%, #8B3A1F 100%); border-radius: 16px; padding: 20px 24px; margin-bottom: 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: 0 8px 24px rgba(200, 92, 50, 0.25);">
+              <div>
+                <p style="font-size: 0.7rem; color: rgba(255,255,255,0.7); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;">⚡ PEDIDO RÁPIDO</p>
+                <h3 style="color: #fff; font-family: var(--font-headings); font-size: 1.25rem; margin-bottom: 4px;" x-text="timeOfDay === 'manana' ? 'Combo Brunch: Café + Tostada Artesanal' : timeOfDay === 'almuerzo' ? 'Combo Almuerzo: Cazuela + Bebida' : 'Combo Tarde: Café + Pastel del Día'"></h3>
+                <p style="color: rgba(255,255,255,0.8); font-size: 0.85rem;" x-text="timeOfDay === 'manana' ? '$6.800 · Listo en 12 min' : timeOfDay === 'almuerzo' ? '$9.500 · Plato del día incluido' : '$5.200 · Café de especialidad'"></p>
+              </div>
+              <a :href="`https://wa.me/56987654321?text=${encodeURIComponent('Hola Café La Ruta! Quiero pedir el ' + (timeOfDay === 'manana' ? 'Combo Brunch: Café + Tostada Artesanal ($6.800)' : timeOfDay === 'almuerzo' ? 'Combo Almuerzo: Cazuela + Bebida ($9.500)' : 'Combo Tarde: Café + Pastel del Día ($5.200)') + ' para retiro en tienda. Cuándo está listo?')}`"
+                 target="_blank"
+                 style="background: #fff; color: var(--primary); padding: 12px 20px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; white-space: nowrap; display: flex; align-items: center; gap: 8px; text-decoration: none; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                📲 Pedir Ahora
+              </a>
             </div>
 
             <!-- Menu Navigation Tabs -->
