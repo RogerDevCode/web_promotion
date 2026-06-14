@@ -36,3 +36,10 @@ env/
 .DS_Store
 Thumbs.db
 .kilo/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
