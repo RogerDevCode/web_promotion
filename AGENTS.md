@@ -38,9 +38,20 @@ Cada uno de los sitios de demostración fue construido bajo estándares premium 
 │   ├── index.html                     # Carrito asincrónico y checkout a WhatsApp
 │   └── studio.png, greda.png, etc.    # Recursos e imágenes locales
 │
-└── demo-contabilidad/                 # Demo 5: Portal de Servicios B2B (ContaDigital)
-    ├── index.html                     # Calculadora dinámica de planes SII
-    └── office.png, portrait.png       # Recursos e imágenes locales
+├── demo-contabilidad/                 # Demo 5: Portal de Servicios B2B (ContaDigital)
+│   ├── index.html                     # Calculadora dinámica de planes SII
+│   └── office.png, portrait.png       # Recursos e imágenes locales
+│
+├── demo-propiedades/                  # Demo 6: Corredora de Propiedades (Cobre & Co.)
+│   ├── index.html                     # Filtros en UF/CLP y Agenda de Visitas
+│   └── depto1.png, hero.png, etc.     # Recursos e imágenes locales
+│
+├── demo-ecommerce-tech/               # Demo 7: Tienda Auto-Administrable (Apex Tech)
+│   ├── index.html                     # E-commerce interactivo con panel de pedidos
+│   └── hero.png, product_*.png        # Recursos e imágenes locales
+│
+└── demo-agenda/                       # Demo 8: CRM Express (Gestor de Citas y Clientes)
+    └── index.html                     # Tablero centralizado de reservas de los demos
 ```
 
 ---

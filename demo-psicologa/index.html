@@ -197,6 +197,28 @@
               localStorage.setItem('psicologa_email',     this.email);
               localStorage.setItem('psicologa_modalidad', this.modalidad);
 
+              // Guardar en la base de datos local compartida para el panel de administración
+              try {
+                  const bookings = JSON.parse(localStorage.getItem('tuwebpro_bookings') || '[]');
+                  const parts = this.selectedSlot ? this.selectedSlot.split(' · ') : ['', ''];
+                  bookings.push({
+                      id: 'B-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+                      source: 'Psicóloga',
+                      clientName: this.name,
+                      clientPhone: this.phone,
+                      clientEmail: this.email,
+                      date: parts[0] || new Date().toLocaleDateString('es-CL'),
+                      time: parts[1] || 'Por definir',
+                      type: this.modalidad,
+                      details: `Motivo: ${this.motivo || 'Sesión Clínica'}`,
+                      status: 'pendiente',
+                      dateAdded: new Date().toISOString()
+                  });
+                  localStorage.setItem('tuwebpro_bookings', JSON.stringify(bookings));
+              } catch (e) {
+                  console.error('Error al guardar reserva local:', e);
+              }
+
               const subject = encodeURIComponent('Solicitud de Horas - Ps. Clara Altieri');
               const slotLine = this.selectedSlot ? `\nHora solicitada: ${this.selectedSlot}` : '';
               const body = encodeURIComponent(`Nombre: ${this.name}\nTeléfono: ${this.phone}\nEmail: ${this.email}\nModalidad: ${this.modalidad}${slotLine}\nMotivo: ${this.motivo}`);

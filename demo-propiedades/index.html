@@ -1103,6 +1103,27 @@
                     const propertyPrice = this.selectedProperty ? this.formatUF(this.selectedProperty.precioUF) : '';
                     const propertyComuna = this.selectedProperty ? this.selectedProperty.comuna : '';
 
+                    // Guardar en la base de datos local compartida para el panel de administración
+                    try {
+                        const bookings = JSON.parse(localStorage.getItem('tuwebpro_bookings') || '[]');
+                        bookings.push({
+                            id: 'B-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+                            source: 'Propiedades',
+                            clientName: name,
+                            clientPhone: phone,
+                            clientEmail: '',
+                            date: date,
+                            time: timeSlot === 'mañana' ? '09:00 - 13:00' : '14:00 - 18:00',
+                            type: type,
+                            details: `Propiedad: "${propertyTitle}" (${propertyPrice}) en ${propertyComuna}`,
+                            status: 'pendiente',
+                            dateAdded: new Date().toISOString()
+                        });
+                        localStorage.setItem('tuwebpro_bookings', JSON.stringify(bookings));
+                    } catch (e) {
+                        console.error('Error al guardar reserva local:', e);
+                    }
+
                     const text = `¡Hola Cobre & Co. Propiedades! Me interesa coordinar una visita para la propiedad "${propertyTitle}" (${propertyPrice}) en la comuna de ${propertyComuna}.\n\n` +
                                  `- Modalidad: ${type === 'presencial' ? 'Presencial (En el inmueble)' : 'Virtual (Videollamada)'}\n` +
                                  `- Fecha propuesta: ${date}\n` +

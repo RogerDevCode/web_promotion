@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="es-CL" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRM Express | Panel de Control de Agenda y Clientes Demo</title>
+  <meta name="description" content="Gestiona tus citas de corretaje, consultas, peluquería y contabilidad en tiempo real. Un panel integrado, intuitivo y adaptado para PYMEs chilenas." />
+  <meta name="theme-color" content="#0F172A" />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💼</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            slate: {
+              950: '#0B0F19',
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#334155',
+              400: '#94A3B8',
+              300: '#CBD5E1',
+            },
+            brand: {
+              accent: '#38BDF8', // Cyan
+              success: '#10B981', // Green
+              warning: '#F59E0B', // Amber
+              danger: '#EF4444', // Red
+              purple: '#8B5CF6',
+              
+              // Demo themes
+              prop: '#D97706', // Cobre / Amber
+              psi: '#65A30D', // Sage / Lime
+              salon: '#DB2777', // Studio Chic / Pink
+              conta: '#1E40AF', // Navy / Blue
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #0B0F19;
+      color: #F1F5F9;
+      font-family: 'Inter', sans-serif;
+    }
+    .glass-card {
+      background: rgba(30, 41, 59, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .glow-border:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.05);
+    }
+    /* Enforce Chilean accessibility rules - no font below 14px on mobile viewport */
+    @media (max-width: 768px) {
+      .text-xs, .text-sm, select, input, textarea, button {
+        font-size: 14px !important;
+      }
+    }
+  </style>
+</head>
+<body x-data="dashboardApp()" x-init="initDashboard()" class="min-h-screen pb-16">
+
+  <!-- Header Nav -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="h-9 w-9 rounded-xl bg-gradient-to-tr from-brand-accent to-brand-purple flex items-center justify-center text-white font-bold text-lg shadow-md shadow-brand-accent/10">
+          C
+        </div>
+        <div>
+          <span class="font-display font-bold text-base sm:text-lg tracking-tight text-white block">CRM Express</span>
+          <span class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-widest block font-medium">Gestor de Agenda Integrado</span>
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="../index.html" class="text-sm font-semibold text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+          <span>← Volver al Portafolio</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    
+    <!-- Title Area -->
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 rounded-full bg-sky-500/10 px-3 py-1 text-xs sm:text-sm font-semibold text-sky-400 mb-3 border border-sky-500/20">
+        <span>✨ Demo Interactiva de Gestión</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-success animate-pulse"></span>
+      </div>
+      <h1 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+        Panel de Administración de Citas
+      </h1>
+      <p class="mt-2 text-slate-400 text-sm sm:text-base max-w-3xl leading-relaxed">
+        Este panel simula el sistema interno que utilizaría el dueño del negocio. Reúne automáticamente las reservas solicitadas por los clientes en las demos públicas (Psicóloga, Corredora, Salón y Contabilidad) usando el navegador local.
+      </p>
+    </div>
+
+    <!-- Stats Grid (Bento) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      
+      <!-- Stat 1: Total Citas -->
+      <div class="glass-card rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition-colors">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-slate-400 text-sm font-medium uppercase tracking-wider">Citas Totales</span>
+          <span class="text-2xl">📅</span>
+        </div>
+        <div>
+          <div class="text-3xl font-black text-white" x-text="bookings.length">0</div>
+          <div class="text-xs text-slate-500 mt-1 flex items-center gap-1">
+            <span class="text-brand-success font-semibold">100%</span>
+            <span>registradas localmente</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat 2: Pendientes vs Confirmadas -->
+      <div class="glass-card rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition-colors">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-slate-400 text-sm font-medium uppercase tracking-wider">Pendientes</span>
+          <span class="text-2xl">⏳</span>
+        </div>
+        <div>
+          <div class="text-3xl font-black text-white" x-text="countPending()">0</div>
+          <div class="w-full bg-slate-800 rounded-full h-1.5 mt-2 overflow-hidden">
+            <div class="bg-brand-warning h-1.5 rounded-full transition-all duration-500" :style="`width: ${pctPending()}%`"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat 3: Estimación de Ingresos -->
+      <div class="glass-card rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition-colors">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-slate-400 text-sm font-medium uppercase tracking-wider">Valor Estimado</span>
+          <span class="text-2xl">💰</span>
+        </div>
+        <div>
+          <div class="text-3xl font-black text-brand-success" x-text="formatCLP(calculateValue())">$0</div>
+          <div class="text-xs text-slate-500 mt-1">
+            Basado en servicios y reservas
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat 4: Canal Principal -->
+      <div class="glass-card rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition-colors">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-slate-400 text-sm font-medium uppercase tracking-wider">Canal más Activo</span>
+          <span class="text-2xl">🚀</span>
+        </div>
+        <div>
+          <div class="text-xl font-bold text-brand-accent" x-text="getTopChannel()">Ninguno</div>
+          <div class="text-xs text-slate-500 mt-1">
+            Rubro con mayor demanda
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+      
+      <!-- List Area (Left Column - Spans 2 cols) -->
+      <div class="lg:col-span-2 space-y-6">
+        
+        <!-- Filters Block -->
+        <div class="glass-card rounded-2xl p-4 sm:p-5">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            
+            <!-- Category Filter Buttons -->
+            <div class="flex flex-wrap gap-2">
+              <button @click="filterSource = 'all'" :class="filterSource === 'all' ? 'bg-brand-accent text-slate-950 font-bold' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'" class="px-3 py-1.5 rounded-xl text-sm transition-all duration-200">
+                Todos
+              </button>
+              <button @click="filterSource = 'Propiedades'" :class="filterSource === 'Propiedades' ? 'bg-amber-600 text-white font-bold' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'" class="px-3 py-1.5 rounded-xl text-sm transition-all duration-200">
+                Propiedades
+              </button>
+              <button @click="filterSource = 'Psicóloga'" :class="filterSource === 'Psicóloga' ? 'bg-lime-600 text-white font-bold' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'" class="px-3 py-1.5 rounded-xl text-sm transition-all duration-200">
+                Psicóloga
+              </button>
+              <button @click="filterSource = 'Peluquería'" :class="filterSource === 'Peluquería' ? 'bg-pink-600 text-white font-bold' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'" class="px-3 py-1.5 rounded-xl text-sm transition-all duration-200">
+                Peluquería
+              </button>
+              <button @click="filterSource = 'Contabilidad'" :class="filterSource === 'Contabilidad' ? 'bg-blue-600 text-white font-bold' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'" class="px-3 py-1.5 rounded-xl text-sm transition-all duration-200">
+                Contabilidad
+              </button>
+            </div>
+
+            <!-- Search Field -->
+            <div class="relative w-full sm:w-64">
+              <input type="text" x-model="searchQuery" placeholder="Buscar cliente..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-accent transition-colors">
+            </div>
+
+          </div>
+
+          <!-- Status Tabs -->
+          <div class="flex border-b border-slate-800 mt-4">
+            <button @click="filterStatus = 'all'" :class="filterStatus === 'all' ? 'border-brand-accent text-brand-accent' : 'border-transparent text-slate-400 hover:text-slate-200'" class="pb-2 px-4 border-b-2 font-medium text-sm transition-colors">
+              Todas ({#bookings.length})
+            </button>
+            <button @click="filterStatus = 'pendiente'" :class="filterStatus === 'pendiente' ? 'border-brand-warning text-brand-warning' : 'border-transparent text-slate-400 hover:text-slate-200'" class="pb-2 px-4 border-b-2 font-medium text-sm transition-colors">
+              Pendientes
+            </button>
+            <button @click="filterStatus = 'confirmada'" :class="filterStatus === 'confirmada' ? 'border-brand-success text-brand-success' : 'border-transparent text-slate-400 hover:text-slate-200'" class="pb-2 px-4 border-b-2 font-medium text-sm transition-colors">
+              Confirmadas
+            </button>
+            <button @click="filterStatus = 'cancelada'" :class="filterStatus === 'cancelada' ? 'border-brand-danger text-brand-danger' : 'border-transparent text-slate-400 hover:text-slate-200'" class="pb-2 px-4 border-b-2 font-medium text-sm transition-colors">
+              Canceladas
+            </button>
+          </div>
+        </div>
+
+        <!-- Bookings Loop -->
+        <div class="space-y-4">
+          <template x-for="b in filteredBookings()" :key="b.id">
+            <div class="glass-card glow-border rounded-2xl p-5 transition-all duration-300 relative overflow-hidden" :class="getBorderClass(b.source)">
+              
+              <!-- Source Badge Line & Status Badge -->
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider" :class="getSourceBadgeClass(b.source)" x-text="b.source"></span>
+                
+                <span class="px-2 py-0.5 rounded-full text-xs font-semibold flex items-center gap-1.5" :class="getStatusBadgeClass(b.status)">
+                  <span class="w-1.5 h-1.5 rounded-full" :class="getStatusDotClass(b.status)"></span>
+                  <span x-text="capitalize(b.status)"></span>
+                </span>
+              </div>
+
+              <!-- Main Card Body -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <!-- Client Details -->
+                <div>
+                  <h3 class="text-lg font-bold text-white leading-tight" x-text="b.clientName"></h3>
+                  <div class="text-sm text-slate-400 mt-2 space-y-1">
+                    <p class="flex items-center gap-1.5">
+                      <span>📞</span>
+                      <a :href="`tel:${b.clientPhone}`" class="hover:text-brand-accent transition-colors" x-text="b.clientPhone"></a>
+                    </p>
+                    <p class="flex items-center gap-1.5" x-show="b.clientEmail">
+                      <span>✉️</span>
+                      <a :href="`mailto:${b.clientEmail}`" class="hover:text-brand-accent transition-colors" x-text="b.clientEmail"></a>
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Appointment Date & Time -->
+                <div class="bg-slate-950/40 rounded-xl p-3 border border-slate-800/60 flex flex-col justify-center">
+                  <div class="text-sm font-semibold text-slate-200 flex items-center gap-2">
+                    <span>📅 Fecha:</span>
+                    <span x-text="formatDateStr(b.date)"></span>
+                  </div>
+                  <div class="text-sm text-slate-400 flex items-center gap-2 mt-1">
+                    <span>⏰ Hora/Bloque:</span>
+                    <span x-text="b.time"></span>
+                  </div>
+                  <div class="text-xs text-slate-500 uppercase tracking-widest mt-2 font-bold" x-text="`Modalidad: ${b.type === 'presencial' ? 'Presencial' : 'Virtual'}`"></div>
+                </div>
+
+              </div>
+
+              <!-- Extra details / service -->
+              <div class="mt-4 pt-3 border-t border-slate-800/80 text-sm text-slate-300 leading-relaxed">
+                <span class="text-slate-500 font-medium">Detalles:</span>
+                <span x-text="b.details"></span>
+              </div>
+
+              <!-- Action Footer -->
+              <div class="mt-5 flex flex-wrap gap-2 justify-between items-center border-t border-slate-800/80 pt-3">
+                <div class="flex gap-2">
+                  <button @click="changeStatus(b.id, 'confirmada')" x-show="b.status !== 'confirmada'" class="text-xs bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 px-3 py-1.5 rounded-lg font-bold transition-all">
+                    Confirmar
+                  </button>
+                  <button @click="changeStatus(b.id, 'cancelada')" x-show="b.status !== 'cancelada'" class="text-xs bg-red-500/10 text-red-400 hover:bg-red-500/20 px-3 py-1.5 rounded-lg font-bold transition-all">
+                    Cancelar
+                  </button>
+                </div>
+
+                <div class="flex gap-2">
+                  <button @click="sendWhatsAppReminder(b)" class="text-xs bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1">
+                    <span>📱 Notificar WhatsApp</span>
+                  </button>
+                  <button @click="deleteBooking(b.id)" class="text-xs bg-slate-800 text-slate-400 hover:bg-red-500/20 hover:text-red-400 px-3 py-1.5 rounded-lg font-bold transition-all">
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </template>
+
+          <!-- Empty State -->
+          <div x-show="filteredBookings().length === 0" class="glass-card rounded-2xl p-10 text-center">
+            <div class="text-4xl mb-3">🔍</div>
+            <h3 class="text-lg font-bold text-slate-300">No hay reservas que coincidan</h3>
+            <p class="text-slate-500 text-sm mt-1">Intenta ajustando los filtros superiores o agregando una cita manual.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Right Column (Booking Creator & Sales Pitch) -->
+      <div class="space-y-6">
+        
+        <!-- Manual Creator Form -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <h3 class="font-display text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <span>➕ Registrar Cita Manual</span>
+          </h3>
+
+          <form @submit.prevent="createManualBooking()" class="space-y-4 text-left">
+            
+            <!-- Negocio Select -->
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-source">Rubro / Demo</label>
+              <select id="form-source" x-model="formSource" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-brand-accent">
+                <option value="Propiedades">Propiedades (Cobre & Co.)</option>
+                <option value="Psicóloga">Psicóloga (Clara Altieri)</option>
+                <option value="Peluquería">Peluquería (Studio Chic)</option>
+                <option value="Contabilidad">Contabilidad (ContaDigital)</option>
+              </select>
+            </div>
+
+            <!-- Cliente Name -->
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-name">Nombre Cliente *</label>
+              <input id="form-name" type="text" x-model="formName" placeholder="Ej. Camila Henríquez" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-brand-accent">
+            </div>
+
+            <!-- Teléfono -->
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-phone">WhatsApp / Celular *</label>
+              <input id="form-phone" type="tel" x-model="formPhone" placeholder="Ej. +56 9 9904 0515" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-brand-accent">
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-email">Correo Electrónico</label>
+              <input id="form-email" type="email" x-model="formEmail" placeholder="Ej. camila@correo.cl" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-brand-accent">
+            </div>
+
+            <!-- Fecha y Hora -->
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-date">Fecha *</label>
+                <input id="form-date" type="date" x-model="formDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-brand-accent">
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-time">Hora *</label>
+                <input id="form-time" type="text" x-model="formTime" placeholder="Ej. 16:30 o Tarde" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-brand-accent">
+              </div>
+            </div>
+
+            <!-- Modalidad -->
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-type">Modalidad de Atención</label>
+              <select id="form-type" x-model="formType" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-brand-accent">
+                <option value="presencial">Presencial (Por Defecto)</option>
+                <option value="virtual">Virtual (Videollamada / Meet)</option>
+              </select>
+            </div>
+
+            <!-- Detalles -->
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-details">Detalles / Comentario</label>
+              <textarea id="form-details" x-model="formDetails" placeholder="Ingresa los servicios solicitados o propiedad" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-brand-accent"></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-brand-accent hover:bg-sky-400 text-slate-950 font-bold py-2.5 rounded-xl text-sm transition-all shadow-md shadow-brand-accent/10">
+              Agregar a la Agenda
+            </button>
+
+          </form>
+        </div>
+
+        <!-- Sales Pitch Section: LLM Objection -->
+        <div class="glass-card rounded-2xl p-5 border border-dashed border-slate-700 bg-slate-950/20">
+          <div class="inline-flex items-center gap-1.5 rounded-full bg-purple-500/10 px-2.5 py-0.5 text-xs font-semibold text-purple-400 mb-3 border border-purple-500/20">
+            <span>💡 Diferenciador de Negocios</span>
+          </div>
+          <h4 class="font-display font-bold text-white text-base leading-tight">¿Por qué pagar una Web si la IA la hace gratis?</h4>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+            Una IA LLM te puede dar código HTML suelto, pero <strong>no crea una solución comercial integrada</strong>.
+          </p>
+          <ul class="text-xs text-slate-400 mt-3 space-y-2 list-disc pl-4 leading-relaxed">
+            <li>
+              <strong>Cero Configuración Técnica:</strong> Nos encargamos del hosting, dominio, DNS chileno (.cl) y certificados SSL de forma transparente.
+            </li>
+            <li>
+              <strong>Conversión Garantizada:</strong> Diseñamos flujos optimizados de contacto a WhatsApp que multiplican el contacto local.
+            </li>
+            <li>
+              <strong>Sistemas Integrados:</strong> Enlazamos tus páginas a paneles sencillos como esta agenda local, sin que tengas que pagar suscripciones complejas ni programar bases de datos.
+            </li>
+            <li>
+              <strong>Soporte Real:</strong> La IA no te contestará el teléfono ni solucionará un problema en tu correo cuando lo necesites.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Clear Cache button -->
+        <div class="text-center">
+          <button @click="resetToDefaultData()" class="text-xs text-slate-600 hover:text-slate-400 transition-colors uppercase tracking-wider font-semibold">
+            🔄 Reiniciar Base de Datos Demo
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Script block -->
+  <script>
+    function dashboardApp() {
+      return {
+        bookings: [],
+        filterSource: 'all',
+        filterStatus: 'all',
+        searchQuery: '',
+
+        // Form Fields
+        formSource: 'Propiedades',
+        formName: '',
+        formPhone: '',
+        formEmail: '',
+        formDate: '',
+        formTime: '',
+        formType: 'presencial',
+        formDetails: '',
+
+        // Mock Default Bookings
+        defaultBookings: [
+          {
+            id: 'B-1',
+            source: 'Propiedades',
+            clientName: 'María Inés Larraín',
+            clientPhone: '+56 9 9876 5432',
+            clientEmail: 'mines.larrain@email.cl',
+            date: new Date(Date.now() + 86400000 * 2).toISOString().split('T')[0], // 2 days from now
+            time: '09:00 - 13:00',
+            type: 'presencial',
+            details: 'Propiedad: "Departamento Dúplex en Providencia" (12.400 UF) en Las Condes',
+            status: 'confirmada',
+            dateAdded: new Date(Date.now() - 86400000).toISOString()
+          },
+          {
+            id: 'B-2',
+            source: 'Psicóloga',
+            clientName: 'Carlos Muñoz Toledo',
+            clientPhone: '+56 9 8234 5678',
+            clientEmail: 'carlos.munoz@gmail.com',
+            date: new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0], // 3 days from now
+            time: '16:00',
+            type: 'virtual',
+            details: 'Motivo: Manejo de ansiedad y estrés laboral',
+            status: 'pendiente',
+            dateAdded: new Date().toISOString()
+          },
+          {
+            id: 'B-3',
+            source: 'Peluquería',
+            clientName: 'Constanza Silva Valdés',
+            clientPhone: '+56 9 7345 6789',
+            clientEmail: 'constanza.silva@outlook.cl',
+            date: new Date(Date.now() + 86400000 * 4).toISOString().split('T')[0], // 4 days from now
+            time: '11:30',
+            type: 'presencial',
+            details: 'Estilista: Valentina Moretti. Servicios: Balayage de Autor, Hidratación de Argán (Total: $125.000 CLP)',
+            status: 'pendiente',
+            dateAdded: new Date().toISOString()
+          },
+          {
+            id: 'B-4',
+            source: 'Contabilidad',
+            clientName: 'Eduardo Rozas (Distribuidora Rozas)',
+            clientPhone: '+56 9 6456 7890',
+            clientEmail: 'erozas@distribuidorarozas.cl',
+            date: new Date(Date.now() + 86400000 * 5).toISOString().split('T')[0], // 5 days from now
+            time: '15:00',
+            type: 'presencial',
+            details: 'Empresa RUT: 76.543.210-K. Plan Cotizado: Plan Profesional ($95.000 CLP/mes)',
+            status: 'confirmada',
+            dateAdded: new Date(Date.now() - 86400000 * 2).toISOString()
+          },
+          {
+            id: 'B-5',
+            source: 'Propiedades',
+            clientName: 'Jorge Alessandri',
+            clientPhone: '+56 9 5567 8901',
+            clientEmail: 'jorge.alessandri@inmobiliaria.cl',
+            date: new Date(Date.now() - 86400000).toISOString().split('T')[0], // Yesterday
+            time: '14:00 - 18:00',
+            type: 'presencial',
+            details: 'Propiedad: "Casa Condominio Lo Barnechea" (24.500 UF) en Lo Barnechea',
+            status: 'cancelada',
+            dateAdded: new Date(Date.now() - 86400000 * 3).toISOString()
+          }
+        ],
+
+        initDashboard() {
+          const stored = localStorage.getItem('tuwebpro_bookings');
+          if (stored) {
+            try {
+              this.bookings = JSON.parse(stored);
+            } catch (e) {
+              console.error(e);
+              this.bookings = [...this.defaultBookings];
+            }
+          } else {
+            this.bookings = [...this.defaultBookings];
+            localStorage.setItem('tuwebpro_bookings', JSON.stringify(this.bookings));
+          }
+          
+          // Pre-fill manual date to tomorrow
+          const tomorrow = new Date();
+          tomorrow.setDate(tomorrow.getDate() + 1);
+          this.formDate = tomorrow.toISOString().split('T')[0];
+        },
+
+        filteredBookings() {
+          return this.bookings.filter(b => {
+            // Filter by Business Source
+            const matchesSource = this.filterSource === 'all' || b.source === this.filterSource;
+            // Filter by Status
+            const matchesStatus = this.filterStatus === 'all' || b.status === this.filterStatus;
+            // Filter by Search Query
+            const matchesSearch = !this.searchQuery.trim() || 
+              b.clientName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+              b.details.toLowerCase().includes(this.searchQuery.toLowerCase());
+            
+            return matchesSource && matchesStatus && matchesSearch;
+          }).sort((a, b) => new Date(a.date + ' ' + (a.time.includes(':') ? a.time : '00:00')) - new Date(b.date + ' ' + (b.time.includes(':') ? b.time : '00:00')));
+        },
+
+        // Helper calculations
+        countPending() {
+          return this.bookings.filter(b => b.status === 'pendiente').length;
+        },
+
+        pctPending() {
+          if (this.bookings.length === 0) return 0;
+          return Math.round((this.countPending() / this.bookings.length) * 100);
+        },
+
+        calculateValue() {
+          return this.bookings.reduce((sum, b) => {
+            if (b.status === 'cancelada') return sum;
+            
+            // Assign arbitrary transaction values to represent business activity
+            if (b.source === 'Propiedades') {
+              // Simular comisión promedio por visita/propiedad
+              return sum + 180000; 
+            } else if (b.source === 'Psicóloga') {
+              // Precio de sesión promedio
+              return sum + 45000;
+            } else if (b.source === 'Peluquería') {
+              // Extraer valor del detalle si existe o asignar promedio
+              const match = b.details.match(/\$(\d+(\.\d+)*)/);
+              if (match) {
+                return sum + parseInt(match[1].replace(/\./g, ''));
+              }
+              return sum + 35000;
+            } else if (b.source === 'Contabilidad') {
+              // Mensualidad cotizada
+              const match = b.details.match(/\$(\d+(\.\d+)*)/);
+              if (match) {
+                return sum + parseInt(match[1].replace(/\./g, ''));
+              }
+              return sum + 95000;
+            }
+            return sum + 20000;
+          }, 0);
+        },
+
+        getTopChannel() {
+          if (this.bookings.length === 0) return 'Ninguno';
+          const counts = {};
+          this.bookings.forEach(b => {
+            counts[b.source] = (counts[b.source] || 0) + 1;
+          });
+          let maxCount = 0;
+          let top = 'Ninguno';
+          for (const [source, count] of Object.entries(counts)) {
+            if (count > maxCount) {
+              maxCount = count;
+              top = source;
+            }
+          }
+          return top;
+        },
+
+        // Actions
+        changeStatus(id, newStatus) {
+          this.bookings = this.bookings.map(b => {
+            if (b.id === id) {
+              b.status = newStatus;
+            }
+            return b;
+          });
+          this.syncStorage();
+        },
+
+        deleteBooking(id) {
+          if (confirm('¿Estás seguro de que deseas eliminar esta reserva de la agenda?')) {
+            this.bookings = this.bookings.filter(b => b.id !== id);
+            this.syncStorage();
+          }
+        },
+
+        createManualBooking() {
+          if (!this.formName.trim() || !this.formPhone.trim() || !this.formDate || !this.formTime.trim()) {
+            return;
+          }
+
+          const newBooking = {
+            id: 'B-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+            source: this.formSource,
+            clientName: this.formName,
+            clientPhone: this.formPhone,
+            clientEmail: this.formEmail,
+            date: this.formDate,
+            time: this.formTime,
+            type: this.formType,
+            details: this.formDetails.trim() || 'Cita ingresada manualmente desde el panel administrativo.',
+            status: 'pendiente',
+            dateAdded: new Date().toISOString()
+          };
+
+          this.bookings.push(newBooking);
+          this.syncStorage();
+
+          // Reset fields
+          this.formName = '';
+          this.formPhone = '';
+          this.formEmail = '';
+          this.formTime = '';
+          this.formDetails = '';
+          
+          alert('¡Reserva ingresada con éxito!');
+        },
+
+        sendWhatsAppReminder(booking) {
+          const typeLabel = booking.type === 'presencial' ? 'Presencial' : 'Virtual (Videollamada)';
+          const dateFmt = this.formatDateStr(booking.date);
+          
+          const text = `Hola ${booking.clientName}, te escribimos de parte de la administración del rubro ${booking.source} para informarte que tu reserva para el día ${dateFmt} a las ${booking.time} (${typeLabel}) ha sido gestionada.\n\nDetalles: ${booking.details}\n\nSi necesitas realizar cambios, puedes escribirnos por este canal. ¡Te esperamos!`;
+          
+          // Clean phone for WhatsApp url
+          let phoneClean = booking.clientPhone.replace(/[^\d]/g, '');
+          if (!phoneClean.startsWith('56')) {
+            phoneClean = '56' + phoneClean.replace(/^9/, '');
+          }
+
+          const whatsappUrl = `https://wa.me/${phoneClean}?text=${encodeURIComponent(text)}`;
+          window.open(whatsappUrl, '_blank');
+        },
+
+        resetToDefaultData() {
+          if (confirm('¿Deseas reiniciar la agenda al estado original? Se perderán las citas ingresadas recientemente.')) {
+            this.bookings = [...this.defaultBookings];
+            this.syncStorage();
+          }
+        },
+
+        syncStorage() {
+          localStorage.setItem('tuwebpro_bookings', JSON.stringify(this.bookings));
+        },
+
+        // Formatters
+        formatCLP(value) {
+          return new Intl.NumberFormat('es-CL', {
+            style: 'currency',
+            currency: 'CLP',
+            minimumFractionDigits: 0
+          }).format(value);
+        },
+
+        formatDateStr(dateStr) {
+          if (!dateStr) return '';
+          // Avoid timezone shifts in date object
+          const parts = dateStr.split('-');
+          if (parts.length === 3) {
+            const date = new Date(parts[0], parts[1] - 1, parts[2]);
+            const options = { weekday: 'long', day: 'numeric', month: 'short' };
+            return date.toLocaleDateString('es-CL', options);
+          }
+          return dateStr;
+        },
+
+        capitalize(str) {
+          if (!str) return '';
+          return str.charAt(0).toUpperCase() + str.slice(1);
+        },
+
+        // Styling helpers
+        getBorderClass(source) {
+          const classes = {
+            'Propiedades': 'border-l-4 border-l-amber-500',
+            'Psicóloga': 'border-l-4 border-l-lime-500',
+            'Peluquería': 'border-l-4 border-l-pink-500',
+            'Contabilidad': 'border-l-4 border-l-blue-500'
+          };
+          return classes[source] || 'border-l-4 border-l-slate-500';
+        },
+
+        getSourceBadgeClass(source) {
+          const classes = {
+            'Propiedades': 'bg-amber-600/20 text-amber-400 border border-amber-500/20',
+            'Psicóloga': 'bg-lime-600/20 text-lime-400 border border-lime-500/20',
+            'Peluquería': 'bg-pink-600/20 text-pink-400 border border-pink-500/20',
+            'Contabilidad': 'bg-blue-600/20 text-blue-400 border border-blue-500/20'
+          };
+          return classes[source] || 'bg-slate-700/20 text-slate-400';
+        },
+
+        getStatusBadgeClass(status) {
+          const classes = {
+            'pendiente': 'bg-amber-500/10 text-brand-warning',
+            'confirmada': 'bg-emerald-500/10 text-brand-success',
+            'cancelada': 'bg-red-500/10 text-brand-danger'
+          };
+          return classes[status] || 'bg-slate-800 text-slate-400';
+        },
+
+        getStatusDotClass(status) {
+          const classes = {
+            'pendiente': 'bg-brand-warning',
+            'confirmada': 'bg-brand-success',
+            'cancelada': 'bg-brand-danger'
+          };
+          return classes[status] || 'bg-slate-500';
+        }
+      };
+    }
+  </script>
+</body>
+</html>
