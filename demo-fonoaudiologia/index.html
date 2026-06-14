@@ -157,7 +157,7 @@
         <div class="lg:col-span-7 space-y-6 text-left">
           
           <div class="inline-flex items-center gap-2 rounded-full bg-forest-100 px-3 py-1 text-sm font-semibold text-forest-700 border border-forest-600/10">
-            <span>🏡 Atención a Domicilio en Santiago</span>
+            <span>🏡 Vamos a tu casa en Santiago</span>
           </div>
 
           <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-forest-900 leading-tight">
@@ -165,14 +165,14 @@
           </h1>
 
           <p class="text-base sm:text-lg text-forest-700 max-w-2xl leading-relaxed">
-            Sabemos que el bienestar de tu hijo es tu mayor prioridad y quieres verlo comunicarse con confianza. Cada niño se desarrolla a su propio tiempo, y tu dedicación es su mejor impulso. Te entregamos herramientas prácticas y un acompañamiento lúdico personalizado para fortalecer su lenguaje a través del juego diario, en la comodidad de su hogar.
+            Sabemos que el bienestar de tu hijo es tu mayor prioridad y quieres verlo comunicarse con confianza. Cada niño se desarrolla a su propio tiempo, y tu dedicación es su mejor impulso. Te entregamos herramientas prácticas y un acompañamiento cercano y personalizado para fortalecer su lenguaje a través del juego diario, en la comodidad de su hogar.
           </p>
 
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
             <button @click="bookingModal = true; selectedService = 'evaluacion'" class="bg-forest-600 hover:bg-forest-700 text-white text-center font-bold px-8 py-4 rounded-full transition-all shadow-md hover:-translate-y-0.5">
-              Agendar Evaluación Lúdica
+              Agendar Visita de Juego
             </button>
-            <a href="https://wa.me/56964910042?text=Hola%20Nahovy%2C%20quisiera%20consultar%20por%20una%20evaluaci%C3%B3n%20para%20mi%20hijo%2Fhija." 
+            <a href="https://wa.me/56964910042?text=Hola%20Nahovy%2C%20quisiera%20agendar%20una%20visita%20de%20juego%20para%20mi%20hijo%2Fhija." 
                target="_blank" 
                class="border border-forest-600/20 hover:border-forest-600 text-forest-700 hover:text-forest-900 font-bold px-8 py-4 rounded-full transition-all text-center flex items-center justify-center gap-2">
                <span>📱 Consultar por WhatsApp</span>
@@ -181,7 +181,7 @@
 
           <!-- Small reassuring tag -->
           <p class="text-xs text-forest-600/70 font-medium">
-            * Evaluaciones afectivas y dinámicas diseñadas para su comodidad y diversión en casa.
+            * Encuentros de juego diseñados para su comodidad y diversión en casa.
           </p>
         </div>
 
@@ -195,7 +195,7 @@
             <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-md border border-cream-100 flex items-center space-x-3 max-w-[240px]">
               <span class="text-2xl">🧸</span>
               <div>
-                <span class="block text-sm font-bold text-forest-900">Enfoque Lúdico</span>
+                <span class="block text-sm font-bold text-forest-900">Aprender Jugando</span>
                 <span class="block text-xs text-forest-600">Progreso a su propio ritmo</span>
               </div>
             </div>
@@ -242,7 +242,7 @@
             <div class="w-10 h-10 rounded-full bg-forest-100 flex items-center justify-center text-lg">🧩</div>
             <h3 class="font-bold text-lg text-forest-900">A Través del Juego</h3>
             <p class="text-sm text-forest-600 leading-relaxed">
-              Para un niño, jugar es cosa seria. En cada sesión usamos sus juguetes favoritos y dinámicas lúdicas para estimular fonemas y fluidez sin que se sienta evaluado.
+              Para un niño, jugar es cosa seria. En cada sesión usamos sus juguetes favoritos y dinámicas entretenidas para estimular su habla y expresión natural sin que se sienta presionado.
             </p>
           </div>
 
@@ -354,9 +354,9 @@
           <!-- Step 2 -->
           <div class="space-y-3 relative z-10">
             <div class="w-12 h-12 rounded-full bg-forest-600 text-white font-bold flex items-center justify-center text-lg">2</div>
-            <h3 class="font-bold text-lg text-forest-900">Evaluación a través del juego</h3>
+            <h3 class="font-bold text-lg text-forest-900">Primer Encuentro Jugando</h3>
             <p class="text-sm text-forest-600 leading-relaxed">
-              Visitamos tu casa y realizamos una sesión de juego dinámico. Evaluamos su habla mientras interactúa con juguetes. Sin formalidades intimidantes.
+              Visitamos tu casa y compartimos un espacio de juego espontáneo. Observamos su lenguaje mientras se divierte con juguetes cotidianos, de manera natural.
             </p>
           </div>
 
@@ -365,7 +365,7 @@
             <div class="w-12 h-12 rounded-full bg-forest-600 text-white font-bold flex items-center justify-center text-lg">3</div>
             <h3 class="font-bold text-lg text-forest-900">Acompañamiento a Medida</h3>
             <p class="text-sm text-forest-600 leading-relaxed">
-              Establecemos un plan lúdico y te entregamos pautas simples para el día a día. Haremos revisiones continuas para celebrar juntos cada logro comunicativo.
+              Diseñamos actividades divertidas para hacer juntos y te entregamos pautas simples para el día a día. Celebraremos cada avance a su propio ritmo.
             </p>
           </div>
 
@@ -411,7 +411,7 @@
               <span class="text-lg transition-transform" :class="active === 3 ? 'rotate-45' : ''">+</span>
             </button>
             <div x-show="active === 3" x-collapse class="px-6 pb-5 text-sm text-forest-600 leading-relaxed border-t border-cream-50 pt-4" x-cloak>
-              Si tu hijo tiene 2 años y aún no forma frases simples de dos palabras, si a los 3 años le cuesta ser entendido por personas fuera del núcleo familiar, o si le cuesta pronunciar fonemas específicos a partir de los 4 años, una evaluación lúdica inicial es una excelente idea para descartar dudas y darle un empujón de confianza.
+              Si tu hijo tiene 2 años y aún no forma frases simples de dos palabras, si a los 3 años le cuesta darse a entender fuera de casa, o si le cuesta pronunciar ciertos sonidos a partir de los 4 años, un primer encuentro de juego y conversación es una excelente idea para resolver dudas y ver cómo ayudarle de forma oportuna.
             </div>
           </div>
 
@@ -476,13 +476,13 @@
       
       <!-- Header -->
       <div class="flex items-center justify-between mb-4">
-        <h3 class="font-serif text-xl sm:text-2xl font-bold text-forest-900">Agendar Evaluación Lúdica</h3>
+        <h3 class="font-serif text-xl sm:text-2xl font-bold text-forest-900">Agendar Visita de Juego</h3>
         <button @click="bookingModal = false" class="text-forest-600 hover:text-forest-900 text-2xl font-semibold">&times;</button>
       </div>
 
       <!-- Empathetic intro -->
       <p class="text-xs sm:text-sm text-forest-600 mb-4 bg-forest-50 p-3 rounded-xl border border-forest-100 leading-relaxed">
-        Agenda en sencillos pasos. Coordinaremos una visita para realizar una evaluación lúdica y cercana con tu hijo.
+        Agenda en sencillos pasos. Coordinaremos una visita a tu hogar para jugar con tu hijo y conversar sobre sus avances en confianza.
       </p>
 
       <form @submit.prevent="submitBooking(clientName, clientPhone, apptDate, apptSlot, apptDetails)" class="space-y-4">
@@ -503,7 +503,7 @@
         <div>
           <label class="block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-service">Área de Apoyo Solicitada</label>
           <select id="modal-service" x-model="selectedService" class="w-full bg-cream-50 border border-cream-200 rounded-xl px-3 py-2 text-sm text-forest-900 focus:outline-none focus:border-forest-600">
-            <option value="evaluacion">Evaluación Lúdica Inicial (General)</option>
+            <option value="evaluacion">Conocerlo Jugando (Primera Visita)</option>
             <option value="retraso">Acompañamiento en Retraso del Lenguaje</option>
             <option value="sonidos">Terapia en Sonidos del Habla (TSH)</option>
             <option value="comunicacion">Habilidades de Comunicación Social</option>
@@ -555,7 +555,7 @@
       }
 
       const serviceNames = {
-        'evaluacion': 'Evaluación Lúdica Inicial',
+        'evaluacion': 'Primera Visita de Juego',
         'retraso': 'Retraso del Lenguaje',
         'sonidos': 'Sonidos del Habla (TSH)',
         'comunicacion': 'Comunicación Social y Juego',
@@ -586,7 +586,7 @@
       }
 
       // Enviar a WhatsApp
-      const text = `¡Hola Nahovy Gallegos Fonoaudiología! Solicito agendar una evaluación lúdica inicial para mi hijo/a:\n\n` +
+      const text = `¡Hola Nahovy Gallegos Fonoaudiología! Solicito agendar una primera visita de juego en casa para mi hijo/a:\n\n` +
                    `- Servicio consultado: ${selectedServiceName}\n` +
                    `- Fecha solicitada: ${date}\n` +
                    `- Bloque de preferencia: ${slot === 'mañana' ? 'Mañana (09:00 - 13:00)' : 'Tarde (14:00 - 18:00)'}\n` +
