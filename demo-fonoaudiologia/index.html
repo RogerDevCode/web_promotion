@@ -381,12 +381,12 @@
           <div class="bg-white rounded-2xl p-6 border border-cream-100 shadow-sm flex flex-col justify-between">
             <div class="space-y-3">
               <span class="text-3xl">🗣️</span>
-              <h3 class="font-bold text-lg text-forest-900 leading-tight">Retraso del Lenguaje</h3>
+              <h3 class="font-bold text-lg text-forest-900 leading-tight">Inicio Tardío del Habla</h3>
               <p class="text-sm text-forest-600 leading-relaxed">
                 Para niños que tardan más en comenzar a hablar o usan menos palabras de lo habitual para su edad. Estimulamos la intención y comprensión en un ambiente seguro.
               </p>
             </div>
-            <button @click="bookingModal = true; selectedService = 'retraso'" class="text-sm text-coral-600 hover:text-coral-500 font-bold mt-4 flex items-center gap-1 group">
+            <button @click="bookingModal = true; selectedService = 'inicio_tardio'" class="text-sm text-coral-600 hover:text-coral-500 font-bold mt-4 flex items-center gap-1 group">
               <span>Consultar área</span>
               <span class="transition-transform group-hover:translate-x-1">→</span>
             </button>
@@ -618,7 +618,7 @@
           <label class="modal-label block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-service">Área de Apoyo Solicitada</label>
           <select id="modal-service" x-model="selectedService" class="w-full bg-cream-50 border border-cream-200 rounded-xl px-3 py-2 text-sm text-forest-900 focus:outline-none focus:border-forest-600">
             <option value="evaluacion">Conocerlo Jugando (Primera Visita)</option>
-            <option value="retraso">Acompañamiento en Retraso del Lenguaje</option>
+            <option value="inicio_tardio">Acompañamiento en Inicio Tardío del Habla</option>
             <option value="sonidos">Terapia en Sonidos del Habla (TSH)</option>
             <option value="comunicacion">Habilidades de Comunicación Social</option>
             <option value="asesoria">Asesoría de Crianza para Apoderados</option>
@@ -670,7 +670,7 @@
 
       const serviceNames = {
         'evaluacion': 'Primera Visita de Juego',
-        'retraso': 'Retraso del Lenguaje',
+        'inicio_tardio': 'Inicio Tardío del Habla',
         'sonidos': 'Sonidos del Habla (TSH)',
         'comunicacion': 'Comunicación Social y Juego',
         'asesoria': 'Asesoría de Crianza para Apoderados'
