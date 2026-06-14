@@ -1149,7 +1149,7 @@
                     <a href="../index.html#precios" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'">Ver otros Planes</a>
                 </div>
                 <div class="text-responsive-disclaimer" style="width: 100%; border-top: 1px solid var(--border); padding-top: 15px; margin-top: 10px; text-align: center; color: var(--text-muted); line-height: 1.5;">
-                    * La integración de pasarelas (Webpay, MercadoPago, Flow) es opcional. El cliente debe abrir una cuenta comercial en la plataforma elegida (como empresa o persona natural con inicio de actividades en el SII) y entregar las credenciales de conexión para habilitarla en la web.
+                    * La integración de pasarelas de pago (Webpay, MercadoPago, Flow) es opcional y requiere cuenta comercial en el SII. Asimismo, aclaramos amablemente que la facturación electrónica directa (emisión automática de boletas/facturas autorizadas por el SII) no está incluida en los planes base; corresponde a un desarrollo dedicado o módulo de integración de otro nivel.
                 </div>
             </div>
         </div>
@@ -1248,6 +1248,9 @@
                         <option value="boleta">Boleta de Ventas y Servicios</option>
                         <option value="factura">Factura de Ventas y Servicios (SII)</option>
                     </select>
+                    <p class="text-responsive-detail" style="color: var(--text-muted); margin-top: 6px; line-height: 1.4; font-size: 0.8rem;">
+                        * Nota: El sitio registra sus datos tributarios para procesar la compra. La emisión del documento legal final (factura o boleta de ventas) corresponde a una facturación manual o integración dedicada de otro nivel.
+                    </p>
                 </div>
 
                 <div x-show="checkoutDocument === 'factura'" style="background-color: rgba(255,255,255,0.02); padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px;" x-cloak>
@@ -1670,7 +1673,7 @@
                         <li style="display: flex; align-items: start; gap: 10px;">
                             <span style="color: var(--primary); font-weight: bold;">✔</span>
                             <div>
-                                <strong style="color: var(--text-light);">Checkout Inteligente con Boleta/Factura</strong>: Formulario que valida RUTs de empresas automáticamente para compras corporativas B2B con IVA.
+                                <strong style="color: var(--text-light);">Registro y Validación para Boleta/Factura</strong>: Formulario que recopila y valida RUTs de empresas automáticamente para compras corporativas B2B con IVA (la emisión del documento legal tributario requiere facturación manual o integración de otro nivel).
                             </div>
                         </li>
                         <li style="display: flex; align-items: start; gap: 10px;">
