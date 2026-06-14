@@ -75,7 +75,25 @@
     }
     /* Enforce Chilean accessibility rules - no font below 14px on mobile viewport */
     @media (max-width: 768px) {
-      html body .text-xs, html body .text-sm, html body select, html body input, html body textarea, html body button {
+      html body select,
+      html body input,
+      html body textarea,
+      html body button,
+      html body a,
+      html body .header-subtitle,
+      html body .header-back-link,
+      html body .title-badge,
+      html body .title-description,
+      html body .stat-title,
+      html body .stat-detail,
+      html body .booking-source-badge,
+      html body .booking-status-badge,
+      html body .booking-meta-item,
+      html body .form-label,
+      html body .info-badge,
+      html body .info-text,
+      html body .info-list,
+      html body .reset-btn {
         font-size: 14px;
       }
     }
@@ -92,11 +110,11 @@
         </div>
         <div>
           <span class="font-display font-bold text-base sm:text-lg tracking-tight text-white block">CRM Express</span>
-          <span class="text-sm sm:text-xs text-slate-400 uppercase tracking-widest block font-medium">Gestor de Agenda Integrado</span>
+          <span class="header-subtitle text-sm sm:text-xs text-slate-400 uppercase tracking-widest block font-medium">Gestor de Agenda Integrado</span>
         </div>
       </div>
       <div class="flex items-center space-x-4">
-        <a href="../index.html" class="text-sm font-semibold text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+        <a href="../index.html" class="header-back-link text-sm font-semibold text-slate-400 hover:text-white transition-colors flex items-center gap-1">
           <span>← Volver al Portafolio</span>
         </a>
       </div>
@@ -107,14 +125,14 @@
     
     <!-- Title Area -->
     <div class="mb-8">
-      <div class="inline-flex items-center gap-2 rounded-full bg-sky-500/10 px-3 py-1 text-xs sm:text-sm font-semibold text-sky-400 mb-3 border border-sky-500/20">
+      <div class="title-badge inline-flex items-center gap-2 rounded-full bg-sky-500/10 px-3 py-1 text-xs sm:text-sm font-semibold text-sky-400 mb-3 border border-sky-500/20">
         <span>✨ Demo Interactiva de Gestión</span>
         <span class="w-1.5 h-1.5 rounded-full bg-brand-success animate-pulse"></span>
       </div>
       <h1 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
         Panel de Administración de Citas
       </h1>
-      <p class="mt-2 text-slate-400 text-sm sm:text-base max-w-3xl leading-relaxed">
+      <p class="title-description mt-2 text-slate-400 text-sm sm:text-base max-w-3xl leading-relaxed">
         Este panel simula el sistema interno que utilizaría el dueño del negocio. Reúne automáticamente las reservas solicitadas por los clientes en las demos públicas (Psicóloga, Corredora, Salón y Contabilidad) usando el navegador local.
       </p>
     </div>
@@ -125,12 +143,12 @@
       <!-- Stat 1: Total Citas -->
       <div class="glass-card rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition-colors">
         <div class="flex items-center justify-between mb-4">
-          <span class="text-slate-400 text-sm font-medium uppercase tracking-wider">Citas Totales</span>
+          <span class="stat-title text-slate-400 text-sm font-medium uppercase tracking-wider">Citas Totales</span>
           <span class="text-2xl">📅</span>
         </div>
         <div>
           <div class="text-3xl font-black text-white" x-text="bookings.length">0</div>
-          <div class="text-xs text-slate-500 mt-1 flex items-center gap-1">
+          <div class="stat-detail text-xs text-slate-500 mt-1 flex items-center gap-1">
             <span class="text-brand-success font-semibold">100%</span>
             <span>registradas localmente</span>
           </div>
@@ -140,7 +158,7 @@
       <!-- Stat 2: Pendientes vs Confirmadas -->
       <div class="glass-card rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition-colors">
         <div class="flex items-center justify-between mb-4">
-          <span class="text-slate-400 text-sm font-medium uppercase tracking-wider">Pendientes</span>
+          <span class="stat-title text-slate-400 text-sm font-medium uppercase tracking-wider">Pendientes</span>
           <span class="text-2xl">⏳</span>
         </div>
         <div>
@@ -154,12 +172,12 @@
       <!-- Stat 3: Estimación de Ingresos -->
       <div class="glass-card rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition-colors">
         <div class="flex items-center justify-between mb-4">
-          <span class="text-slate-400 text-sm font-medium uppercase tracking-wider">Valor Estimado</span>
+          <span class="stat-title text-slate-400 text-sm font-medium uppercase tracking-wider">Valor Estimado</span>
           <span class="text-2xl">💰</span>
         </div>
         <div>
           <div class="text-3xl font-black text-brand-success" x-text="formatCLP(calculateValue())">$0</div>
-          <div class="text-xs text-slate-500 mt-1">
+          <div class="stat-detail text-xs text-slate-500 mt-1">
             Basado en servicios y reservas
           </div>
         </div>
@@ -168,12 +186,12 @@
       <!-- Stat 4: Canal Principal -->
       <div class="glass-card rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition-colors">
         <div class="flex items-center justify-between mb-4">
-          <span class="text-slate-400 text-sm font-medium uppercase tracking-wider">Canal más Activo</span>
+          <span class="stat-title text-slate-400 text-sm font-medium uppercase tracking-wider">Canal más Activo</span>
           <span class="text-2xl">🚀</span>
         </div>
         <div>
           <div class="text-xl font-bold text-brand-accent" x-text="getTopChannel()">Ninguno</div>
-          <div class="text-xs text-slate-500 mt-1">
+          <div class="stat-detail text-xs text-slate-500 mt-1">
             Rubro con mayor demanda
           </div>
         </div>
@@ -244,9 +262,9 @@
               
               <!-- Source Badge Line & Status Badge -->
               <div class="flex items-center justify-between mb-3">
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider" :class="getSourceBadgeClass(b.source)" x-text="b.source"></span>
+                <span class="booking-source-badge px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider" :class="getSourceBadgeClass(b.source)" x-text="b.source"></span>
                 
-                <span class="px-2 py-0.5 rounded-full text-xs font-semibold flex items-center gap-1.5" :class="getStatusBadgeClass(b.status)">
+                <span class="booking-status-badge px-2 py-0.5 rounded-full text-xs font-semibold flex items-center gap-1.5" :class="getStatusBadgeClass(b.status)">
                   <span class="w-1.5 h-1.5 rounded-full" :class="getStatusDotClass(b.status)"></span>
                   <span x-text="capitalize(b.status)"></span>
                 </span>
@@ -280,7 +298,7 @@
                     <span>⏰ Hora/Bloque:</span>
                     <span x-text="b.time"></span>
                   </div>
-                  <div class="text-xs text-slate-500 uppercase tracking-widest mt-2 font-bold" x-text="`Modalidad: ${b.type === 'presencial' ? 'Presencial' : 'Virtual'}`"></div>
+                  <div class="booking-meta-item text-xs text-slate-500 uppercase tracking-widest mt-2 font-bold" x-text="`Modalidad: ${b.type === 'presencial' ? 'Presencial' : 'Virtual'}`"></div>
                 </div>
 
               </div>
@@ -339,7 +357,7 @@
             
             <!-- Negocio Select -->
             <div>
-              <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-source">Rubro / Demo</label>
+              <label class="form-label block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-source">Rubro / Demo</label>
               <select id="form-source" x-model="formSource" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-brand-accent">
                 <option value="Fonoaudiología">Fonoaudiología (Nahovy Gallegos)</option>
                 <option value="Propiedades">Propiedades (Cobre & Co.)</option>
@@ -351,37 +369,37 @@
 
             <!-- Cliente Name -->
             <div>
-              <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-name">Nombre Cliente *</label>
+              <label class="form-label block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-name">Nombre Cliente *</label>
               <input id="form-name" type="text" x-model="formName" placeholder="Ej. Camila Henríquez" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-brand-accent">
             </div>
 
             <!-- Teléfono -->
             <div>
-              <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-phone">WhatsApp / Celular *</label>
+              <label class="form-label block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-phone">WhatsApp / Celular *</label>
               <input id="form-phone" type="tel" x-model="formPhone" placeholder="Ej. +56 9 9904 0515" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-brand-accent">
             </div>
 
             <!-- Email -->
             <div>
-              <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-email">Correo Electrónico</label>
+              <label class="form-label block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-email">Correo Electrónico</label>
               <input id="form-email" type="email" x-model="formEmail" placeholder="Ej. camila@correo.cl" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-brand-accent">
             </div>
 
             <!-- Fecha y Hora -->
             <div class="grid grid-cols-2 gap-3">
               <div>
-                <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-date">Fecha *</label>
+                <label class="form-label block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-date">Fecha *</label>
                 <input id="form-date" type="date" x-model="formDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-brand-accent">
               </div>
               <div>
-                <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-time">Hora *</label>
+                <label class="form-label block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-time">Hora *</label>
                 <input id="form-time" type="text" x-model="formTime" placeholder="Ej. 16:30 o Tarde" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-brand-accent">
               </div>
             </div>
 
             <!-- Modalidad -->
             <div>
-              <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-type">Modalidad de Atención</label>
+              <label class="form-label block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-type">Modalidad de Atención</label>
               <select id="form-type" x-model="formType" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-brand-accent">
                 <option value="presencial">Presencial (Por Defecto)</option>
                 <option value="virtual">Virtual (Videollamada / Meet)</option>
@@ -390,7 +408,7 @@
 
             <!-- Detalles -->
             <div>
-              <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-details">Detalles / Comentario</label>
+              <label class="form-label block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1" for="form-details">Detalles / Comentario</label>
               <textarea id="form-details" x-model="formDetails" placeholder="Ingresa los servicios solicitados o propiedad" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-brand-accent"></textarea>
             </div>
 
@@ -403,14 +421,14 @@
 
         <!-- Sales Pitch Section: LLM Objection -->
         <div class="glass-card rounded-2xl p-5 border border-dashed border-slate-700 bg-slate-950/20">
-          <div class="inline-flex items-center gap-1.5 rounded-full bg-purple-500/10 px-2.5 py-0.5 text-xs font-semibold text-purple-400 mb-3 border border-purple-500/20">
+          <div class="info-badge inline-flex items-center gap-1.5 rounded-full bg-purple-500/10 px-2.5 py-0.5 text-xs font-semibold text-purple-400 mb-3 border border-purple-500/20">
             <span>💡 Diferenciador de Negocios</span>
           </div>
           <h4 class="font-display font-bold text-white text-base leading-tight">¿Por qué pagar una Web si la IA la hace gratis?</h4>
-          <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+          <p class="info-text text-xs text-slate-400 mt-2 leading-relaxed">
             Una IA LLM te puede dar código HTML suelto, pero <strong>no crea una solución comercial integrada</strong>.
           </p>
-          <ul class="text-xs text-slate-400 mt-3 space-y-2 list-disc pl-4 leading-relaxed">
+          <ul class="info-list text-xs text-slate-400 mt-3 space-y-2 list-disc pl-4 leading-relaxed">
             <li>
               <strong>Cero Configuración Técnica:</strong> Nos encargamos del hosting, dominio, DNS chileno (.cl) y certificados SSL de forma transparente.
             </li>
@@ -428,7 +446,7 @@
 
         <!-- Clear Cache button -->
         <div class="text-center">
-          <button @click="resetToDefaultData()" class="text-xs text-slate-600 hover:text-slate-400 transition-colors uppercase tracking-wider font-semibold">
+          <button @click="resetToDefaultData()" class="reset-btn text-xs text-slate-600 hover:text-slate-400 transition-colors uppercase tracking-wider font-semibold">
             🔄 Reiniciar Base de Datos Demo
           </button>
         </div>

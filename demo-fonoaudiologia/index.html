@@ -98,7 +98,20 @@
 
     /* Accessibility requirements: no text below 14px on mobile */
     @media (max-width: 768px) {
-      html body .text-xs, html body .text-sm, html body select, html body input, html body textarea, html body button, html body a {
+      html body select,
+      html body input,
+      html body textarea,
+      html body button,
+      html body a,
+      html body .demo-bar,
+      html body .hero-subtitle,
+      html body .benefit-detail,
+      html body .professional-badge,
+      html body .section-subtitle,
+      html body .about-item-text,
+      html body .footer-copyright,
+      html body .modal-disclaimer,
+      html body .modal-label {
         font-size: 14px;
       }
     }
@@ -107,7 +120,7 @@
 <body class="min-h-screen flex flex-col font-sans" x-data="{ bookingModal: false, selectedService: 'evaluacion' }">
 
   <!-- Top Demo Bar (Offline compatible navigation) -->
-  <div class="bg-forest-900 py-2.5 px-4 text-center text-forest-100 border-b border-forest-800 text-xs sm:text-sm">
+  <div class="demo-bar bg-forest-900 py-2.5 px-4 text-center text-forest-100 border-b border-forest-800 text-xs sm:text-sm">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
       <span class="font-medium">✨ Esta es la DEMO de <strong>Fonoaudiología Infantil</strong> a domicilio (Santiago).</span>
       <a href="../index.html" class="underline hover:text-white transition-colors font-bold">Volver al Portafolio de Demos</a>
@@ -181,7 +194,7 @@
           </div>
 
           <!-- Small reassuring tag -->
-          <p class="text-xs text-forest-600/70 font-medium">
+          <p class="hero-subtitle text-xs text-forest-600/70 font-medium">
             * Encuentros de juego diseñados para su comodidad y diversión en casa.
           </p>
         </div>
@@ -197,7 +210,7 @@
               <span class="text-2xl">🧸</span>
               <div>
                 <span class="block text-sm font-bold text-forest-900">Aprender Jugando</span>
-                <span class="block text-xs text-forest-600">Progreso a su propio ritmo</span>
+                <span class="benefit-detail block text-xs text-forest-600">Progreso a su propio ritmo</span>
               </div>
             </div>
           </div>
@@ -276,7 +289,7 @@
               </div>
 
               <!-- Trust Badge 2 (floating top left) -->
-              <div class="absolute -top-4 -left-4 bg-coral-500 text-white py-1.5 px-3.5 rounded-full shadow-md text-xs font-bold uppercase tracking-wider">
+              <div class="professional-badge absolute -top-4 -left-4 bg-coral-500 text-white py-1.5 px-3.5 rounded-full shadow-md text-xs font-bold uppercase tracking-wider">
                 Atención a Domicilio
               </div>
             </div>
@@ -284,7 +297,7 @@
 
           <!-- Text Column -->
           <div class="lg:col-span-7 space-y-6 order-1 lg:order-2 text-left">
-            <span class="text-xs uppercase tracking-widest text-coral-600 font-bold block">Conoce a la Profesional</span>
+            <span class="section-subtitle text-xs uppercase tracking-widest text-coral-600 font-bold block">Conoce a la Profesional</span>
             <h2 class="font-serif text-3xl sm:text-4xl font-bold text-forest-900 leading-tight">
               Nahovy Alejandra Gallegos Ugas
             </h2>
@@ -311,29 +324,29 @@
               <div class="flex items-start space-x-3">
                 <span class="text-coral-500 text-lg">✓</span>
                 <div>
-                  <h4 class="font-bold text-sm text-forest-900">Formación Universitaria</h4>
-                  <p class="text-xs text-forest-600">Licenciada en Fonoaudiología, dedicada al desarrollo de la comunicación infantil.</p>
+                  <h4 class="about-item-title font-bold text-sm text-forest-900">Formación Universitaria</h4>
+                  <p class="about-item-text text-xs text-forest-600">Licenciada en Fonoaudiología, dedicada al desarrollo de la comunicación infantil.</p>
                 </div>
               </div>
               <div class="flex items-start space-x-3">
                 <span class="text-coral-500 text-lg">✓</span>
                 <div>
-                  <h4 class="font-bold text-sm text-forest-900">Registro Nacional de Salud</h4>
-                  <p class="text-xs text-forest-600">Profesional habilitada en el Registro Nacional de Prestadores de Salud de Chile.</p>
+                  <h4 class="about-item-title font-bold text-sm text-forest-900">Registro Nacional de Salud</h4>
+                  <p class="about-item-text text-xs text-forest-600">Profesional habilitada en el Registro Nacional de Prestadores de Salud de Chile.</p>
                 </div>
               </div>
               <div class="flex items-start space-x-3">
                 <span class="text-coral-500 text-lg">✓</span>
                 <div>
-                  <h4 class="font-bold text-sm text-forest-900">Enfoque Familiar</h4>
-                  <p class="text-xs text-forest-600">Acompañamiento cercano y empoderamiento a los apoderados en cada sesión.</p>
+                  <h4 class="about-item-title font-bold text-sm text-forest-900">Enfoque Familiar</h4>
+                  <p class="about-item-text text-xs text-forest-600">Acompañamiento cercano y empoderamiento a los apoderados en cada sesión.</p>
                 </div>
               </div>
               <div class="flex items-start space-x-3">
                 <span class="text-coral-500 text-lg">✓</span>
                 <div>
-                  <h4 class="font-bold text-sm text-forest-900">Sesiones a Domicilio</h4>
-                  <p class="text-xs text-forest-600">Atención personalizada en Santiago de Chile, evitando traslados estresantes.</p>
+                  <h4 class="about-item-title font-bold text-sm text-forest-900">Sesiones a Domicilio</h4>
+                  <p class="about-item-text text-xs text-forest-600">Atención personalizada en Santiago de Chile, evitando traslados estresantes.</p>
                 </div>
               </div>
             </div>
@@ -355,7 +368,7 @@
       <div class="max-w-7xl mx-auto px-6 text-center">
         
         <div class="max-w-2xl mx-auto space-y-4 mb-12">
-          <span class="text-xs uppercase tracking-widest text-coral-600 font-bold block">Especialidades</span>
+          <span class="section-subtitle text-xs uppercase tracking-widest text-coral-600 font-bold block">Especialidades</span>
           <h2 class="font-serif text-3xl font-bold text-forest-900">¿Cómo podemos apoyar el camino de tu hijo?</h2>
           <p class="text-sm sm:text-base text-forest-600 leading-relaxed">
             Abordamos las dificultades comunicativas desde una mirada integral y afectiva, ajustándonos a la etapa del ciclo vital de tu hijo.
@@ -433,7 +446,7 @@
       <div class="max-w-7xl mx-auto px-6 text-center">
         
         <div class="max-w-2xl mx-auto space-y-4 mb-12">
-          <span class="text-xs uppercase tracking-widest text-coral-600 font-bold block">El Proceso</span>
+          <span class="section-subtitle text-xs uppercase tracking-widest text-coral-600 font-bold block">El Proceso</span>
           <h2 class="font-serif text-3xl font-bold text-forest-900">Un camino claro, simple y sin estrés</h2>
           <p class="text-sm sm:text-base text-forest-600">
             Diseñamos el servicio pensando en la comodidad de la familia y en la estabilidad emocional del niño.
@@ -557,7 +570,7 @@
     </div>
 
     <!-- Copyright -->
-    <div class="max-w-7xl mx-auto px-6 pt-8 mt-8 border-t border-forest-800 text-center text-xs text-forest-400">
+    <div class="footer-copyright max-w-7xl mx-auto px-6 pt-8 mt-8 border-t border-forest-800 text-center text-xs text-forest-400">
       <p>&copy; 2026 Nahovy Gallegos. Todos los derechos reservados. Licenciada en Fonoaudiología.</p>
       <div class="mt-4 text-sm sm:text-[11px] leading-relaxed max-w-3xl mx-auto opacity-60">
         * La integración de pasarelas de pago (Webpay, MercadoPago, Flow) es opcional y requiere cuenta comercial en el SII. Asimismo, aclaramos amablemente que la facturación electrónica directa (emisión automática de boletas/facturas autorizadas por el SII) no está incluida en los planes base; corresponde a un desarrollo dedicado o módulo de integración de otro nivel.
@@ -582,7 +595,7 @@
       </div>
 
       <!-- Empathetic intro -->
-      <p class="text-xs sm:text-sm text-forest-600 mb-4 bg-forest-50 p-3 rounded-xl border border-forest-100 leading-relaxed">
+      <p class="modal-disclaimer text-xs sm:text-sm text-forest-600 mb-4 bg-forest-50 p-3 rounded-xl border border-forest-100 leading-relaxed">
         Agenda en sencillos pasos. Coordinaremos una visita a tu hogar para jugar con tu hijo y conversar sobre sus avances en confianza.
       </p>
 
@@ -590,19 +603,19 @@
         
         <!-- Nombre Apoderado -->
         <div>
-          <label class="block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-name">Nombre Completo del Apoderado/a *</label>
+          <label class="modal-label block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-name">Nombre Completo del Apoderado/a *</label>
           <input id="modal-name" type="text" x-model="clientName" required placeholder="Ej. Alejandra Valenzuela" class="w-full bg-cream-50 border border-cream-200 rounded-xl px-3 py-2 text-sm text-forest-900 focus:outline-none focus:border-forest-600">
         </div>
 
         <!-- Teléfono de contacto -->
         <div>
-          <label class="block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-phone">WhatsApp / Celular *</label>
+          <label class="modal-label block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-phone">WhatsApp / Celular *</label>
           <input id="modal-phone" type="tel" x-model="clientPhone" required placeholder="Ej. +56 9 1234 5678" class="w-full bg-cream-50 border border-cream-200 rounded-xl px-3 py-2 text-sm text-forest-900 focus:outline-none focus:border-forest-600">
         </div>
 
         <!-- Área de Interés / Servicio -->
         <div>
-          <label class="block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-service">Área de Apoyo Solicitada</label>
+          <label class="modal-label block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-service">Área de Apoyo Solicitada</label>
           <select id="modal-service" x-model="selectedService" class="w-full bg-cream-50 border border-cream-200 rounded-xl px-3 py-2 text-sm text-forest-900 focus:outline-none focus:border-forest-600">
             <option value="evaluacion">Conocerlo Jugando (Primera Visita)</option>
             <option value="retraso">Acompañamiento en Retraso del Lenguaje</option>
@@ -615,11 +628,11 @@
         <!-- Fecha y Bloque -->
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-date">Fecha Solicitada *</label>
+            <label class="modal-label block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-date">Fecha Solicitada *</label>
             <input id="modal-date" type="date" x-model="apptDate" required class="w-full bg-cream-50 border border-cream-200 rounded-xl px-3 py-2 text-sm text-forest-900 focus:outline-none focus:border-forest-600">
           </div>
           <div>
-            <label class="block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-slot">Bloque Horario</label>
+            <label class="modal-label block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-slot">Bloque Horario</label>
             <select id="modal-slot" x-model="apptSlot" class="w-full bg-cream-50 border border-cream-200 rounded-xl px-3 py-2 text-sm text-forest-900 focus:outline-none focus:border-forest-600">
               <option value="mañana">Mañana (09:00 - 13:00)</option>
               <option value="tarde">Tarde (14:00 - 18:00)</option>
@@ -629,7 +642,7 @@
 
         <!-- Comentarios sobre el niño -->
         <div>
-          <label class="block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-details">¿Qué te gustaría comentarnos sobre tu hijo/a? (Opcional)</label>
+          <label class="modal-label block text-xs uppercase tracking-wider text-forest-700 font-bold mb-1" for="modal-details">¿Qué te gustaría comentarnos sobre tu hijo/a? (Opcional)</label>
           <textarea id="modal-details" x-model="apptDetails" placeholder="Ej. Tiene 3 años, le cuesta pronunciar la R y queremos que la sesión sea muy entretenida." rows="2" class="w-full bg-cream-50 border border-cream-200 rounded-xl px-3 py-2 text-sm text-forest-900 focus:outline-none focus:border-forest-600"></textarea>
         </div>
 
