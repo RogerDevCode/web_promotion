@@ -1,38 +1,5 @@
 <!doctype html>
-<html lang="es-CL" x-data="{ 
-    mobileMenu: false, 
-    showVideo: false, 
-    planTimes: { esencial: 0, local: 0, profesional: 0, premium: 0 }, 
-    activePlan: null, 
-    hoverStart: null,
-    darkMode: localStorage.getItem('theme') !== 'light',
-    toggleTheme() {
-        this.darkMode = !this.darkMode;
-        localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
-    },
-    startPlanHover(plan) {
-        this.activePlan = plan;
-        this.hoverStart = Date.now();
-    },
-    endPlanHover(plan) {
-        if (this.activePlan === plan && this.hoverStart) {
-            this.planTimes[plan] += Date.now() - this.hoverStart;
-            this.activePlan = null;
-            this.hoverStart = null;
-        }
-    },
-    getMostViewedPlan() {
-        let maxTime = 0;
-        let mostViewed = 'Profesional';
-        for (const [plan, time] of Object.entries(this.planTimes)) {
-            if (time > maxTime) {
-                maxTime = time;
-                mostViewed = plan.charAt(0).toUpperCase() + plan.slice(1);
-            }
-        }
-        return mostViewed;
-    }
-}" :class="darkMode ? 'scroll-smooth' : 'scroll-smooth light-theme'">
+<html lang="es-CL" x-data="landingApp()" :class="darkMode ? 'scroll-smooth' : 'scroll-smooth light-theme'">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -67,9 +34,26 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+  <script>
+    window.__twOriginalWarn = console.warn.bind(console);
+    console.warn = function (...args) {
+      if (
+        typeof args[0] === 'string' &&
+        args[0].includes('cdn.tailwindcss.com should not be used in production')
+      ) {
+        return;
+      }
+      window.__twOriginalWarn(...args);
+    };
+  </script>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    console.warn = window.__twOriginalWarn;
+    delete window.__twOriginalWarn;
+  </script>
 
+  <script defer src="./app.js"></script>
   <!-- Alpine.js -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 

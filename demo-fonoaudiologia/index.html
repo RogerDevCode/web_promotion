@@ -40,9 +40,26 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
+  <script>
+    window.__twOriginalWarn = console.warn.bind(console);
+    console.warn = function (...args) {
+      if (
+        typeof args[0] === 'string' &&
+        args[0].includes('cdn.tailwindcss.com should not be used in production')
+      ) {
+        return;
+      }
+      window.__twOriginalWarn(...args);
+    };
+  </script>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    console.warn = window.__twOriginalWarn;
+    delete window.__twOriginalWarn;
+  </script>
 
+  <script defer src="./app.js"></script>
   <!-- Alpine.js Collapse Plugin -->
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
   <!-- Alpine.js -->
@@ -117,7 +134,7 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col font-sans" x-data="{ bookingModal: false, selectedService: 'evaluacion' }">
+<body class="min-h-screen flex flex-col font-sans" x-data="fonoaudiologiaApp()">
 
   <!-- Top Demo Bar (Offline compatible navigation) -->
   <div class="demo-bar bg-forest-900 py-2.5 px-4 text-center text-forest-100 border-b border-forest-800 text-xs sm:text-sm">
@@ -661,60 +678,5 @@
   </div>
 
   <!-- Booking submission script -->
-  <script>
-    function submitBooking(name, phone, date, slot, details) {
-      if (!name || !phone || !date) {
-        alert('Por favor completa todos los campos requeridos (*).');
-        return;
-      }
-
-      const serviceNames = {
-        'evaluacion': 'Primera Visita de Juego',
-        'inicio_tardio': 'Inicio Tardío del Habla',
-        'sonidos': 'Sonidos del Habla (TSH)',
-        'comunicacion': 'Comunicación Social y Juego',
-        'asesoria': 'Asesoría de Crianza para Apoderados'
-      };
-
-      const selectedServiceName = serviceNames[document.getElementById('modal-service').value] || 'Fonoaudiología';
-
-      // Sincronizar con base de datos local compartida (CRM Express)
-      try {
-        const bookings = JSON.parse(localStorage.getItem('tuwebpro_bookings') || '[]');
-        bookings.push({
-          id: 'B-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
-          source: 'Fonoaudiología',
-          clientName: name,
-          clientPhone: phone,
-          clientEmail: '',
-          date: date,
-          time: slot === 'mañana' ? '09:00 - 13:00' : '14:00 - 18:00',
-          type: 'presencial',
-          details: `Servicio: "${selectedServiceName}". Comentarios: ${details || 'Ninguno'}. Atención a domicilio en Santiago.`,
-          status: 'pendiente',
-          dateAdded: new Date().toISOString()
-        });
-        localStorage.setItem('tuwebpro_bookings', JSON.stringify(bookings));
-      } catch (e) {
-        console.error('Error al registrar reserva en el CRM local:', e);
-      }
-
-      // Enviar a WhatsApp
-      const text = `¡Hola Nahovy Gallegos Fonoaudiología! Solicito agendar una primera visita de juego en casa para mi hijo/a:\n\n` +
-                   `- Servicio consultado: ${selectedServiceName}\n` +
-                   `- Fecha solicitada: ${date}\n` +
-                   `- Bloque de preferencia: ${slot === 'mañana' ? 'Mañana (09:00 - 13:00)' : 'Tarde (14:00 - 18:00)'}\n` +
-                   `- Comentarios del niño/a: ${details || 'Ninguno'}\n\n` +
-                   `Mis datos de contacto:\n` +
-                   `- Nombre: ${name}\n` +
-                   `- WhatsApp: ${phone}`;
-
-      const whatsappUrl = `https://wa.me/56964910042?text=${encodeURIComponent(text)}`;
-      window.open(whatsappUrl, '_blank');
-      
-      this.bookingModal = false;
-    }
-  </script>
-
 </body>
 </html>

@@ -41,6 +41,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <script defer src="./app.js"></script>
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
@@ -1248,125 +1249,7 @@
         }
     </style>
 </head>
-<body x-data="{ 
-    bookingModal: false, 
-    mobileMenu: false, 
-    scrolled: false, 
-    activeTab: 'cafe',
-    orderTotal: 0,
-    orderCount: 0,
-    lightbox: false,
-    lightboxImg: '',
-    lightboxCaption: '',
-    successToast: false,
-    timeOfDay: '',
-    
-    // Form variables
-    formName: '',
-    formEmail: '',
-    formPhone: '',
-    formDate: '',
-    formTime: '',
-    formGuests: '2',
-    formSector: 'presencial', // Sector/modalidad: default presencial (Terraza)
-    formComment: '',
-
-    init() {
-        window.addEventListener('scroll', () => {
-            this.scrolled = window.scrollY > 50;
-        });
-
-        // Time-based menu auto-selection
-        const hour = new Date().getHours();
-        if (hour >= 8 && hour < 13) {
-            // Morning/brunch hours: highlight breakfast items, show cafe tab
-            this.activeTab = 'cafe';
-            this.timeOfDay = 'manana'; // 'mañana' (8-13): desayunos y brunch
-        } else if (hour >= 13 && hour < 16) {
-            // Lunch hours: switch to 'cocina' tab automatically
-            this.activeTab = 'cocina';
-            this.timeOfDay = 'almuerzo'; // (13-16): almuerzos
-        } else {
-            // Afternoon/evening: cafe & pastries
-            this.activeTab = 'cafe';
-            this.timeOfDay = 'tarde'; // (16+): café de especialidad y repostería
-        }
-    },
-
-    openLightbox(img, caption) {
-        this.lightboxImg = img;
-        this.lightboxCaption = caption;
-        this.lightbox = true;
-    },
-
-    addToOrder(price) {
-        this.orderTotal += price;
-        this.orderCount++;
-    },
-
-    resetOrder() {
-        this.orderTotal = 0;
-        this.orderCount = 0;
-    },
-
-    openBooking() {
-        // Al abrir, se asegura de que el sector/modalidad por defecto esté marcado (presencial = Terraza)
-        this.formSector = 'presencial';
-        this.bookingModal = true;
-    },
-
-    closeBooking() {
-        // Limpieza total del formulario al salir sin guardar (sin recuerdos)
-        this.formName = '';
-        this.formEmail = '';
-        this.formPhone = '';
-        this.formDate = '';
-        this.formTime = '';
-        this.formGuests = '2';
-        this.formSector = 'presencial';
-        this.formComment = '';
-        this.bookingModal = false;
-    },
-
-    submitBooking() {
-        if (!this.formName || !this.formPhone || !this.formDate || !this.formTime) {
-            alert('Por favor, completa los campos requeridos.');
-            return;
-        }
-
-        // Crear cuerpo para simular el correo predefinido
-        const subject = encodeURIComponent('Nueva Solicitud de Reserva - Café La Ruta');
-        const bodyText = `Hola Café La Ruta, me gustaría solicitar una reserva:\n\n` +
-            `Nombre: ${this.formName}\n` +
-            `Teléfono: ${this.formPhone}\n` +
-            `Email: ${this.formEmail || 'No provisto'}\n` +
-            `Fecha: ${this.formDate}\n` +
-            `Hora: ${this.formTime}\n` +
-            `N° de Personas: ${this.formGuests}\n` +
-            `Sector Preferido: ${this.formSector === 'presencial' ? 'Terraza (Presencial)' : 'Salón Interior (Online/Privado)'}\n` +
-            `Comentarios: ${this.formComment || 'Ninguno'}`;
-        
-        // Simular envío enviando a un email predefinido via mailto
-        window.location.href = `mailto:reservas@cafelaruta.cl?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
-
-        // Cerrar modal
-        this.bookingModal = false;
-
-        // Limpiar completamente el formulario (sin recuerdos)
-        this.formName = '';
-        this.formEmail = '';
-        this.formPhone = '';
-        this.formDate = '';
-        this.formTime = '';
-        this.formGuests = '2';
-        this.formSector = 'presencial';
-        this.formComment = '';
-
-        // Mostrar alerta de éxito
-        this.successToast = true;
-        setTimeout(() => { this.successToast = false; }, 3500);
-    }
-}">
+<body x-data="cafeApp()" x-init="init()">
 
     <!-- Success Toast Notification -->
     <div x-show="successToast" 

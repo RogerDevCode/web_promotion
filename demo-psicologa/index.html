@@ -36,9 +36,26 @@
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
     
+    <script>
+        window.__twOriginalWarn = console.warn.bind(console);
+        console.warn = function (...args) {
+            if (
+                typeof args[0] === 'string' &&
+                args[0].includes('cdn.tailwindcss.com should not be used in production')
+            ) {
+                return;
+            }
+            window.__twOriginalWarn(...args);
+        };
+    </script>
     <!-- Tailwind CSS (v3 Play CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        console.warn = window.__twOriginalWarn;
+        delete window.__twOriginalWarn;
+    </script>
     
+    <script defer src="./app.js"></script>
     <!-- Alpine.js Plugins -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <!-- Alpine.js -->
@@ -127,122 +144,7 @@
     </style>
 </head>
 <body class="bg-sand-50 font-sans text-slate-800 antialiased selection:bg-sage-200 selection:text-sage-900 min-h-screen flex flex-col" 
-      x-data="{ 
-          bookingModal: false,
-          name: '',
-          phone: '',
-          email: '',
-          modalidad: 'presencial',
-          motivo: '',
-          selectedSlot: '',
-          isReturningUser: false,
-          showAllFields: false,
-          urlBadge: '',
-          timeSlots: [],
-          init() {
-              // --- localStorage Smart Autocomplete ---
-              const savedName  = localStorage.getItem('psicologa_name');
-              const savedPhone = localStorage.getItem('psicologa_phone');
-              const savedEmail = localStorage.getItem('psicologa_email');
-              const savedMod   = localStorage.getItem('psicologa_modalidad');
-              if (savedName)  { this.name      = savedName; }
-              if (savedPhone) { this.phone     = savedPhone; }
-              if (savedEmail) { this.email     = savedEmail; }
-              if (savedMod)   { this.modalidad = savedMod; }
-              if (savedName && savedPhone && savedEmail) {
-                  this.isReturningUser = true;
-              }
-
-              // --- URL Parameter Pre-selection ---
-              const params = new URLSearchParams(window.location.search);
-              const tipo   = params.get('tipo');
-              const tipoMap = {
-                  'parejas':  { motivo: 'Terapia de pareja',      badge: '📍 Terapia de Pareja' },
-                  'ansiedad': { motivo: 'Manejo de ansiedad',     badge: '📍 Manejo de Ansiedad' },
-                  'duelo':    { motivo: 'Proceso de duelo',       badge: '📍 Proceso de Duelo' }
-              };
-              if (tipo && tipoMap[tipo]) {
-                  this.motivo   = tipoMap[tipo].motivo;
-                  this.urlBadge = tipoMap[tipo].badge;
-              }
-
-              // --- Quick-Pick Time Slots ---
-              const now     = new Date();
-              const hour    = now.getHours();
-              const days    = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-              const months  = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-              const fmt     = (d) => `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}`;
-
-              const d0 = new Date(now); d0.setHours(0,0,0,0);
-              const d1 = new Date(d0); d1.setDate(d1.getDate() + 1);
-              const d2 = new Date(d0); d2.setDate(d2.getDate() + 2);
-              const d3 = new Date(d0); d3.setDate(d3.getDate() + 3);
-
-              let slot0;
-              if (hour < 14) {
-                  slot0 = `${fmt(d0)} · 16:00`;
-              } else {
-                  slot0 = `${fmt(d1)} · 10:00`;
-              }
-              this.timeSlots = [
-                  slot0,
-                  `${fmt(d2)} · 11:00`,
-                  `${fmt(d3)} · 15:00`
-              ];
-          },
-          submitForm() {
-              // --- Save to localStorage ---
-              localStorage.setItem('psicologa_name',      this.name);
-              localStorage.setItem('psicologa_phone',     this.phone);
-              localStorage.setItem('psicologa_email',     this.email);
-              localStorage.setItem('psicologa_modalidad', this.modalidad);
-
-              // Guardar en la base de datos local compartida para el panel de administración
-              try {
-                  const bookings = JSON.parse(localStorage.getItem('tuwebpro_bookings') || '[]');
-                  const parts = this.selectedSlot ? this.selectedSlot.split(' · ') : ['', ''];
-                  bookings.push({
-                      id: 'B-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
-                      source: 'Psicóloga',
-                      clientName: this.name,
-                      clientPhone: this.phone,
-                      clientEmail: this.email,
-                      date: parts[0] || new Date().toLocaleDateString('es-CL'),
-                      time: parts[1] || 'Por definir',
-                      type: this.modalidad,
-                      details: `Motivo: ${this.motivo || 'Sesión Clínica'}`,
-                      status: 'pendiente',
-                      dateAdded: new Date().toISOString()
-                  });
-                  localStorage.setItem('tuwebpro_bookings', JSON.stringify(bookings));
-              } catch (e) {
-                  console.error('Error al guardar reserva local:', e);
-              }
-
-              const subject = encodeURIComponent('Solicitud de Horas - Ps. Clara Altieri');
-              const slotLine = this.selectedSlot ? `\nHora solicitada: ${this.selectedSlot}` : '';
-              const body = encodeURIComponent(`Nombre: ${this.name}\nTeléfono: ${this.phone}\nEmail: ${this.email}\nModalidad: ${this.modalidad}${slotLine}\nMotivo: ${this.motivo}`);
-              window.location.href = `mailto:contacto@psclaraaltieri.com?subject=${subject}&body=${body}`;
-              this.bookingModal = false;
-          },
-          resetForm() {
-              this.name         = '';
-              this.phone        = '';
-              this.email        = '';
-              this.modalidad    = 'presencial';
-              this.motivo       = '';
-              this.selectedSlot = '';
-              this.showAllFields = false;
-              if (this.$refs && this.$refs.form) this.$refs.form.reset();
-          },
-          whatsappHref() {
-              const base = 'https://wa.me/56999040515?text=';
-              const slotPart = this.selectedSlot
-                  ? encodeURIComponent(`Hola Psicóloga Clara, quisiera consultar por la hora del ${this.selectedSlot}.`)
-                  : encodeURIComponent('Hola Psicóloga Clara, quisiera consultar por horas disponibles de sesión.');
-              return base + slotPart;
-          }
-      }"
+      x-data="psicologaApp()"
       x-effect="if (!bookingModal) setTimeout(() => { if (!bookingModal) resetForm(); }, 300)"
       x-init="init()">
 
