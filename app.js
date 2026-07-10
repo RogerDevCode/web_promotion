@@ -18,7 +18,7 @@ window.landingApp = function landingApp() {
   return {
     mobileMenu: false,
     showVideo: false,
-    planTimes: { esencial: 0, local: 0, profesional: 0, premium: 0 },
+    planTimes: { esencial: 0, profesional: 0, premium: 0 },
     activePlan: null,
     hoverStart: null,
     darkMode: localStorage.getItem('theme') === 'dark',
@@ -43,12 +43,17 @@ window.landingApp = function landingApp() {
 
     getMostViewedPlan() {
       let maxTime = 0;
-      let mostViewed = 'Profesional';
+      let mostViewed = 'Atención Clara';
+      const planLabels = {
+        esencial: 'Presencia Propia',
+        profesional: 'Atención Clara',
+        premium: 'Venta Activa',
+      };
 
       for (const [plan, time] of Object.entries(this.planTimes)) {
         if (time > maxTime) {
           maxTime = time;
-          mostViewed = plan.charAt(0).toUpperCase() + plan.slice(1);
+          mostViewed = planLabels[plan] || plan;
         }
       }
 

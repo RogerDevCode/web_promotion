@@ -1471,7 +1471,7 @@
           </div>
         </div>
 
-        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
 
           <!-- Plan Esencial -->
           <div class="reveal rounded-[2rem] border border-drac-current/40 bg-drac-bg/80 overflow-hidden transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover hover:-translate-y-1 flex flex-col h-full"
@@ -1593,114 +1593,6 @@
             </div>
             <div class="p-6 pt-0">
               <a href="#contacto" class="btn-glow flex w-full items-center justify-center rounded-2xl border border-chile-blue/30 bg-chile-blue/10 px-5 py-3.5 text-sm font-bold text-chile-blueLight transition-all duration-300 hover:bg-chile-blue/20">Quiero partir por aquí</a>
-            </div>
-          </div>
-
-          <!-- Plan Local (New) -->
-          <div class="reveal rounded-[2rem] border border-drac-current/40 bg-drac-bg/80 overflow-hidden transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover hover:-translate-y-1 flex flex-col h-full" style="transition-delay: .04s"
-               @mouseenter="startPlanHover('local')"
-               @mouseleave="endPlanHover('local')">
-            <div class="p-8 flex-grow">
-              <p class="text-sm font-bold uppercase tracking-[0.2em] text-chile-blueLight">Presencia Local</p>
-              <p class="mt-4 font-display text-4xl font-black text-drac-fg"><span class="text-lg font-medium text-drac-comment">Desde </span>$199.990<span class="text-base font-medium text-drac-comment"> CLP</span><span style="font-size: 80%; font-weight: 600; color: var(--text-muted, #94a3b8); margin-left: 4px; vertical-align: middle;"> neto + IVA</span></p>
-              <p class="mt-2 text-xs text-drac-green font-bold">Paga en 3 cuotas precio contado de $66.663 CLP <span class="text-responsive-detail" style="font-weight: 600; color: var(--text-muted, #94a3b8);">neto + IVA</span></p>
-              <p class="mt-1 text-xs text-drac-comment">Pago único • Ideal si atiendes en local, consulta u oficina</p>
-              <div class="mt-6 h-px bg-drac-current/30"></div>
-              <ul class="mt-6 space-y-3">
-                <li class="flex items-start gap-3 text-sm text-drac-fg font-medium relative cursor-help" x-data="{ tooltip: false }" @mouseenter="tooltip = true" @mouseleave="tooltip = false">
-                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                  <span>Todo lo de Presencia Propia, con refuerzo local</span>
-                  <div x-show="tooltip" x-cloak
-                       x-transition:enter="transition ease-out duration-200"
-                       x-transition:enter-start="opacity-0 translate-y-1"
-                       x-transition:enter-end="opacity-100 translate-y-0"
-                       x-transition:leave="transition ease-in duration-150"
-                       x-transition:leave-start="opacity-100 translate-y-0"
-                       x-transition:leave-end="opacity-0 translate-y-1"
-                       class="absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-xl bg-drac-darker border border-drac-current/50 p-3 text-xs text-drac-fg shadow-mega pointer-events-none">
-                       <p class="font-bold text-chile-blueLight mb-1">✨ Servicios Base Incluidos:</p>
-                       Este plan incluye todos los beneficios del Plan Esencial, sumando herramientas específicas para atraer clientes a su local físico.
-                  </div>
-                </li>
-                <li class="flex items-start gap-3 text-sm text-drac-comment relative cursor-help" x-data="{ tooltip: false }" @mouseenter="tooltip = true" @mouseleave="tooltip = false">
-                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                  <span>Tu ficha comercial bien presentada y lista para ser encontrada</span>
-                  <div x-show="tooltip" x-cloak
-                       x-transition:enter="transition ease-out duration-200"
-                       x-transition:enter-start="opacity-0 translate-y-1"
-                       x-transition:enter-end="opacity-100 translate-y-0"
-                       x-transition:leave="transition ease-in duration-150"
-                       x-transition:leave-start="opacity-100 translate-y-0"
-                       x-transition:leave-end="opacity-0 translate-y-1"
-                       class="absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-xl bg-drac-darker border border-drac-current/50 p-3 text-xs text-drac-fg shadow-mega pointer-events-none">
-                       <p class="font-bold text-chile-blueLight mb-1">🏢 Su Ficha de Negocio:</p>
-                       Pondremos a punto su perfil comercial oficial en Google (ex Google Mi Negocio) con sus horarios, fotos y datos de contacto reales.
-                  </div>
-                </li>
-                <li class="flex items-start gap-3 text-sm text-drac-comment relative cursor-help" x-data="{ tooltip: false }" @mouseenter="tooltip = true" @mouseleave="tooltip = false">
-                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                  <span>Destacado en tu comuna cuando busquen lo que vendes</span>
-                  <div x-show="tooltip" x-cloak
-                       x-transition:enter="transition ease-out duration-200"
-                       x-transition:enter-start="opacity-0 translate-y-1"
-                       x-transition:enter-end="opacity-100 translate-y-0"
-                       x-transition:leave="transition ease-in duration-150"
-                       x-transition:leave-start="opacity-100 translate-y-0"
-                       x-transition:leave-end="opacity-0 translate-y-1"
-                       class="absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-xl bg-drac-darker border border-drac-current/50 p-3 text-xs text-drac-fg shadow-mega pointer-events-none">
-                       <p class="font-bold text-chile-blueLight mb-1">📍 Búsquedas Locales:</p>
-                       Su negocio aparecerá destacado en Google cuando las personas en su comuna o ciudad busquen los servicios que usted ofrece.
-                  </div>
-                </li>
-                <li class="flex items-start gap-3 text-sm text-drac-comment relative cursor-help" x-data="{ tooltip: false }" @mouseenter="tooltip = true" @mouseleave="tooltip = false">
-                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                  <span>Mapa interactivo para llegar fácil hasta tu negocio</span>
-                  <div x-show="tooltip" x-cloak
-                       x-transition:enter="transition ease-out duration-200"
-                       x-transition:enter-start="opacity-0 translate-y-1"
-                       x-transition:enter-end="opacity-100 translate-y-0"
-                       x-transition:leave="transition ease-in duration-150"
-                       x-transition:leave-start="opacity-100 translate-y-0"
-                       x-transition:leave-end="opacity-0 translate-y-1"
-                       class="absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-xl bg-drac-darker border border-drac-current/50 p-3 text-xs text-drac-fg shadow-mega pointer-events-none">
-                       <p class="font-bold text-chile-blueLight mb-1">🗺️ Mapa Dinámico:</p>
-                       Integramos un mapa de Google interactivo en su web para que sus visitas puedan ver su local, hacer zoom y trazar la ruta de llegada con un clic.
-                  </div>
-                </li>
-                <li class="flex items-start gap-3 text-sm text-drac-comment relative cursor-help" x-data="{ tooltip: false }" @mouseenter="tooltip = true" @mouseleave="tooltip = false">
-                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                  <span>Hosting incluido por 12 meses</span>
-                  <div x-show="tooltip" x-cloak
-                       x-transition:enter="transition ease-out duration-200"
-                       x-transition:enter-start="opacity-0 translate-y-1"
-                       x-transition:enter-end="opacity-100 translate-y-0"
-                       x-transition:leave="transition ease-in duration-150"
-                       x-transition:leave-start="opacity-100 translate-y-0"
-                       x-transition:leave-end="opacity-0 translate-y-1"
-                       class="absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-xl bg-drac-darker border border-drac-current/50 p-3 text-xs text-drac-fg shadow-mega pointer-events-none">
-                       <p class="font-bold text-chile-blueLight mb-1">🌐 Espacio en Internet:</p>
-                       El alojamiento ('hosting') de los archivos de su web estará completamente cubierto en servidores rápidos por un período de 12 meses.
-                  </div>
-                </li>
-                <li class="flex items-start gap-3 text-sm text-drac-comment relative cursor-help" x-data="{ tooltip: false }" @mouseenter="tooltip = true" @mouseleave="tooltip = false">
-                  <svg class="h-5 w-5 text-drac-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                  <span>Acompañamiento por 20 días para afirmar el lanzamiento</span>
-                  <div x-show="tooltip" x-cloak
-                       x-transition:enter="transition ease-out duration-200"
-                       x-transition:enter-start="opacity-0 translate-y-1"
-                       x-transition:enter-end="opacity-100 translate-y-0"
-                       x-transition:leave="transition ease-in duration-150"
-                       x-transition:leave-start="opacity-100 translate-y-0"
-                       x-transition:leave-end="opacity-0 translate-y-1"
-                       class="absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-xl bg-drac-darker border border-drac-current/50 p-3 text-xs text-drac-fg shadow-mega pointer-events-none">
-                       <p class="font-bold text-chile-blueLight mb-1">🤝 Apoyo Post-Entrega:</p>
-                       Le acompañamos por 20 días tras la entrega para resolver consultas técnicas y asegurar que su sitio funcione de forma impecable.
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="p-6 pt-0">
-              <a href="#contacto" class="btn-glow flex w-full items-center justify-center rounded-2xl border border-chile-blue/30 bg-chile-blue/10 px-5 py-3.5 text-sm font-bold text-chile-blueLight transition-all duration-300 hover:bg-chile-blue/20">Quiero esta versión</a>
             </div>
           </div>
 
