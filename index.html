@@ -455,7 +455,7 @@
         </span>
         <div>
           <p class="text-sm font-extrabold tracking-tight text-drac-fg font-display">STAX<span class="text-chile-red">.cl</span></p>
-          <p class="text-responsive-caption font-medium text-drac-comment tracking-wider uppercase">Se ve bien. Se vende mejor.</p>
+          <p class="hidden text-responsive-caption font-medium text-drac-comment tracking-wider uppercase lg:block">Se ve bien. Se vende mejor.</p>
         </div>
       </a>
 
@@ -525,7 +525,7 @@
     </div>
   </header>
 
-  <main id="contenido">
+  <main id="contenido" class="pb-24 sm:pb-0">
 
     <!-- ============================================ -->
     <!-- HERO -->
@@ -655,82 +655,88 @@
     <!-- ============================================ -->
     <!-- 3 PROPUESTAS DE DIRECCION -->
     <!-- ============================================ -->
-    <section id="propuestas-premium" class="relative py-20 overflow-hidden">
-      <div class="absolute inset-0 dot-pattern opacity-30 pointer-events-none"></div>
-      <div class="absolute top-10 right-0 h-64 w-64 rounded-full bg-chile-blue/10 blur-[100px] pointer-events-none"></div>
-      <div class="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-drac-orange/10 blur-[120px] pointer-events-none"></div>
+    <section id="propuestas-premium" x-data="{ showMoreProposals: false }" class="relative py-16 overflow-hidden md:py-20">
+      <div class="absolute inset-0 dot-pattern opacity-15 pointer-events-none"></div>
+      <div class="absolute top-10 right-0 h-56 w-56 rounded-full bg-chile-blue/6 blur-[100px] pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-drac-orange/6 blur-[120px] pointer-events-none"></div>
 
       <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="reveal mx-auto mb-14 max-w-4xl text-center">
-          <span class="inline-flex items-center rounded-full border border-drac-orange/20 bg-drac-orange/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-drac-orange mb-6">
+        <div class="reveal mx-auto mb-10 max-w-3xl text-center md:mb-12">
+          <span class="inline-flex items-center rounded-full border border-drac-current/20 bg-drac-current/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-drac-comment mb-5">
             Nuevas direcciones para tu futura landing
           </span>
-          <h2 class="font-display text-3xl font-black sm:text-4xl lg:text-5xl">
+          <h2 class="font-display text-2xl font-black sm:text-3xl lg:text-4xl">
             Elige cómo quieres
-            <span class="text-gradient-gold">que te recuerden</span>
+            <span class="text-drac-fg">que te recuerden</span>
           </h2>
-          <p class="mt-6 text-lg leading-relaxed text-drac-comment">
+          <p class="mt-4 text-base leading-relaxed text-drac-comment sm:text-lg">
             Tres caminos visuales distintos para que tu negocio se vea claro, cercano y listo para recibir consultas.
           </p>
         </div>
 
         <div class="grid gap-6 lg:grid-cols-3">
-          <a href="./demo-propuesta-empezar-simple/index.html" target="_blank" class="reveal group relative flex min-h-[380px] flex-col overflow-hidden rounded-[2rem] border border-chile-blueLight/25 bg-gradient-to-br from-chile-blueLight/12 via-drac-bg/90 to-drac-darker p-6 shadow-card transition-all duration-500 hover:-translate-y-2 hover:border-chile-blueLight/60 hover:shadow-mega md:min-h-[420px] md:p-7">
+          <a href="./demo-propuesta-empezar-simple/index.html" target="_blank" class="reveal group relative flex min-h-[340px] flex-col overflow-hidden rounded-[1.75rem] border border-drac-current/30 bg-drac-bg/70 p-5 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-chile-blueLight/35 hover:shadow-card-hover md:min-h-[420px] md:p-7">
             <div class="absolute -right-12 -top-12 h-36 w-36 rounded-full bg-chile-blueLight/15 blur-2xl transition-transform duration-500 group-hover:scale-125"></div>
             <div class="relative flex flex-grow flex-col">
-              <div class="mb-6 h-44 overflow-hidden rounded-3xl border border-white/10">
+              <div class="mb-5 h-40 overflow-hidden rounded-3xl border border-white/10 md:mb-6 md:h-44">
                 <img src="./demo-salon-belleza/hero.png" alt="Vista editorial boutique" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
               </div>
-              <span class="inline-flex w-fit rounded-full bg-chile-blueLight/20 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-chile-blueLight">Propuesta 01 · Editorial boutique viva</span>
-              <h3 class="mt-6 font-display text-2xl font-black leading-tight text-drac-fg sm:text-3xl">Una vitrina que eleva tu imagen</h3>
-              <p class="mt-4 text-sm leading-relaxed text-drac-comment sm:text-base">
+              <span class="inline-flex w-fit rounded-full bg-chile-blueLight/12 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-chile-blueLight">Propuesta 01 · Editorial boutique viva</span>
+              <h3 class="mt-4 font-display text-xl font-black leading-tight text-drac-fg sm:text-2xl">Una vitrina que eleva tu imagen</h3>
+              <p class="mt-3 text-sm leading-relaxed text-drac-comment sm:text-base">
                 Ideal para negocios donde la imagen, el gusto y la atención personalizada marcan la diferencia desde el primer vistazo.
               </p>
-              <div class="mt-6 rounded-2xl border border-chile-blueLight/20 bg-chile-blueLight/10 p-4">
+              <div class="mt-5 rounded-2xl border border-drac-current/20 bg-drac-current/15 p-4">
                 <p class="text-xs font-black uppercase tracking-[0.16em] text-chile-blueLight">Primer vistazo</p>
                 <p class="mt-2 text-sm leading-relaxed text-drac-comment">Hero visual, mockup móvil y estética boutique para instalar deseo inmediato.</p>
               </div>
-              <div class="mt-auto pt-8 text-xs font-black uppercase tracking-[0.16em] text-chile-blueLight">Ver propuesta editorial →</div>
+              <div class="mt-auto pt-6 text-xs font-black uppercase tracking-[0.16em] text-chile-blueLight">Ver propuesta editorial →</div>
             </div>
           </a>
 
-          <a href="./demo-propuesta-impacto-comercial/index.html" target="_blank" class="reveal group relative flex min-h-[380px] flex-col overflow-hidden rounded-[2rem] border border-drac-orange/35 bg-gradient-to-br from-drac-orange/16 via-drac-bg/90 to-chile-red/10 p-6 shadow-card transition-all duration-500 hover:-translate-y-2 hover:border-drac-orange/70 hover:shadow-mega md:min-h-[420px] md:p-7" style="transition-delay: .08s">
+          <a href="./demo-propuesta-impacto-comercial/index.html" target="_blank" :class="showMoreProposals ? 'flex' : 'hidden'" class="hidden md:flex reveal group relative min-h-[340px] flex-col overflow-hidden rounded-[1.75rem] border border-drac-current/30 bg-drac-bg/70 p-5 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-drac-orange/40 hover:shadow-card-hover md:min-h-[420px] md:p-7" style="transition-delay: .08s">
             <div class="absolute -right-10 bottom-8 h-40 w-40 rounded-full bg-chile-red/15 blur-2xl transition-transform duration-500 group-hover:scale-125"></div>
             <div class="relative flex flex-grow flex-col">
-              <div class="mb-6 h-44 overflow-hidden rounded-3xl border border-white/10">
+              <div class="mb-5 h-40 overflow-hidden rounded-3xl border border-white/10 md:mb-6 md:h-44">
                 <img src="./demo-ecommerce-tech/hero.png" alt="Vista de impacto comercial" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
               </div>
-              <span class="inline-flex w-fit rounded-full bg-drac-orange/20 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-drac-orange">Propuesta 02 · Impacto comercial vivo</span>
-              <h3 class="mt-6 font-display text-2xl font-black leading-tight text-drac-fg sm:text-3xl">Una página que invita a consultar y comprar</h3>
-              <p class="mt-4 text-sm leading-relaxed text-drac-comment sm:text-base">
+              <span class="inline-flex w-fit rounded-full bg-drac-orange/12 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-drac-orange">Propuesta 02 · Impacto comercial vivo</span>
+              <h3 class="mt-4 font-display text-xl font-black leading-tight text-drac-fg sm:text-2xl">Una página que invita a consultar y comprar</h3>
+              <p class="mt-3 text-sm leading-relaxed text-drac-comment sm:text-base">
                 Directa, comercial y fácil de recorrer. Funciona bien cuando quieres mostrar valor rápido y recibir mensajes con intención.
               </p>
-              <div class="mt-6 rounded-2xl border border-drac-orange/25 bg-drac-orange/10 p-4">
+              <div class="mt-5 rounded-2xl border border-drac-current/20 bg-drac-current/15 p-4">
                 <p class="text-xs font-black uppercase tracking-[0.16em] text-drac-orange">Primer vistazo</p>
                 <p class="mt-2 text-sm leading-relaxed text-drac-comment">Contraste fuerte, señales claras y botones ubicados en el momento correcto.</p>
               </div>
-              <div class="mt-auto pt-8 text-xs font-black uppercase tracking-[0.16em] text-drac-orange">Ver propuesta comercial →</div>
+              <div class="mt-auto pt-6 text-xs font-black uppercase tracking-[0.16em] text-drac-orange">Ver propuesta comercial →</div>
             </div>
           </a>
 
-          <a href="./demo-propuesta-atencion-ordenada/index.html" target="_blank" class="reveal group relative flex min-h-[380px] flex-col overflow-hidden rounded-[2rem] border border-drac-green/30 bg-gradient-to-br from-drac-green/12 via-drac-bg/90 to-drac-cyan/10 p-6 shadow-card transition-all duration-500 hover:-translate-y-2 hover:border-drac-green/65 hover:shadow-mega md:min-h-[420px] md:p-7" style="transition-delay: .16s">
+          <a href="./demo-propuesta-atencion-ordenada/index.html" target="_blank" :class="showMoreProposals ? 'flex' : 'hidden'" class="hidden md:flex reveal group relative min-h-[340px] flex-col overflow-hidden rounded-[1.75rem] border border-drac-current/30 bg-drac-bg/70 p-5 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-drac-green/40 hover:shadow-card-hover md:min-h-[420px] md:p-7" style="transition-delay: .16s">
             <div class="absolute -left-14 top-20 h-40 w-40 rounded-full bg-drac-green/12 blur-2xl transition-transform duration-500 group-hover:scale-125"></div>
             <div class="relative flex flex-grow flex-col">
-              <div class="mb-6 h-44 overflow-hidden rounded-3xl border border-white/10">
+              <div class="mb-5 h-40 overflow-hidden rounded-3xl border border-white/10 md:mb-6 md:h-44">
                 <img src="./demo-contabilidad/office.png" alt="Vista de sistema vivo" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
               </div>
-              <span class="inline-flex w-fit rounded-full bg-drac-green/20 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-drac-green">Propuesta 03 · Sistema vivo</span>
-              <h3 class="mt-6 font-display text-2xl font-black leading-tight text-drac-fg sm:text-3xl">Una página que ordena la atención</h3>
-              <p class="mt-4 text-sm leading-relaxed text-drac-comment sm:text-base">
+              <span class="inline-flex w-fit rounded-full bg-drac-green/12 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-drac-green">Propuesta 03 · Sistema vivo</span>
+              <h3 class="mt-4 font-display text-xl font-black leading-tight text-drac-fg sm:text-2xl">Una página que ordena la atención</h3>
+              <p class="mt-3 text-sm leading-relaxed text-drac-comment sm:text-base">
                 Ideal para servicios con agenda, pedidos o consultas frecuentes. La atención se entiende mejor y el cliente llega más preparado.
               </p>
-              <div class="mt-6 rounded-2xl border border-drac-green/25 bg-drac-green/10 p-4">
+              <div class="mt-5 rounded-2xl border border-drac-current/20 bg-drac-current/15 p-4">
                 <p class="text-xs font-black uppercase tracking-[0.16em] text-drac-green">Primer vistazo</p>
                 <p class="mt-2 text-sm leading-relaxed text-drac-comment">Panel visual, pasos claros y módulos interactivos para explicar con simpleza.</p>
               </div>
-              <div class="mt-auto pt-8 text-xs font-black uppercase tracking-[0.16em] text-drac-green">Ver propuesta sistema →</div>
+              <div class="mt-auto pt-6 text-xs font-black uppercase tracking-[0.16em] text-drac-green">Ver propuesta sistema →</div>
             </div>
           </a>
+        </div>
+
+        <div class="mt-5 flex justify-center md:hidden">
+          <button @click="showMoreProposals = !showMoreProposals" class="inline-flex items-center justify-center rounded-full border border-drac-current/30 bg-drac-current/15 px-5 py-3 text-sm font-bold text-drac-fg transition-all duration-300 hover:border-drac-comment/40 hover:bg-drac-current/25">
+            <span x-text="showMoreProposals ? 'Ver menos direcciones' : 'Ver 2 direcciones más'"></span>
+          </button>
         </div>
       </div>
     </section>
@@ -738,7 +744,7 @@
     <!-- ============================================ -->
     <!-- DEMO SHOWCASE SECTION (PORTAFOLIO DE DEMOS) -->
     <!-- ============================================ -->
-    <section id="demos" class="relative py-20 border-y border-drac-current/30 bg-drac-darker/50 overflow-hidden">
+    <section id="demos" x-data="{ showAllDemos: false }" class="relative py-20 border-y border-drac-current/30 bg-drac-darker/50 overflow-hidden">
       <!-- Background glow -->
       <div class="absolute -top-40 -left-40 h-[350px] w-[350px] rounded-full bg-drac-purple/5 blur-[120px] pointer-events-none"></div>
       <div class="absolute -bottom-40 -right-40 h-[350px] w-[350px] rounded-full bg-chile-blue/5 blur-[120px] pointer-events-none"></div>
@@ -749,11 +755,11 @@
             Demos Interactivas 100% Funcionales
           </span>
           <h2 class="font-display text-3xl font-black sm:text-4xl lg:text-5xl">
-            Explora nuestro trabajo
+            Tres maneras de verlo
             <span class="text-drac-green">en vivo</span>
           </h2>
           <p class="mt-6 text-lg text-drac-comment leading-relaxed">
-            Revisa maquetas funcionales completas, adaptadas a rubros chilenos reales. Cada demo se puede navegar e interactuar.
+            Primero te muestro una selección curada para centrar la atención. Si quieres seguir mirando, puedes abrir el resto sin salir de esta misma página.
           </p>
         </div>
 
@@ -777,7 +783,7 @@
           </a>
 
           <!-- Demo 2: Psicóloga -->
-          <a href="./demo-psicologa/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .06s">
+          <a x-show="showAllDemos" x-cloak href="./demo-psicologa/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .06s">
             <div class="relative h-48 w-full overflow-hidden">
               <img src="./demo-psicologa/preview.png" alt="Demo Clara Altieri Psicóloga" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-drac-bg to-transparent opacity-60"></div>
@@ -794,7 +800,7 @@
           </a>
 
           <!-- Demo 3: Café La Ruta -->
-          <a href="./demo-cafe-valparaiso/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .12s">
+          <a x-show="showAllDemos" x-cloak href="./demo-cafe-valparaiso/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .12s">
             <div class="relative h-48 w-full overflow-hidden">
               <img src="./demo-cafe-valparaiso/hero.png" alt="Demo Café La Ruta Valparaíso" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-drac-bg to-transparent opacity-60"></div>
@@ -828,7 +834,7 @@
           </a>
 
           <!-- Demo 5: Artesanías del Sur -->
-          <a href="./demo-artesanias/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .24s">
+          <a x-show="showAllDemos" x-cloak href="./demo-artesanias/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .24s">
             <div class="relative h-48 w-full overflow-hidden">
               <img src="./demo-artesanias/studio.png" alt="Demo Artesanías del Sur E-commerce" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-drac-bg to-transparent opacity-60"></div>
@@ -845,7 +851,7 @@
           </a>
 
           <!-- Demo 6: ContaDigital -->
-          <a href="./demo-contabilidad/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .30s">
+          <a x-show="showAllDemos" x-cloak href="./demo-contabilidad/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .30s">
             <div class="relative h-48 w-full overflow-hidden">
               <img src="./demo-contabilidad/office.png" alt="Demo ContaDigital Contabilidad" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-drac-bg to-transparent opacity-60"></div>
@@ -862,7 +868,7 @@
           </a>
 
           <!-- Demo 7: Corredora de Propiedades (Cobre & Co.) -->
-          <a href="./demo-propiedades/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .36s">
+          <a x-show="showAllDemos" x-cloak href="./demo-propiedades/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-current/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-green/30 hover:shadow-mega hover:-translate-y-2" style="transition-delay: .36s">
             <div class="relative h-48 w-full overflow-hidden">
               <img src="./demo-propiedades/hero.png" alt="Demo Cobre & Co. Propiedades" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-drac-bg to-transparent opacity-60"></div>
@@ -887,7 +893,11 @@
             </div>
             <div class="flex flex-col flex-grow p-6">
               <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-purple transition-colors">Tienda Online con Auto-Administración</h3>
-              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">El escalamiento ideal para tu negocio. Pasa de mostrar información a tener una tienda inteligente: cambia tus precios, fotos y productos tú mismo con edición simple y gestiona los pedidos desde un panel muy claro.</p>
+              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">Una tienda que cobra, ordena pedidos y también resuelve preguntas frecuentes. Integra pagos digitales, panel simple y atención automática conectada a WhatsApp.</p>
+              <div class="mt-4 flex flex-wrap gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-drac-purple">
+                <span class="rounded-full border border-drac-purple/30 bg-drac-purple/10 px-3 py-1">Pagos digitales</span>
+                <span class="rounded-full border border-drac-purple/30 bg-drac-purple/10 px-3 py-1">Chatbot comercial</span>
+              </div>
               <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-purple mt-auto">
                 <span>Ver demo en vivo</span>
                 <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -895,8 +905,9 @@
             </div>
           </a>
 
+
           <!-- Demo 9: CRM Express (Gestor de Citas y Clientes) -->
-          <a href="./demo-agenda/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-cyan/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-cyan hover:shadow-mega hover:-translate-y-2" style="transition-delay: .48s">
+          <a x-show="showAllDemos" x-cloak href="./demo-agenda/index.html" target="_blank" class="reveal group relative flex flex-col rounded-3xl border border-drac-cyan/40 bg-drac-bg/80 overflow-hidden shadow-card transition-all duration-500 hover:border-drac-cyan hover:shadow-mega hover:-translate-y-2" style="transition-delay: .48s">
             <div class="relative h-48 w-full overflow-hidden">
               <!-- Custom designed visual preview -->
               <div class="absolute inset-0 bg-gradient-to-tr from-slate-950 via-slate-900 to-sky-950 flex flex-col items-center justify-center p-4">
@@ -917,8 +928,20 @@
             </div>
           </a>
 
-          <!-- Call to Action Card -->
-          <div class="reveal sm:col-span-2 lg:col-span-3 group relative flex flex-col md:flex-row items-center justify-between gap-8 rounded-3xl border border-dashed border-drac-purple/50 bg-gradient-to-r from-drac-bg/90 via-drac-purple/10 to-drac-bg/90 p-8 md:p-10 shadow-card transition-all duration-500 hover:border-drac-purple hover:shadow-mega hover:-translate-y-1" style="transition-delay: .42s">
+        <div class="reveal mt-6 rounded-[1.5rem] border border-drac-current/25 bg-drac-bg/45 p-4 sm:p-5">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div class="max-w-2xl">
+              <p class="text-xs font-black uppercase tracking-[0.18em] text-drac-green">Más rubros, misma claridad</p>
+              <p class="mt-2 text-sm leading-relaxed text-drac-comment">Si quieres revisar más estilos, abre el resto del portafolio aquí mismo, sin cortar la lectura ni salir del flujo.</p>
+            </div>
+            <button @click="showAllDemos = !showAllDemos" class="inline-flex items-center justify-center rounded-full border border-drac-green/25 bg-drac-green/10 px-5 py-3 text-sm font-bold text-drac-green transition-all duration-300 hover:border-drac-green/40 hover:bg-drac-green/15">
+              <span x-text="showAllDemos ? 'Mostrar menos demos' : 'Ver más demos'"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Call to Action Card -->
+        <div class="reveal mt-8 group relative flex flex-col md:flex-row items-center justify-between gap-8 rounded-3xl border border-dashed border-drac-purple/50 bg-gradient-to-r from-drac-bg/90 via-drac-purple/10 to-drac-bg/90 p-8 md:p-10 shadow-card transition-all duration-500 hover:border-drac-purple hover:shadow-mega hover:-translate-y-1" style="transition-delay: .42s">
             <div class="flex-grow text-left max-w-2xl">
               <div class="inline-flex items-center gap-2 rounded-full bg-drac-purple/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-drac-purple mb-4">
                 <span>Tu rubro también puede verse así</span>
@@ -2272,10 +2295,10 @@
   <!-- FLOATING WHATSAPP BUTTON -->
   <!-- ============================================ -->
   <a href="https://wa.me/56999040515?text=Hola%2C%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio" target="_blank" rel="noopener"
-     class="fixed inset-x-4 bottom-4 z-50 flex items-center justify-center gap-2 rounded-2xl bg-[#25D366] px-5 py-4 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:shadow-xl sm:hidden"
+     class="fixed bottom-4 right-4 z-50 inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:shadow-xl sm:hidden"
      aria-label="Contactar por WhatsApp">
     <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.613.613l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
-    <span>Hablar por WhatsApp</span>
+    <span>WhatsApp</span>
   </a>
 
   <a href="https://wa.me/56999040515?text=Hola%2C%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio" target="_blank" rel="noopener"
