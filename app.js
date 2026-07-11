@@ -26,6 +26,11 @@ window.landingApp = function landingApp() {
     toggleTheme() {
       this.darkMode = !this.darkMode;
       localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
+      if (this.darkMode) {
+        document.documentElement.classList.remove('light-theme');
+      } else {
+        document.documentElement.classList.add('light-theme');
+      }
     },
 
     startPlanHover(plan) {
