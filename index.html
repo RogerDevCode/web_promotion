@@ -153,7 +153,7 @@
       --drac-darker: 30, 31, 41;
       --drac-current: 68, 71, 90;
       --drac-fg: 248, 248, 242;
-      --drac-comment: 98, 114, 164;
+      --drac-comment: 168, 175, 203; /* WCAG AA compliant contrast (>6.4:1) on dark backgrounds */
       --drac-cyan: 139, 233, 253;
       --drac-green: 80, 250, 123;
       --drac-orange: 255, 184, 108;
@@ -169,7 +169,7 @@
       --drac-darker: 234, 234, 225;  /* Richer warm linen/stone gray for body background */
       --drac-current: 206, 206, 194; /* Subtle granite gray for visible borders */
       --drac-fg: 30, 32, 34;         /* Rich dark charcoal black for crisp contrast */
-      --drac-comment: 85, 87, 95;    /* Muted neutral slate gray */
+      --drac-comment: 85, 87, 95;    /* Muted neutral slate gray (>6.5:1 on white) */
       --drac-cyan: 31, 58, 96;       /* Deep navy blue */
       --drac-green: 45, 90, 39;      /* Sage/forest green */
       --drac-orange: 163, 93, 34;    /* Luxury bronze/copper */
@@ -179,29 +179,44 @@
       --drac-yellow: 184, 134, 11;   /* Antique gold */
     }
 
-    /* Force all transparent cards/panels to solid white in light theme for maximum contrast */
-    html.light-theme [class*="bg-drac-bg/"] {
+    /* In Light Theme: cards in normal/light sections become solid white for maximum contrast */
+    html.light-theme :not(.band-dark):not(.band-navy):not(#inicio) > [class*="bg-drac-bg/"],
+    html.light-theme #propuestas-premium [class*="bg-drac-bg/"],
+    html.light-theme #demos [class*="bg-drac-bg/"],
+    html.light-theme #beneficios [class*="bg-drac-bg/"],
+    html.light-theme #precios [class*="bg-drac-bg/"],
+    html.light-theme #faq [class*="bg-drac-bg/"] {
       background-color: rgb(255, 255, 255) !important;
     }
 
-    /* Ensure dark band sections always show white text regardless of theme */
-    .band-dark,
-    .band-navy {
+    /* In Light Theme: ensure dark band sections show white text and translucent dark cards */
+    html.light-theme .band-dark [class*="bg-drac-bg/"],
+    html.light-theme .band-navy [class*="bg-drac-bg/"] {
+      background-color: rgba(255, 255, 255, 0.08) !important;
+      border-color: rgba(255, 255, 255, 0.15) !important;
+    }
+    html.light-theme .band-dark,
+    html.light-theme .band-navy {
       color: #FFFFFF;
     }
-    .band-dark .text-drac-fg,
-    .band-navy .text-drac-fg {
-      color: #F0F0F0;
+    html.light-theme .band-dark .text-drac-fg,
+    html.light-theme .band-navy .text-drac-fg {
+      color: #FFFFFF;
     }
-    .band-dark .text-drac-comment,
-    .band-navy .text-drac-comment {
-      color: #A8AABB;
+    html.light-theme .band-dark .text-drac-comment,
+    html.light-theme .band-navy .text-drac-comment {
+      color: #C4C8DB;
     }
 
-    /* Light band sections get dark text */
-    .band-white,
-    .band-lino {
+    /* Light band sections get dark text in light theme */
+    html.light-theme .band-white,
+    html.light-theme .band-lino {
       color: #1E2022;
+    }
+
+    /* High contrast green for WhatsApp text on light backgrounds */
+    html.light-theme .text-\[\#25D366\] {
+      color: #0D7A3A !important;
     }
 
     /* Smooth transition for theme switch, excluding transforms to preserve fast interactions */
@@ -367,16 +382,31 @@
     /* =============================================
        SECTION BANDS: Alternating color rhythm
        ============================================= */
+    /* In Dark Mode: section bands use dark shades so text contrast is 100% compliant */
     .band-dark {
-      background-color: #0B1526;
+      background-color: #11131C;
     }
     .band-white {
-      background-color: #FFFFFF;
+      background-color: #1E1F29;
     }
     .band-lino {
-      background-color: #EAEAE1;
+      background-color: #161822;
     }
     .band-navy {
+      background-color: #0E1424;
+    }
+
+    /* In Light Mode: alternating clean white, warm lino, and dark anchor sections */
+    html.light-theme .band-dark {
+      background-color: #0B1526;
+    }
+    html.light-theme .band-white {
+      background-color: #FFFFFF;
+    }
+    html.light-theme .band-lino {
+      background-color: #EAEAE1;
+    }
+    html.light-theme .band-navy {
       background-color: #0C1F4A;
     }
 
