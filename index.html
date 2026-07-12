@@ -43,7 +43,7 @@
   <!-- Tailwind CSS -->
   <script src="./assets/vendor/tailwindcss-play.js"></script>
 
-  <script defer src="./app.js"></script>
+  <!-- app.js is inlined at the bottom of the body for total offline file:// compatibility -->
   <!-- Alpine.js -->
   <script defer src="./assets/vendor/alpinejs.min.js"></script>
 
@@ -2411,6 +2411,79 @@
       });
     });
 
+    // Inlined app.js logic for total offline execution without CORS block
+    window.openWhatsAppWithFallback = function openWhatsAppWithFallback(url) {
+      const popup = window.open(url, '_blank', 'noopener');
+      if (popup) {
+        try {
+          popup.focus();
+        } catch (error) {
+          // Ignore focus
+        }
+        return true;
+      }
+      window.location.href = url;
+      return false;
+    };
+
+    window.landingApp = function landingApp() {
+      return {
+        mobileMenu: false,
+        showVideo: false,
+        planTimes: { esencial: 0, profesional: 0, premium: 0 },
+        activePlan: null,
+        hoverStart: null,
+        darkMode: localStorage.getItem('theme') === 'dark',
+
+        init() {
+          if (this.darkMode) {
+            document.documentElement.classList.remove('light-theme');
+          } else {
+            document.documentElement.classList.add('light-theme');
+          }
+        },
+
+        toggleTheme() {
+          this.darkMode = !this.darkMode;
+          localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
+          if (this.darkMode) {
+            document.documentElement.classList.remove('light-theme');
+          } else {
+            document.documentElement.classList.add('light-theme');
+          }
+        },
+
+        startPlanHover(plan) {
+          this.activePlan = plan;
+          this.hoverStart = Date.now();
+        },
+
+        endPlanHover(plan) {
+          if (this.activePlan === plan && this.hoverStart) {
+            this.planTimes[plan] += Date.now() - this.hoverStart;
+            this.activePlan = null;
+            this.hoverStart = null;
+          }
+        },
+
+        getMostViewedPlan() {
+          let maxTime = 0;
+          let mostViewed = 'Atención Clara';
+          const planLabels = {
+            esencial: 'Presencia Propia',
+            profesional: 'Atención Clara',
+            premium: 'Venta Activa',
+          };
+          for (const [plan, time] of Object.entries(this.planTimes)) {
+            if (time > maxTime) {
+              maxTime = time;
+              mostViewed = planLabels[plan] || plan;
+            }
+          }
+          return mostViewed;
+        },
+      };
+    };
   </script>
 </body>
 </html>
