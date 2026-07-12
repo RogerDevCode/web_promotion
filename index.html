@@ -334,15 +334,15 @@
 
     /* Hybrid Backgrounds: Trama Micro-Dot Editorial */
     .bg-micro-dots {
-      background-image: radial-gradient(rgba(var(--drac-fg), 0.04) 1.5px, transparent 1.5px);
+      background-image: radial-gradient(rgba(var(--drac-fg), 0.15) 1.5px, transparent 1.5px);
       background-size: 16px 16px;
     }
 
     /* Hybrid Backgrounds: Grilla de Precisión */
     .bg-precision-grid {
       background-image: 
-        linear-gradient(rgba(var(--drac-current), 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(var(--drac-current), 0.08) 1px, transparent 1px);
+        linear-gradient(rgba(var(--drac-fg), 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--drac-fg), 0.08) 1px, transparent 1px);
       background-size: 40px 40px;
     }
 
@@ -675,7 +675,7 @@
     <!-- 3 PROPUESTAS DE DIRECCION -->
     <!-- ============================================ -->
     <section id="propuestas-premium" x-data="{ showMoreProposals: false }" class="relative py-12 overflow-hidden lg:py-16">
-      <div class="absolute inset-0 bg-precision-grid opacity-40 pointer-events-none"></div>
+      <div class="absolute inset-0 bg-precision-grid opacity-70 pointer-events-none"></div>
       <div class="absolute top-10 right-0 h-56 w-56 rounded-full bg-chile-blue/6 blur-[100px] pointer-events-none"></div>
       <div class="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-drac-orange/6 blur-[120px] pointer-events-none"></div>
 
@@ -765,7 +765,7 @@
     <!-- ============================================ -->
     <section id="demos" x-data="{ showAllDemos: false }" class="relative py-12 lg:py-16 border-y border-drac-current/30 bg-drac-darker/50 overflow-hidden">
       <!-- Background grid overlay -->
-      <div class="absolute inset-0 bg-precision-grid opacity-30 pointer-events-none"></div>
+      <div class="absolute inset-0 bg-precision-grid opacity-60 pointer-events-none"></div>
       <!-- Background glow -->
       <div class="absolute -top-40 -left-40 h-[350px] w-[350px] rounded-full bg-drac-purple/5 blur-[120px] pointer-events-none"></div>
       <div class="absolute -bottom-40 -right-40 h-[350px] w-[350px] rounded-full bg-chile-blue/5 blur-[120px] pointer-events-none"></div>
@@ -1277,7 +1277,7 @@
     <!-- ============================================ -->
     <section id="proceso" class="relative overflow-hidden">
       <!-- Background grid overlay -->
-      <div class="absolute inset-0 bg-precision-grid opacity-30 pointer-events-none"></div>
+      <div class="absolute inset-0 bg-precision-grid opacity-60 pointer-events-none"></div>
       <div class="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-drac-purple/5 blur-[120px]"></div>
 
       <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
