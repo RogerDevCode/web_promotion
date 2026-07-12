@@ -184,6 +184,26 @@
       background-color: rgb(255, 255, 255) !important;
     }
 
+    /* Ensure dark band sections always show white text regardless of theme */
+    .band-dark,
+    .band-navy {
+      color: #FFFFFF;
+    }
+    .band-dark .text-drac-fg,
+    .band-navy .text-drac-fg {
+      color: #F0F0F0;
+    }
+    .band-dark .text-drac-comment,
+    .band-navy .text-drac-comment {
+      color: #A8AABB;
+    }
+
+    /* Light band sections get dark text */
+    .band-white,
+    .band-lino {
+      color: #1E2022;
+    }
+
     /* Smooth transition for theme switch, excluding transforms to preserve fast interactions */
     html, body, header, section, footer, nav, div, a, p, span, h1, h2, h3, h4, h5, h6, svg, button {
       transition-property: background-color, border-color, color, fill, stroke, text-decoration-color;
@@ -319,33 +339,53 @@
       animation: shimmer 3s ease-in-out infinite;
     }
 
-    /* Mesh background */
-    .mesh-bg {
+    /* =============================================
+       HERO: Real photo background + strong overlay
+       ============================================= */
+    .hero-photo-bg {
       background-image:
-        radial-gradient(ellipse at 20% 0%, rgba(0,57,166,0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 0%, rgba(213,43,30,0.1) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 100%, rgba(189,147,249,0.08) 0%, transparent 50%);
+        linear-gradient(135deg,
+          rgba(0,20,70,0.88) 0%,
+          rgba(0,40,130,0.75) 40%,
+          rgba(120,15,10,0.65) 100%),
+        url('./santiago_hero.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
     }
 
-    /* Noise texture */
+    /* Noise texture on hero only */
     .noise::after {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none;
-      opacity: 0.4;
+      opacity: 0.5;
     }
 
-    /* Global Organic Texture (Textura de Papel Matte Premium) */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      opacity: 0.85;
-      z-index: 9999;
+    /* =============================================
+       SECTION BANDS: Alternating color rhythm
+       ============================================= */
+    .band-dark {
+      background-color: #0B1526;
+    }
+    .band-white {
+      background-color: #FFFFFF;
+    }
+    .band-lino {
+      background-color: #EAEAE1;
+    }
+    .band-navy {
+      background-color: #0C1F4A;
+    }
+
+    /* =============================================
+       EDITORIAL: Left accent bar (Opcion 3)
+       ============================================= */
+    .editorial-bar {
+      border-left: 5px solid #0039A6;
+      padding-left: 1.25rem;
     }
 
     /* Glow ring */
@@ -554,7 +594,7 @@
     <!-- ============================================ -->
     <!-- HERO -->
     <!-- ============================================ -->
-    <section id="inicio" class="relative flex min-h-[84svh] items-center overflow-hidden mesh-bg noise md:min-h-screen">
+    <section id="inicio" class="relative flex min-h-[84svh] items-center overflow-hidden hero-photo-bg noise md:min-h-screen">
       <!-- Decorative elements -->
       <div class="absolute top-20 left-10 h-72 w-72 rounded-full bg-chile-blue/10 blur-[100px] animate-pulse-soft"></div>
       <div class="absolute bottom-20 right-10 h-64 w-64 rounded-full bg-chile-red/8 blur-[80px] animate-pulse-soft" style="animation-delay: 1.5s"></div>
@@ -564,17 +604,20 @@
         <div class="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12">
           <div class="reveal">
             <!-- Badge -->
-            <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-chile-blue/20 bg-chile-blue/10 px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-chile-blueLight sm:px-4 sm:text-xs sm:tracking-[0.2em]">
-              <span class="h-2 w-2 rounded-full bg-drac-green animate-pulse-soft"></span>
+            <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-sm px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-white/90 sm:px-4 sm:text-xs sm:tracking-[0.2em]">
+              <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse-soft"></span>
               Ayudando a las PYMEs chilenas a destacar en internet
             </div>
 
-            <h1 class="font-display text-[2.25rem] font-black leading-[1.02] sm:text-5xl lg:text-6xl xl:text-[3.5rem] text-drac-fg">
-              Tu negocio en internet,
-              <span class="bg-gradient-to-r from-drac-purple via-drac-pink to-drac-red bg-clip-text text-transparent">sin enredos.</span>
-            </h1>
+            <!-- Editorial bar accent (Opción 3) -->
+            <div class="editorial-bar">
+              <h1 class="font-display text-[2.25rem] font-black leading-[1.02] sm:text-5xl lg:text-6xl xl:text-[3.5rem] text-white drop-shadow-lg">
+                Tu negocio en internet,
+                <span class="bg-gradient-to-r from-orange-300 via-yellow-200 to-white bg-clip-text text-transparent">sin enredos.</span>
+              </h1>
+            </div>
 
-            <p class="mt-5 max-w-xl text-[15px] leading-relaxed text-drac-comment sm:text-lg">
+            <p class="mt-5 max-w-xl text-[15px] leading-relaxed text-white/75 sm:text-lg">
               Solo el 23% de las PYMEs en Chile tiene una web propia. Ayudamos a tu negocio local a destacar en Google, ordenar tu atención y recibir clientes directamente en tu WhatsApp, sin mensualidades ni amarras.
             </p>
 
@@ -590,17 +633,17 @@
             </div>
 
             <!-- Trust signals -->
-            <div class="mt-7 grid grid-cols-1 gap-3 text-sm text-drac-comment sm:flex sm:flex-wrap sm:items-center sm:gap-6">
-              <div class="flex items-center gap-2 rounded-2xl border border-drac-current/30 bg-drac-current/15 px-4 py-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:px-0 sm:py-0">
-                <svg class="h-4 w-4 text-drac-green" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
+              <div class="flex items-center gap-2 text-sm text-white/70">
+                <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 Soporte local (Santiago de Chile)
               </div>
-              <div class="flex items-center gap-2 rounded-2xl border border-drac-current/30 bg-drac-current/15 px-4 py-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:px-0 sm:py-0">
-                <svg class="h-4 w-4 text-drac-green" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <div class="flex items-center gap-2 text-sm text-white/70">
+                <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 Precios transparentes en CLP (neto + IVA)
               </div>
-              <div class="flex items-center gap-2 rounded-2xl border border-drac-current/30 bg-drac-current/15 px-4 py-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:px-0 sm:py-0">
-                <svg class="h-4 w-4 text-drac-green" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <div class="flex items-center gap-2 text-sm text-white/70">
+                <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 Tu web es 100% tuya, sin suscripciones
               </div>
             </div>
@@ -678,7 +721,7 @@
     <!-- ============================================ -->
     <!-- 3 PROPUESTAS DE DIRECCION -->
     <!-- ============================================ -->
-    <section id="propuestas-premium" x-data="{ showMoreProposals: false }" class="relative py-12 overflow-hidden lg:py-16">
+    <section id="propuestas-premium" x-data="{ showMoreProposals: false }" class="relative band-white py-12 overflow-hidden lg:py-16">
 
       <div class="absolute top-10 right-0 h-56 w-56 rounded-full bg-chile-blue/6 blur-[100px] pointer-events-none"></div>
       <div class="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-drac-orange/6 blur-[120px] pointer-events-none"></div>
@@ -767,7 +810,7 @@
     <!-- ============================================ -->
     <!-- DEMO SHOWCASE SECTION (PORTAFOLIO DE DEMOS) -->
     <!-- ============================================ -->
-    <section id="demos" x-data="{ showAllDemos: false }" class="relative py-12 lg:py-16 border-y border-drac-current/30 bg-drac-darker/50 overflow-hidden">
+    <section id="demos" x-data="{ showAllDemos: false }" class="relative band-lino py-12 lg:py-16 overflow-hidden">
 
       <!-- Background glow -->
       <div class="absolute -top-40 -left-40 h-[350px] w-[350px] rounded-full bg-drac-purple/5 blur-[120px] pointer-events-none"></div>
@@ -1040,7 +1083,7 @@
     <!-- ============================================ -->
     <!-- PAIN POINTS / PROBLEM -->
     <!-- ============================================ -->
-    <section id="beneficios" class="relative overflow-hidden dot-pattern">
+    <section id="beneficios" class="relative band-white overflow-hidden dot-pattern">
       <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div class="reveal mx-auto mb-14 max-w-3xl text-center">
           <span class="inline-flex items-center rounded-full bg-chile-red/10 border border-chile-red/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-chile-red mb-6">
@@ -1278,7 +1321,7 @@
     <!-- ============================================ -->
     <!-- PROCESS -->
     <!-- ============================================ -->
-    <section id="proceso" class="relative overflow-hidden">
+    <section id="proceso" class="relative band-dark overflow-hidden">
 
       <div class="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-drac-purple/5 blur-[120px]"></div>
 
@@ -1446,7 +1489,7 @@
     <!-- ============================================ -->
     <!-- PRICING -->
     <!-- ============================================ -->
-    <section id="precios" class="relative overflow-hidden">
+    <section id="precios" class="relative band-lino overflow-hidden">
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-chile-blue/5 blur-[150px]"></div>
 
       <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
@@ -1995,7 +2038,7 @@
     <!-- ============================================ -->
     <!-- FAQ -->
     <!-- ============================================ -->
-    <section id="faq" class="relative overflow-hidden">
+    <section id="faq" class="relative band-white overflow-hidden">
       <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div class="reveal text-center mb-16">
           <span class="inline-flex items-center rounded-full bg-drac-cyan/10 border border-drac-cyan/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-drac-cyan mb-6">
@@ -2160,7 +2203,7 @@
     <!-- ============================================ -->
     <!-- CTA + CONTACT -->
     <!-- ============================================ -->
-    <section id="contacto" class="relative overflow-hidden mesh-bg noise">
+    <section id="contacto" class="relative band-navy overflow-hidden noise">
       <div class="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-chile-blue/10 blur-[120px]"></div>
       <div class="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-chile-red/8 blur-[100px]"></div>
 
