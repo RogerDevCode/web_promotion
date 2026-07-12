@@ -50,7 +50,21 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: .08em;
-      mix-blend-mode: difference;
+      mix-blend-mode: normal;
+      background: rgba(8, 8, 8, .58);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .nav a:last-child {
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+    }
+    .nav a:last-child:hover {
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.22);
     }
     .hero {
       position: relative;
@@ -247,6 +261,7 @@
     .mockup-ui h3 {
       font-size: clamp(1.45rem, 2.3vw, 2.3rem);
       line-height: .9;
+      color: var(--ink);
     }
     .mockup-ui p {
       margin: 8px 0 0;

@@ -57,8 +57,8 @@
         :root {
             --primary-navy: #0A192F;      /* Deep navy corporate background */
             --secondary-navy: #172A45;    /* Dark steel panel */
-            --accent-cyan: #00B4D8;       /* Tech cyan/blue accent */
-            --accent-cyan-hover: #0077B6;
+            --accent-cyan: #0077B6;       /* Tech cyan/blue accent */
+            --accent-cyan-hover: #005B8E;
             --bg-light: #F4F7F6;          /* Clean light grey background */
             --text-dark: #0A192F;         /* Dark text */
             --text-light: #F4F7F6;        /* Light text */
@@ -161,7 +161,7 @@
 
         .btn-cyan {
             background-color: var(--accent-cyan);
-            color: var(--primary-navy);
+            color: var(--text-light);
         }
         .btn-cyan:hover {
             background-color: var(--accent-cyan-hover);
@@ -393,8 +393,8 @@
         .calc-badge {
             font-size: 0.85rem;
             font-weight: 700;
-            color: var(--accent-cyan);
-            background-color: rgba(0, 180, 216, 0.08);
+            color: #005B8E;
+            background-color: rgba(0, 119, 182, 0.16);
             padding: 0.2rem 0.6rem;
             border-radius: 50px;
         }
@@ -1050,7 +1050,31 @@
         }
 
         .showcase-back-btn {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 9999;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(10, 25, 47, 0.9);
+            color: #F4F7F6;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 14px 30px rgba(10, 25, 47, 0.24);
             font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease, border-color .25s ease;
+        }
+        .showcase-back-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(10, 25, 47, 0.98);
+            border-color: rgba(255,255,255,0.18);
+            box-shadow: 0 18px 34px rgba(10, 25, 47, 0.32);
         }
         @media (max-width: 768px) {
             html body .showcase-back-btn,
@@ -1558,9 +1582,7 @@
 
     <!-- Botón Flotante para Volver al Showcase -->
     <a href="../index.html#demos" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" 
-       class="showcase-back-btn no-print text-responsive-detail" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #bd93f9; color: #1e1f29; padding: 12px 20px; border-radius: 50px; font-family: 'Inter', sans-serif;  font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(189, 147, 249, 0.4); border: 2px solid #1e1f29; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
-       onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(189, 147, 249, 0.6)';"
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(189, 147, 249, 0.4)';">
+       class="showcase-back-btn no-print text-responsive-detail">
          <span>⬅️ Volver al Showcase</span>
     </a>
 

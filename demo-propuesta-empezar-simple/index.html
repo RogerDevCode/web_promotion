@@ -47,11 +47,25 @@
       justify-content: space-between;
       padding: 18px clamp(18px, 4vw, 42px);
       color: #fff;
-      mix-blend-mode: difference;
+      mix-blend-mode: normal;
       font-size: .78rem;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: .08em;
+      background: rgba(15,12,10,.56);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .topbar a:last-child {
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+    }
+    .topbar a:last-child:hover {
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.22);
     }
     .hero {
       position: relative;
@@ -342,7 +356,7 @@
       <div class="hero-inner">
         <span class="eyebrow">Propuesta 01 · Editorial boutique viva</span>
         <h1>La web como vitrina que da ganas de comprar.</h1>
-        <p class="hero-copy">Para rubros donde la primera impresión vende: belleza, flores, bienestar, decoración, moda, regalos y servicios personales. Esta dirección hace visible el cuidado, el gusto y la atención personalizada.</p>
+        <p class="hero-copy">Para rubros donde la primera impresión vende: belleza, flores, bienestar, decoración, moda y regalos. Esta dirección hace visible el cuidado, el gusto y la atención personalizada.</p>
         <div class="hero-actions">
           <a class="btn primary" href="#experiencia">Ver experiencia</a>
           <a class="btn" href="../index.html#contacto">Me interesa esta dirección</a>

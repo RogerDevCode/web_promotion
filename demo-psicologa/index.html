@@ -114,7 +114,31 @@
         }
 
         .showcase-back-btn {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 9999;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(43, 58, 54, 0.88);
+            color: #F8FAFC;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 14px 30px rgba(20, 28, 26, 0.22);
             font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease, border-color .25s ease;
+        }
+        .showcase-back-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(43, 58, 54, 0.96);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 18px 34px rgba(20, 28, 26, 0.28);
         }
         @media (max-width: 768px) {
             html body .showcase-back-btn,
@@ -122,6 +146,11 @@
                 font-size: 14px;
                 line-height: 1.45;
             }
+        }
+
+        .hero-quote-card {
+            background: rgba(23, 35, 32, 0.68);
+            border-color: rgba(255, 255, 255, 0.14);
         }
     </style>
 </head>
@@ -139,7 +168,7 @@
                 </div>
                 <div>
                     <span class="block font-serif text-lg font-semibold tracking-wide text-sage-900 leading-tight">Clara Altieri</span>
-                    <span class="block text-responsive-detail uppercase tracking-widest text-sage-500 font-medium">Psicóloga Clínica</span>
+                    <span class="block text-responsive-detail uppercase tracking-widest text-sage-600 font-medium">Psicóloga Clínica</span>
                 </div>
             </a>
             
@@ -236,9 +265,9 @@
                     <div class="group relative aspect-[4/5] w-full max-w-[18rem] overflow-hidden rounded-3xl border border-white bg-sage-200 shadow-2xl sm:max-w-sm">
                         <div class="absolute inset-0 bg-gradient-to-tr from-sage-700 via-sage-500 to-sand-300 flex flex-col justify-end p-8 text-white">
                             <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                            <div class="w-full border border-white/20 p-6 rounded-2xl bg-white/10 backdrop-blur-md">
+                            <div class="hero-quote-card w-full border p-6 rounded-2xl backdrop-blur-md">
                                 <span class="font-serif italic text-2xl block mb-2">"La terapia es un espacio para descubrir, ordenar y abrazar quién has sido siempre."</span>
-                                <span class="text-responsive-detail uppercase tracking-wider opacity-80">— Ps. Clara Altieri</span>
+                                <span class="text-responsive-detail uppercase tracking-wider text-white">— Ps. Clara Altieri</span>
                             </div>
                         </div>
                         
@@ -256,7 +285,7 @@
         <section id="enfoque" class="py-20 bg-white border-y border-sage-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
-                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-500">Filosofía de Trabajo</span>
+                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-600">Filosofía de Trabajo</span>
                     <h2 class="font-serif text-3xl md:text-4xl text-sage-900 font-medium">Un enfoque humano, cercano y con rigurosidad profesional</h2>
                     <div class="w-12 h-1 bg-sage-500 mx-auto rounded-full"></div>
                     <p class="text-sage-700 font-light max-w-xl mx-auto">
@@ -309,7 +338,7 @@
                         <div class="w-full max-w-sm rounded-3xl bg-sage-600 aspect-[4/5] relative overflow-hidden shadow-xl border border-white">
                             <div class="absolute inset-0 bg-gradient-to-b from-sage-500/80 to-sage-900 flex flex-col justify-end p-8 text-white">
                                 <span class="block font-serif text-2xl font-semibold">Ps. Clara Altieri</span>
-                                <span class="block text-responsive-detail uppercase tracking-widest text-sage-200 mt-1">Nº Registro Superintendencia: 482910</span>
+                                <span class="block text-responsive-detail uppercase tracking-widest text-sage-100 mt-1">Nº Registro Superintendencia: 482910</span>
                                 <div class="mt-4 pt-4 border-t border-white/10 flex justify-between text-responsive-detail text-sage-100">
                                     <span>Psicóloga Univ. de Buenos Aires</span>
                                     <span>Mención Clínica</span>
@@ -320,7 +349,7 @@
 
                     <!-- Bio Text -->
                     <div class="lg:col-span-7 space-y-6">
-                        <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-500">¿Quién te acompañará?</span>
+                        <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-600">¿Quién te acompañará?</span>
                         <h2 class="font-serif text-3xl md:text-4xl text-sage-900 font-medium">Hola, soy Clara.</h2>
                         <p class="text-sage-800 leading-relaxed font-light">
                             Mi propósito es entregarte un espacio de contención genuino, seguro y estructurado donde podamos fortalecer tu bienestar actual.
@@ -331,11 +360,11 @@
                         <div class="grid grid-cols-2 gap-6 pt-4 border-t border-sage-200">
                             <div>
                                 <span class="block font-serif text-2xl text-sage-700 font-semibold">8+</span>
-                                <span class="text-responsive-detail text-sage-500 uppercase tracking-wider font-medium">Años de experiencia</span>
+                                <span class="text-responsive-detail text-sage-600 uppercase tracking-wider font-medium">Años de experiencia</span>
                             </div>
                             <div>
                                 <span class="block font-serif text-2xl text-sage-700 font-semibold">1.200+</span>
-                                <span class="text-responsive-detail text-sage-500 uppercase tracking-wider font-medium">Sesiones clínicas</span>
+                                <span class="text-responsive-detail text-sage-600 uppercase tracking-wider font-medium">Sesiones clínicas</span>
                             </div>
                         </div>
                     </div>
@@ -347,7 +376,7 @@
         <section id="servicios" class="py-20 bg-white border-t border-sage-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
-                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-500">Áreas de Trabajo</span>
+                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-600">Áreas de Trabajo</span>
                     <h2 class="font-serif text-3xl md:text-4xl text-sage-900 font-medium">¿En qué áreas te puedo acompañar?</h2>
                     <div class="w-12 h-1 bg-sage-500 mx-auto rounded-full"></div>
                 </div>
@@ -364,7 +393,7 @@
                                 Trabajamos ansiedad, rumiación mental y estrés con herramientas concretas para identificar desencadenantes, ordenar patrones de pensamiento y recuperar control emocional.
                             </p>
                         </div>
-                        <span class="text-responsive-detail uppercase tracking-wider text-sage-500 mt-6 font-semibold block">Terapia Adultos & Jóvenes</span>
+                        <span class="text-responsive-detail uppercase tracking-wider text-sage-600 mt-6 font-semibold block">Terapia Adultos & Jóvenes</span>
                     </div>
 
                     <!-- Box 2 -->
@@ -378,7 +407,7 @@
                                 Fortalecimiento de la relación contigo mismo, estableciendo límites saludables y reconociendo tus fortalezas para mejorar la autovaloración.
                             </p>
                         </div>
-                        <span class="text-responsive-detail uppercase tracking-wider text-sand-600 mt-6 font-semibold block">Proceso Individual</span>
+                        <span class="text-responsive-detail uppercase tracking-wider text-sand-700 mt-6 font-semibold block">Proceso Individual</span>
                     </div>
 
                     <!-- Box 3 -->
@@ -392,7 +421,7 @@
                                 Acompañamiento en procesos de duelo, baja motivación y reconstrucción personal para recuperar sentido de propósito y vitalidad.
                             </p>
                         </div>
-                        <span class="text-responsive-detail uppercase tracking-wider text-sand-600 mt-6 font-semibold block">Terapia Adultos</span>
+                        <span class="text-responsive-detail uppercase tracking-wider text-sand-700 mt-6 font-semibold block">Terapia Adultos</span>
                     </div>
 
                     <!-- Box 4 -->
@@ -406,7 +435,7 @@
                                 Mudanzas de país, quiebres afectivos, cambios laborales o crisis propias de la edad. Te ayudo a reorganizar tus recursos cognitivos y emocionales frente a los quiebres vitales obligados o deseados.
                             </p>
                         </div>
-                        <span class="text-responsive-detail uppercase tracking-wider text-sage-500 mt-6 font-semibold block">Asesoría Individual</span>
+                        <span class="text-responsive-detail uppercase tracking-wider text-sage-600 mt-6 font-semibold block">Asesoría Individual</span>
                     </div>
                 </div>
             </div>
@@ -416,7 +445,7 @@
         <section id="como-funciona" class="py-20 bg-sand-50/50">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
-                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-500">¿Cómo empezar?</span>
+                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-600">¿Cómo empezar?</span>
                     <h2 class="font-serif text-3xl md:text-4xl text-sage-900 font-medium">El camino hacia tu bienestar</h2>
                     <div class="w-12 h-1 bg-sage-500 mx-auto rounded-full"></div>
                 </div>
@@ -471,7 +500,7 @@
         <section class="py-20 bg-white border-y border-sage-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
-                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-500">Testimonios Reales</span>
+                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-600">Testimonios Reales</span>
                     <h2 class="font-serif text-3xl md:text-4xl text-sage-900 font-medium">Experiencias de consultantes</h2>
                     <div class="w-12 h-1 bg-sage-500 mx-auto rounded-full"></div>
                 </div>
@@ -484,7 +513,7 @@
                         </p>
                         <div>
                             <span class="block font-semibold text-sm text-sage-900">Paula A.</span>
-                            <span class="block text-responsive-detail text-sage-500">Ingeniera, 34 años</span>
+                            <span class="block text-responsive-detail text-sage-600">Ingeniera, 34 años</span>
                         </div>
                     </div>
 
@@ -495,7 +524,7 @@
                         </p>
                         <div>
                             <span class="block font-semibold text-sm text-sage-900">Martín S.</span>
-                            <span class="block text-responsive-detail text-sage-500">Diseñador, 29 años</span>
+                            <span class="block text-responsive-detail text-sage-600">Diseñador, 29 años</span>
                         </div>
                     </div>
 
@@ -506,7 +535,7 @@
                         </p>
                         <div>
                             <span class="block font-semibold text-sm text-sage-900">Catalina R.</span>
-                            <span class="block text-responsive-detail text-sage-500">Docente, 42 años</span>
+                            <span class="block text-responsive-detail text-sage-600">Docente, 42 años</span>
                         </div>
                     </div>
                 </div>
@@ -517,7 +546,7 @@
         <section id="preguntas" class="py-20 bg-sand-50/30">
             <div class="max-w-4xl mx-auto px-6">
                 <div class="text-center space-y-4 mb-16">
-                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-500">Preguntas Frecuentes</span>
+                    <span class="text-responsive-detail font-semibold uppercase tracking-widest text-sage-600">Preguntas Frecuentes</span>
                     <h2 class="font-serif text-3xl text-sage-900 font-medium">Respuestas a tus dudas</h2>
                     <div class="w-12 h-1 bg-sage-500 mx-auto rounded-full"></div>
                 </div>
@@ -627,7 +656,7 @@
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-sage-800 text-center text-responsive-detail text-sage-400 font-light">
+        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-sage-800 text-center text-responsive-detail text-sage-300 font-light">
             <p>&copy; 2026 Ps. Clara Altieri. Todos los derechos reservados. Diseñado por RogerDevCode.</p>
             <div class="mt-4 pt-4 border-t border-sage-800 text-responsive-disclaimer text-sage-400 font-light leading-relaxed max-w-4xl mx-auto text-center">
                 * La integración de pasarelas de pago (Webpay, MercadoPago, Flow) es opcional y requiere cuenta comercial en el SII. La facturación electrónica directa (emisión automática de boletas/facturas autorizadas por el SII) corresponde a un desarrollo dedicado o módulo de integración de otro nivel.
@@ -819,10 +848,7 @@
     </div>
 
     <!-- Botón Flotante para Volver al Showcase -->
-    <a href="../index.html#demos" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" class="showcase-back-btn no-print" 
-       style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #bd93f9; color: #1e1f29; padding: 12px 20px; border-radius: 50px; font-family: 'Inter', sans-serif; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(189, 147, 249, 0.4); border: 2px solid #1e1f29; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
-       onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(189, 147, 249, 0.6)';"
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(189, 147, 249, 0.4)';">
+    <a href="../index.html#demos" onclick="if(window.history.length > 1) { event.preventDefault(); history.back(); }" class="showcase-back-btn no-print">
         <span>⬅️ Volver al Showcase</span>
     </a>
 

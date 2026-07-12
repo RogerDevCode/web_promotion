@@ -114,6 +114,16 @@
         font-size: 14px;
       }
     }
+
+    .section-subtitle,
+    .service-link,
+    .hero-emphasis {
+      color: #A95A3A !important;
+    }
+
+    .hero-subtitle {
+      color: #3D584C !important;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col font-sans" x-data="fonoaudiologiaApp()">
@@ -174,7 +184,7 @@
           </div>
 
           <h1 class="font-serif text-[2.45rem] font-bold leading-[1.02] text-forest-900 sm:text-4xl md:text-5xl lg:text-6xl">
-            Acompañamos el desarrollo de su lenguaje, potenciando su <span class="italic text-coral-600">propia voz</span>.
+            Acompañamos el desarrollo de su lenguaje, potenciando su <span class="hero-emphasis italic">propia voz</span>.
           </h1>
 
           <p class="max-w-2xl text-base leading-relaxed text-forest-700 sm:text-lg">
@@ -193,7 +203,7 @@
           </div>
 
           <!-- Small reassuring tag -->
-          <p class="hero-subtitle text-xs text-forest-600/70 font-medium">
+          <p class="hero-subtitle text-xs font-medium">
             * Encuentros de juego diseñados para su comodidad y diversión en casa.
           </p>
         </div>
@@ -296,7 +306,7 @@
 
           <!-- Text Column -->
           <div class="lg:col-span-7 space-y-6 order-1 lg:order-2 text-left">
-            <span class="section-subtitle text-xs uppercase tracking-widest text-coral-600 font-bold block">Conoce a la Profesional</span>
+            <span class="section-subtitle text-xs uppercase tracking-widest font-bold block">Conoce a la Profesional</span>
             <h2 class="font-serif text-3xl sm:text-4xl font-bold text-forest-900 leading-tight">
               Nahovy Alejandra Gallegos Ugas
             </h2>
@@ -367,7 +377,7 @@
       <div class="max-w-7xl mx-auto px-6 text-center">
         
         <div class="max-w-2xl mx-auto space-y-4 mb-12">
-          <span class="section-subtitle text-xs uppercase tracking-widest text-coral-600 font-bold block">Especialidades</span>
+          <span class="section-subtitle text-xs uppercase tracking-widest font-bold block">Especialidades</span>
           <h2 class="font-serif text-3xl font-bold text-forest-900">¿Cómo podemos apoyar el camino de tu hijo?</h2>
           <p class="text-sm sm:text-base text-forest-600 leading-relaxed">
             Abordamos las dificultades comunicativas desde una mirada integral y afectiva, ajustándonos a la etapa del ciclo vital de tu hijo.
@@ -385,7 +395,7 @@
                 Para niños que tardan más en comenzar a hablar o usan menos palabras de lo habitual para su edad. Estimulamos la intención y comprensión en un ambiente seguro.
               </p>
             </div>
-            <button @click="bookingModal = true; selectedService = 'inicio_tardio'" class="text-sm text-coral-600 hover:text-coral-500 font-bold mt-4 flex items-center gap-1 group">
+            <button @click="bookingModal = true; selectedService = 'inicio_tardio'" class="service-link text-sm hover:text-[#8F4B30] font-bold mt-4 flex items-center gap-1 group">
               <span>Consultar área</span>
               <span class="transition-transform group-hover:translate-x-1">→</span>
             </button>
@@ -400,7 +410,7 @@
                 Apoyo especializado para pronunciar fonemas difíciles (como la 'R', 'D', 'L'). Trabajamos la motricidad orofacial a través de juegos interactivos y entretenidos.
               </p>
             </div>
-            <button @click="bookingModal = true; selectedService = 'sonidos'" class="text-sm text-coral-600 hover:text-coral-500 font-bold mt-4 flex items-center gap-1 group">
+            <button @click="bookingModal = true; selectedService = 'sonidos'" class="service-link text-sm hover:text-[#8F4B30] font-bold mt-4 flex items-center gap-1 group">
               <span>Consultar área</span>
               <span class="transition-transform group-hover:translate-x-1">→</span>
             </button>
@@ -415,7 +425,7 @@
                 Desarrollo del contacto visual, inicio de conversaciones y juego compartido. Ideal para niños que necesitan guías empáticas en la interacción con sus pares.
               </p>
             </div>
-            <button @click="bookingModal = true; selectedService = 'comunicacion'" class="text-sm text-coral-600 hover:text-coral-500 font-bold mt-4 flex items-center gap-1 group">
+            <button @click="bookingModal = true; selectedService = 'comunicacion'" class="service-link text-sm hover:text-[#8F4B30] font-bold mt-4 flex items-center gap-1 group">
               <span>Consultar área</span>
               <span class="transition-transform group-hover:translate-x-1">→</span>
             </button>
@@ -430,7 +440,7 @@
                 Espacio de orientación exclusivo para apoderados y familias. Te guiamos sobre cómo enriquecer la rutina diaria de tu hijo en casa con estrategias que facilitan su adquisición de palabras.
               </p>
             </div>
-            <button @click="bookingModal = true; selectedService = 'asesoria'" class="text-sm text-coral-600 hover:text-coral-500 font-bold mt-4 flex items-center gap-1 group">
+            <button @click="bookingModal = true; selectedService = 'asesoria'" class="service-link text-sm hover:text-[#8F4B30] font-bold mt-4 flex items-center gap-1 group">
               <span>Consultar área</span>
               <span class="transition-transform group-hover:translate-x-1">→</span>
             </button>
@@ -445,7 +455,7 @@
       <div class="max-w-7xl mx-auto px-6 text-center">
         
         <div class="max-w-2xl mx-auto space-y-4 mb-12">
-          <span class="section-subtitle text-xs uppercase tracking-widest text-coral-600 font-bold block">El Proceso</span>
+          <span class="section-subtitle text-xs uppercase tracking-widest font-bold block">El Proceso</span>
           <h2 class="font-serif text-3xl font-bold text-forest-900">Un camino claro, simple y tranquilo</h2>
           <p class="text-sm sm:text-base text-forest-600">
             Diseñamos el servicio pensando en la comodidad de la familia y en la estabilidad emocional del niño.

@@ -51,7 +51,21 @@
       text-transform: uppercase;
       letter-spacing: .08em;
       color: #fff;
-      mix-blend-mode: difference;
+      mix-blend-mode: normal;
+      background: rgba(16,20,24,.58);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .nav a:last-child {
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+    }
+    .nav a:last-child:hover {
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.22);
     }
     .hero {
       min-height: 94svh;

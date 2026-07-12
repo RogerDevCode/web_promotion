@@ -179,8 +179,7 @@
       --drac-yellow: 184, 134, 11;   /* Antique gold */
     }
 
-    /* In Light Theme: cards in normal/light sections become solid white for maximum contrast */
-    html.light-theme :not(.band-dark):not(.band-navy):not(#inicio) > [class*="bg-drac-bg/"],
+    /* In Light Theme: only specific light sections should promote cards to solid white */
     html.light-theme #propuestas-premium [class*="bg-drac-bg/"],
     html.light-theme #demos [class*="bg-drac-bg/"],
     html.light-theme #beneficios [class*="bg-drac-bg/"],
@@ -206,6 +205,28 @@
     html.light-theme .band-dark .text-drac-comment,
     html.light-theme .band-navy .text-drac-comment {
       color: #C4C8DB;
+    }
+    html.light-theme #proceso .process-step-card {
+      background-color: rgba(14, 24, 43, 0.78) !important;
+      border-color: rgba(255, 255, 255, 0.16) !important;
+    }
+    html.light-theme #proceso .process-step-card .text-drac-fg,
+    html.light-theme #proceso .process-step-card [class*="text-drac-fg/"] {
+      color: rgba(255, 255, 255, 0.94) !important;
+    }
+    html.light-theme #proceso .process-step-card .text-drac-comment {
+      color: rgba(225, 231, 243, 0.86) !important;
+    }
+    html.light-theme #proceso .process-step-card .text-drac-purple {
+      color: #C9B3FF !important;
+    }
+    html.light-theme #proceso .process-step-chip {
+      background-color: rgba(255, 255, 255, 0.09) !important;
+    }
+    html.light-theme #proceso .process-step-meta {
+      background-color: rgba(8, 14, 28, 0.42) !important;
+      border-color: rgba(255, 255, 255, 0.14) !important;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
     }
 
     /* Inside dark sections (.band-dark, .band-navy), force luminous text contrast in ALL themes */
@@ -236,6 +257,49 @@
     /* High contrast bright sky blue for chile-blueLight in Dark Mode on dark cards */
     :root:not(.light-theme) .text-chile-blueLight {
       color: #68A2FF !important;
+    }
+
+    /* In light theme, the transparent header still sits over the dark hero photo */
+    html.light-theme #navbar:not(.glass) .text-drac-fg {
+      color: #FFFFFF;
+    }
+    html.light-theme #navbar:not(.glass) .text-drac-comment {
+      color: rgba(236, 241, 250, 0.88);
+    }
+    html.light-theme #navbar:not(.glass) .link-underline:hover {
+      color: #FFFFFF;
+    }
+    html.light-theme #navbar:not(.glass) button[aria-label="Cambiar tema"],
+    html.light-theme #navbar:not(.glass) button[aria-label="Menú"] {
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.34);
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+    html.light-theme #navbar:not(.glass) > div:first-child {
+      background-color: rgba(11, 21, 38, 0.52);
+      border-bottom-color: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    html.light-theme #navbar:not(.glass) > div:first-child .text-drac-comment {
+      color: #EAF0FB;
+    }
+    html.light-theme #navbar:not(.glass) > div:first-child .text-drac-cyan {
+      color: #B9E6FF;
+    }
+    .mini-wa {
+      background-color: rgba(var(--drac-green), 0.15);
+      border-color: rgba(var(--drac-green), 0.25);
+    }
+    html.light-theme .mini-wa {
+      background-color: #DDF3E4;
+      border-color: #A8C8B0;
+    }
+    html.light-theme .mini-wa .mini-wa-text {
+      color: #1F5E2E;
+    }
+    html.light-theme .mini-wa .mini-wa-dot {
+      background-color: #2F7A42;
     }
 
     /* Smooth transition for theme switch, excluding transforms to preserve fast interactions */
@@ -275,9 +339,37 @@
         font-size: 15px;
         line-height: 1.5;
       }
-      html body .text-drac-comment {
+      :root:not(.light-theme) body .text-drac-comment {
         color: #c5c6d0; /* Kept only for color contrast override */
       }
+      .mobile-soft-hide {
+        display: none;
+      }
+    }
+
+    .demo-card-copy {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .premium-note {
+      letter-spacing: 0.14em;
+    }
+
+    .premium-quiet-cta {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.24);
+    }
+
+    .premium-quiet-cta:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.34);
+    }
+
+    .section-kicker {
+      letter-spacing: 0.16em;
     }
 
     body {
@@ -539,7 +631,7 @@
 
 <body class="min-h-screen" x-data="landingApp()">
   <!-- Elegant vertical grid lines framing the editorial content -->
-  <div class="fixed inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-7xl pointer-events-none border-x border-drac-current/40 hidden md:block z-0"></div>
+  <div class="fixed inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-7xl pointer-events-none border-x border-drac-current/20 hidden xl:block z-0"></div>
   <!-- Skip to content -->
   <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-chile-blue focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">Saltar al contenido</a>
 
@@ -551,7 +643,7 @@
     x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 20 })"
     :class="scrolled ? 'glass shadow-card' : 'bg-transparent'">
     <!-- Top info bar -->
-    <div x-show="!scrolled" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2" class="bg-drac-darker/20 border-b border-drac-current/10 py-1.5 text-center text-xs text-drac-comment font-semibold" x-cloak>
+    <div x-show="!scrolled" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2" class="hidden bg-drac-darker/20 border-b border-drac-current/10 py-1.5 text-center text-xs text-drac-comment font-semibold md:block" x-cloak>
       <div class="mx-auto flex max-w-7xl items-center justify-center gap-1.5 px-4">
         <svg class="h-3.5 w-3.5 text-drac-cyan flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -585,7 +677,7 @@
         <a href="#faq" class="link-underline rounded-xl px-4 py-2 text-sm font-semibold text-drac-comment transition-colors hover:text-drac-fg">Preguntas</a>
         
         <!-- Theme Toggle (Desktop) -->
-        <button @click="toggleTheme()" class="ml-2 relative inline-flex h-10 w-10 items-center justify-center rounded-xl border border-drac-current/50 text-drac-fg transition-all duration-300 hover:bg-drac-current/30 hover:border-drac-comment focus:outline-none" aria-label="Cambiar tema">
+        <button @click="toggleTheme()" :aria-pressed="darkMode.toString()" :class="darkMode ? 'bg-drac-current/20 border-drac-comment/70 shadow-[0_0_0_1px_rgba(248,248,242,0.05)]' : 'bg-drac-current/10 border-drac-current/50'" class="ml-2 relative inline-flex h-10 w-10 items-center justify-center rounded-xl border text-drac-fg transition-all duration-300 hover:bg-drac-current/30 hover:border-drac-comment focus:outline-none" aria-label="Cambiar tema">
           <!-- Sun icon (visible in dark mode) -->
           <svg x-show="darkMode" x-cloak class="h-5 w-5 text-drac-yellow transition-transform duration-500 hover:rotate-90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="4"></circle>
@@ -606,7 +698,7 @@
       <!-- Right side for Mobile (Theme Toggle + Menu Button) -->
       <div class="flex items-center gap-2 lg:hidden">
         <!-- Theme Toggle (Mobile) -->
-        <button @click="toggleTheme()" class="relative inline-flex h-11 w-11 items-center justify-center rounded-xl border border-drac-current/50 text-drac-fg transition-all duration-300 hover:bg-drac-current/30 hover:border-drac-comment focus:outline-none" aria-label="Cambiar tema">
+        <button @click="toggleTheme()" :aria-pressed="darkMode.toString()" :class="darkMode ? 'bg-drac-current/20 border-drac-comment/70 shadow-[0_0_0_1px_rgba(248,248,242,0.05)]' : 'bg-drac-current/10 border-drac-current/50'" class="relative inline-flex h-11 w-11 items-center justify-center rounded-xl border text-drac-fg transition-all duration-300 hover:bg-drac-current/30 hover:border-drac-comment focus:outline-none" aria-label="Cambiar tema">
           <!-- Sun icon (visible in dark mode) -->
           <svg x-show="darkMode" x-cloak class="h-5 w-5 text-drac-yellow transition-transform duration-500" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="4"></circle>
@@ -656,7 +748,7 @@
         <div class="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12">
           <div class="reveal">
             <!-- Badge -->
-            <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-sm px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-white/90 sm:px-4 sm:text-xs sm:tracking-[0.2em]">
+            <div class="premium-note mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/8 backdrop-blur-sm px-3 py-1.5 text-[10px] font-bold uppercase text-white/85 sm:px-4 sm:text-xs">
               <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse-soft"></span>
               Ayudando a las PYMEs chilenas a destacar en internet
             </div>
@@ -669,7 +761,7 @@
               </h1>
             </div>
 
-            <p class="mt-5 max-w-xl text-[15px] leading-relaxed text-white/75 sm:text-lg">
+            <p class="mt-5 max-w-xl text-[15px] leading-relaxed text-[rgba(255,255,255,0.88)] sm:text-lg">
               Solo el 23% de las PYMEs en Chile tiene una web propia. Ayudamos a tu negocio local a destacar en Google, ordenar tu atención y recibir clientes directamente en tu WhatsApp, sin mensualidades ni amarras.
             </p>
 
@@ -679,22 +771,22 @@
                 <svg class="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.197 0-.517.074-.788.374-.27.3-.1.574-.1.574s-.123.238-.123.57c0 .87.616 1.713.712 1.838.096.126 1.293 2.127 3.25 2.87.568.216 1.01.345 1.353.453.57.18 1.088.156 1.498.094.46-.07 1.77-.723 2.022-1.422.253-.7.253-1.3.177-1.423-.075-.12-.275-.196-.575-.346z"/></svg>
                 Quiero comenzar mi propuesta
               </a>
-              <a href="#precios" class="inline-flex min-h-[56px] items-center justify-center rounded-full border border-drac-current bg-drac-current/30 px-7 py-4 text-sm font-bold text-drac-fg transition-all duration-300 hover:-translate-y-1 hover:border-chile-blue/40 hover:bg-drac-current/50">
+              <a href="#precios" class="premium-quiet-cta inline-flex min-h-[56px] items-center justify-center rounded-full border px-7 py-4 text-sm font-bold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
                 Ver planes y precios →
               </a>
             </div>
 
             <!-- Trust signals -->
-            <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
-              <div class="flex items-center gap-2 text-sm text-white/70">
+            <div class="mt-7 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
+              <div class="flex items-center gap-2 text-sm text-[rgba(255,255,255,0.82)]">
                 <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 Soporte local (Santiago de Chile)
               </div>
-              <div class="flex items-center gap-2 text-sm text-white/70">
+              <div class="flex items-center gap-2 text-sm text-[rgba(255,255,255,0.82)]">
                 <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 Precios transparentes en CLP (neto + IVA)
               </div>
-              <div class="flex items-center gap-2 text-sm text-white/70">
+              <div class="mobile-soft-hide flex items-center gap-2 text-sm text-[rgba(255,255,255,0.82)]">
                 <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 Tu web es 100% tuya, sin suscripciones
               </div>
@@ -722,37 +814,37 @@
                       tunegocio.cl
                     </div>
                   </div>
-                  <span class="rounded-full bg-chile-blue/15 px-3 py-1 text-responsive-caption font-bold text-chile-blueLight uppercase tracking-wider">Vista previa</span>
+                  <span class="rounded-full border border-chile-blueLight/30 bg-chile-blue px-3 py-1 text-responsive-caption font-bold uppercase tracking-wider text-white">Vista previa</span>
                 </div>
 
                 <!-- Mock website content -->
                 <div class="p-5 space-y-4">
                   <!-- Mini hero -->
                   <div class="rounded-2xl bg-gradient-to-br from-chile-blue via-chile-blueLight to-chile-blueDark p-6 text-white">
-                    <p class="text-responsive-caption font-bold uppercase tracking-[0.2em] text-white/60">Tu marca aquí</p>
+                    <p class="text-responsive-caption font-bold uppercase tracking-[0.2em] text-white/90">Tu marca aquí</p>
                     <h2 class="mt-2 font-display text-xl font-bold leading-tight">Servicio claro, atención simple</h2>
-                    <p class="mt-2 text-xs text-white/70 leading-relaxed">Todo lo importante listo para que te escriban.</p>
+                    <p class="mt-2 text-xs text-white/85 leading-relaxed">Todo lo importante listo para que te escriban.</p>
                     <div class="mt-4 flex gap-2">
                       <span class="rounded-full bg-white/20 px-3 py-1.5 text-responsive-caption font-bold">Cotizar Ahora</span>
                       <span class="rounded-full border border-white/30 px-3 py-1.5 text-responsive-caption font-bold">Ver Servicios</span>
                     </div>
                   </div>
 
-                  <div class="rounded-xl border border-drac-current/30 bg-drac-current/20 p-4">
+                  <div class="mobile-soft-hide rounded-xl border border-drac-current/30 bg-drac-current/20 p-4">
                     <p class="text-responsive-caption font-bold text-drac-fg">Tu cliente entiende rápido</p>
                     <p class="mt-2 text-responsive-detail text-drac-comment leading-relaxed">Qué haces, cómo atiendes y cómo avanzar contigo, sin vueltas ni ruido.</p>
                   </div>
 
                   <!-- WhatsApp bar -->
-                  <div class="rounded-xl bg-[#25D366]/15 border border-[#25D366]/20 p-3 flex items-center justify-between">
-                    <span class="text-responsive-caption font-bold text-[#25D366]">💬 Contactar por WhatsApp</span>
-                    <span class="h-2 w-2 rounded-full bg-[#25D366] animate-pulse-soft"></span>
+                  <div class="mini-wa rounded-xl border p-3 flex items-center justify-between">
+                    <span class="mini-wa-text text-responsive-caption font-bold text-drac-green">💬 Contactar por WhatsApp</span>
+                    <span class="mini-wa-dot h-2 w-2 rounded-full bg-drac-green animate-pulse-soft"></span>
                   </div>
                 </div>
               </div>
 
               <!-- Floating badge -->
-              <div class="absolute -right-3 -bottom-3 hidden glass rounded-2xl px-4 py-3 shadow-card animate-float sm:block" style="animation-delay: 1s">
+              <div class="absolute -right-3 -bottom-3 hidden glass rounded-2xl px-4 py-3 shadow-card lg:block" style="animation-delay: 1s">
                 <div class="flex items-center gap-2">
                   <span class="flex h-8 w-8 items-center justify-center rounded-full bg-drac-green/20 text-drac-green">
                     <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -780,7 +872,7 @@
 
       <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="reveal mx-auto mb-10 max-w-3xl text-center md:mb-12">
-          <span class="inline-flex items-center rounded-full border border-drac-current/20 bg-drac-current/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-drac-comment mb-5">
+          <span class="section-kicker inline-flex items-center rounded-full border border-drac-current/20 bg-drac-current/20 px-4 py-1.5 text-xs font-bold uppercase text-drac-comment mb-5">
             Nuevas direcciones para tu futura landing
           </span>
           <h2 class="font-display text-2xl font-black sm:text-3xl lg:text-4xl">
@@ -893,7 +985,7 @@
             </div>
             <div class="flex flex-col flex-grow p-6">
               <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-green transition-colors">Fonoaudiología Infantil</h3>
-              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">Sitio web cálido y profesional para fonoaudiología infantil a domicilio en Santiago. Integra un diseño acogedor centrado en el juego, acompañamiento familiar y agenda de visitas.</p>
+              <p class="demo-card-copy mt-2 text-sm text-drac-comment leading-relaxed text-left">Sitio web cálido y profesional para fonoaudiología infantil a domicilio en Santiago. Integra un diseño acogedor centrado en el juego, acompañamiento familiar y agenda de visitas.</p>
               <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-cyan mt-auto">
                 <span>Ver demo en vivo</span>
                 <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -910,7 +1002,7 @@
             </div>
             <div class="flex flex-col flex-grow p-6">
               <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-green transition-colors">Psicóloga Clínica</h3>
-              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">Página limpia y minimalista enfocada en transmitir tranquilidad. Incluye selector de modalidad presencial/online y formulario de reserva con reset inmediato.</p>
+              <p class="demo-card-copy mt-2 text-sm text-drac-comment leading-relaxed text-left">Página limpia y minimalista enfocada en transmitir tranquilidad. Incluye selector de modalidad presencial/online y formulario de reserva con reset inmediato.</p>
               <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-purple mt-auto">
                 <span>Ver demo en vivo</span>
                 <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -927,7 +1019,7 @@
             </div>
             <div class="flex flex-col flex-grow p-6">
               <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-green transition-colors">Café de Especialidad</h3>
-              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">Diseño rústico y cálido con colores de Valparaíso. Incluye Bento Grid para historia/horarios, carta digital interactiva con simulador de precios y mapa.</p>
+              <p class="demo-card-copy mt-2 text-sm text-drac-comment leading-relaxed text-left">Diseño rústico y cálido con colores de Valparaíso. Incluye Bento Grid para historia/horarios, carta digital interactiva con simulador de precios y mapa.</p>
               <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-orange mt-auto">
                 <span>Ver demo en vivo</span>
                 <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -944,7 +1036,7 @@
             </div>
             <div class="flex flex-col flex-grow p-6">
               <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-green transition-colors">Salón de Belleza</h3>
-              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">Estilo de lujo editorial en negro y dorado. Destaca su panel dividido (split-screen) y su deslizador interactivo de cambio capilar antes/después.</p>
+              <p class="demo-card-copy mt-2 text-sm text-drac-comment leading-relaxed text-left">Estilo de lujo editorial en negro y dorado. Destaca su panel dividido (split-screen) y su deslizador interactivo de cambio capilar antes/después.</p>
               <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-yellow mt-auto">
                 <span>Ver demo en vivo</span>
                 <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -961,7 +1053,7 @@
             </div>
             <div class="flex flex-col flex-grow p-6">
               <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-green transition-colors">Catálogo de Productos</h3>
-              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">E-commerce asimétrico y natural para productos locales. Cuenta con filtrado de catálogo, carro de compras interactivo y checkout directo a WhatsApp.</p>
+              <p class="demo-card-copy mt-2 text-sm text-drac-comment leading-relaxed text-left">E-commerce asimétrico y natural para productos locales. Cuenta con filtrado de catálogo, carro de compras interactivo y checkout directo a WhatsApp.</p>
               <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-pink mt-auto">
                 <span>Ver demo en vivo</span>
                 <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -978,7 +1070,7 @@
             </div>
             <div class="flex flex-col flex-grow p-6">
               <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-green transition-colors">ContaDigital Asesoría</h3>
-              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">Portal corporativo limpio y tecnológico en azul marino. Ofrece una calculadora interactiva de planes y tarifas dinámicas y workflow explicativo.</p>
+              <p class="demo-card-copy mt-2 text-sm text-drac-comment leading-relaxed text-left">Portal corporativo limpio y tecnológico en azul marino. Ofrece una calculadora interactiva de planes y tarifas dinámicas y workflow explicativo.</p>
               <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-cyan mt-auto">
                 <span>Ver demo en vivo</span>
                 <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -995,7 +1087,7 @@
             </div>
             <div class="flex flex-col flex-grow p-6">
               <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-green transition-colors">Cobre & Co. Propiedades</h3>
-              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">Sitio web inmobiliario interactivo con estética minimalista cálida. Cuenta con buscador en tiempo real, cálculo UF/CLP y agendamiento de visitas con envío directo a WhatsApp.</p>
+              <p class="demo-card-copy mt-2 text-sm text-drac-comment leading-relaxed text-left">Sitio web inmobiliario interactivo con estética minimalista cálida. Cuenta con buscador en tiempo real, cálculo UF/CLP y agendamiento de visitas con envío directo a WhatsApp.</p>
               <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-cyan mt-auto">
                 <span>Ver demo en vivo</span>
                 <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -1012,8 +1104,8 @@
             </div>
             <div class="flex flex-col flex-grow p-6">
               <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-purple transition-colors">Tienda Online con Auto-Administración</h3>
-              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">Una tienda que cobra, ordena pedidos y también resuelve preguntas frecuentes. Integra pagos digitales, panel simple y atención automática conectada a WhatsApp.</p>
-              <div class="mt-4 flex flex-wrap gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-drac-purple">
+              <p class="demo-card-copy mt-2 text-sm text-drac-comment leading-relaxed text-left">Una tienda que cobra, ordena pedidos y también resuelve preguntas frecuentes. Integra pagos digitales, panel simple y atención automática conectada a WhatsApp.</p>
+              <div class="mt-4 hidden flex-wrap gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-drac-purple md:flex">
                 <span class="rounded-full border border-drac-purple/30 bg-drac-purple/10 px-3 py-1">Pagos digitales</span>
                 <span class="rounded-full border border-drac-purple/30 bg-drac-purple/10 px-3 py-1">Chatbot comercial</span>
               </div>
@@ -1039,7 +1131,7 @@
             </div>
             <div class="flex flex-col flex-grow p-6">
               <h3 class="text-xl font-bold text-drac-fg group-hover:text-drac-cyan transition-colors">CRM Express & Agenda de Clientes</h3>
-              <p class="mt-2 text-sm text-drac-comment leading-relaxed text-left">Controla todas las citas y visitas de tus clientes en tiempo real. Este panel de administración simula cómo el dueño del negocio recibe, confirma o cancela las solicitudes agendadas en las páginas públicas y contacta al cliente vía WhatsApp.</p>
+              <p class="demo-card-copy mt-2 text-sm text-drac-comment leading-relaxed text-left">Controla todas las citas y visitas de tus clientes en tiempo real. Este panel de administración simula cómo el dueño del negocio recibe, confirma o cancela las solicitudes agendadas en las páginas públicas y contacta al cliente vía WhatsApp.</p>
               <div class="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-drac-cyan mt-auto">
                 <span>Ver panel en vivo</span>
                 <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -1050,7 +1142,7 @@
 
         <!-- Toggle button centered below grid -->
         <div class="reveal mt-12 flex justify-center" style="transition-delay: .1s">
-          <button @click="showAllDemos = !showAllDemos" class="inline-flex items-center justify-center rounded-full border border-drac-current/40 bg-drac-bg/80 px-8 py-3.5 text-sm font-bold text-drac-fg transition-all duration-300 hover:border-drac-green hover:bg-drac-green/10 hover:text-drac-green shadow-card hover:shadow-glow">
+          <button @click="showAllDemos = !showAllDemos" class="inline-flex items-center justify-center rounded-full border border-drac-current/40 bg-drac-bg/95 px-8 py-3.5 text-sm font-bold text-drac-fg transition-all duration-300 hover:border-drac-green hover:bg-drac-green/10 hover:text-drac-green shadow-lg hover:shadow-glow">
             <span x-text="showAllDemos ? 'Mostrar menos demostraciones' : 'Ver las 9 demostraciones en vivo'"></span>
             <svg class="ml-2.5 h-4 w-4 transition-transform duration-300" :class="showAllDemos ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
@@ -1065,7 +1157,7 @@
               
               <!-- Left Column: Copywriting and benefits -->
               <div class="text-left lg:col-span-7">
-                <span class="inline-flex items-center rounded-full bg-drac-green/10 border border-drac-green/25 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-drac-green">
+                <span class="inline-flex items-center rounded-full bg-drac-green/10 border border-drac-green/20 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-drac-green">
                   Tu rubro en internet 🚀
                 </span>
                 <h3 class="mt-4 font-display text-3xl font-black leading-tight text-drac-fg sm:text-4xl lg:text-5xl">
@@ -1076,7 +1168,7 @@
                   ¿No encuentras tu sector entre los ejemplos? No te preocupes. Diseñamos páginas 100% a medida adaptando el diseño, los textos y los flujos de atención (como reservas, catálogos o cotizadores) a lo que tu negocio chileno necesita para generar confianza y vender más.
                 </p>
                 
-                <div class="mt-8 grid gap-4 sm:grid-cols-3">
+                <div class="mt-7 grid gap-3 sm:grid-cols-3">
                   <div class="flex items-center gap-3">
                     <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-drac-cyan/10 text-drac-cyan flex-shrink-0">
                       <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
@@ -1089,7 +1181,7 @@
                     </div>
                     <span class="text-sm font-bold text-drac-fg">WhatsApp integrado</span>
                   </div>
-                  <div class="flex items-center gap-3">
+                  <div class="hidden items-center gap-3 sm:flex">
                     <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-drac-green/10 text-drac-green flex-shrink-0">
                       <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
                     </div>
@@ -1138,7 +1230,7 @@
     <section id="beneficios" class="relative band-white overflow-hidden dot-pattern">
       <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div class="reveal mx-auto mb-14 max-w-3xl text-center">
-          <span class="inline-flex items-center rounded-full bg-chile-red/10 border border-chile-red/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-chile-red mb-6">
+          <span class="section-kicker inline-flex items-center rounded-full bg-chile-red/10 border border-chile-red/20 px-4 py-1.5 text-xs font-bold uppercase text-chile-red mb-6">
             Por qué tener tu web propia
           </span>
           <h2 class="font-display text-3xl font-black sm:text-4xl lg:text-5xl">
@@ -1152,7 +1244,7 @@
 
         <div class="grid gap-5 lg:grid-cols-3">
           <div class="reveal group rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-7 transition-all duration-300 hover:border-chile-red/30 hover:shadow-card-hover hover:-translate-y-1">
-            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-chile-red/10 text-chile-red transition-transform duration-300 group-hover:scale-110">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-chile-red/10 text-chile-red transition-transform duration-300 group-hover:scale-110">
               <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
             </div>
             <h3 class="mt-5 text-lg font-bold text-drac-fg">Credibilidad inmediata</h3>
@@ -1160,7 +1252,7 @@
           </div>
 
           <div class="reveal group rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-7 transition-all duration-300 hover:border-chile-red/30 hover:shadow-card-hover hover:-translate-y-1" style="transition-delay: 0.06s">
-            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-drac-orange/10 text-drac-orange transition-transform duration-300 group-hover:scale-110">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-drac-orange/10 text-drac-orange transition-transform duration-300 group-hover:scale-110">
               <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.92 1.786c-.082.095-.08.24.008.331.088.09.237.095.33.008a6.862 6.862 0 001.803-1.648c.31-.383.821-.507 1.258-.337A8.995 8.995 0 0012 20.25z"/></svg>
             </div>
             <h3 class="mt-5 text-lg font-bold text-drac-fg">Cero fricción con WhatsApp</h3>
@@ -1168,7 +1260,7 @@
           </div>
 
           <div class="reveal group rounded-2xl border border-drac-current/40 bg-drac-bg/60 p-7 transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover hover:-translate-y-1" style="transition-delay: 0.12s">
-            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-chile-blue/10 text-chile-blueLight transition-transform duration-300 group-hover:scale-110">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-chile-blue/10 text-chile-blueLight transition-transform duration-300 group-hover:scale-110">
               <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/></svg>
             </div>
             <h3 class="mt-5 text-lg font-bold text-drac-fg">Carga móvil ultra rápida</h3>
@@ -1180,9 +1272,9 @@
           <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div class="max-w-2xl">
               <h3 class="text-lg font-bold text-white">Se ve profesional. Inspira confianza.</h3>
-              <p class="mt-2 text-sm leading-relaxed text-white/75">Menos ruido, más claridad y una presencia digital robusta sin mensualidades ocultas que te aten.</p>
+              <p class="mt-2 text-sm leading-relaxed text-white/82">Menos ruido, más claridad y una presencia digital que acompaña mejor cada consulta.</p>
             </div>
-            <a href="#precios" class="inline-flex items-center justify-center rounded-full bg-white/15 border border-white/20 px-5 py-3 text-sm font-bold text-white transition-all duration-300 hover:bg-white/25">
+            <a href="#precios" class="premium-quiet-cta inline-flex items-center justify-center rounded-full border px-5 py-3 text-sm font-bold text-white transition-all duration-300">
               Ver planes y precios →
             </a>
           </div>
@@ -1399,7 +1491,7 @@
           <div class="space-y-8 lg:space-y-12">
             <!-- Step 1 -->
             <div class="reveal lg:ml-20 group">
-              <div class="relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/60 p-8 transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover">
+              <div class="process-step-card relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/68 p-8 shadow-[0_16px_44px_rgba(0,0,0,0.18)] transition-all duration-300 hover:border-chile-blue/30 hover:shadow-card-hover">
                 <!-- Step number (desktop) -->
                 <div class="absolute -left-[4.75rem] top-8 hidden lg:flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-chile-blue to-chile-blueLight text-white text-sm font-black shadow-glow ring-4 ring-drac-darker">1</div>
                 <!-- Step number (mobile) -->
@@ -1408,14 +1500,14 @@
                   <div class="flex-1">
                     <div class="flex items-center gap-3 mb-3">
                       <h3 class="text-xl font-bold text-drac-fg">Conversamos sobre tu negocio</h3>
-                      <span class="rounded-full bg-chile-blue/10 px-3 py-1 text-responsive-caption font-bold text-chile-blueLight uppercase tracking-wider">15 min</span>
+                      <span class="process-step-chip rounded-full border border-chile-blueLight/25 bg-chile-blue/18 px-3 py-1 text-responsive-caption font-bold text-chile-blueLight uppercase tracking-wider">15 min</span>
                     </div>
-                    <p class="text-sm leading-relaxed text-drac-comment">Me cuentas qué haces, a quién le vendes y qué quieres lograr con tu página. Es una conversación relajada por WhatsApp o videollamada, con calma y claridad.</p>
+                    <p class="text-sm leading-relaxed text-drac-fg/88">Me cuentas qué haces, a quién le vendes y qué quieres lograr con tu página. Es una conversación relajada por WhatsApp o videollamada, con calma y claridad.</p>
                   </div>
                   <div class="mt-4 lg:mt-0 lg:flex-shrink-0">
-                    <div class="rounded-xl bg-drac-current/30 border border-drac-current/30 px-4 py-3 text-xs">
+                    <div class="process-step-meta rounded-xl border border-white/14 bg-drac-darker/58 px-4 py-3 text-xs shadow-[0_10px_24px_rgba(0,0,0,0.12)]">
                       <p class="font-bold text-drac-fg mb-1">Lo que recibes:</p>
-                      <p class="text-drac-comment">✓ Enfoque claro para tu página</p>
+                      <p class="font-medium text-drac-fg/86">✓ Enfoque claro para tu página</p>
                     </div>
                   </div>
                 </div>
@@ -1424,21 +1516,21 @@
 
             <!-- Step 2 -->
             <div class="reveal lg:ml-20 group" style="transition-delay: .08s">
-              <div class="relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/60 p-8 transition-all duration-300 hover:border-chile-red/30 hover:shadow-card-hover">
+              <div class="process-step-card relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/68 p-8 shadow-[0_16px_44px_rgba(0,0,0,0.18)] transition-all duration-300 hover:border-chile-red/30 hover:shadow-card-hover">
                 <div class="absolute -left-[4.75rem] top-8 hidden lg:flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-chile-red to-chile-redDark text-white text-sm font-black shadow-glow-red ring-4 ring-drac-darker">2</div>
                 <span class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-chile-red to-chile-redDark text-white text-sm font-black mb-4">2</span>
                 <div class="flex flex-col lg:flex-row lg:items-start lg:gap-8">
                   <div class="flex-1">
                     <div class="flex items-center gap-3 mb-3">
                       <h3 class="text-xl font-bold text-drac-fg">Armo el contenido y estructura</h3>
-                      <span class="rounded-full bg-chile-red/10 px-3 py-1 text-responsive-caption font-bold text-chile-red uppercase tracking-wider">2–3 días</span>
+                      <span class="process-step-chip rounded-full border border-chile-red/25 bg-chile-red/15 px-3 py-1 text-responsive-caption font-bold text-chile-red uppercase tracking-wider">2–3 días</span>
                     </div>
-                    <p class="text-sm leading-relaxed text-drac-comment">Organizo las secciones de tu página, escribo los textos que mejor comunican lo que haces y defino la estructura que va a convencer a tus clientes.</p>
+                    <p class="text-sm leading-relaxed text-drac-fg/88">Organizo las secciones de tu página, escribo los textos que mejor comunican lo que haces y defino la estructura que va a convencer a tus clientes.</p>
                   </div>
                   <div class="mt-4 lg:mt-0 lg:flex-shrink-0">
-                    <div class="rounded-xl bg-drac-current/30 border border-drac-current/30 px-4 py-3 text-xs">
+                    <div class="process-step-meta rounded-xl border border-white/14 bg-drac-darker/58 px-4 py-3 text-xs shadow-[0_10px_24px_rgba(0,0,0,0.12)]">
                       <p class="font-bold text-drac-fg mb-1">Lo que recibes:</p>
-                      <p class="text-drac-comment">✓ Esquema y textos listos</p>
+                      <p class="font-medium text-drac-fg/86">✓ Esquema y textos listos</p>
                     </div>
                   </div>
                 </div>
@@ -1447,21 +1539,21 @@
 
             <!-- Step 3 -->
             <div class="reveal lg:ml-20 group" style="transition-delay: .16s">
-              <div class="relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/60 p-8 transition-all duration-300 hover:border-drac-purple/30 hover:shadow-card-hover">
+              <div class="process-step-card relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/68 p-8 shadow-[0_16px_44px_rgba(0,0,0,0.18)] transition-all duration-300 hover:border-drac-purple/30 hover:shadow-card-hover">
                 <div class="absolute -left-[4.75rem] top-8 hidden lg:flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-drac-purple to-[#9B72D8] text-white text-sm font-black ring-4 ring-drac-darker" style="box-shadow: 0 0 30px rgba(189,147,249,0.2)">3</div>
                 <span class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-drac-purple to-[#9B72D8] text-white text-sm font-black mb-4">3</span>
                 <div class="flex flex-col lg:flex-row lg:items-start lg:gap-8">
                   <div class="flex-1">
                     <div class="flex items-center gap-3 mb-3">
                       <h3 class="text-xl font-bold text-drac-fg">Diseño y ajustes contigo</h3>
-                      <span class="rounded-full bg-drac-purple/10 px-3 py-1 text-responsive-caption font-bold text-drac-purple uppercase tracking-wider">3–5 días</span>
+                      <span class="process-step-chip rounded-full border border-drac-purple/25 bg-drac-purple/15 px-3 py-1 text-responsive-caption font-bold text-drac-purple uppercase tracking-wider">3–5 días</span>
                     </div>
-                    <p class="text-sm leading-relaxed text-drac-comment">Construyo tu página con diseño profesional. Te muestro un borrador para que lo revises y hacemos los ajustes que necesites hasta que quede como tú quieres.</p>
+                    <p class="text-sm leading-relaxed text-drac-fg/88">Construyo tu página con diseño profesional. Te muestro un borrador para que lo revises y hacemos los ajustes que necesites hasta que quede como tú quieres.</p>
                   </div>
                   <div class="mt-4 lg:mt-0 lg:flex-shrink-0">
-                    <div class="rounded-xl bg-drac-current/30 border border-drac-current/30 px-4 py-3 text-xs">
+                    <div class="process-step-meta rounded-xl border border-white/14 bg-drac-darker/58 px-4 py-3 text-xs shadow-[0_10px_24px_rgba(0,0,0,0.12)]">
                       <p class="font-bold text-drac-fg mb-1">Lo que recibes:</p>
-                      <p class="text-drac-comment">✓ Borrador interactivo + ajustes</p>
+                      <p class="font-medium text-drac-fg/86">✓ Borrador interactivo + ajustes</p>
                     </div>
                   </div>
                 </div>
@@ -1470,21 +1562,21 @@
 
             <!-- Step 4 -->
             <div class="reveal lg:ml-20 group" style="transition-delay: .24s">
-              <div class="relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/60 p-8 transition-all duration-300 hover:border-drac-green/30 hover:shadow-card-hover">
+              <div class="process-step-card relative rounded-[1.75rem] border border-drac-current/40 bg-drac-bg/68 p-8 shadow-[0_16px_44px_rgba(0,0,0,0.18)] transition-all duration-300 hover:border-drac-green/30 hover:shadow-card-hover">
                 <div class="absolute -left-[4.75rem] top-8 hidden lg:flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-drac-green to-[#3DD668] text-drac-darker text-sm font-black ring-4 ring-drac-darker" style="box-shadow: 0 0 30px rgba(80,250,123,0.2)">4</div>
                 <span class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-drac-green to-[#3DD668] text-drac-darker text-sm font-black mb-4">4</span>
                 <div class="flex flex-col lg:flex-row lg:items-start lg:gap-8">
                   <div class="flex-1">
                     <div class="flex items-center gap-3 mb-3">
                       <h3 class="text-xl font-bold text-drac-fg">¡Tu página queda online!</h3>
-                      <span class="rounded-full bg-drac-green/10 px-3 py-1 text-responsive-caption font-bold text-drac-green uppercase tracking-wider">1 día</span>
+                      <span class="process-step-chip rounded-full border border-drac-green/25 bg-drac-green/15 px-3 py-1 text-responsive-caption font-bold text-drac-green uppercase tracking-wider">1 día</span>
                     </div>
-                    <p class="text-sm leading-relaxed text-drac-comment">Publico tu página en internet, configuro todo lo técnico y te la entrego funcionando. Listo, ya puedes compartir tu link con todos tus clientes.</p>
+                    <p class="text-sm leading-relaxed text-drac-fg/88">Publico tu página en internet, configuro todo lo técnico y te la entrego funcionando. Listo, ya puedes compartir tu link con todos tus clientes.</p>
                   </div>
                   <div class="mt-4 lg:mt-0 lg:flex-shrink-0">
-                    <div class="rounded-xl bg-drac-green/10 border border-drac-green/20 px-4 py-3 text-xs">
+                    <div class="process-step-meta rounded-xl border border-white/14 bg-drac-darker/58 px-4 py-3 text-xs shadow-[0_10px_24px_rgba(0,0,0,0.12)]">
                       <p class="font-bold text-drac-green mb-1">Lo que recibes:</p>
-                      <p class="text-drac-comment">✓ Tu página 100% online</p>
+                      <p class="font-medium text-drac-fg/86">✓ Tu página 100% online</p>
                     </div>
                   </div>
                 </div>
@@ -1546,7 +1638,7 @@
 
       <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div class="reveal text-center max-w-3xl mx-auto mb-16">
-          <span class="inline-flex items-center rounded-full bg-drac-orange/10 border border-drac-orange/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-drac-orange mb-6">
+          <span class="section-kicker inline-flex items-center rounded-full bg-drac-orange/10 border border-drac-orange/20 px-4 py-1.5 text-xs font-bold uppercase text-drac-orange mb-6">
             Inversión transparente
           </span>
           <h2 class="font-display text-3xl font-black sm:text-4xl lg:text-5xl">
@@ -1558,7 +1650,7 @@
           </p>
         </div>
 
-        <div class="reveal mx-auto mb-10 max-w-5xl rounded-[1.75rem] border border-drac-current/30 bg-drac-bg/50 p-5 sm:p-6">
+        <div class="reveal mx-auto mb-10 hidden max-w-5xl rounded-[1.75rem] border border-drac-current/30 bg-drac-bg/50 p-5 sm:p-6 md:block">
           <div class="grid gap-4 md:grid-cols-3">
             <div class="rounded-2xl border border-drac-current/20 bg-drac-darker/40 p-4">
               <p class="text-xs font-black uppercase tracking-[0.16em] text-chile-blueLight">Presencia propia</p>
@@ -2448,7 +2540,7 @@
 
       <div class="mt-10 flex flex-col items-center gap-3 border-t border-drac-current/20 pt-8 text-center sm:flex-row sm:justify-between">
         <p class="text-xs text-drac-comment">© 2026 STAX — Todos los derechos reservados</p>
-        <p class="text-responsive-caption text-drac-comment/50">Hecho en Chile • HTML + Tailwind CSS + Alpine.js</p>
+        <p class="text-responsive-caption text-drac-comment">Hecho en Chile • HTML + Tailwind CSS + Alpine.js</p>
       </div>
     </div>
   </footer>
@@ -2521,6 +2613,13 @@
       return false;
     };
 
+    window.setThemeColorMeta = function setThemeColorMeta(isDark) {
+      const themeMeta = document.querySelector('meta[name="theme-color"]');
+      if (themeMeta) {
+        themeMeta.setAttribute('content', isDark ? '#282A36' : '#EAEAE1');
+      }
+    };
+
     window.landingApp = function landingApp() {
       return {
         mobileMenu: false,
@@ -2536,6 +2635,7 @@
           } else {
             document.documentElement.classList.add('light-theme');
           }
+          window.setThemeColorMeta(this.darkMode);
         },
 
         toggleTheme() {
@@ -2546,6 +2646,7 @@
           } else {
             document.documentElement.classList.add('light-theme');
           }
+          window.setThemeColorMeta(this.darkMode);
         },
 
         startPlanHover(plan) {

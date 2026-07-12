@@ -150,7 +150,7 @@
         </div>
         <div>
           <div class="text-3xl font-black text-white" x-text="bookings.length">0</div>
-          <div class="stat-detail text-xs text-slate-500 mt-1 flex items-center gap-1">
+          <div class="stat-detail text-xs text-slate-400 mt-1 flex items-center gap-1">
             <span class="text-brand-success font-semibold">100%</span>
             <span>registradas localmente</span>
           </div>
@@ -309,7 +309,7 @@
 
               <!-- Extra details / service -->
               <div class="mt-4 pt-3 border-t border-slate-800/80 text-sm text-slate-300 leading-relaxed">
-                <span class="text-slate-500 font-medium">Detalles:</span>
+                <span class="text-slate-400 font-medium">Detalles:</span>
                 <span x-text="b.details"></span>
               </div>
 
@@ -319,13 +319,13 @@
                   <button @click="changeStatus(b.id, 'confirmada')" x-show="b.status !== 'confirmada'" class="text-xs bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 px-3 py-1.5 rounded-lg font-bold transition-all">
                     Confirmar
                   </button>
-                  <button @click="changeStatus(b.id, 'cancelada')" x-show="b.status !== 'cancelada'" class="text-xs bg-red-500/10 text-red-400 hover:bg-red-500/20 px-3 py-1.5 rounded-lg font-bold transition-all">
+                  <button @click="changeStatus(b.id, 'cancelada')" x-show="b.status !== 'cancelada'" class="text-xs bg-red-500/15 text-red-300 hover:bg-red-500/25 px-3 py-1.5 rounded-lg font-bold transition-all">
                     Cancelar
                   </button>
                 </div>
 
                 <div class="flex gap-2">
-                  <button @click="sendWhatsAppReminder(b)" class="text-xs bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1">
+                  <button @click="sendWhatsAppReminder(b)" class="text-xs bg-green-500 hover:bg-green-400 text-slate-950 px-3 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1">
                     <span>📱 Notificar WhatsApp</span>
                   </button>
                   <button @click="deleteBooking(b.id)" class="text-xs bg-slate-800 text-slate-400 hover:bg-red-500/20 hover:text-red-400 px-3 py-1.5 rounded-lg font-bold transition-all">
@@ -450,7 +450,7 @@
 
         <!-- Clear Cache button -->
         <div class="text-center">
-          <button @click="resetToDefaultData()" class="reset-btn text-xs text-slate-600 hover:text-slate-400 transition-colors uppercase tracking-wider font-semibold">
+          <button @click="resetToDefaultData()" class="reset-btn text-xs text-slate-300 hover:text-white transition-colors uppercase tracking-wider font-semibold">
             🔄 Reiniciar Base de Datos Demo
           </button>
         </div>
@@ -789,14 +789,14 @@
             'Contabilidad': 'bg-blue-600/20 text-blue-400 border border-blue-500/20',
             'Fonoaudiología': 'bg-emerald-600/20 text-emerald-400 border border-emerald-500/20'
           };
-          return classes[source] || 'bg-slate-700/20 text-slate-400';
+          return classes[source] || 'bg-slate-700/20 text-slate-300';
         },
 
         getStatusBadgeClass(status) {
           const classes = {
-            'pendiente': 'bg-amber-500/10 text-brand-warning',
-            'confirmada': 'bg-emerald-500/10 text-brand-success',
-            'cancelada': 'bg-red-500/10 text-brand-danger'
+            'pendiente': 'bg-amber-500/15 text-amber-300',
+            'confirmada': 'bg-emerald-500/15 text-emerald-300',
+            'cancelada': 'bg-red-500/15 text-red-300'
           };
           return classes[status] || 'bg-slate-800 text-slate-400';
         },
