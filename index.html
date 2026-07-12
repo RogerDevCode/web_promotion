@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es-CL" class="no-js scroll-smooth light-theme" x-data="landingApp()" :class="darkMode ? 'scroll-smooth' : 'scroll-smooth light-theme'">
+<html lang="es-CL" class="no-js scroll-smooth light-theme">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -177,6 +177,11 @@
       --drac-purple: 76, 58, 117;    /* Elegant dark indigo */
       --drac-red: 201, 42, 42;       /* Solemn crimson */
       --drac-yellow: 184, 134, 11;   /* Antique gold */
+    }
+
+    /* Force all transparent cards/panels to solid white in light theme for maximum contrast */
+    html.light-theme [class*="bg-drac-bg/"] {
+      background-color: rgb(255, 255, 255) !important;
     }
 
     /* Smooth transition for theme switch, excluding transforms to preserve fast interactions */
@@ -440,7 +445,7 @@
   </style>
 </head>
 
-<body class="min-h-screen">
+<body class="min-h-screen" x-data="landingApp()">
   <!-- Elegant vertical grid lines framing the editorial content -->
   <div class="fixed inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-7xl pointer-events-none border-x border-drac-current/40 hidden md:block z-0"></div>
   <!-- Skip to content -->

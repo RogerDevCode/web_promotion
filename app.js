@@ -23,6 +23,14 @@ window.landingApp = function landingApp() {
     hoverStart: null,
     darkMode: localStorage.getItem('theme') === 'dark',
 
+    init() {
+      if (this.darkMode) {
+        document.documentElement.classList.remove('light-theme');
+      } else {
+        document.documentElement.classList.add('light-theme');
+      }
+    },
+
     toggleTheme() {
       this.darkMode = !this.darkMode;
       localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
