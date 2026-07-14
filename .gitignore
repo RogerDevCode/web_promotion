@@ -43,3 +43,6 @@ playwright-report/
 test-results/
 .lighthouseci/
 npm-debug.log*
+
+# External reference artifacts
+voiceshop-pro.zip
