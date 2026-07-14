@@ -14,31 +14,82 @@ window.openWhatsAppWithFallback = function openWhatsAppWithFallback(url) {
   return false;
 };
 
+window.themeController = window.themeController || (() => {
+  const root = document.documentElement;
+  const DARK_THEME = 'dark';
+  const LIGHT_THEME = 'light';
+
+  function readStoredTheme() {
+    try {
+      return window.localStorage ? window.localStorage.getItem('theme') : null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function writeStoredTheme(theme) {
+    try {
+      if (window.localStorage) {
+        window.localStorage.setItem('theme', theme);
+      }
+    } catch (error) {
+      // Ignore storage restrictions from embedded/privacy contexts.
+    }
+  }
+
+  function applyTheme(theme) {
+    const normalizedTheme = theme === DARK_THEME ? DARK_THEME : LIGHT_THEME;
+    root.classList.toggle('light-theme', normalizedTheme === LIGHT_THEME);
+    root.dataset.theme = normalizedTheme;
+
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) {
+      themeMeta.setAttribute('content', normalizedTheme === DARK_THEME ? '#282A36' : '#EAEAE1');
+    }
+
+    return normalizedTheme;
+  }
+
+  return {
+    DARK_THEME,
+    LIGHT_THEME,
+    applyTheme,
+    readStoredTheme,
+    writeStoredTheme,
+    getInitialTheme() {
+      return readStoredTheme() === DARK_THEME ? DARK_THEME : LIGHT_THEME;
+    },
+  };
+})();
+
 window.landingApp = function landingApp() {
+  const themeController = window.themeController;
+
   return {
     mobileMenu: false,
     showVideo: false,
     planTimes: { esencial: 0, profesional: 0, premium: 0 },
     activePlan: null,
     hoverStart: null,
-    darkMode: localStorage.getItem('theme') === 'dark',
+    darkMode: themeController ? themeController.getInitialTheme() === themeController.DARK_THEME : false,
+
+    syncTheme(nextTheme) {
+      if (themeController) {
+        themeController.writeStoredTheme(nextTheme);
+        this.darkMode = themeController.applyTheme(nextTheme) === themeController.DARK_THEME;
+        return;
+      }
+
+      this.darkMode = nextTheme === 'dark';
+      document.documentElement.classList.toggle('light-theme', !this.darkMode);
+    },
 
     init() {
-      if (this.darkMode) {
-        document.documentElement.classList.remove('light-theme');
-      } else {
-        document.documentElement.classList.add('light-theme');
-      }
+      this.syncTheme(this.darkMode ? 'dark' : 'light');
     },
 
     toggleTheme() {
-      this.darkMode = !this.darkMode;
-      localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
-      if (this.darkMode) {
-        document.documentElement.classList.remove('light-theme');
-      } else {
-        document.documentElement.classList.add('light-theme');
-      }
+      this.syncTheme(this.darkMode ? 'light' : 'dark');
     },
 
     startPlanHover(plan) {

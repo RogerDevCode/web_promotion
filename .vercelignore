@@ -1,0 +1,16 @@
+AGENTS.md
+README.md
+docs/
+tests/
+scripts/
+playwright.config.js
+package.json
+package-lock.json
+check_consoles.js
+test_*.js
+investigacion_diseños_populares.md
+research_sitios_web_chile.md
+mejoras_frontend.md
+mejoras_frontend_2.md
+plan_diseno_invisible.md
+prompt_copywriting_empatico.md
