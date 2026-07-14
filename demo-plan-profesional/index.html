@@ -502,6 +502,13 @@
             box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
         }
 
+        .modal-form {
+            display: flex;
+            flex: 1 1 auto;
+            flex-direction: column;
+            min-height: 0;
+        }
+
         .modal-header {
             padding: 24px 30px;
             border-bottom: 1px solid var(--border);
@@ -561,6 +568,13 @@
 
         .modal-body::-webkit-scrollbar-thumb:hover {
             background: rgba(251, 191, 36, 0.85);
+        }
+
+        .modal-footer {
+            flex-shrink: 0;
+            padding: 0 30px 24px;
+            background-color: var(--bg-card);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .form-group {
@@ -819,6 +833,9 @@
             }
             .modal-body {
                 padding: 20px;
+            }
+            .modal-footer {
+                padding: 0 20px 20px;
             }
             .modal-buttons {
                 flex-direction: column-reverse;
@@ -1172,86 +1189,90 @@
                 <button type="button" class="modal-close-btn" @click="closeCheckout()" aria-label="Cerrar modal">&times;</button>
             </div>
             
-            <form @submit.prevent="submitQuote()" class="modal-body">
-                <div class="form-group">
-                    <label for="quote-name">Nombre Completo</label>
-                    <input id="quote-name" type="text" x-model="checkoutName" required class="form-control" placeholder="Ej: Marcela Soto">
-                </div>
-                
-                <div class="form-group">
-                    <label for="quote-phone">WhatsApp de Contacto</label>
-                    <input id="quote-phone" type="tel" x-model="checkoutPhone" required class="form-control" placeholder="Ej: +56987654321">
-                </div>
-
-                <!-- Priority delivery option: "Presencial" listed and selected first -->
-                <div class="form-group">
-                    <label for="quote-method">Modalidad de Reunión Técnica</label>
-                    <select id="quote-method" x-model="checkoutMethod" class="form-control">
-                        <option value="presencial">Presencial (Visita técnica en terreno)</option>
-                        <option value="online">Online (Videollamada informativa)</option>
-                    </select>
-                </div>
-
-                <div class="form-group" x-show="checkoutMethod === 'presencial'">
-                    <label for="quote-commune">Comuna del Proyecto</label>
-                    <select id="quote-commune" x-model="checkoutCommune" class="form-control">
-                        <option value="valparaiso">Valparaíso Centro (Gratis)</option>
-                        <option value="vinadelmar">Viña del Mar (Gratis)</option>
-                        <option value="concon">Concón (+$5.000 CLP)</option>
-                        <option value="quilpue">Quilpué / Villa Alemana (+$8.000 CLP)</option>
-                        <option value="placilla">Placilla / Curauma (+$5.000 CLP)</option>
-                    </select>
-                </div>
-
-                <div class="form-group" x-show="checkoutMethod === 'presencial'">
-                    <label for="quote-address">Dirección del Proyecto</label>
-                    <input id="quote-address" type="text" x-model="checkoutAddress" class="form-control" placeholder="Ej: Av. Alemania 450, Valparaíso">
-                </div>
-
-                <div class="form-group">
-                    <label for="quote-date">Fecha Solicitada para Visita / Reunión</label>
-                    <input id="quote-date" type="date" x-model="checkoutDate" :min="new Date().toISOString().split('T')[0]" class="form-control" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="quote-time-block">Bloque Horario Preferido</label>
-                    <select id="quote-time-block" x-model="checkoutTimeBlock" class="form-control">
-                        <option value="mañana">Mañana (09:00 - 13:00)</option>
-                        <option value="tarde">Tarde (15:00 - 19:00)</option>
-                    </select>
-                </div>
-
-                <!-- Dynamic pricing breakdown inside modal -->
-                <div style="background-color: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-top: 20px; font-size: 0.9rem;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                        <span style="color: var(--text-muted);">Subtotal Servicios (neto):</span>
-                        <span style="color: var(--text-light);">
-                            <span x-text="formatPrice(getCartTotal())"></span>
-                            <span class="text-responsive-caption" style="font-weight: normal; color: var(--text-muted); margin-left: 2px;">CLP</span>
-                            <span class="text-responsive-disclaimer" style="font-weight: normal; color: var(--text-muted); margin-left: 2px;">neto</span>
-                        </span>
+            <form @submit.prevent="submitQuote()" class="modal-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="quote-name">Nombre Completo</label>
+                        <input id="quote-name" type="text" x-model="checkoutName" required class="form-control" placeholder="Ej: Marcela Soto">
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;" x-show="checkoutMethod === 'presencial'">
-                        <span style="color: var(--text-muted);">Traslado Comuna (neto):</span>
-                        <span style="color: var(--text-light);">
-                            <span x-text="formatPrice(checkoutCommuneSurcharge())"></span>
-                            <span class="text-responsive-caption" style="font-weight: normal; color: var(--text-muted); margin-left: 2px;">CLP</span>
-                            <span class="text-responsive-disclaimer" style="font-weight: normal; color: var(--text-muted); margin-left: 2px;">neto</span>
-                        </span>
+                    
+                    <div class="form-group">
+                        <label for="quote-phone">WhatsApp de Contacto</label>
+                        <input id="quote-phone" type="tel" x-model="checkoutPhone" required class="form-control" placeholder="Ej: +56987654321">
                     </div>
-                    <div style="display: flex; justify-content: space-between; font-weight: bold; border-top: 1px solid var(--border); padding-top: 8px; margin-top: 8px; color: var(--primary);">
-                        <span>Total de Cotización:</span>
-                        <span>
-                            <span x-text="formatPrice(getCartTotal() + (checkoutMethod === 'presencial' ? checkoutCommuneSurcharge() : 0))"></span>
-                            <span style="font-size: 14px; font-weight: normal; color: var(--primary); margin-left: 2px; vertical-align: middle;">CLP</span>
-                            <span style="font-size: 14px; font-weight: normal; color: var(--text-muted); margin-left: 4px; vertical-align: middle;">neto + IVA</span>
-                        </span>
+
+                    <!-- Priority delivery option: "Presencial" listed and selected first -->
+                    <div class="form-group">
+                        <label for="quote-method">Modalidad de Reunión Técnica</label>
+                        <select id="quote-method" x-model="checkoutMethod" class="form-control">
+                            <option value="presencial">Presencial (Visita técnica en terreno)</option>
+                            <option value="online">Online (Videollamada informativa)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" x-show="checkoutMethod === 'presencial'">
+                        <label for="quote-commune">Comuna del Proyecto</label>
+                        <select id="quote-commune" x-model="checkoutCommune" class="form-control">
+                            <option value="valparaiso">Valparaíso Centro (Gratis)</option>
+                            <option value="vinadelmar">Viña del Mar (Gratis)</option>
+                            <option value="concon">Concón (+$5.000 CLP)</option>
+                            <option value="quilpue">Quilpué / Villa Alemana (+$8.000 CLP)</option>
+                            <option value="placilla">Placilla / Curauma (+$5.000 CLP)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" x-show="checkoutMethod === 'presencial'">
+                        <label for="quote-address">Dirección del Proyecto</label>
+                        <input id="quote-address" type="text" x-model="checkoutAddress" class="form-control" placeholder="Ej: Av. Alemania 450, Valparaíso">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quote-date">Fecha Solicitada para Visita / Reunión</label>
+                        <input id="quote-date" type="date" x-model="checkoutDate" :min="new Date().toISOString().split('T')[0]" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quote-time-block">Bloque Horario Preferido</label>
+                        <select id="quote-time-block" x-model="checkoutTimeBlock" class="form-control">
+                            <option value="mañana">Mañana (09:00 - 13:00)</option>
+                            <option value="tarde">Tarde (15:00 - 19:00)</option>
+                        </select>
+                    </div>
+
+                    <!-- Dynamic pricing breakdown inside modal -->
+                    <div style="background-color: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-top: 20px; font-size: 0.9rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="color: var(--text-muted);">Subtotal Servicios (neto):</span>
+                            <span style="color: var(--text-light);">
+                                <span x-text="formatPrice(getCartTotal())"></span>
+                                <span class="text-responsive-caption" style="font-weight: normal; color: var(--text-muted); margin-left: 2px;">CLP</span>
+                                <span class="text-responsive-disclaimer" style="font-weight: normal; color: var(--text-muted); margin-left: 2px;">neto</span>
+                            </span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;" x-show="checkoutMethod === 'presencial'">
+                            <span style="color: var(--text-muted);">Traslado Comuna (neto):</span>
+                            <span style="color: var(--text-light);">
+                                <span x-text="formatPrice(checkoutCommuneSurcharge())"></span>
+                                <span class="text-responsive-caption" style="font-weight: normal; color: var(--text-muted); margin-left: 2px;">CLP</span>
+                                <span class="text-responsive-disclaimer" style="font-weight: normal; color: var(--text-muted); margin-left: 2px;">neto</span>
+                            </span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-weight: bold; border-top: 1px solid var(--border); padding-top: 8px; margin-top: 8px; color: var(--primary);">
+                            <span>Total de Cotización:</span>
+                            <span>
+                                <span x-text="formatPrice(getCartTotal() + (checkoutMethod === 'presencial' ? checkoutCommuneSurcharge() : 0))"></span>
+                                <span style="font-size: 14px; font-weight: normal; color: var(--primary); margin-left: 2px; vertical-align: middle;">CLP</span>
+                                <span style="font-size: 14px; font-weight: normal; color: var(--text-muted); margin-left: 4px; vertical-align: middle;">neto + IVA</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="modal-buttons">
-                    <button type="button" class="btn-cancel" @click="closeCheckout()">Cancelar</button>
-                    <button type="submit" class="cta-btn">Enviar a WhatsApp</button>
+                <div class="modal-footer">
+                    <div class="modal-buttons">
+                        <button type="button" class="btn-cancel" @click="closeCheckout()">Cancelar</button>
+                        <button type="submit" class="cta-btn">Enviar a WhatsApp</button>
+                    </div>
                 </div>
             </form>
         </div>

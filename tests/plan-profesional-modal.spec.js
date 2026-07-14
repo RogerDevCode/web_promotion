@@ -24,27 +24,42 @@ test("Plan Profesional checkout modal stays scrollable across viewport sizes", a
     });
 
     const modal = page.locator(".modal-content");
+    const modalBody = page.locator(".modal-body");
     await expect(modal).toBeVisible();
+    await expect(modalBody).toBeVisible();
 
-    const metrics = await modal.evaluate((node) => {
-      const style = window.getComputedStyle(node);
-      const rect = node.getBoundingClientRect();
+    const metrics = await page.evaluate(() => {
+      const modalNode = document.querySelector(".modal-content");
+      const bodyNode = document.querySelector(".modal-body");
+      const submitNode = [...document.querySelectorAll("button")].find((button) => button.textContent.trim() === "Enviar a WhatsApp");
+      const cancelNode = [...document.querySelectorAll("button")].find((button) => button.textContent.trim() === "Cancelar");
+      const modalRect = modalNode.getBoundingClientRect();
+      const bodyRect = bodyNode.getBoundingClientRect();
+      const submitRect = submitNode.getBoundingClientRect();
+      const cancelRect = cancelNode.getBoundingClientRect();
       return {
-        overflowY: style.overflowY,
-        clientHeight: node.clientHeight,
-        scrollHeight: node.scrollHeight,
-        top: rect.top,
-        bottom: rect.bottom,
+        modalTop: modalRect.top,
+        modalBottom: modalRect.bottom,
+        modalViewportHeight: window.innerHeight,
+        bodyOverflowY: window.getComputedStyle(bodyNode).overflowY,
+        bodyClientHeight: bodyNode.clientHeight,
+        bodyScrollHeight: bodyNode.scrollHeight,
+        bodyTop: bodyRect.top,
+        bodyBottom: bodyRect.bottom,
+        submitBottom: submitRect.bottom,
+        cancelBottom: cancelRect.bottom,
         viewportHeight: window.innerHeight,
       };
     });
 
-    expect(["auto", "scroll"]).toContain(metrics.overflowY);
-    expect(metrics.top, viewport.name).toBeGreaterThanOrEqual(0);
-    expect(metrics.bottom, viewport.name).toBeLessThanOrEqual(metrics.viewportHeight);
+    expect(["auto", "scroll"]).toContain(metrics.bodyOverflowY);
+    expect(metrics.modalTop, viewport.name).toBeGreaterThanOrEqual(0);
+    expect(metrics.modalBottom, viewport.name).toBeLessThanOrEqual(metrics.modalViewportHeight);
+    expect(metrics.submitBottom, `${viewport.name} submit`).toBeLessThanOrEqual(metrics.viewportHeight);
+    expect(metrics.cancelBottom, `${viewport.name} cancel`).toBeLessThanOrEqual(metrics.viewportHeight);
 
-    if (metrics.scrollHeight > metrics.clientHeight) {
-      await modal.evaluate((node) => {
+    if (metrics.bodyScrollHeight > metrics.bodyClientHeight) {
+      await modalBody.evaluate((node) => {
         node.scrollTop = node.scrollHeight;
       });
     }
