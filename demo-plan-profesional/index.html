@@ -483,8 +483,6 @@
             backdrop-filter: blur(5px);
             z-index: 300;
             display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 20px;
             overflow-y: auto;
         }
@@ -492,61 +490,76 @@
         .modal-content {
             background-color: var(--bg-card);
             border: 1px solid var(--border);
-            padding: 40px;
             border-radius: 24px;
             max-width: 560px;
             width: 100%;
+            margin: auto;
             position: relative;
-            max-height: calc(100dvh - 40px);
+            max-height: min(calc(100vh - 40px), calc(100dvh - 40px));
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+        }
+
+        .modal-header {
+            padding: 24px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            background-color: var(--bg-card);
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: var(--text-light);
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0 4px;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            color: var(--primary);
+        }
+
+        .modal-body {
+            padding: 24px 30px;
             overflow-y: auto;
+            flex: 1 1 auto;
+            min-height: 0;
             overscroll-behavior: contain;
             scrollbar-gutter: stable;
             scrollbar-width: auto;
             scrollbar-color: rgba(251, 191, 36, 0.85) rgba(255, 255, 255, 0.08);
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
         }
 
-        .modal-content::before,
-        .modal-content::after {
-            content: "";
-            position: sticky;
-            left: 0;
-            display: block;
-            width: calc(100% + 4px);
-            height: 16px;
-            margin-left: -2px;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .modal-content::before {
-            top: -2px;
-            margin-bottom: -16px;
-            background: linear-gradient(180deg, rgba(30, 41, 59, 0.98) 0%, rgba(30, 41, 59, 0) 100%);
-        }
-
-        .modal-content::after {
-            bottom: -2px;
-            margin-top: -16px;
-            background: linear-gradient(0deg, rgba(30, 41, 59, 0.98) 0%, rgba(30, 41, 59, 0) 100%);
-        }
-
-        .modal-content::-webkit-scrollbar {
+        .modal-body::-webkit-scrollbar {
             width: 12px;
         }
 
-        .modal-content::-webkit-scrollbar-track {
+        .modal-body::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.06);
             border-radius: 999px;
         }
 
-        .modal-content::-webkit-scrollbar-thumb {
+        .modal-body::-webkit-scrollbar-thumb {
             background: rgba(251, 191, 36, 0.65);
             border: 2px solid rgba(30, 41, 59, 0.9);
             border-radius: 999px;
         }
 
-        .modal-content::-webkit-scrollbar-thumb:hover {
+        .modal-body::-webkit-scrollbar-thumb:hover {
             background: rgba(251, 191, 36, 0.85);
         }
 
@@ -796,12 +809,16 @@
             }
             .modal-overlay {
                 padding: 16px;
-                align-items: flex-start;
             }
             .modal-content {
-                padding: 24px 20px;
-                max-height: calc(100dvh - 32px);
+                max-height: min(calc(100vh - 32px), calc(100dvh - 32px));
                 border-radius: 20px;
+            }
+            .modal-header {
+                padding: 20px;
+            }
+            .modal-body {
+                padding: 20px;
             }
             .modal-buttons {
                 flex-direction: column-reverse;
@@ -1150,9 +1167,12 @@
     <!-- CHECKOUT MODAL FORM (Form reset 100% compliant) -->
     <div x-show="isCheckoutOpen" class="modal-overlay" x-cloak @click.self="closeCheckout()">
         <div class="modal-content">
-            <h3 style="margin-bottom: 20px;">Detalles de la Solicitud</h3>
+            <div class="modal-header">
+                <h3>Detalles de la Solicitud</h3>
+                <button type="button" class="modal-close-btn" @click="closeCheckout()" aria-label="Cerrar modal">&times;</button>
+            </div>
             
-            <form @submit.prevent="submitQuote()">
+            <form @submit.prevent="submitQuote()" class="modal-body">
                 <div class="form-group">
                     <label for="quote-name">Nombre Completo</label>
                     <input id="quote-name" type="text" x-model="checkoutName" required class="form-control" placeholder="Ej: Marcela Soto">

@@ -836,8 +836,6 @@
             backdrop-filter: blur(8px);
             z-index: 1000;
             display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 1rem;
             overflow-y: auto;
         }
@@ -846,12 +844,13 @@
             background-color: var(--bg-cream);
             width: 100%;
             max-width: 600px;
+            margin: auto;
             border-radius: 28px;
             box-shadow: var(--shadow-lg);
             overflow: hidden;
             border: 1px solid var(--glass-border);
             position: relative;
-            max-height: calc(100dvh - 2rem);
+            max-height: min(calc(100vh - 2rem), calc(100dvh - 2rem));
             display: flex;
             flex-direction: column;
         }
@@ -1055,14 +1054,14 @@
             background-color: rgba(44, 30, 23, 0.95);
             z-index: 2000;
             display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 2rem;
+            overflow-y: auto;
         }
         
         .lightbox-content {
             position: relative;
             max-width: 90%;
+            margin: auto;
             max-height: 85vh;
             display: flex;
             flex-direction: column;
