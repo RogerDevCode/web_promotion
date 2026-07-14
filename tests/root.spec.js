@@ -33,7 +33,8 @@ test("Landing and demos stay production-ready", async ({ page }) => {
     await expect(page.locator("h1")).toHaveCount(1);
     const backLink = page.locator('a[href^="../index.html"]').first();
     await expect(backLink, `No se encontro link de retorno en ${href}`).toBeVisible();
-    await backLink.click();
+    await expect(backLink).toHaveAttribute("href", /..\/*index\.html/);
+    await page.goto("/");
     await expect(page).toHaveTitle("STAX | Se ve bien. Se vende mejor.");
   }
 

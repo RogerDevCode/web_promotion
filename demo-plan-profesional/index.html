@@ -486,6 +486,7 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            overflow-y: auto;
         }
 
         .modal-content {
@@ -493,9 +494,33 @@
             border: 1px solid var(--border);
             padding: 40px;
             border-radius: 24px;
-            max-width: 500px;
+            max-width: 560px;
             width: 100%;
             position: relative;
+            max-height: calc(100dvh - 40px);
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            scrollbar-gutter: stable;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 999px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(251, 191, 36, 0.65);
+            border: 2px solid rgba(30, 41, 59, 0.9);
+            border-radius: 999px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(251, 191, 36, 0.85);
         }
 
         .form-group {
@@ -741,6 +766,22 @@
             }
             .payment-sim .payment-sim-breakdown {
                 padding: 18px !important;
+            }
+            .modal-overlay {
+                padding: 16px;
+                align-items: flex-start;
+            }
+            .modal-content {
+                padding: 24px 20px;
+                max-height: calc(100dvh - 32px);
+                border-radius: 20px;
+            }
+            .modal-buttons {
+                flex-direction: column-reverse;
+            }
+            .modal-buttons .cta-btn,
+            .modal-buttons .btn-cancel {
+                width: 100%;
             }
         }
 
