@@ -9,7 +9,7 @@ test.describe('Exhaustive Landing Page (index.html) Tests', () => {
 
   test('Hero section elements, typography, and primary CTA responsiveness', async ({ page }) => {
     const guards = await attachPageGuards(page);
-    await expect(page).toHaveTitle(/Primera respuesta ordenada por WhatsApp/i);
+    await expect(page).toHaveTitle(/Primera respuesta ordenada por WhatsApp y Telegram/i);
     await expect(page.locator('h1')).toHaveCount(1);
     await expect(page.locator('h1')).toContainText('Deja de responder lo mismo todos los días.');
     
@@ -53,6 +53,7 @@ test.describe('Exhaustive Landing Page (index.html) Tests', () => {
     const faqButtons = page.locator('#faq button');
     const count = await faqButtons.count();
     expect(count).toBeGreaterThan(0);
+    await expect(faqSection).toContainText('¿Sirve para WhatsApp y Telegram?');
 
     for (let i = 0; i < count; i++) {
       const btn = faqButtons.nth(i);
@@ -88,16 +89,17 @@ test.describe('Exhaustive Landing Page (index.html) Tests', () => {
     await guards.assertHealthyContext();
   });
 
-  test('Offer section and WhatsApp CTA links are available', async ({ page }) => {
+  test('Offer section and messaging CTA links are available', async ({ page }) => {
     const guards = await attachPageGuards(page);
     const offerSection = page.locator('#oferta');
     await expect(offerSection).toBeVisible();
-    await expect(offerSection).toContainText('Primera Respuesta Ordenada por WhatsApp');
+    await expect(offerSection).toContainText('Primera Respuesta Ordenada');
+    await expect(offerSection).toContainText('por WhatsApp y Telegram');
 
-    // Check WhatsApp/wa.me action links
-    const ctaLinks = page.locator('a[href*="wa.me"], a[href*="whatsapp"]');
-    const ctaCount = await ctaLinks.count();
-    expect(ctaCount).toBeGreaterThan(0);
+    const whatsappLinks = page.locator('a[href*="wa.me"], a[href*="whatsapp"]');
+    const telegramLinks = page.locator('a[href^="tg://user?id=5391760292"]');
+    expect(await whatsappLinks.count()).toBeGreaterThan(0);
+    expect(await telegramLinks.count()).toBeGreaterThan(0);
     await guards.assertHealthyContext();
   });
 });
