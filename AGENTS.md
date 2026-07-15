@@ -6,7 +6,7 @@ Este archivo documenta la estructura, las características técnicas, las decisi
 
 ## 1. Resumen y Objetivos del Proyecto
 
-El objetivo de este proyecto es promocionar servicios de desarrollo de software y diseño web para PYMEs en Chile. Para lograrlo, el sitio principal funciona como una **Landing Page de Conversión** que incluye un catálogo interactivo de **8 sitios web de demostración** altamente optimizados y adaptados a sectores típicos del comercio local chileno.
+El objetivo de este proyecto es promocionar servicios de desarrollo de software y diseño web para PYMEs en Chile. Para lograrlo, el sitio principal funciona como una **Landing Page de Conversión** que incluye un catálogo interactivo de **14 sitios web de demostración** altamente optimizados y adaptados a sectores típicos del comercio local chileno.
 
 Cada uno de los sitios de demostración fue construido bajo estándares premium de diseño, con micro-animaciones fluidas (usando CSS Vainilla y transiciones aceleradas por hardware), interactividad dinámica con Alpine.js y optimización básica para SEO y accesibilidad.
 
@@ -51,8 +51,26 @@ Cada uno de los sitios de demostración fue construido bajo estándares premium 
 │   ├── index.html                     # E-commerce interactivo con panel de pedidos
 │   └── hero.png, product_*.png        # Recursos e imágenes locales
 │
-└── demo-agenda/                       # Demo 8: CRM Express (Gestor de Citas y Clientes)
-    └── index.html                     # Tablero centralizado de reservas de los demos
+├── demo-agenda/                       # Demo 8: CRM Express (Gestor de Citas y Clientes)
+│   └── index.html                     # Tablero centralizado de reservas de los demos
+│
+├── demo-fonoaudiologia/               # Demo 9: Clínica de Especialidades Médicas & Fonoaudiología
+│   └── index.html                     # Reserva clínica interactiva y servicios de salud
+│
+├── demo-plan-profesional/             # Demo 10: Plan Profesional (Simulador de Pagos & Catálogo)
+│   └── index.html                     # Catálogo filtrable, simulador financiero y modales
+│
+├── demo-plan-premium/                 # Demo 11: Plan Premium (Portal E-commerce Interactivo)
+│   └── index.html                     # Configuración de producto en vivo y checkout asincrónico
+│
+├── demo-propuesta-empezar-simple/     # Demo 12: Propuesta Comercial - Empezar Simple
+│   └── index.html                     # Landing ejecutiva enfocada en presencia digital inicial
+│
+├── demo-propuesta-atencion-ordenada/  # Demo 13: Propuesta Comercial - Atención Ordenada
+│   └── index.html                     # Propuesta enfocada en automatización de reservas y agenda
+│
+└── demo-propuesta-impacto-comercial/  # Demo 14: Propuesta Comercial - Impacto Comercial
+    └── index.html                     # Propuesta enfocada en conversión e-commerce integral
 ```
 
 > [!NOTE]

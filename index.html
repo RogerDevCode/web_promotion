@@ -132,83 +132,83 @@
     }
 
     /* In Light Theme: only specific light sections should promote cards to solid white */
-    html.light-theme #propuestas-premium [class*="bg-drac-bg/"],
-    html.light-theme #demos [class*="bg-drac-bg/"],
-    html.light-theme #beneficios [class*="bg-drac-bg/"],
-    html.light-theme #precios [class*="bg-drac-bg/"],
-    html.light-theme #faq [class*="bg-drac-bg/"] {
-      background-color: rgb(255, 255, 255) !important;
+    html.light-theme body #propuestas-premium [class*="bg-drac-bg/"],
+    html.light-theme body #demos [class*="bg-drac-bg/"],
+    html.light-theme body #beneficios [class*="bg-drac-bg/"],
+    html.light-theme body #precios [class*="bg-drac-bg/"],
+    html.light-theme body #faq [class*="bg-drac-bg/"] {
+      background-color: rgb(255, 255, 255);
     }
 
     /* In Light Theme: ensure dark band sections show white text and translucent dark cards */
-    html.light-theme .band-dark [class*="bg-drac-bg/"],
-    html.light-theme .band-navy [class*="bg-drac-bg/"] {
-      background-color: rgba(255, 255, 255, 0.08) !important;
-      border-color: rgba(255, 255, 255, 0.15) !important;
+    html.light-theme body .band-dark [class*="bg-drac-bg/"],
+    html.light-theme body .band-navy [class*="bg-drac-bg/"] {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
     }
-    html.light-theme .band-dark,
-    html.light-theme .band-navy {
+    html.light-theme body .band-dark,
+    html.light-theme body .band-navy {
       color: #FFFFFF;
     }
-    html.light-theme .band-dark .text-drac-fg,
-    html.light-theme .band-navy .text-drac-fg {
+    html.light-theme body .band-dark .text-drac-fg,
+    html.light-theme body .band-navy .text-drac-fg {
       color: #FFFFFF;
     }
-    html.light-theme .band-dark .text-drac-comment,
-    html.light-theme .band-navy .text-drac-comment {
+    html.light-theme body .band-dark .text-drac-comment,
+    html.light-theme body .band-navy .text-drac-comment {
       color: #C4C8DB;
     }
-    html.light-theme #proceso .process-step-card {
-      background-color: rgba(14, 24, 43, 0.78) !important;
-      border-color: rgba(255, 255, 255, 0.16) !important;
+    html.light-theme body #proceso .process-step-card {
+      background-color: rgba(14, 24, 43, 0.78);
+      border-color: rgba(255, 255, 255, 0.16);
     }
-    html.light-theme #proceso .process-step-card .text-drac-fg,
-    html.light-theme #proceso .process-step-card [class*="text-drac-fg/"] {
-      color: rgba(255, 255, 255, 0.94) !important;
+    html.light-theme body #proceso .process-step-card .text-drac-fg,
+    html.light-theme body #proceso .process-step-card [class*="text-drac-fg/"] {
+      color: rgba(255, 255, 255, 0.94);
     }
-    html.light-theme #proceso .process-step-card .text-drac-comment {
-      color: rgba(225, 231, 243, 0.86) !important;
+    html.light-theme body #proceso .process-step-card .text-drac-comment {
+      color: rgba(225, 231, 243, 0.86);
     }
-    html.light-theme #proceso .process-step-card .text-drac-purple {
-      color: #C9B3FF !important;
+    html.light-theme body #proceso .process-step-card .text-drac-purple {
+      color: #C9B3FF;
     }
-    html.light-theme #proceso .process-step-chip {
-      background-color: rgba(255, 255, 255, 0.09) !important;
+    html.light-theme body #proceso .process-step-chip {
+      background-color: rgba(255, 255, 255, 0.09);
     }
-    html.light-theme #proceso .process-step-meta {
-      background-color: rgba(8, 14, 28, 0.42) !important;
-      border-color: rgba(255, 255, 255, 0.14) !important;
+    html.light-theme body #proceso .process-step-meta {
+      background-color: rgba(8, 14, 28, 0.42);
+      border-color: rgba(255, 255, 255, 0.14);
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
     }
 
     /* Inside dark sections (.band-dark, .band-navy), force luminous text contrast in ALL themes */
-    .band-dark .text-drac-green, .band-navy .text-drac-green {
-      color: #4ADE80 !important; /* Crisp emerald/lime WCAG AA on dark */
+    html body .band-dark .text-drac-green, html body .band-navy .text-drac-green {
+      color: #4ADE80; /* Crisp emerald/lime WCAG AA on dark */
     }
-    .band-dark .text-drac-orange, .band-navy .text-drac-orange {
-      color: #FFB86C !important;
+    html body .band-dark .text-drac-orange, html body .band-navy .text-drac-orange {
+      color: #FFB86C;
     }
-    .band-dark .text-drac-cyan, .band-navy .text-drac-cyan {
-      color: #7DD3FC !important;
+    html body .band-dark .text-drac-cyan, html body .band-navy .text-drac-cyan {
+      color: #7DD3FC;
     }
-    .band-dark .text-chile-blueLight, .band-navy .text-chile-blueLight {
-      color: #68A2FF !important;
+    html body .band-dark .text-chile-blueLight, html body .band-navy .text-chile-blueLight {
+      color: #68A2FF;
     }
 
     /* Light band sections get dark text in light theme */
-    html.light-theme .band-white,
-    html.light-theme .band-lino {
+    html.light-theme body .band-white,
+    html.light-theme body .band-lino {
       color: #1E2022;
     }
 
     /* High contrast green for WhatsApp text on light backgrounds */
-    html.light-theme .text-\[\#25D366\] {
-      color: #0D7A3A !important;
+    html.light-theme body .text-\[\#25D366\] {
+      color: #0D7A3A;
     }
 
     /* High contrast bright sky blue for chile-blueLight in Dark Mode on dark cards */
-    :root:not(.light-theme) .text-chile-blueLight {
-      color: #68A2FF !important;
+    html:root:not(.light-theme) body .text-chile-blueLight {
+      color: #68A2FF;
     }
 
     /* In light theme, the transparent header still sits over the dark hero photo */
@@ -434,78 +434,78 @@
     }
 
     /* Solid & Utility Text Colors */
-    .text-chile-blue { color: rgb(var(--chile-blue-rgb)) !important; }
-    .text-chile-blueLight { color: #2A68C8 !important; }
-    :root:not(.light-theme) .text-chile-blueLight { color: #68A2FF !important; }
-    .text-chile-red { color: rgb(var(--chile-red-rgb)) !important; }
+    html body .text-chile-blue { color: rgb(var(--chile-blue-rgb)); }
+    html body .text-chile-blueLight { color: #2A68C8; }
+    html:root:not(.light-theme) body .text-chile-blueLight { color: #68A2FF; }
+    html body .text-chile-red { color: rgb(var(--chile-red-rgb)); }
 
     /* Solid & Opacity Background Colors */
-    .bg-chile-blue { background-color: rgb(var(--chile-blue-rgb)) !important; }
-    .bg-chile-blue\/5 { background-color: rgba(var(--chile-blue-rgb), 0.05) !important; }
-    .bg-chile-blue\/10 { background-color: rgba(var(--chile-blue-rgb), 0.1) !important; }
-    .bg-chile-blue\/18 { background-color: rgba(var(--chile-blue-rgb), 0.18) !important; }
-    .bg-chile-blue\/20 { background-color: rgba(var(--chile-blue-rgb), 0.2) !important; }
-    .bg-chile-blueLight\/10 { background-color: rgba(var(--chile-blue-light-rgb), 0.1) !important; }
-    .bg-chile-blueLight\/12 { background-color: rgba(var(--chile-blue-light-rgb), 0.12) !important; }
-    .bg-chile-blueLight\/15 { background-color: rgba(var(--chile-blue-light-rgb), 0.15) !important; }
-    .bg-chile-red\/5 { background-color: rgba(var(--chile-red-rgb), 0.05) !important; }
-    .bg-chile-red\/8 { background-color: rgba(var(--chile-red-rgb), 0.08) !important; }
-    .bg-chile-red\/10 { background-color: rgba(var(--chile-red-rgb), 0.1) !important; }
-    .bg-chile-red\/20 { background-color: rgba(var(--chile-red-rgb), 0.2) !important; }
-    .bg-chile-red\/80 { background-color: rgba(var(--chile-red-rgb), 0.8) !important; }
+    html body .bg-chile-blue { background-color: rgb(var(--chile-blue-rgb)); }
+    html body .bg-chile-blue\/5 { background-color: rgba(var(--chile-blue-rgb), 0.05); }
+    html body .bg-chile-blue\/10 { background-color: rgba(var(--chile-blue-rgb), 0.1); }
+    html body .bg-chile-blue\/18 { background-color: rgba(var(--chile-blue-rgb), 0.18); }
+    html body .bg-chile-blue\/20 { background-color: rgba(var(--chile-blue-rgb), 0.2); }
+    html body .bg-chile-blueLight\/10 { background-color: rgba(var(--chile-blue-light-rgb), 0.1); }
+    html body .bg-chile-blueLight\/12 { background-color: rgba(var(--chile-blue-light-rgb), 0.12); }
+    html body .bg-chile-blueLight\/15 { background-color: rgba(var(--chile-blue-light-rgb), 0.15); }
+    html body .bg-chile-red\/5 { background-color: rgba(var(--chile-red-rgb), 0.05); }
+    html body .bg-chile-red\/8 { background-color: rgba(var(--chile-red-rgb), 0.08); }
+    html body .bg-chile-red\/10 { background-color: rgba(var(--chile-red-rgb), 0.1); }
+    html body .bg-chile-red\/20 { background-color: rgba(var(--chile-red-rgb), 0.2); }
+    html body .bg-chile-red\/80 { background-color: rgba(var(--chile-red-rgb), 0.8); }
 
     /* Border Colors */
-    .border-chile-blue { border-color: rgb(var(--chile-blue-rgb)) !important; }
-    .border-chile-blue\/10 { border-color: rgba(var(--chile-blue-rgb), 0.1) !important; }
-    .border-chile-blue\/20 { border-color: rgba(var(--chile-blue-rgb), 0.2) !important; }
-    .border-chile-blue\/30 { border-color: rgba(var(--chile-blue-rgb), 0.3) !important; }
-    .border-chile-blueLight\/20 { border-color: rgba(var(--chile-blue-light-rgb), 0.2) !important; }
-    .border-chile-blueLight\/25 { border-color: rgba(var(--chile-blue-light-rgb), 0.25) !important; }
-    .border-chile-blueLight\/30 { border-color: rgba(var(--chile-blue-light-rgb), 0.3) !important; }
-    .border-chile-blueLight\/35 { border-color: rgba(var(--chile-blue-light-rgb), 0.35) !important; }
-    .border-chile-red\/10 { border-color: rgba(var(--chile-red-rgb), 0.1) !important; }
+    html body .border-chile-blue { border-color: rgb(var(--chile-blue-rgb)); }
+    html body .border-chile-blue\/10 { border-color: rgba(var(--chile-blue-rgb), 0.1); }
+    html body .border-chile-blue\/20 { border-color: rgba(var(--chile-blue-rgb), 0.2); }
+    html body .border-chile-blue\/30 { border-color: rgba(var(--chile-blue-rgb), 0.3); }
+    html body .border-chile-blueLight\/20 { border-color: rgba(var(--chile-blue-light-rgb), 0.2); }
+    html body .border-chile-blueLight\/25 { border-color: rgba(var(--chile-blue-light-rgb), 0.25); }
+    html body .border-chile-blueLight\/30 { border-color: rgba(var(--chile-blue-light-rgb), 0.3); }
+    html body .border-chile-blueLight\/35 { border-color: rgba(var(--chile-blue-light-rgb), 0.35); }
+    html body .border-chile-red\/10 { border-color: rgba(var(--chile-red-rgb), 0.1); }
 
     /* Gradients */
-    .from-chile-blue.to-chile-blueLight {
-      background: linear-gradient(135deg, rgb(var(--chile-blue-rgb)) 0%, rgb(var(--chile-blue-light-rgb)) 100%) !important;
+    html body .from-chile-blue.to-chile-blueLight {
+      background: linear-gradient(135deg, rgb(var(--chile-blue-rgb)) 0%, rgb(var(--chile-blue-light-rgb)) 100%);
     }
-    .from-chile-blue.to-chile-blueDark {
-      background: linear-gradient(135deg, rgb(var(--chile-blue-rgb)) 0%, rgb(var(--chile-blue-dark-rgb)) 100%) !important;
+    html body .from-chile-blue.to-chile-blueDark {
+      background: linear-gradient(135deg, rgb(var(--chile-blue-rgb)) 0%, rgb(var(--chile-blue-dark-rgb)) 100%);
     }
-    .from-chile-blue.via-chile-blueLight.to-chile-blueDark {
-      background: linear-gradient(135deg, rgb(var(--chile-blue-rgb)) 0%, rgb(var(--chile-blue-light-rgb)) 50%, rgb(var(--chile-blue-dark-rgb)) 100%) !important;
+    html body .from-chile-blue.via-chile-blueLight.to-chile-blueDark {
+      background: linear-gradient(135deg, rgb(var(--chile-blue-rgb)) 0%, rgb(var(--chile-blue-light-rgb)) 50%, rgb(var(--chile-blue-dark-rgb)) 100%);
     }
-    .from-chile-blue.to-drac-purple {
-      background: linear-gradient(135deg, rgb(var(--chile-blue-rgb)) 0%, #BD93F9 100%) !important;
+    html body .from-chile-blue.to-drac-purple {
+      background: linear-gradient(135deg, rgb(var(--chile-blue-rgb)) 0%, #BD93F9 100%);
     }
-    .from-chile-red.to-chile-redDark {
-      background: linear-gradient(135deg, rgb(var(--chile-red-rgb)) 0%, rgb(var(--chile-red-dark-rgb)) 100%) !important;
+    html body .from-chile-red.to-chile-redDark {
+      background: linear-gradient(135deg, rgb(var(--chile-red-rgb)) 0%, rgb(var(--chile-red-dark-rgb)) 100%);
     }
-    .from-chile-red.to-drac-orange {
-      background: linear-gradient(135deg, rgb(var(--chile-red-rgb)) 0%, #FFB86C 100%) !important;
+    html body .from-chile-red.to-drac-orange {
+      background: linear-gradient(135deg, rgb(var(--chile-red-rgb)) 0%, #FFB86C 100%);
     }
-    .from-slate-950.via-slate-900.to-sky-950 {
-      background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #082f49 100%) !important;
+    html body .from-slate-950.via-slate-900.to-sky-950 {
+      background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #082f49 100%);
     }
-    .from-\[\#25D366\].to-\[\#128C7E\] {
-      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+    html body .from-\[\#25D366\].to-\[\#128C7E\] {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
     }
-    .from-drac-green.to-\[\#3DD668\] {
-      background: linear-gradient(135deg, #50FA7B 0%, #3DD668 100%) !important;
+    html body .from-drac-green.to-\[\#3DD668\] {
+      background: linear-gradient(135deg, #50FA7B 0%, #3DD668 100%);
     }
 
     /* Custom Shadow Fallbacks */
-    .shadow-glow {
-      box-shadow: 0 0 28px rgba(10, 49, 97, 0.42), 0 0 48px rgba(42, 104, 200, 0.22) !important;
+    html body .shadow-glow {
+      box-shadow: 0 0 28px rgba(10, 49, 97, 0.42), 0 0 48px rgba(42, 104, 200, 0.22);
     }
-    .shadow-glow-red {
-      box-shadow: 0 0 28px rgba(213, 43, 30, 0.42), 0 0 48px rgba(255, 85, 85, 0.22) !important;
+    html body .shadow-glow-red {
+      box-shadow: 0 0 28px rgba(213, 43, 30, 0.42), 0 0 48px rgba(255, 85, 85, 0.22);
     }
-    .shadow-card {
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
+    html body .shadow-card {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
     }
-    .shadow-card-hover {
-      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.22), 0 0 24px rgba(42, 104, 200, 0.15) !important;
+    html body .shadow-card-hover {
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.22), 0 0 24px rgba(42, 104, 200, 0.15);
     }
 
     /* =============================================
