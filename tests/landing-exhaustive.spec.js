@@ -9,7 +9,7 @@ test.describe('Exhaustive Landing Page (index.html) Tests', () => {
 
   test('Hero section elements, typography, and primary CTA responsiveness', async ({ page }) => {
     const guards = await attachPageGuards(page);
-    await expect(page).toHaveTitle(/Atención inicial para WhatsApp y Telegram/i);
+    await expect(page).toHaveTitle(/Bot de Telegram y atención por WhatsApp/i);
     await expect(page.locator('h1')).toHaveCount(1);
     await expect(page.locator('h1')).toContainText('Deja de responder lo mismo todos los días.');
     
@@ -53,7 +53,7 @@ test.describe('Exhaustive Landing Page (index.html) Tests', () => {
     const faqButtons = page.locator('#faq button');
     const count = await faqButtons.count();
     expect(count).toBeGreaterThan(0);
-    await expect(faqSection).toContainText('¿Sirve para WhatsApp y Telegram?');
+    await expect(faqSection).toContainText('¿Qué canal incluye el plan básico?');
 
     for (let i = 0; i < count; i++) {
       const btn = faqButtons.nth(i);
@@ -93,8 +93,8 @@ test.describe('Exhaustive Landing Page (index.html) Tests', () => {
     const guards = await attachPageGuards(page);
     const offerSection = page.locator('#oferta');
     await expect(offerSection).toBeVisible();
-    await expect(offerSection).toContainText('Atención inicial');
-    await expect(offerSection).toContainText('para WhatsApp y Telegram');
+    await expect(offerSection).toContainText('Plan básico');
+    await expect(offerSection).toContainText('Bot de Telegram');
 
     const whatsappLinks = page.locator('a[href*="wa.me"], a[href*="whatsapp"]');
     const telegramLinks = page.locator('a[href^="tg://user?id=5391760292"]');
