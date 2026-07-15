@@ -911,14 +911,14 @@
 
     <!-- BOOKING VISIT MODAL -->
     <div x-show="isBookingOpen" class="modal-overlay" style="display: none;" x-cloak @click.self="closeBooking()">
-        <div class="modal-card">
+        <div class="modal-card" x-data="{ bookingName: '', bookingPhone: '', bookingDate: '', bookingTimeSlot: 'mañana', bookingType: 'presencial' }">
             
             <div class="modal-header">
                 <h3>Agendar Visita</h3>
                 <button class="modal-close" @click="closeBooking()">&times;</button>
             </div>
 
-            <div class="modal-body" x-data="{ bookingName: '', bookingPhone: '', bookingDate: '', bookingTimeSlot: 'mañana', bookingType: 'presencial' }">
+            <div class="modal-body">
                 
                 <template x-if="selectedProperty">
                     <div style="background-color: var(--bg-warm); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-light); margin-bottom: 0.5rem;">

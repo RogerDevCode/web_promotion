@@ -82,6 +82,20 @@ test("Core booking forms submit to WhatsApp", async ({ browser }) => {
       submitName: /Agendar Reunión/i,
       expectedParts: ["Empresa QA", "Diagnostico tributario"],
     },
+    {
+      path: "/demo-propiedades/index.html",
+      open: () => {
+        const state = document.querySelector("[x-data]")._x_dataStack[0];
+        state.openBooking(state.filteredProperties?.[0] || state.properties[0]);
+      },
+      fill: async (page) => {
+        await page.locator("#booking-name").fill("Comprador QA");
+        await page.locator("#booking-phone").fill("+56988889999");
+        await page.locator("#booking-date").fill("2026-08-01");
+      },
+      submitName: /Confirmar Visita/i,
+      expectedParts: ["Comprador QA", "Departamento Dúplex en Providencia"],
+    },
   ];
 
   for (const current of cases) {
