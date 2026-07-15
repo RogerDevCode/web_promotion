@@ -42,9 +42,9 @@ test.describe('Exhaustive Tests for Demos 1 to 5', () => {
       await expect(modal).toBeAttached();
 
       // Check Presencial priority in modality selector if exists
-      const modeSelect = modal.locator('select');
+      const modeSelect = modal.locator('select').first();
       if (await modeSelect.count() > 0 && await modeSelect.isVisible()) {
-        const firstOptionText = await modeSelect.first().locator('option').first().textContent();
+        const firstOptionText = await modeSelect.locator('option').first().textContent();
         expect(firstOptionText?.toLowerCase()).toContain('presencial');
       }
 
