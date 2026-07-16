@@ -102,4 +102,11 @@ test.describe('Exhaustive Landing Page (index.html) Tests', () => {
     expect(await telegramLinks.count()).toBeGreaterThan(0);
     await guards.assertHealthyContext();
   });
+
+  test('Live Telegram demonstration is clearly available', async ({ page }) => {
+    const demoLinks = page.locator('a[href="https://t.me/rogerdevcodebot"]');
+    await expect(demoLinks).toHaveCount(4);
+    await expect(page.locator('#probar')).toContainText('Pruébalo antes de decidir');
+    await expect(page.locator('#probar')).toContainText('@rogerdevcodebot');
+  });
 });
