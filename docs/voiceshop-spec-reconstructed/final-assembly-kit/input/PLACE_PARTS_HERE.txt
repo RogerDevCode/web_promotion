@@ -1,0 +1,14 @@
+COPIAR AQUÍ LOS 34 ARCHIVOS:
+
+VoiceShop-Spec-Part-01.zip
+VoiceShop-Spec-Part-02.zip
+...
+VoiceShop-Spec-Part-34.zip
+
+REGLAS:
+
+1. No cambiar los nombres.
+2. No descomprimirlos manualmente.
+3. No sobrescribir una parte con otra.
+4. Ejecutar scripts/verify_inputs.py antes de ensamblar.
+5. El kit ya incluye Part-34.
